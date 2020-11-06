@@ -1,0 +1,253 @@
+\chapter{Eigenvectors and Eigenvalues}
+\section{Definition}
+An \emph{eigenvector}\index{Eigenvector} of a transformation is a (non-zero) vector that doesn't change its direction when transformed, but is only scaled by a scalar $\lambda$. The scalar $\lambda$ is its corresponding \emph{eigenvalue}\index{Eigenvalue}.
+
+Generally, an \emph{Eigenvalue equation}\index{Eigenvalue equation} looks as following:
+
+\vspace{1cm}
+\begin{equation*}
+  T\left(\tikznode[fill=col1!20, draw=col1, thick, rounded corners, minimum width=5mm, minimum height=5mm]{v1}{\vec{v}}\right) = \tikznode[fill=col3!20, draw=col3, thick, rounded corners, minimum width=5mm, minimum height=5mm]{L}{\lambda}\tikznode[fill=col1!20, draw=col1, thick, rounded corners, minimum width=5mm, minimum height=5mm]{v2}{\vec{v}},
+\end{equation*}
+
+\begin{tikzpicture}[overlay, remember picture, node distance=1cm]
+  \coordinate (center) at ($(v1)!0.5!(v2)$);
+  \node[below=of center, fill=col1!20, draw=col1, rounded corners, thick] (eigenvec) {Eigenvector};
+  \draw[->, >=stealth, thick, col1] (eigenvec.north) to [out=90, in=-90] ($(v1.south)+(0,-1mm)$);
+  \draw[->, >=stealth, thick, col1] (eigenvec.north) to [out=90, in=-90] ($(v2.south)+(0,-1mm)$);
+  \node[above right=of L, fill=col3!20, draw=col3, rounded corners, thick] (eigenval) {Eigenvalue};
+  \draw[->, >=stealth, thick, col3] (eigenval.west) to [out=180, in=90] ($(L.north)+(0,1mm)$);
+\end{tikzpicture}
+
+\vspace{1cm}
+and in the equivalent matrix-vector multiplication form, where $T(\vec{v})=A\vec{v}$:
+\begin{equation*}
+  A\vec{v}=\lambda\vec{v}.
+\end{equation*}
+
+\begin{example}
+  The transformation represented by the matrix $A=\begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix}$ has several eigen vectors:
+  
+  \begin{itemize}
+	\item The vector $\vec{u}=\colvec{2}{1}{-1}$ is affected by $A$ as follows:
+		  \begin{equation*}
+			A\vec{u} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\colvec{2}{1}{-1} = \colvec{2}{1}{-1} = 1\cdot\colvec{2}{1}{-1},
+		  \end{equation*}
+		  which means it is an eigenvector of $A$ with eigenvalue $\lambda=1$.
+  
+	\item Similarily, the vector $\vec{v}=\colvec{2}{1}{1}$ is also an eigenvector of $A$:
+		  \begin{equation*}
+			A\vec{v} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\colvec{2}{1}{1} = \colvec{2}{3}{3} = 3\cdot\colvec{2}{1}{1},
+		  \end{equation*}
+		  which means that the respective eigenvalue is $\lambda=3$.
+  \end{itemize}
+\end{example}
+
+If a vector $\vec{u}$ is an eigenvector of a transformation $T$, then any scaling of $\vec{u}$, i.e. $\vec{v}=\alpha\vec{u}$, is also an eigenvector of $T$, with the same eigenvalue. This is due to the scaling property of linear transformations:
+\begin{align*}
+  T(\vec{v}) &= T\left(\alpha\vec{u}\right) \tikznode[thick, circle, draw=col2]{s}{\ =\ } \alpha T(\vec{u}) = \alpha \lambda \vec{u} = \lambda \left(\alpha \vec{u}\right) = \lambda\vec{v}.
+\end{align*}
+\begin{tikzpicture}[overlay, remember picture, node distance=5mm]
+  \node[below left=of s, fill=col2!20, draw=col2, thick, rounded corners, text width=6cm, align=center] (stext) {This equality is due to the scaling property of linear transformations};
+  \draw[thick, col2] (stext.east) to [out=0, in=-90] (s.south);
+\end{tikzpicture}
+
+\vspace{1cm}
+\begin{warning}
+  While any scale of an eigenvector is itself an eigenvector, this is not true for general linear combinations. For example, let's examine the linear transformation represented by the matrix $\begin{pmatrix} 5 & 0 \\ 0 & -2 \end{pmatrix}$: Two eigenvectors of this transformation are
+  \begin{equation*}
+	\vec{u}_{1} = \colvec{2}{1}{0},\ \vec{u}_{2} = \colvec{2}{0}{1},
+  \end{equation*}
+  whith corresponding eigenvalues $\lambda_{1}=5,\ \lambda_{2}=-2$.
+
+  However, the vector $\colvec{2}{1}{1}$, which is a linear combination of $\vec{u}_{1}$ and $\vec{u}_{2}$ (with $\alpha=\beta=1$), is not an eigenvector of the transformation:
+  \begin{equation*}
+	\begin{pmatrix} 5 & 0 \\ 0 & -2 \end{pmatrix}\colvec{2}{1}{1} = \colvec{2}{5+0}{0+(-2)} = \colvec{2}{5}{-2} \neq \lambda \colvec{2}{1}{1}.
+  \end{equation*}
+\end{warning}
+
+\section{Characteristic Polynomial}
+As stated before, the general eigenvalue equation in matrix form is
+\begin{equation*}
+  A\vec{v} = \lambda\vec{v},
+\end{equation*}
+where $A$ is a square matrix.
+
+Rearranging the equation we get
+\begin{equation*}
+  A\vec{v} - \lambda\vec{v} = \vec{0},
+\end{equation*}
+and similar to scalar equations, we can group the vectors $\vec{v}$ together. In the matrix-vector case, we do this by using the identity matrix $I$:
+\begin{equation*}
+  \left( A-\lambda I \right)\vec{v} = \vec{0}.
+\end{equation*}
+
+In order to find all the possible eigenvectors $\lambda$, we must assume that $\vec{v}$ is non-zero (otherwise we find only the zero vector). This means that the matrix $A-\lambda I$ has a non-zero nullspace, which means its determinant is zero. Thus, solving the following equation:
+\begin{equation*}
+  \left| A-\lambda I\right| = 0,
+\end{equation*}
+will give as the values $\lambda_{1}, \lambda_{2}, \dots$ that are eigenvalues of the matrix $A$.
+
+The resulting determinant $\left| A-\lambda I \right|$ is a polynomial of order $n$ in $\lambda$, $P_{n}\left( \lambda \right)$, due to the way determinants are calculated. It is called the \emph{characteristic polynomial}\index{Characteristic polynomial of a matrix}\index{Characteristic polynomial of a linear transformation} of $A$.
+
+\begin{example}
+  Let's look again at the matrix $A=\begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}$:
+  \begin{align*}
+	\left| A-\lambda I\right| &= \left| \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix} -\lambda \idenmat{2}\right|\\
+	&= \left| \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix} - \begin{pmatrix} \lambda & 0 \\ 0 & \lambda \end{pmatrix} \right|\\
+	&= \begin{vmatrix} 1-\lambda & 2 \\ 2 & 1-\lambda \end{vmatrix}\\
+	&= \left( 1-\lambda \right)\left( 1-\lambda \right) - 4\\
+	&= 1-2\lambda + \lambda^{2} - 4\\
+	&= \lambda^{2}-2\lambda-3.
+  \end{align*}
+
+  Therefore, we should solve the equation
+  \begin{equation*}
+	\lambda^{2}-2\lambda-3 = 0,
+  \end{equation*}
+  which yields
+  \begin{align*}
+	\lambda_{1,2} &= \frac{2\pm\sqrt{12+4}}{2}\\
+	&= \frac{2\pm4}{2}\\
+	&= 1\pm2\\
+	&= -1,3.
+  \end{align*}
+  Indeed, these are the two eigenvalues we saw earlier.
+\end{example}
+
+The characteristic polynomial of a diagonal matrix $D=\begin{pmatrix} d_{1} & 0 & \dots & 0 \\ 0 & d_{2} & \dots & 0\\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & d_{n} \end{pmatrix}$ is
+\begin{equation*}
+  p(\lambda) = \prod\limits_{i=1}^{n}\left(d_{i}-\lambda\right),
+\end{equation*}
+i.e. - its eigenvalues are the diagonal values $d_{1},d_{2},\dots,d_{n}$.
+\begin{example}
+  The characteristic polynomial of the matrix $A=\begin{pmatrix} 1 & 0 & 0 & 0\\ 0 & 3 & 0 & 0 \\ 0 & 0 & 3 & 0\\ 0 & 0 & 0 & 7 \end{pmatrix}$ is
+  \begin{equation*}
+	p(\lambda) = \left( 1-\lambda \right)\left( 3-\lambda \right)\left( 3-\lambda \right)\left( 7-\lambda \right),
+  \end{equation*}
+  and thus has the eigenvalues $\lambda_{1}=1, \lambda_{2}=3, \lambda_{3}=3$ and $\lambda_{4}=7$.\\
+  (the respective eigenvectors are the basis vectors $\eb{1}, \eb{2}, \eb{3}$ and $\eb{4}$.)
+\end{example}
+
+\section{Eigenspaces, Multiplicity}
+The space spanned by the eigenvectors of a linear transformation $\func{T}{\Rs{n}}{\Rs{n}}$ (or its square matrix representation, $A$) can have dimensionality smaller than or equal to $n$.
+
+\begin{example}
+  The matrix $A=\begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$ has a single eigenvector $\vec{v}=\colvec{2}{1}{0}$, with eigenvalue $\lambda=1$.
+  Thus, it spans a single-dimensional space.
+
+  The matrix $B=\begin{pmatrix} 1 & 3 \\ 3 & 1 \end{pmatrix}$ has two eigenvectors:
+  \begin{equation*}
+	\vec{v}_{1} = \colvec{2}{1}{1} \quad \vec{v}_{2}=\colvec{2}{-1}{1},
+  \end{equation*}
+  with $\lambda_{1}=4, \lambda_{2}=-2$, respectively. These eigenvectors span a 2-dimensional space.
+
+  The matrix $C=\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$ is a rotation matrix (by $\degree{90}$ ccw), and thus has no eigenvectors.
+\end{example}
+
+Some matrices have repeating eigenvectors (i.e. $\lambda_{i}=\lambda_{j}$ for some indices $i,j$).
+\begin{example}
+  The characteristic polynomial of the matrix $A=\begin{pmatrix} 2 & 0 & 0 \\ 0 & -5 & 0 \\ 0 & 0 & 2 \end{pmatrix}$ is
+  \begin{equation*}
+	p(\lambda) = \left( 2-\lambda \right)\left( -5-\lambda \right)\left( 2-\lambda \right),
+  \end{equation*}
+  and thus its eigenvalues are $\lambda_{1}=2, \lambda_{2}=-5$ and $\lambda_{3}=2$. We can see that $\lambda_{1}=\lambda_{3}=2$.
+
+  (the respective eigenvectors are the basis vectors $\eb{1},\ \eb{2}$ and $\eb{3}$.)
+\end{example}
+
+The number of repetition of an eigenvalue is called its \emph{algebraic multiplicity}\index{Algebraic multiplicity of an eigenvalue}.
+\begin{example}
+  In the previous example, the algebraic multiplicity of $\lambda=2$ is 2, while the algebraic multiplicity of $\lambda=-5$ is 1. 
+\end{example}
+
+The dimensionality of the space spanned by eigenvectors of the same eigenvalue is called the \emph{geometric multiplicity}\index{Geometric multiplicity of an eigenvalue} of the eigenvalue.
+\begin{example}
+  In the previous example, the two eigenvectors that correspond to the eigenvalue $\lambda=2$ are $\vec{u}=\colvec{3}{1}{0}{0}$ and $\vec{v}=\colvec{3}{0}{0}{1}$ (i.e. $\eb{1}$ and $\eb{3}$). Together they span a 2-dimensional subspace of $\Rs{3}$. Therefore, the geometric multiplication of $\lambda=2$ is equal to 2.
+\end{example}
+
+The geomtric multiplication of an eigenvalue can be \textbf{at most} equal to its algebraic multiplication.
+
+%\section{Eigenvectors in $\Rs{2}$}
+%% The table needs work
+%The following table\footnote{this table is shamelessly taken from \href{https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors\#Eigenvalues_of_geometric_transformations}{Wikipedia}.} summerizes relevant properties of some common transformations in $\Rs{2}$:
+%
+%\begin{tabular}{l|cccccc}
+%  \toprule
+%  & \multicolumn{2}{c}{Scaling} &	& \multicolumn{2}{c}{Shear} & \\
+%  & Equal & Unequal & Rotation & Horizontal & Vertical & Sqeeze \\
+%  \midrule
+%  Matrix & $\begin{pmatrix} s & 0 \\ 0 & s \end{pmatrix}$ & $\begin{pmatrix} s_{1} & 0 \\ 0 & s_{2} \end{pmatrix}$ & $\begin{pmatrix} c & -s \\ s & c \end{pmatrix}$ & $\begin{pmatrix} 1 & m \\ 0 & 1 \end{pmatrix}$ & $\begin{pmatrix} 1 & 0 \\ m & 1 \end{pmatrix}$ & $\begin{pmatrix} c & s \\ s & c \end{pmatrix}$ \\
+%  Polynomial & $\left( \lambda-s^{2} \right)$ & $\left( \lambda-s_{1} \right)\left( \lambda-s_{2} \right)$ & $\lambda^{2}-2c\lambda+1$ & $\left( \lambda-1 \right)^{2}$ & $\left( \lambda-1 \right)^{2}$ & $\lambda^{2}-2c\lambda+1$ \\
+%  Eigenvalues & $\lambda_{1}=\lambda_{2}=s$ & $\lambda_{1}=s_{1},\ \lambda_{2}=s_{2}$ & None over $\Rs{2}$ & \multicolumn{2}{c}{$\lambda_{1}=\lambda_{2}=1$} & bla \\
+%  Eigenvectors & All nonzero vectors & $\vec{v}_{1}=\colvec{2}{1}{0},\ \vec{v}_{2}=\colvec{2}{0}{1}$ &None over $\Rs{2}$ & $\colvec{2}{1}{0}$ & $\colvec{2}{0}{1}$ & $\vec{v}_{1}=\colvec{2}{1}{1},\ \vec{v}_{2}=\colvec{2}{1}{-1}$\\
+%  \bottomrule
+%\end{tabular}
+
+\section{Matrix Diagonalization}
+A square matrix $A$ is called \emph{diagonalizable}\index{Diagonalizable matrix} if there exists an invertible matrix $P$ (i.e. with non-zero determinant) such that
+\begin{equation*}
+  P^{-1}AP = D,
+\end{equation*}
+where $D$ is a diagonal matrix. This can be alternatively formulated by multiplying both sides of the equation by $P$ from the left and $P^{-1}$ from the right, yielding
+\begin{align*}
+  \tikznode[fill=col1!50, rounded corners,	minimum height=5mm]{P1}{PP^{-1}}A\tikznode[fill=col1!50, rounded corners,  minimum height=5mm]{P2}{PP^{-1}} &= PDP^{-1}\\
+  &\Downarrow\\
+  A &= PDP^{-1}.
+\end{align*}
+\begin{tikzpicture}[overlay, remember picture]
+  \node[below = of P1, xshift=5mm, yshift=10mm] (I) {$I$};
+  \draw[->, thick] (I.west) to [out=180, in=-90] (P1.south);
+  \draw[->, thick] (I.east) to [out=0, in=-90] (P2.south);
+\end{tikzpicture}
+
+\begin{example}
+  The matrix $A=\begin{pmatrix} 2 & 0 & 0 \\ 1 & 2 & 1 \\ -1 & 0 & 1 \end{pmatrix}$ can be written as $PDP^{-1}$ for
+  \begin{equation*}
+	P=\begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & -1 & -1 \end{pmatrix},\quad D=\begin{pmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 1 \end{pmatrix}.
+  \end{equation*}
+  We will show this by multiplying $D$ with $P^{-1}$ from the right and $P$ from the left:
+  \begin{equation*}
+	P^{-1} = \begin{pmatrix} 1 & 1 & 1 \\ 1 & 0 & 0 \\ -1 & 0 & -1 \end{pmatrix},
+  \end{equation*}
+  and thus
+  \begin{align*}
+	DP^{-1} &= \begin{pmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 & 1 \\ 1 & 0 & 0 \\ -1 & 0 & -1 \end{pmatrix}\\
+	&= \begin{pmatrix} 2 & 2 & 2 \\ 2 & 0 & 0 \\ -1 & 0 & -1 \end{pmatrix}\\
+	&\Downarrow\\
+	PDP^{-1} &= \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & -1 & -1 \end{pmatrix}\begin{pmatrix} 2 & 2 & 2 \\ 2 & 0 & 0 \\ -1 & 0 & -1 \end{pmatrix}\\
+	&= \begin{pmatrix} 2 & 0 & 0 \\ 1 & 2 & 1 \\ -1 & 0 & 1 \end{pmatrix}\\
+	&= A.
+  \end{align*}
+\end{example}
+
+A matrix that is \textbf{not diagonalizable} is called a \emph{defective matrix}\index{Defective matrix}.
+
+WRITE: WHY IS DIAGONALIZATION IMPORTANT.
+
+\section{Summary of Eigenvectors and Eigenvalues in $\Rs{2}$}
+\centering
+\begingroup\setlength{\fboxsep}{0pt}
+\colorbox{col2!10}{%
+\begin{tabular}{lccc}
+  \rowcolor{col2!75}\multicolumn{4}{l}{\color{white}\textbf{Eigenvectors and eigenvalues in $\Rs{2}$}}\\
+  \rule{0pt}{4ex}
+  & Scaling & Unequal scaling & Rotation \\
+  \midrule
+  Matrix & $\begin{pmatrix} k & 0 \\ 0 & k \end{pmatrix}$ & $\begin{pmatrix} k_{1} & 0 \\ 0 & k_{2}\end {pmatrix}$ & $\begin{pmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{pmatrix}$ \\
+  Characteristic polynomial & $\left( \lambda-k \right)$ & $\left( \lambda-k_{1} \right)\left( \lambda-k_{2} \right)$ & $\lambda^{2}-2\cos(\theta)\lambda + 1$ \\
+  Eigenvalues & $\lambda_{1}=\lambda_{2}=k$ & $\lambda_{1}=k_{1},\ \lambda_{2}=k_{2}$ & - \\
+  Algebraic multiplication & $\mu=2$ & $\mu_{1}=\mu_{2}=1$ & - \\
+  Geometric multiplication & $\gamma=2$ & $\gamma_{1}=\gamma_{2}=1$ & - \\
+  Eigenvectors & All vectors & $\vec{u}_{1}=\colvec{2}{1}{0},\ \vec{u}_{2}=\colvec{2}{0}{1}$ & - \\
+  \midrule
+  & $x$-shear & $y$-shear & Reflection \\
+  \midrule
+  Matrix & $\begin{pmatrix} 1 & k_{x} \\ 0 & 1 \end{pmatrix}$ & $\begin{pmatrix} 1 & 0 \\ k_{y} & 1\end {pmatrix}$ & $\begin{pmatrix} \cos(2\theta) & -\sin(2\theta) \\ \sin(2\theta) & \cos(2\theta) \end{pmatrix}$ \\
+  Characteristic polynomial & $\left( 1-\lambda \right)^{2}$ & $\left( 1-\lambda \right)^{2}$ & $\lambda^{2}-2\cos(2\theta)\lambda + 1$ \\
+  Eigenvalues & $\lambda_{1}=\lambda_{2}=1$ & $\lambda_{1}=\lambda_{2}=1$ & - \\
+  Algebraic multiplication & $\mu=2$ & $\mu=2$ & - \\
+  Geometric multiplication & $\gamma=1$ & $\gamma=1$ & - \\
+  Eigenvectors & $\vec{u}=\colvec{2}{1}{0}$ & $\vec{u}=\colvec{2}{0}{1}$ & - \\
+  \midrule
+\end{tabular}
+}\flushleft

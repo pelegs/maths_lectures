@@ -1,0 +1,1684 @@
+\sectionpic{Introduction}{../figures/presentation_chapters/intro.pdf}
+
+%% ----- Propositions ----- %%
+
+\begin{frame}
+  \frametitle{Mathematical Propositions}
+  \begin{presentation_definition}
+    A \emph{mathematical propostion} is a statement that can be either \true\ or \false.
+  \end{presentation_definition}
+
+  \onslide<2->{
+    \begin{presentation_example}
+      \begin{itemize}
+          \onslide<2->{
+          \item The Moon's radius is smaller than the Earth's radius (\true)
+          }
+          \onslide<3->{
+          \item $1+2=3$ (\true)
+          }
+          \onslide<4->{
+          \item Protons have no electric charge (\false)
+          }
+          \onslide<5->{
+          \item $13 > 37$ (\false)
+          }
+      \end{itemize}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operators: and, or}
+  Propositions can be grouped together with \emph{operators} such as \textbf{and}, \textbf{or}.
+  \begin{itemize}
+      \onslide<2->{
+      \item The \textbf{and} operator returns a \true\ statement only if \textbf{both} the statements it groups are themselves \true, otherwise it returns \false.
+      }
+      \onslide<3->{
+      \item The \textbf{or} operator returns \true\ if \textbf{at least} one of the statements it groups is true.
+      }
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operators: and, or}
+  \begin{presentation_example}
+    \begin{align*}
+      \onslide<1->{
+        \thl{1+2=3} \text{ and } \thl{3-5=-2} &\Rightarrow \mtrue\\
+      }
+      \onslide<2->{
+        \thl{1+2=3} \text{ and } \fhl{2\times4=7} &\Rightarrow \false\\
+      }
+      \onslide<3->{
+        \fhl{\frac{10}{2}=1} \text{ and } \thl{2^{4}=16} &\Rightarrow \false\\
+      }
+      \onslide<4->{
+        \fhl{7<5} \text{ and } \fhl{10+2=13} &\Rightarrow \false\\
+      }
+    \end{align*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operators: and, or}
+  \begin{presentation_example}
+    \begin{align*}
+      \onslide<1->{
+        \thl{1+2=3} \text{ or } \fhl{3>7} &\Rightarrow \true\\
+      }
+      \onslide<2->{
+        \fhl{0+3=-1} \text{ or } \thl{1=1} &\Rightarrow \true\\
+      }
+      \onslide<3->{
+        \thl{2\times2=4} \text{ or } \thl{2+0=2} &\Rightarrow \true\\
+      }
+      \onslide<4->{
+        \fhl{3\times7=10} \text{ or } \fhl{\frac{1}{2}<\frac{1}{10}} &\Rightarrow \false\\
+      }
+    \end{align*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operators: Truth Table}
+  We can summarize the behaviour of operators in a \emph{truth table}:
+  \begin{table}
+    \begin{tabular}[h]{p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}}
+      \toprule
+      $A$ & $B$ & AND & OR\\
+      \midrule
+      \true & \true & \true & \true \\
+      \true & \false & \false & \true \\
+      \false & \true & \false & \true \\
+      \false & \false & \false & \false \\
+      \midrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Mathematical Notation}
+  Other \emph{notations} that will be used throughout this course:
+  \begin{table}
+    \begin{tabular}{ll}
+      \toprule
+      Symbol & In words\\
+      \midrule
+      $\neg a$ & \textbf{not} $a$\\
+      $a \wedge b$ & $a$ \textbf{and} $b$\\
+      $a \vee b$ & $a$ \textbf{or} $b$\\
+      $a \Rightarrow b$ & $a$ \textbf{implies} $b$\\
+      $a \Leftrightarrow b$ & $a$ \textbf{is equivalent to} $b$\\
+      $\forall x$ & \textbf{For all} $x$ (...)\\
+      $\exists x$ & \textbf{There exists} $x$ \textbf{such that} (...)\\
+      $a\defeq b$ & $a$ \textbf{is defined to be} $b$\\
+      \midrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+%% ----- Sets ----- %%
+
+\begin{frame}
+  \frametitle{Sets}
+  \onslide<1->{
+    \begin{presentation_definition}
+      A \emph{set} is a collection of \emph{elements}. Elements of a set can be any concept - be it physical (a chair, a car, a tapir) or abstract (a number, an idea).
+    \end{presentation_definition}
+  }
+
+  \onslide<2->{
+    \begin{presentation_note}
+      In this course we consider only \emph{mathematical objects} as elements of sets.
+    \end{presentation_note}
+  }
+
+  \onslide<3->{
+    Sets can have a \emph{finite} or \emph{infinite} number of elements.
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sets}
+  \onslide<1->{
+    Sets are denoted with curly brackets.
+  }
+
+  \onslide<2->{
+    \begin{presentation_example}
+      \begin{equation*}
+        \left\{ 1,2,3,4 \right\},\quad\left\{ -4,\frac{3}{7},0,\pi,i,0.1 \right\},\quad\left\{ \text{all even numbers} \right\}.
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sets}
+  The order of elements in a set \textbf{does not matter}.
+
+  \onslide<2->{
+    \begin{presentation_example}
+      The following sets are all identical:
+      \begin{equation*}
+        \left\{ 1,2,3,4 \right\} = \left\{ 1,3,2,4 \right\} = \left\{ 2,1,4,3 \right\}.
+      \end{equation*}
+    \end{presentation_example}
+  }
+
+  \onslide<3>{
+    \begin{presentation_note}
+      There is no repetition in sets, i.e. $\left\{ 1,1,3,3,3,3,5 \right\}$ is not a proper set, contrary to e.g. $\left\{ 1,3,5 \right\}$.
+    \end{presentation_note}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sets}
+  Sets can be denoted as conditions, using a vertical separator to denote \emph{conditions}.
+
+  \onslide<2->{
+    \begin{presentation_example}
+      The following set contains all odd numbers between $0$ and $10$:
+      \begin{equation*}
+        \left\{ x \text{ is odd} \mid 0<x<10 \right\}.
+      \end{equation*}
+
+      \onslide<3>{
+        It can also be written explicitly:
+        \begin{equation*}
+          \left\{ 1,3,5,7,9 \right\}.
+        \end{equation*}
+      }
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sets}
+  Sets are usually denoted with an uppercase latin letter, while their elements as lowercase latin or greek letters. The notation $\in$ means that an element belongs to a set.
+  \onslide<2>{
+    \begin{presentation_example}
+      For the two sets
+      \begin{equation*}
+        A = \left\{ 1,2,5,7 \right\},\quad B=\left\{ \text{even numbers} \right\},
+      \end{equation*}
+      all the following propostions are true:
+      \begin{align*}
+        &1\in A,\quad 2\in A,\quad 5\in A,\quad 7\in A,\\
+        &2\in B,\quad 1\notin B,\quad 5\notin B,\quad 7\notin B.
+      \end{align*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sets}
+  The number of elements in a set (also called its \emph{cardinality}) is denoted with two vertical bars.
+
+  \onslide<2>{
+    \begin{presentation_example}
+      \begin{equation*}
+        S=\left\{ -3,0,-2,7,1 \right\}\quad\Rightarrow\quad|S|=5.
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{The Empty Set}
+  An important special set  is the \emph{empty set}, which is the set containing no elements. It is denoted by $\emptyset$, and has the unique property that
+  \begin{equation*}
+    \left| \emptyset \right| = 0.
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subsets and Supersets}
+  If a set $A$ contains all the elements in a set $B$ (and perhaps additional elements), then $B$ is said to be a \emph{subset} of $A$, and $A$ a \emph{superset} of $B$.
+
+  \onslide<2>{
+    \begin{presentation_example}
+      The sets
+      \begin{equation*}
+        A=\left\{ 0,-3 \right\},\quad B=\left\{ 5,-3,1 \right\},\quad C=\left\{ -2,2,1 \right\},
+      \end{equation*}
+      are some of the subsets of
+      \begin{equation*}
+        D=\left\{ 0,-3,5,1,2,-2 \right\}.
+      \end{equation*}
+      Equivalently, $D$ is a superset of $A,B$ and $C$.
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subsets and Supersets}
+  \begin{presentation_note}
+    All sets are supersets and subsets of themselves. This is a direct consequence of the definition of supersets and subsets.
+  \end{presentation_note}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subsets and Supersets}
+  We denote that $A$ is a superset of $B$ as
+  \begin{equation*}
+    B\subseteq A.
+  \end{equation*}
+
+  A \emph{Venn Diagram} representation of this fact looks as following:
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \def\firstcircle{(0,0) circle (2)}
+      \def\secondcircle{(0.5,1) circle (0.75)}
+      \begin{scope}
+        \fill[col1!50]\firstcircle;
+        \fill[col2!50]\secondcircle;
+        \draw \firstcircle node[below] {$A$};
+        \draw \secondcircle node [above] {$B$};
+      \end{scope}
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subsets and Supersets}
+  If for some two sets $A,B$ both $A\subseteq B$ \textbf{and} $B\subseteq A$, then the sets are identical.
+
+  Formally, this fact is written as
+  \begin{equation*}
+    A\subseteq B \wedge B\subseteq A \Leftrightarrow A=B.
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  \begin{presentation_definition}
+    The \emph{intersection} of two sets $A$ and $B$ is the set of all elements that are \textbf{both} in $A$ and in $B$.
+  \end{presentation_definition}
+  \onslide<2>{
+    \begin{presentation_example}
+      Given the sets
+      \begin{equation*}
+        A=\left\{ 1,2,5,6,7 \right\},\ B=\left\{ -1,0,1,5,10,13,15 \right\},
+      \end{equation*}
+      the intersection of $A$ and $B$ is $\left\{ 1, 5 \right\}$.
+    }
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  The symbol denoting intersection is $\cap$. An intersection can be formally defined as
+  \begin{equation*}
+    A\cap B = \left\{ x \mid x\in A \wedge x\in B \right\}
+  \end{equation*}
+  (read: "the intersection of $A$ and $B$ is the set containing all elements $x$, such that $x$ is in $A$ and $x$ is in $B$")
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  A Venn diagram visualization of $A\cap B$ (green area):
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \def\firstcircle{(0,0) circle (2)}
+      \def\secondcircle{(2.3,0) circle (1.5)}
+      \fill[col1!50]\firstcircle;
+      \fill[col2!50]\secondcircle;
+      \begin{scope}
+        \clip \firstcircle;
+        \fill[col3!50]\secondcircle;
+      \end{scope}
+      \draw\firstcircle node[left] {$A$};
+      \draw\secondcircle node[right] {$B$};
+      \draw (1.4,-0.2) node[above] {$A\cap B$};
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  If the intersection of two sets is empty ($A\cap B=\emptyset$), then the sets are said to be \emph{disjoint}\index{Disjoint sets}:
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \def\firstcircle{(0,0) circle (2)}
+      \def\secondcircle{(4,0) circle (1.5)}
+      \fill[col1!50]\firstcircle;
+      \fill[col2!50]\secondcircle;
+      \draw\firstcircle node {$A$};
+      \draw\secondcircle node {$B$};
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  \begin{presentation_definition}
+    The \emph{union}\index{Union of sets} of two sets $A,B$ is the set of all elements that are either in $A$ or in $B$ (or both).
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      The union of the sets
+      \begin{equation*}
+        A=\left\{ -5, 7, 1\right\},\ B=\left\{ 10, -2, -5, 2 \right\},
+      \end{equation*}
+      is 
+      \begin{equation*}
+        A\cup B=\left\{ 10, -2, -5, 2, 7, 1 \right\}.
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  The symbol denoting union is $\cup$. A union can be formally defined as
+  \begin{equation*}
+    A\cup B = \left\{ x \mid x\in A \vee x\in B \right\}
+  \end{equation*}
+  (read: "the union of $A$ and $B$ is the set containing all elements $x$, such that $x$ is in $A$ or $x$ is in $B$")
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  A Venn diagram visualization of $A\cup B$ (purple area):
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \def\firstcircle{(0,0) circle (2)}
+      \def\secondcircle{(2.3,0) circle (1.5)}
+      \fill[col4!50, draw=black]\firstcircle;
+      \fill[col4!50, draw=black]\secondcircle;
+      \draw\firstcircle node {$A$};
+      \draw\secondcircle node {$B$};
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intersections and Unions}
+  The number of elements in a union of two sets $A$ and $B$ is
+  \begin{equation*}
+    \left|A\cup B\right| = |A| + |B| - \left|A\cap B\right|
+  \end{equation*}
+
+  \onslide<2>{
+    \begin{presentation_note}
+      If $A,B$ are disjoint, $\left|A\cup B\right| = |A| + |B|$ (because $\left|A\cap B\right|=0$).
+    \end{presentation_note}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Difference of Sets}
+  \begin{presentation_definition}
+    The \emph{difference}\index{Difference of a set} of $A$ and $B$ is the set of all elements in $A$ that \emph{are not} elements of $B$. This is written as $A-B$ (or sometimes $A\setminus B$).
+  \end{presentation_definition}
+  \onslide<2>{
+    \begin{presentation_example}
+      For the sets
+      \begin{equation*}
+        A = \left\{ 1,5,9,10 \right\},\ B=\left\{ -3,2,5,9,13 \right\},
+      \end{equation*}
+      The differences are
+      \begin{equation*}
+        A-B=\left\{ 1,10 \right\},\ B-A=\left\{-3,2,13  \right\}.
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Difference of Sets}
+  Formally:
+  \begin{equation*}
+    A-B = \left\{ x \mid x\in A,\ x\notin B\right\}
+  \end{equation*}
+
+  \onslide<2>{
+    A Venn diagram visualization of $A-B$ (orange area):
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}
+        \def\firstcircle{(0,0) circle (2)}
+        \def\secondcircle{(2.3,0) circle (1.5)}
+        \begin{scope}
+          \begin{scope}[even odd rule]% first circle without the second
+            \clip \secondcircle (-3,-3) rectangle (3,3);
+            \fill[col5!50] \firstcircle;
+          \end{scope}
+          \draw \firstcircle node {$A$};
+          \draw \secondcircle node {$B$};
+        \end{scope}
+      \end{tikzpicture}
+    \end{figure}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Complement}
+  \begin{presentation_definition}
+    The \emph{complement}\index{Complement of a set} of a set $A$ in reltaion to a superset $Z\supset A$ is the difference $Z-A$, and is denoted $A^{\mathsf{c}}$.
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      For the sets
+      \begin{equation*}
+        Z=\left\{ 1,2,3,4,5 \right\},\ A=\left\{ 1,2,3 \right\},
+      \end{equation*}
+      The complement of $A$ in relation to $Z$ is
+      \begin{equation*}
+        A^{\mathsf{c}}=\left\{ 4,5 \right\}
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Complement}
+  Formally:
+  \begin{equation*}
+    A^{\mathsf{c}} = \left\{ x\in Z \mid x\notin A \right\}.
+  \end{equation*}
+
+  \onslide<2>{
+    A Venn diagram representation:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}
+        \def\firstcircle{(0,0) circle (2.5)}
+        \def\secondcircle{(1,1) circle (1)}
+        \fill[col1!50, draw=black]\firstcircle;
+        \fill[col2!50, draw=black]\secondcircle;
+        \node at (1.3,1) {$A$};
+        \node at (-1,0) {$A^{\mathsf{c}}$};
+        \node at (-2.7,1.9) {$Z$};
+      \end{tikzpicture}
+    \end{figure}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Power Sets}
+  \begin{presentation_definition}
+    The set of all subsets of a given set $A$ is called the \emph{powerset of $A$}\index{Powerset}.
+  \end{presentation_definition}
+  \onslide<2>{
+    \begin{presentation_example}
+      All the subsets of $A=\left\{ 1,2,3 \right\}$ are:
+      \begin{equation*}
+        \emptyset, \left\{ 1 \right\}, \left\{ 2 \right\}, \left\{ 3 \right\}, \left\{ 1,2 \right\}, \left\{ 1,3 \right\}, \left\{ 2,3 \right\}, \left\{ 1,2,3 \right\}.
+      \end{equation*}
+      Thus, the power set of $A$ is
+      \begin{equation*}
+        P(A) = \left\{ \emptyset, \left\{ 1 \right\}, \left\{ 2 \right\}, \left\{ 3 \right\}, \left\{ 1,2 \right\}, \left\{ 1,3 \right\}, \left\{ 2,3 \right\}, \left\{ 1,2,3 \right\} \right\}.
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Power Sets}
+  \begin{presentation_note}
+    The empty set $\emptyset$ is a subset of all sets. Each set is also a subset of itself.
+  \end{presentation_note}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Important Number Sets}
+  Some important number sets, which will be used frequently in the course (all with infinite number of elements):
+  \begin{itemize}
+      \onslide<2->{
+      \item \textbf{The natural numbers} (symbol: $\mathbb{N}$). These are the numbers $1,2,3,\dots$.
+      }
+      \onslide<3->{
+      \item \textbf{The integers} (symbol: $\mathbb{Z}$). These are the "whole numbers" (i.e. not fractions). They include all the natural numbers together with their negatives (i.e. $-1,-2,-3,\dots$) and $0$.
+      }
+      \onslide<4->{
+      \item \textbf{The rational} numbers (symbol: $\mathbb{Q}$). As their name suggests, they are ratios between two integers (e.g. $\frac{1}{2},\ \frac{-5}{3},\ \frac{7}{13}$).
+      }
+      \onslide<5->{
+      \item \textbf{The real numbers} (symbol: $\mathbb{R}$). These are all the numbers on the number line (e.g. $2, \pi, \frac{\sqrt{3}}{17}, \sqrt{5}, -7.2, e^{\pi}$). A proper definition of the real numbers is beyond the scope of this course.
+      }
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Important Number Sets}
+  Additionaly, the \emph{Complex Numbers} are the set of all numbers
+  \begin{equation*}
+    z=a+bi,
+  \end{equation*}
+  where $a$ and $b$ are both real numbers, and $i$ is the imaginary unit, i.e. $i=\sqrt{-1}$.
+
+  The complex number set has the notation $\mathbb{C}$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Important Number Sets}
+  Table summary:
+
+  \begin{tabular}{lll}
+    \toprule
+    Symbol & Name & Definition \\
+    \midrule
+    $\mathbb{N}$ & Natural numbers & $\left\{1,2,3,4,\dots\right\}$\\
+    $\mathbb{Z}$ & Integers & $\left\{ 0,\pm x \mid x\in\mathbb{N} \right\}$\\
+    $\mathbb{Q}$ & Rational numbers & $\left\{ \frac{p}{q} \mid p\in\mathbb{Z}, q\in\mathbb{N} \right\}$\\
+    $\mathbb{R}$ & Real numbers & Not in this course \\
+    $\mathbb{C}$ & Complex numbers & $\left\{ a+ib \mid a,b\in\mathbb{R}, i=\sqrt{-1} \right\}$\\
+    \midrule
+  \end{tabular}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Important Number Sets}
+  \begin{presentation_note}
+    The relations between these sets are
+    \begin{equation*}
+      \mathbb{N}\subset \mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}\subset\mathbb{C}
+    \end{equation*}
+    (the symbol $\subset$ means "a proper subset")
+  \end{presentation_note}
+  \onslide<2>{
+    \begin{presentation_note}
+      Although each of these sets is infinite, the actual number of elements in $\mathbb{R}$ and $\mathbb{C}$ \textbf{is bigger} than the number of elements in $\mathbb{N},\mathbb{Z}$ and $\mathbb{Q}$. There are different kinds of infinities.
+    \end{presentation_note}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intervals}
+  The \emph{interval} $[a,b]$ is the subset of $\mathbb{R}$ defined as
+  \begin{equation*}
+    [a,b] = \left\{ x\in\mathbb{R} \mid a \leq x \leq b \right\}.
+  \end{equation*}
+  \begin{presentation_example}
+    The interval $I=[-5,3]$ is the set of all real numbers that are \textbf{greater than or equal} to $-5$ and are \textbf{smaller than or equal} $3$.
+
+    Some examples:
+    \begin{equation*}
+      -5.1 \notin I,\ -5 \in I,\ 0 \in I,\ 2 \in I,\ 3\in I,\ 4\notin I.
+    \end{equation*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intervals}
+  The interval $(a,b)$ is the subset of $\mathbb{R}$ defined as
+  \begin{equation*}
+    [a,b] = \left\{ x\in\mathbb{R} \mid a < x < b \right\}.
+  \end{equation*}
+  (i.e. same as $[a,b]$ but excluding the actual values $a$ and $b$)
+  \begin{presentation_example}
+    The interval $I=(-5,3)$ is the set of all real numbers that are \textbf{greater than} $-5$ and are \textbf{smaller than} $3$.
+
+    Some examples:
+    \begin{equation*}
+      -5.1\notin I,\ -5 \notin I,\ 0 \in I,\ 2 \in I,\ 3\notin I,\ 4\notin I.
+    \end{equation*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intervals}
+  Similarily, the interval $[a,b)$ is the subset of $\mathbb{R}$ defined as
+  \begin{equation*}
+    [a,b) = \left\{ x\in\mathbb{R} \mid a \leq x < b \right\},
+  \end{equation*}
+  and the interval $(a,b]$ is the subset of $\mathbb{R}$ defined as
+  \begin{equation*}
+    (a,b] = \left\{ x\in\mathbb{R} \mid a < x \leq b \right\}.
+  \end{equation*}
+  (i.e. in the notation for intervals a square bracket means "less/more than or equal to", while a round braket means "less/more than" - without the "equal to" part)
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cartesian Products}
+  \begin{presentation_definition}
+    The \emph{cartesian product}\index{Cartesian product} of two sets $A,B$ (denoted $A\times B$) is the set of all possible \textbf{ordered} pairs, where the first component is an element of $A$ and the second component is an element of $B$.
+  \end{presentation_definition}
+  \onslide<2>{
+    \begin{presentation_example}
+      Consider $A=\left\{ 1,2,3 \right\},\ B=\left\{ x, y \right\}$. Then:
+      \begin{equation*}
+        A\times B = \left\{ \left( 1,x \right), \left( 1,y \right), \left( 2,x \right), \left( 2,y \right), \left( 3,x \right), \left( 3,y \right) \right\}
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cartesian Products}
+  \begin{presentation_note}
+    The cartesian product of two sets $A,B$ is not commutative, i.e.
+    \begin{equation*}
+      A\times B \neq B\times A,
+    \end{equation*}
+    unless $A=B$ or any one of the sets (or both) is the empty set.
+  \end{presentation_note}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cartesian Products}
+  Defining a cartesian product formally:
+  \begin{equation*}
+    A \times B = \left\{ (a,b) \mid a\in A,b\in B \right\}.
+  \end{equation*}
+
+  \onslide<2->{
+    The number of elements in a cartesian product is
+    \begin{equation*}
+      \left|A\times B\right| = |A|\cdot|B|.
+    \end{equation*}
+  }
+
+  \onslide<3>{
+    The definition of a cartesian product can be expanded to $n\in\mathbb{N}$ sets $A_{1}, A_{2}, \dots, A_{n}$:
+    \begin{equation*}
+      A_{1}\times A_{2} \times \dots \times A_{n} = \left\{ \left(a_{1}, a_{2}, \dots, a_{n}\right) \mid a_{1}\in A_{1}, a_{2}\in A_{2}, \dots, a_{n}\in A_{n} \right\}
+    \end{equation*}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cartesian Products}
+  The definition can be made more compact by the use of the product symbol $\prod$:
+  \begin{equation*}
+    \prod\limits_{i=1}^{n} A_{i} = \left\{ \left( a_{1}, a_{2}, \dots, a_{i} \right) \mid a_{i}\in A_{i}, i=1,2,\dots,n\right\}.
+  \end{equation*}
+
+  \onslide<2>{
+    \begin{presentation_note}
+      The symbol $\prod$ is a generalized product notation. It will be discussed in more details later in the course.
+    \end{presentation_note}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cartesian Products}
+  A cartesian product of the same set is written in an similar way to a power. For example
+  \begin{align*}
+    \mathbb{R}\times\mathbb{R} &= \mathbb{R}^{2},\\
+    \mathbb{R}\times\mathbb{R}\times\mathbb{R} &= \mathbb{R}^{3}.
+  \end{align*}
+  These are, respectively, sets of pairs of real numbers, e.g. $\left( -3,1 \right), (\pi,2), (-\frac{\sqrt{7}}{13}, 0)$, and triples of real numbers, e.g. $\left( 1,2,-\pi \right), \left( -6,\frac{1}{\sqrt{\pi}}, 0.2 \right), \left( \frac{1}{51}, \sqrt{3}, -4 \right)$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cartesian Products}
+  \begin{presentation_example}
+    For the set $A=\left\{ a,b \right\}$,
+    \begin{equation*}
+      A^{3}=\left\{(aaa),(aab),(aba),(abb),(baa),(bab),(bba),(bbb)\right\}.
+    \end{equation*}
+
+    \onslide<2>{
+      For the set $B=\left\{ 1,2,3 \right\}$,
+      \begin{align*}
+        B^{2} = &\left\{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),\right.\\
+        &\left.\ (3,1),(3,2),(3,3)\right\}.
+      \end{align*}
+    }
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Relations Between Sets}
+  \begin{presentation_definition}
+    A \emph{relation}\index{Relation between two sets} between two sets $A$ and $B$ is a way to "connect" the elements in the two sets in pairs. It is a subset of the cartesian product $A\times B$.
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      An example relation between the sets $A=\left\{ 1,2,3,4,5 \right\}$ and $B=\left\{ \alpha,\beta,\gamma \right\}$ is
+      \begin{equation*}
+        R = \left\{(1,\alpha),(2,\alpha),(3,\beta),(3,\gamma),(5,\gamma)\right\}.
+      \end{equation*}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\tikzset{relation/.style={->, >=stealth, thick}}
+\begin{frame}
+  \frametitle{Relations Between Sets}
+  The previous relation can be visually represented as following:
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+      \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.75, y radius=2]; 
+      \node (A1) at (0,1.5) {1};
+      \node (A2) at (0,0.75) {2};
+      \node (A3) at (0,0) {3};
+      \node (A4) at (0,-0.75) {4};
+      \node (A5) at (0,-1.5) {5};
+      \node[above=5mm of A1] {\color{col1}$A$};
+
+      \fill[col2!20, draw=col2, thick] (2,0) circle [x radius=0.75, y radius=1.5]; 
+      \node (B1) at (2,1) {$\alpha$};
+      \node (B2) at (2,0) {$\beta$};
+      \node (B3) at (2,-1) {$\gamma$};
+      \node[above=5mm of B1] {\color{col2}$B$};
+
+      \draw[relation] (A1) -- (B1);
+      \draw[relation] (A2) -- (B1);
+      \draw[relation] (A3) -- (B2);
+      \draw[relation] (A3) -- (B3);
+      \draw[relation] (A5) -- (B3);
+    \end{tikzpicture}
+  \end{figure}
+
+  \onslide<2>{
+    \begin{presentation_note}
+      Notice how not all elements are connected, and some elements in each set are connected to the same element in the other set. 
+    \end{presentation_note}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reversed Relations}
+  The previous relation can be reversed, yielding a subset of $B\times A$:
+  \begin{equation*}
+    R^{-1} = \left\{ (\alpha,1),(\alpha,2),(\beta,3),(\gamma,3),(\gamma,5) \right\}.
+  \end{equation*}
+
+  \onslide<2>{
+    Graphically:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.8]
+        \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.75, y radius=2]; 
+        \node (A1) at (0,1.5) {1};
+        \node (A2) at (0,0.75) {2};
+        \node (A3) at (0,0) {3};
+        \node (A4) at (0,-0.75) {4};
+        \node (A5) at (0,-1.5) {5};
+        \node[above=5mm of A1] {\color{col1}$A$};
+
+        \fill[col2!20, draw=col2, thick] (2,0) circle [x radius=0.75, y radius=1.5]; 
+        \node (B1) at (2,1) {$\alpha$};
+        \node (B2) at (2,0) {$\beta$};
+        \node (B3) at (2,-1) {$\gamma$};
+        \node[above=5mm of B1] {\color{col2}$B$};
+
+        \draw[relation] (B1) -- (A1);
+        \draw[relation] (B1) -- (A2);
+        \draw[relation] (B2) -- (A3);
+        \draw[relation] (B3) -- (A3);
+        \draw[relation] (B3) -- (A5);
+      \end{tikzpicture}
+    \end{figure}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functions}
+  \begin{presentation_definition}
+    A \emph{function}\index{Function} between the sets $A,B$ is a relation in which for every element $a\in A$ there is exactly \textbf{one} connection to an element $b\in B$.
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      A function from a set $A$ to a set $B$:
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.6]
+          \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.75, y radius=2]; 
+          \node (A1) at (0,1.5) {$1$};
+          \node (A2) at (0,0.75) {$2$};
+          \node (A3) at (0,0) {$3$};
+          \node (A4) at (0,-0.75) {$4$};
+          \node (A5) at (0,-1.5) {$5$};
+          \node[above=5mm of A1] {\color{col1}$A$};
+
+          \fill[col2!20, draw=col2, thick] (2,0) circle [x radius=0.75, y radius=1.75]; 
+          \node (B1) at (2,1.2) {$\alpha$};
+          \node (B2) at (2,0.4) {$\beta$};
+          \node (B3) at (2,-0.4) {$\gamma$};
+          \node (B4) at (2,-1.2) {$\delta$};
+          \node[above=5mm of B1] {\color{col2}$B$};
+
+          \draw[relation] (A1) -- (B1);
+          \draw[relation] (A2) -- (B1);
+          \draw[relation] (A3) -- (B2);
+          \draw[relation] (A4) -- (B4);
+          \draw[relation] (A5) -- (B3);
+        \end{tikzpicture}
+      \end{figure}
+
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functions}
+  \begin{presentation_example}
+    A relation which is \textbf{NOT} a function from $A$ to $B$:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.6]
+        \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.75, y radius=2]; 
+        \node (A1) at (0,1.5) {$1$};
+        \node (A2) at (0,0.75) {$2$};
+        \node (A3) at (0,0) {$3$};
+        \node (A4) at (0,-0.75) {$4$};
+        \node (A5) at (0,-1.5) {$5$};
+        \node[above=5mm of A1] {\color{col1}$A$};
+
+        \fill[col2!20, draw=col2, thick] (2,0) circle [x radius=0.75, y radius=1.75]; 
+        \node (B1) at (2,1.2) {$\alpha$};
+        \node (B2) at (2,0.4) {$\beta$};
+        \node (B3) at (2,-0.4) {$\gamma$};
+        \node (B4) at (2,-1.2) {$\delta$};
+        \node[above=5mm of B1] {\color{col2}$B$};
+
+        \draw[relation] (A1) -- (B1);
+        \draw[relation] (A2) -- (B1);
+        \draw[relation] (A3) -- (B3);
+        \draw[relation] (A4) -- (B4);
+        \draw[relation, red] (A5) -- (B2.west);
+        \draw[relation, red] (A5) -- (B4);
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functions}
+  Two additional terms that are used interchangeably with function are \emph{transformation} and \emph{map}. 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functions}
+  \begin{presentation_note}
+    A function can have more than one element $a\in A$ connected to the same element $b\in B$. The only restriction is that no element $a\in A$ is connected to \textbf{more than one} element $b\in B$.
+  \end{presentation_note}
+\end{frame}
+
+\tikzset{highlight/.style n args={1}{fill=col#1!20, draw=col#1, thick, rounded corners, minimum width=5mm, minimum height=5mm}}
+\begin{frame}
+  \frametitle{Functions}
+  A common notation to a function $f$ connecting between elements of the sets $A$ and $B$ is
+  \begin{equation*}
+    \only<1>{
+      f: \tikznode[highlight={1}, fill opacity=0, draw opacity=0, text opacity=1]{A}{A} \longrightarrow \tikznode[highlight={1}, fill opacity=0, draw opacity=0, text opacity=1]{B}{B}.
+    }
+    \only<2>{
+      f: \tikznode[highlight={1}]{A}{A} \longrightarrow \tikznode[highlight={1}, fill opacity=0, draw opacity=0, text opacity=1]{B}{B}.
+    }
+    \only<3>{
+      f: \tikznode[highlight={1}]{A}{A} \longrightarrow \tikznode[highlight={3}]{B}{B}.
+    }
+  \end{equation*}
+
+  \begin{tikzpicture}[overlay, remember picture]
+    \onslide<2->{
+      \node[highlight={1}, below left=of A, xshift=1cm] (Atext) {Domain of $f$};
+      \draw[vector, col1] (Atext.north) to [in=-90, out=90] (A.south);
+    }
+    \onslide<3>{
+      \node[highlight={3}, below right=of B, xshift=-1cm] (Btext) {Image of $f$};
+      \draw[vector, col3] (Btext.north) to [in=-90, out=90] (B.south);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functions}
+  When used in practice, a common notation to show that an element $x\in A$ is connected to another element $y\in B$ is
+  \begin{equation*}
+    f(x) = y,
+  \end{equation*}
+  i.e. the function $f$ applied to the element $x\in A$ returns the element $y\in B$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Real Functions}
+  In part 3 of the course we will deal with functions of the form
+  \begin{equation*}
+    f:\mathbb{R} \longrightarrow \mathbb{R},
+  \end{equation*}
+  which we call \emph{real functions}, i.e. functions that take a real number $x$ and return a real number $y$.
+
+  \onslide<2>{
+    \begin{presentation_example}
+      The functions
+      \begin{equation*}
+        f_{1}(x) = 2x^{2}-5,\quad f_{2}(x) = \sin\left( \frac{x}{3} \right),\quad f_{3}(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}}
+      \end{equation*}
+      are all real functions.
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Plotting Real Functions}
+  \only<1>{
+    We can plot a real function $f$ on a cartesian coordinate system by drawing a dot in each coordinate $(x,y)$, where $x$ is an element in the domain of $f$, and $y$ is its image (i.e. $f(x) = y$).
+  }
+  \only<2>{
+    \begin{presentation_example}
+      Plotting the function $f(x)=x^{2}-x-1.5$:
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+          \begin{axis}[
+              width=0.75\textwidth,
+              height=0.75\textwidth,
+              xmin=-2, xmax=2,
+              ymin=-2, ymax=2,
+              scale=1.0, restrict y to domain=-2:2,
+              axis line style={-stealth}
+            ]
+            \addplot[col1, thick, samples=500, smooth]
+            plot (\x, { \x^2-\x-1.5} );
+          \end{axis}
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Injective, Surjective and Bijective Functions}
+  A function is called \emph{injective} if each of the elements in its \textbf{image} is connected to by a single element in its \textbf{domain}.
+
+  \onslide<2>{
+    \begin{presentation_example}  
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+  % Injective function
+          \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.75, y radius=2]; 
+          \node (A1) at (0,1.5) {$1$};
+          \node (A2) at (0,0.5) {$2$};
+          \node (A3) at (0,-0.5) {$3$};
+          \node (A4) at (0,-1.5) {$4$};
+          \node[above=5mm of A1] {\color{col1}$A$};
+
+          \fill[col2!20, draw=col2, thick] (2,0) circle [x radius=0.75, y radius=1.75]; 
+          \node (B1) at (2,1.2) {$\alpha$};
+          \node (B2) at (2,0.4) {$\beta$};
+          \node (B3) at (2,-0.4) {$\gamma$};
+          \node (B4) at (2,-1.2) {$\delta$};
+          \node[above=5mm of B1] {\color{col2}$B$};
+
+          \draw[relation] (A1) -- (B2);
+          \draw[relation] (A2) -- (B3);
+          \draw[relation] (A3) -- (B1);
+          \draw[relation] (A4) -- (B4);
+
+          \node at (1,3.5) {\underline{Injective}};
+
+  % Non injective function
+          \fill[col1!20, draw=col1, thick] (6,0) circle [x radius=0.75, y radius=2]; 
+          \node (A1b) at (6,1.5) {$1$};
+          \node (A2b) at (6,0.75) {$2$};
+          \node (A3b) at (6,0) {$3$};
+          \node (A4b) at (6,-0.75) {$4$};
+          \node (A5b) at (6,-1.5) {$5$};
+          \node[above=5mm of A1b] {\color{col1}$A$};
+
+          \fill[col2!20, draw=col2, thick] (8,0) circle [x radius=0.75, y radius=1.75]; 
+          \node (B1b) at (8,1.2) {$\alpha$};
+          \node (B2b) at (8,0.4) {$\beta$};
+          \node (B3b) at (8,-0.4) {$\gamma$};
+          \node (B4b) at (8,-1.2) {$\delta$};
+          \node[above=5mm of B1b] {\color{col2}$B$};
+
+          \draw[relation] (A1b) -- (B1b);
+          \draw[relation, red] (A2b) -- (B2b);
+          \draw[relation, red] (A3b) -- (B2b);
+          \draw[relation] (A4b) -- (B3b);
+          \draw[relation] (A5b) -- (B4b);
+
+          \node at (7,3.5) {\underline{Not injective}};
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Injective, Surjective and Bijective Functions}
+  A function is called \emph{surjective} if all of the elements in its \textbf{image} are connected to by some element in its \textbf{domain}.
+
+  \onslide<2>{
+    \begin{presentation_example}  
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+  % Surjective function
+          \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.75, y radius=2]; 
+          \node (A1) at (0,1.5) {$1$};
+          \node (A2) at (0,0.5) {$2$};
+          \node (A3) at (0,-0.5) {$3$};
+          \node (A4) at (0,-1.5) {$4$};
+          \node[above=5mm of A1] {\color{col1}$A$};
+
+          \fill[col2!20, draw=col2, thick] (2,0) circle [x radius=0.75, y radius=1.75]; 
+          \node (B1) at (2,1.2) {$\alpha$};
+          \node (B2) at (2,0.4) {$\beta$};
+          \node (B3) at (2,-0.4) {$\gamma$};
+          \node (B4) at (2,-1.2) {$\delta$};
+          \node[above=5mm of B1] {\color{col2}$B$};
+
+          \draw[relation] (A1) -- (B2);
+          \draw[relation] (A2) -- (B3);
+          \draw[relation] (A3) -- (B1);
+          \draw[relation] (A4) -- (B4);
+
+          \node at (1,3.5) {\underline{Surjective}};
+
+  % Non surjective function
+          \fill[col1!20, draw=col1, thick] (6,0) circle [x radius=0.75, y radius=2]; 
+          \node (A1b) at (6,1.5) {$1$};
+          \node (A2b) at (6,0.5) {$2$};
+          \node (A3b) at (6,-0.5) {$3$};
+          \node (A4b) at (6,-1.5) {$4$};
+          \node[above=5mm of A1b] {\color{col1}$A$};
+
+          \fill[col2!20, draw=col2, thick] (8,0) circle [x radius=0.75, y radius=1.75]; 
+          \node (B1b) at (8,1.2) {$\alpha$};
+          \node (B2b) at (8,0.4) {$\beta$};
+          \node (B3b) at (8,-0.4) {$\gamma$};
+          \node[text=red] (B4b) at (8,-1.2) {$\delta$};
+          \node[above=5mm of B1b] {\color{col2}$B$};
+
+          \draw[relation] (A1b) -- (B1b);
+          \draw[relation] (A2b) -- (B2b);
+          \draw[relation] (A3b) -- (B3b);
+          \draw[relation] (A4b) -- (B3b);
+
+          \node at (7,3.5) {\underline{Not surjective}};
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Injective, Surjective and Bijective Functions}
+  A function that is both \textbf{injective} and \textbf{surjective} is called \emph{bijective}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Injective, Surjective and Bijective Functions}
+  \begin{presentation_example}
+    Let's look at a few examples of real injective, surjective and bijective functions over $\mathbb{R}$:
+    \begin{itemize}
+      \item
+        \only<1>{$f(x)=x$, injective + surjective = bijective.}
+        \only<2>{$f(x)=x^{2}$, neither injective nor surjective.}
+        \only<3>{$f(x)=x^{3}-2x^{2}$, surjective.}
+        \only<4>{$f(x)=e^{x}$, injective.}
+        \only<5>{$f(x)=\sin(x)$, neither injective nor surjective.}
+        \begin{figure}[H]
+          \centering
+          \begin{tikzpicture}[scale=0.75]
+            \tikzset{function/.style={ultra thick, samples=100}}
+            \begin{axis}[
+                domain=-4.5:4.5,
+                xmin=-4.5, xmax=4.5,
+                ymin=-4.5, ymax=4.5,
+                every axis x label/.style={
+                  at={(ticklabel* cs:1.03)},
+                  anchor=west,
+                },
+                every axis y label/.style={
+                  at={(ticklabel* cs:1.03)},
+                  anchor=south,
+                },
+              axis line style={-stealth},]
+              \only<1>{\addplot[function, col1] {x};}
+              \only<2>{\addplot[function, col2] {x^2};}
+              \only<3>{\addplot[function, col3] {x^3-2*x^2};}
+              \only<4>{\addplot[function, col4] {exp(x)};}
+              \only<5>{\addplot[function, col5] {sin(deg(x))};}
+            \end{axis}
+          \end{tikzpicture}
+        \end{figure}
+    \end{itemize}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Injective, Surjective and Bijective Functions}
+  \begin{presentation_note}
+    Every non-surjective function can be made surjective by excluding the elements its image that are not connected to by any element in its domain.\\
+
+    For example, the function $f(x)=\sin(x)$ is not surjective as a function $\func{f}{\mathbb{R}}{\mathbb{R}}$, but is surjective as a function $\func{f}{\mathbb{R}}{[-1,1]}$.
+  \end{presentation_note}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multivariable Functions}
+  Functions may have several arguments and return several arguments.
+  \onslide<2->{
+    \begin{presentation_example}
+      The following functions take as input three real numbers, and return a single real number ($f:\mathbb{R}^{3}\to\mathbb{R}$). The return value of some functions for a triplet of real numbers, $\left( -5,7,1 \right)$, are:
+      \begin{itemize}
+        \item $f\left( x,y,z \right)=x+y+z\Rightarrow f\left( -5,7,1 \right)=-5+7+1=3$
+          \onslide<3->{
+          \item $f\left( x,y,z \right)=x^{2}-y^{2}\Rightarrow f\left( -5,7,1 \right)=25-49=-24$
+          }
+          \onslide<4->{
+          \item $f\left( x,y,z \right)=\frac{x}{\sqrt{y}+z}\Rightarrow f\left(-5,7,1  \right)=\frac{5}{\sqrt{7}+1}$
+          }
+      \end{itemize}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multivariable Functions}
+  \begin{presentation_example}
+    The function $f:\mathbb{Z}\times\mathbb{N} \longrightarrow \mathbb{Q}$ is defined as
+    \begin{equation*}
+      f(p,q) = \frac{p}{q}.
+    \end{equation*}
+    The return values of $f$ for some example inputs are
+    \begin{itemize}
+        \onslide<2->{
+        \item $f(1,2) = \frac{1}{2}$,
+        }
+        \onslide<3->{
+        \item $f(-5,2) = -\frac{5}{2} = -2.5$,
+        }
+        \onslide<4>{
+        \item $f(0,13) = \frac{0}{13} = 0$.
+        }
+    \end{itemize}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Composition of Functions}
+  Functions can be \emph{composed} together, generating new functions.
+  \onslide<2->{
+    \begin{presentation_example}
+      Consider the functions
+      \begin{equation*}
+        f(x)=x^{2},\quad g(x)=\sin(x).
+      \end{equation*}
+      We can compose the two functions in two ways:
+      \begin{itemize}
+          \onslide<3-> \item $g_{1}(x) = f\left( g(x) \right) = \left[\sin(x)\right]^{2}$, and
+          \onslide<4-> \item $g_{2}(x) = g\left( f(x) \right) = \sin(x^{2})$.
+      \end{itemize}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Composition of Functions}
+  We denote a composition of two functions $\func{f}{A}{B}$ and $\func{g}{B}{C}$ as
+  \begin{equation*}
+    \func{g \circ f}{A}{C}.
+  \end{equation*}
+  \begin{presentation_note}
+    For a composition to be valid, the \textbf{domain} of the second function (here $g$) must be the same as the \textbf{image} of the first function.
+  \end{presentation_note}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Composition of Functions}
+  \begin{presentation_example}
+    A graphical representation of composing two functions:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.9]
+        \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.75, y radius=2]; 
+        \node (A1) at (0,1.5) {$1$};
+        \node (A2) at (0,0.5) {$2$};
+        \node (A3) at (0,-0.5) {$3$};
+        \node (A4) at (0,-1.5) {$4$};
+        \node[above=5mm of A1] {\color{col1}$A$};
+
+        \onslide<1>{
+          \fill[col2!20, draw=col2, thick] (3,0) circle [x radius=0.75, y radius=1.75]; 
+          \node (B1) at (3,1.2) {$\alpha$};
+          \node (B2) at (3,0.4) {$\beta$};
+          \node (B3) at (3,-0.4) {$\gamma$};
+          \node (B4) at (3,-1.2) {$\delta$};
+          \node[above=5mm of B1] {\color{col2}$B$};
+
+          \draw[relation, thick] (1,2) -- node [midway, above] {$f$} ++(1,0);
+          \draw[relation, thick] (4,2) -- node [midway, above] {$g$} ++(1,0);
+        }
+
+        \fill[col3!20, draw=col3, thick] (6,0) circle [x radius=0.75, y radius=1.5]; 
+        \node (C1) at (6,1) {$a$};
+        \node (C2) at (6,0) {$b$};
+        \node (C3) at (6,-1) {$c$};
+        \node[above=5mm of C1] {\color{col3}$C$};
+
+        \onslide<1>{
+          \draw[relation] (A1) -- (B2);
+          \draw[relation] (A2) -- (B4);
+          \draw[relation] (A3) -- (B1);
+          \draw[relation] (A4) -- (B3);
+          \draw[relation] (B1) -- (C2);
+          \draw[relation] (B2) -- (C3);
+          \draw[relation] (B3) -- (C1);
+          \draw[relation] (B4) -- (C3);
+        }
+        \onslide<2>{
+          \draw[relation] (A1) -- (C3);
+          \draw[relation] (A2) -- (C3);
+          \draw[relation] (A3) -- (C2);
+          \draw[relation] (A4) -- (C1);
+          \draw[relation, thick] (1,2) -- node [midway, above] {$g\circ f$} ++(4,0);
+        }
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+% -- Some definitions for graphs
+\tikzset{
+  between/.style args={#1 and #2}{
+    at = ($(#1)!0.5!(#2)$)
+  }
+}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_definition}
+    A \emph{graph} is a mathematical structure composed of \emph{nodes} connected to other nodes by \emph{edges}.
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      A graph with 5 nodes and 7 edges:
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+          \tikzset{every state/.style={graphstate, fill=col1}}
+          \node[state] (A) {};
+          \node[state] (B) [right=of A] {};
+          \node[state] (C) [below=of A] {};
+          \node[state] (D) [below=of B] {};
+          \node[state] (E) [between=B and D, xshift=2cm] {};
+
+          \path (A) edge node {} (B)
+          (B) edge node {} (D)
+          (C) edge node {} (A)
+          (D) edge node {} (C)
+          (E) edge node {} (B)
+          (E) edge node {} (D)
+          (A) edge node {} (D);
+
+          \node[col1, left=of A] (nodetxt) {\textbf{Node}};
+          \node[above left=of C, yshift=-4mm] (edgetxt) {\textbf{Edge}};
+          \node[between=A and C] (edge) {};
+
+          \draw[vector, densely dotted, col1] (nodetxt.east) to ($(A.west)+(-1mm,0)$);
+          \draw[vector, densely dotted] (edgetxt.east) to (edge);
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  In the graphical representation of a graph, the actual position of nodes does not matter - what matters are the connections (edges) between them.
+
+  \onslide<2>{
+    \begin{presentation_example}
+      The following three graphs are identical:
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[-, >=stealth, auto, semithick]
+          \tikzset{every state/.style={graphstate, fill=col2!75}}
+
+  % First representation
+          \node[state] (A1)  {};
+          \node[state] (B1) [right=of A1]  {};
+          \node (AB1) [between=A1 and B1]  {};
+          \node[state] (C1) [below=of AB1] {};
+
+          \path (A1) edge node {} (B1)
+          (B1) edge node {} (C1)
+          (C1) edge node {} (A1);
+
+  % Second representation
+          \node[state] (A2) [right=3cm of A1] {};
+          \node[state] (B2) [below=of A2] {};
+          \node[state] (C2) [below left=of B2, yshift=5mm]{};
+
+          \path (A2) edge node {} (B2)
+          (B2) edge node {} (C2)
+          (C2) edge node {} (A2);
+
+  % Third representation
+          \node[state] (A3) [right=1cm of A2] {};
+          \node[state] (B3) [below=of A3] {};
+          \node[state] (C3) [right=of B3] {};
+
+          \path (A3) edge node {} (B3)
+          (B3) edge node {} (C3)
+          (C3) edge [bend right] node {} (A3);
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_definition}
+    A graph in which edges have directions is called a \emph{directed graph}.
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      A directed graph with 4 nodes and 6 edges:
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[->, >=stealth', auto, semithick]
+          \tikzset{every state/.style={graphstate, fill=col3!75}}
+
+          \node[state] (A) {};
+          \node[state] (C) [below=of A] {};
+          \node (AC) [between=A and C] {};
+          \node[state] (B) [left=of AC] {};
+          \node[state] (D) [right=of AC] {};
+
+          \path (A) edge [bend left] node {} (B);
+          \path (B) edge [bend left] node {} (A);
+          \path (B) edge node {} (C);
+          \path (C) edge node {} (D);
+          \path (D) edge node {} (A);
+          \path (D) edge [loop right] node {} (D);
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_definition}
+    A \emph{path} in a graph is a sequence of edges in which each edge shares a vertex with the previous edge (except the first edge).
+  \end{presentation_definition}
+  \onslide<2>{
+    \begin{presentation_example}
+      A path in a graph (note that the nodes are labeled):
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+          \tikzset{every state/.style={graphstate, fill=col4!50}}
+
+          \node[state] (1) {1};
+          \node[state, below=of 1] (2) {2};
+          \node[state, right=of 2] (3) {3};
+          \node[state, above=of 3] (4) {4};
+          \node[state, right=of 4] (5) {5};
+          \node[state, below=of 5] (6) {6};
+          \node[state, right=of 6] (7) {7};
+          \node[state, above=of 7] (8) {8};
+
+          \path (1) edge [ultra thick, red] node {} (2);
+          \path (1) edge node {} (3);
+          \path (1) edge node {} (4);
+          \path (2) edge [ultra thick, red] node {} (3);
+          \path (3) edge node {} (4);
+          \path (3) edge [ultra thick, red] node {} (5);
+          \path (3) edge node {} (6);
+          \path (4) edge node {} (5);
+          \path (5) edge [ultra thick, red] node {} (6);
+          \path (5) edge node {} (8);
+          \path (5) edge node {} (7);
+          \path (6) edge [ultra thick, red] node {} (7);
+          \path (7) edge [ultra thick, red] node {} (8);
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_definition}
+    When the start and end vertices coincide the path is known as a \emph{circle}. A directed circle is known as a \emph{cycle}.
+  \end{presentation_definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \only<1>{
+    \begin{presentation_definition}
+      If one or more pathes exist between two vertices $a,b$ in a graph, the number of edges in the shortest path is defined to be the \emph{distance} between the two vertices, and is denoted as $\dist(a,b)$.
+    \end{presentation_definition}
+  }
+
+  \only<2>{
+    \begin{presentation_example}
+      In the following graph three paths between vertices $a$ and $b$ are shown. The number of edges in the shortest path, highlighted in red, is defined as the distance $\dist(a,b)$, and is equal to 3.
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+          \tikzset{every state/.style={graphstate, fill=col2!75}}
+
+          \node[state] (1) {a};
+          \node[state, right=of 1] (a) { };
+          \node[state, right=of a] (b) { };
+          \node[state, right=of b] (2) {b};
+
+          \path (1) edge [ultra thick, red] (a);
+          \path (a) edge [ultra thick, red] (b);
+          \path (b) edge [ultra thick, red] (2);
+
+          \node[state, above right=of 1, xshift=-5mm] (c) { };
+          \node[state, right=of c] (d) { };
+          \node[state, right=of d] (e) { };
+
+          \path (1) edge (c);
+          \path (c) edge (d);
+          \path (d) edge (e);
+          \path (e) edge (2);
+
+          \node[state, below right=of 1, xshift=-5mm] (f) { };
+          \node[state, right=of f] (g) { };
+          \node[state, right=of g] (h) { };
+
+          \path (1) edge (f);
+          \path (f) edge (g);
+          \path (g) edge (h);
+          \path (h) edge (2);
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_definition}
+    A \emph{tree} is a graph with no circles.
+  \end{presentation_definition}
+  \onslide<2>{
+    \begin{presentation_example}
+      A tree (notice that no circles are present):
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+          \tikzset{every state/.style={graphstate, minimum size=5mm, fill=col3!75}}
+          \tikzset{node distance=5mm}
+
+          \node[state] (1) { };
+          \node[state, above left=of 1] (2) { };
+          \node[state, above right=of 1] (3) { };
+          \node[state, below=of 1] (4) { };
+          \node[state, below left=of 4] (5) { };
+          \node[state, below right=of 4] (6) { };
+          \node[state, below=of 4] (7) { };
+          \node[state, left=of 2] (8) { };
+          \node[state, above right=of 3] (9) { };
+          \node[state, below right=of 3] (10) { };
+
+          \path (1) edge [ultra thick] (2);
+          \path (1) edge [ultra thick] (3);
+          \path (1) edge [ultra thick] (4);
+          \path (4) edge [ultra thick] (5);
+          \path (4) edge [ultra thick] (6);
+          \path (4) edge [ultra thick] (7);
+          \path (2) edge [ultra thick] (8);
+          \path (3) edge [ultra thick] (9);
+          \path (3) edge [ultra thick] (10);
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  Some trees have a distinctive \emph{root} node, and are known as \emph{rooted trees}. A node that is "branched" from a higher level node is called a \emph{child node}. The last level nodes are called \emph{leaves} (singular: leaf). The rest of the nodes are known as \emph{inner nodes}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_example}
+    A rooted tree, with the root node highlighted in red and the leaves in green:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[-, very thick]
+        \tikzset{level/.style={sibling distance=4.2cm/####1, level distance=1.2cm}}
+        \node [rnode] (root) { }
+        child{ node (child1) [tnode] { }
+          child{ node [tnode](child3) { }
+            child{ node [lnode] (leaf1){ } edge from parent node[above left] {}}
+          }
+          child{ node [tnode] { }
+            child{ node [lnode] (leaf2){ }}
+            child{ node [lnode] (leaf3){}}
+          }
+        }
+        child{ node [tnode](child2)  { }
+          child{ node [tnode] { }
+            child{ node [lnode] (leaf4) {}}
+          }
+          child{ node [tnode] { }
+            child{ node [lnode] (leaf5){ }}
+            child{ node [lnode] (leaf6){}}
+            child{ node [lnode] (leaf7) {}}
+          }
+        }
+        ;
+
+        \node[annotationtext, right=of root] (roottxt) {Root};
+        \draw[arr, annotation] (roottxt) to ($(root.east) + (2mm,0mm)$);
+
+        \node[annotationtext, below=of root] (childtext) {Children of root};
+        \draw[arr, annotation] (childtext) to ($(child1.east) + (2mm,0)$);
+        \draw[arr, annotation] (childtext) to ($(child2.west) + (-2mm,0)$);
+
+        \node[annotationtext, right=of child1.north] (br1) {};
+        \node[annotationtext, right=of child3.south] (br2) {};
+        \coordinate (A) at (-4.2,0);
+        \draw[annotation, decorate, decoration={brace, amplitude=3pt, raise=-10pt, mirror}]
+        (A |- br1) -- (A |- br2) node[annotationtext, midway, xshift=-1pt, rotate=90] {Inner nodes};
+
+        \node[annotationtext, below = of root, yshift=-3.5cm] (leaves) {Leaves};
+        \draw[annotation, arr] (leaves) -- ($(leaf1.south) + (0,-2mm)$);
+        \draw[annotation, arr] (leaves) -- ($(leaf2.south) + (0,-2mm)$);
+        \draw[annotation, arr] (leaves) -- ($(leaf3.south) + (0,-2mm)$);
+        \draw[annotation, arr] (leaves) -- ($(leaf4.south) + (0,-2mm)$);
+        \draw[annotation, arr] (leaves) -- ($(leaf5.south) + (0,-2mm)$);
+        \draw[annotation, arr] (leaves) -- ($(leaf6.south) + (0,-2mm)$);
+        \draw[annotation, arr] (leaves) -- ($(leaf7.south) + (0,-2mm)$);
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_definition}
+    A tree with 2 children per node (except the leaves) is called a \emph{binary tree}. Similarily, trees can be ternary, quaternary, etc.
+  \end{presentation_definition}
+  \begin{presentation_example}
+    A binary tree:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[-, very thick]
+        \tikzset{level/.style={sibling distance=3.5cm/####1, level distance=0.75cm}}
+        \tikzset{tnode/.style = {treenode, circle, font=\sffamily\bfseries, draw=black,
+        fill=col2!50, minimum size=4mm}}
+        \node [tnode] (root) { }
+        child{ node  [tnode] { }
+          child{ node [tnode] { }
+            child{ node [tnode] { }}
+            child{ node [tnode] { }}
+          }
+          child{ node [tnode] { }
+            child{ node [tnode] { }}
+            child{ node [tnode] {}}
+          }
+        }
+        child{ node [tnode]  { }
+          child{ node [tnode] { }
+            child{ node [tnode] { }}
+            child{ node [tnode] { }}
+          }
+          child{ node [tnode] { }
+            child{ node [tnode] { }}
+            child{ node [tnode] {}}
+          }
+        };
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  Rooted trees are used to describe hierarchies, e.g. in biological systematics, organisations or nested directories of data.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Graphs}
+  \begin{presentation_definition}
+    The \emph{complete graph} $K_{n}$ is the graph with $n$ vertices where every pair of different vertices is connected by an edge (Also called a \emph{clique}).
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      The cliques $K_{1}, \dots, K_{6}$:
+      \newcommand{\clique}[3]{
+        \pgfmathsetmacro{\ang}{180-((####1-2)*180/####1)}
+        \pgfmathsetmacro{\anull}{90}
+        \pgfmathsetmacro{\xnull}{####3}
+
+        \foreach \n in {1,...,####1}{
+          \node[state, fill=col####1!75] (p\n) at ({####2*cos(\n*\ang+\anull)+\xnull},{####2*sin(\n*\ang+\anull)}) { };
+          \foreach \m in {1,...,\n}{
+            \path (p\n) edge (p\m);
+          }
+        }
+
+        \node at (\xnull,-1.5cm) {$K_{####1}$};
+      }
+
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[node distance=1cm]
+          \tikzset{every state/.style={graphstate, minimum size=2.5mm, fill=col2}}
+          \foreach \K in {1,...,6}{
+            \clique{\K}{0.5}{\K*1.75}
+          }
+        \end{tikzpicture}
+      \end{figure}
+    \end{presentation_example}
+  }
+\end{frame}

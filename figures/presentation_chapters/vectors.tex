@@ -1,0 +1,40 @@
+\input{local_settings}
+\input{../../settings}
+
+\begin{document}
+\begin{tikzpicture}[scale=1.5, align=center]
+  \Large
+
+  % Vectors
+  \coordinate (o) at (0,0);
+  \coordinate (u) at (3,3);
+  \coordinate (v) at (-4,2);
+  \coordinate (ulabel) at ($(5,0)+(u)$);
+  \coordinate (vlabel) at ($(-5,0)+(v)$);
+  
+  \filldraw[col1!20, draw=col1, thick] let
+  \p1=(1,0),\p2=(u),\n1={atan2(\y1,\x1)},\n2={atan2(\y2,\x2)}
+  in (o) -- ($(o)!1.5cm!(u)$) arc[start angle=\n2, end angle=\n1, radius=1.5cm] node [text=col1!50!black] at ($(o)!1cm!(ulabel)$) {$\theta$};
+  
+  \filldraw[col2!20, draw=col2, thick] let
+  \p1=(-1,0),\p2=(v),\n1={atan2(\y1,\x1)},\n2={atan2(\y2,\x2)}
+  in (o) -- ($(o)!1.5cm!(v)$) arc[start angle=\n2, end angle=\n1, radius=1.5cm] node [text=col2!50!black] at ($(o)!1cm!(vlabel)$) {$\varphi$};
+
+  \draw[->, >=stealth, ultra thick, col1] (o) to (u) node [above] {$\vec{u}=\colvec{2}{u_{x}}{u_{y}}=\left\{ r_{u},\theta \right\}$};
+  \draw[->, >=stealth, ultra thick, col2] (o) to (v) node [above] {$\vec{v}=\colvec{2}{v_{x}}{v_{y}}=\left\{ r_{v},\varphi \right\}$};
+
+  \tikzset{perpendicular/.style={-, densely dotted, thick, black!20, text=black!50}}
+  \draw[perpendicular] (u) to (u|-o) node [below] {$u_{x}$};
+  \draw[perpendicular] (u) to (u-|o) node [left] {$u_{y}$};
+  \draw[thick] ($(u|-o)+(0,-1mm)$) -- ++(0,2mm);
+  \draw[thick] ($(u-|o)+(-1mm,0)$) -- ++(2mm,0);
+  \draw[perpendicular] (v) to (v|-o) node [below] {$v_{x}$};
+  \draw[perpendicular] (v) to (v-|o) node [right] {$v_{y}$};
+  \draw[thick] ($(v|-o)+(0,-1mm)$) -- ++(0,2mm);
+  \draw[thick] ($(v-|o)+(-1mm,0)$) -- ++(2mm,0);
+  
+  % Axes
+  \draw[<->, >=stealth, ultra thick] (-5,0) to (5,0) node[right] {$x$};
+  \draw[<->, >=stealth, ultra thick] (0,-1) to (0,5) node[above] {$y$};
+\end{tikzpicture}
+\end{document}

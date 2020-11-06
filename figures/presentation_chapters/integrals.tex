@@ -1,0 +1,42 @@
+\input{local_settings}
+\input{../../settings}
+
+\pgfmathsetmacro{\a}{-1.2}
+\pgfmathsetmacro{\b}{1.2}
+\pgfkeys{/pgfplots/Axis Style/.style={
+    width=25cm, height=10cm,
+    axis x line=bottom,
+		x label style={at={(axis description cs:1,-0.1)}},
+    axis y line=none,
+    samples=200,
+		xmin=-2, xmax=2,
+		ymin=0.1, ymax=1.4,
+		domain=-2:2,
+		axis line style={<->, stealth-stealth, very thick},
+		label style={font=\Huge},
+		tick label style={font=\Huge},
+}}
+
+
+\begin{document}
+\begin{tikzpicture}[scale=0.75]
+	\begin{axis}[
+			declare function={func(\x) = exp(-(\x-0.5)^2/2);},
+      Axis Style,
+			xtick={\a, \b},
+			xticklabels={$a$, $b$},
+    ]
+		\pgfmathsetmacro{\dx}{0.1}
+		\pgfplotsinvokeforeach{\a,\a+\dx,...,\b-\dx}{
+			\draw[thick, fill=col2!20] (axis cs:#1,0) rectangle (axis cs:#1+\dx,{max(func(#1), func(#1+\dx))});
+			\draw[thick, fill=col3!20] (axis cs:#1,0) rectangle (axis cs:#1+\dx,{min(func(#1), func(#1+\dx))});
+		}
+		\addplot[name path=f, mark=none, ultra thick] {func(x)};
+		\node at (axis cs:-1,1.1) {\Large
+			$\begin{aligned}
+				\int\limits_{a}^{b}f(x)\dif x &= \lim\limits_{\Delta x\rightarrow 0} \sum\limits_{k=1}^{n}\min(f(x_{k}), f(x_{k}+\Delta x))\Delta x\\
+				&= \lim\limits_{\Delta x\rightarrow 0} \sum\limits_{k=1}^{n}\min(f(x_{k}), f(x_{k}+\Delta x))\Delta x
+			 \end{aligned}$};
+  \end{axis}
+\end{tikzpicture}
+\end{document}

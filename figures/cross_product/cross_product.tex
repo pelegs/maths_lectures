@@ -1,0 +1,105 @@
+% Otherwise some colors may look a bit different in ipe and TeX
+\PassOptionsToPackage{rgb}{xcolor}
+
+\documentclass{article}
+\usepackage[papersize={595bp,842bp},scale=1,margin=0pt]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,patterns}
+\usetikzlibrary{ipe} % ipe compatibility library
+
+\tikzstyle{ipe stylesheet} = [
+  ipe import,
+  even odd rule,
+  line join=round,
+  line cap=butt,
+  ipe pen normal/.style={line width=0.4},
+  ipe pen heavier/.style={line width=0.8},
+  ipe pen fat/.style={line width=1.2},
+  ipe pen ultrafat/.style={line width=2},
+  ipe pen normal,
+  ipe mark normal/.style={ipe mark scale=3},
+  ipe mark large/.style={ipe mark scale=5},
+  ipe mark small/.style={ipe mark scale=2},
+  ipe mark tiny/.style={ipe mark scale=1.1},
+  ipe mark normal,
+  /pgf/arrow keys/.cd,
+  ipe arrow normal/.style={scale=7},
+  ipe arrow large/.style={scale=10},
+  ipe arrow small/.style={scale=5},
+  ipe arrow tiny/.style={scale=3},
+  ipe arrow normal,
+  /tikz/.cd,
+  ipe arrows, % update arrows
+  <->/.tip = ipe normal,
+  ipe dash normal/.style={dash pattern=},
+  ipe dash dashed/.style={dash pattern=on 4bp off 4bp},
+  ipe dash dotted/.style={dash pattern=on 1bp off 3bp},
+  ipe dash dash dotted/.style={dash pattern=on 4bp off 2bp on 1bp off 2bp},
+  ipe dash dash dot dotted/.style={dash pattern=on 4bp off 2bp on 1bp off 2bp on 1bp off 2bp},
+  ipe dash normal,
+  ipe node/.append style={font=\normalsize},
+  ipe stretch normal/.style={ipe node stretch=1},
+  ipe stretch normal,
+  ipe opacity 10/.style={opacity=0.1},
+  ipe opacity 30/.style={opacity=0.3},
+  ipe opacity 50/.style={opacity=0.5},
+  ipe opacity 75/.style={opacity=0.75},
+  ipe opacity opaque/.style={opacity=1},
+  ipe opacity opaque,
+]
+
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{col1}{rgb}{1,0.47,0.47}
+\definecolor{col2}{rgb}{0.32,0.71,0.97}
+\definecolor{col3}{rgb}{0.8,0.95,0.9}
+\definecolor{col4}{rgb}{0.72,0.41,0.91}
+\definecolor{gray}{rgb}{0.75,0.75,0.75}
+
+\begin{document}
+\thispagestyle{empty}
+\noindent
+\begin{tikzpicture}[ipe stylesheet]
+  \useasboundingbox (0, 0) rectangle (595, 842);
+  \filldraw[ipe pen fat, ipe dash dashed, fill=col3]
+    (320, 688)
+     -- (464, 592)
+     -- (304, 528)
+     -- (160, 624)
+     -- cycle;
+  \draw[col4, ipe pen fat, ->]
+    (256, 640)
+     -- (256, 752);
+  \draw[ipe pen fat]
+    (192, 640) rectangle (192, 640);
+  \draw[ipe pen heavier]
+    (263.8961, 624.2078)
+     .. controls (271.9394, 625.4207) and (275.3432, 629.9606) .. (274.1075, 637.8276);
+  \node[ipe node]
+     at (264.578, 628.248) {$\theta$};
+  \draw[col2, ipe pen fat, ->]
+    (256, 640)
+     -- (384, 624);
+  \draw[col1, ipe pen fat, ->]
+    (256, 640)
+     -- (288, 576);
+  \node[ipe node, font=\Large, text=col1]
+     at (290.359, 565.776) {$\vec{u}$};
+  \node[ipe node, font=\Large, text=col2]
+     at (387.548, 618.606) {$\vec{v}$};
+  \node[ipe node, font=\Large, text=col4]
+  at (263.105, 740.958) {$\vec{w} = \color{col1}\vec{u}\color{black}\times\color{col2}\vec{v}$};
+     \filldraw[ipe pen heavier, fill=gray, fill opacity=0.4]
+    (256, 640)
+     -- (256, 648.2653)
+     -- (263.8206, 647.2505)
+     -- (263.8206, 638.9852)
+     -- cycle;
+   \filldraw[ipe pen heavier, fill=gray, fill opacity=0.4]
+    (256, 640)
+     -- (258.8501, 634.2998)
+     -- (259.0002, 642.8106)
+     -- (256.1501, 648.5108)
+     -- cycle;
+\end{tikzpicture}
+\end{document}
+

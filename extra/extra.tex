@@ -1,0 +1,160 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\setlength\parindent{0pt}
+\setlength{\parskip}{1em}
+\input{../settings}
+
+\title{The Eigenvectors of 2D and 3D Rotation Matrices}
+\author{Peleg Bar Sapir}
+
+\begin{document}
+\maketitle
+
+\section{Two-Dimensional Rotation Matrix}
+In $\Rs{2}$ the matrix
+\begin{equation}
+	R_{\theta} =
+		\begin{pmatrix}
+			\cos(\theta) & -\sin(\theta)\\
+			\sin(\theta) & \cos(\theta)\\
+		\end{pmatrix}
+	\label{eq:rotmat}
+\end{equation}
+represents a counter-clockwise rotation around the origin by an angle $\theta$.
+
+The eigenvalues of $R_{\theta}$ can be found by solving the equation
+\begin{equation}
+	\begin{vmatrix}
+		\cos(\theta)-\lambda & -\sin(\theta)\\
+		\sin(\theta) & \cos(\theta)-\lambda\\
+	\end{vmatrix}=0,
+	\label{eq:det1}
+\end{equation}
+i.e.
+\begin{equation}
+	\left(\cos(\theta)-\lambda\right)^{2} + \sin^{2}(\theta) = 0.
+	\label{eq:det2}
+\end{equation}
+
+Expanding the left side of equation \ref{eq:det2} yields
+\begin{equation}
+	\cos^{2}(\theta) - 2\lambda\cos(\theta) + \lambda^{2} + \sin^{2}(\theta) = \lambda^{2} - 2\cos(\theta)\lambda + 1 = 0.
+	\label{eq:det3}
+\end{equation}
+(since $\sin^{2}(\theta) + \cos^{2}(\theta) = 1$)
+
+The solution of equation \ref{eq:det3} for $\lambda$ can be calculated by the well known quadratic formula:
+\begin{align}
+	\lambda_{1,2} &= \frac{2\cos(\theta)\pm\sqrt{4\cos^{2}(\theta)-4}}{2}\\
+	&= \frac{2\cos(\theta)\pm\sqrt{4\left[ \cos^{2}(\theta)-1 \right]}}{2}\\
+	&= \frac{\cancel{2}\cos(\theta)\pm\cancel{2}\sqrt{\cos^{2}(\theta)-1}}{\cancel{2}}\\
+	&= \cos(\theta) \pm \sqrt{\cos^{2}(\theta)-1}.
+	\label{eq:quadratic}
+\end{align}
+
+For the solutions to equation \ref{eq:quadratic} to have real value, the expression $\sqrt{\cos^{2}(\theta)-1}$ must not be negative, i.e.
+\begin{equation}
+	\cos^{2}(\theta) \geq 1.
+	\label{eq:desc}
+\end{equation}
+
+Since the image of $\cos(\theta)$ is $\left[ -1,1 \right]$, the image of $\cos^{2}(\theta)$ is $[0,1]$. Thus, the only case for which a solution to equation \ref{eq:quadratic} can be a real number is when $\cos^{2}(\theta)=1$, or
+\begin{equation}
+	\cos(\theta) = \pm 1.
+	\label{eq:cond}
+\end{equation}
+
+This condition means that the only angles for which $R_{\theta}$ has real eigenvalues are
+\begin{equation*}
+	\theta=\ang{0}\ \text{and}\ \theta=\ang{180},
+\end{equation*}
+which are, respectively, the identity operation (rotation by $\ang{0}$) and inverting all vectors (rotation by $\ang{180}$). Indeed, these are the only angles for which a rotation around the origin has any eigenvectors.
+
+\section{Three-Dimensional Rotation Matrices}
+The three counter-clockwise rotation matrices around the axes by the angles $\theta, \varphi, \psi$, respectively, are
+\begin{equation}
+	R^{x}_{\theta} = \begin{pmatrix}
+		1 & 0 & 0\\
+		0 & \cos(\theta) & -\sin(\theta)\\
+		0 & \sin(\theta) & \cos(\theta)
+	\end{pmatrix},\quad
+	R^{y}_{\varphi} = \begin{pmatrix}
+		\cos(\varphi) & 0 & \sin(\varphi)\\
+		0 & 1 & 0\\
+		-\sin(\varphi) & 0 & \cos(\varphi)
+	\end{pmatrix},\quad
+	R^{z}_{\psi} = \begin{pmatrix}
+		\cos(\psi) & -\sin(\psi)& 0\\
+		\sin(\psi) & \cos(\psi) & 0\\
+		0 & 0 & 1
+	\end{pmatrix}.
+	\label{eq:3d_rot}
+\end{equation}
+
+We expect $R^{x}_{\theta}$ to only have eigenvectors in the direction of the $x$-axis, with eigenvalue $\lambda_{x}=1$. Similarly, the eigenvectors of $R^{y}_{\varphi}$ should all lie on the $y$-axis with eigenvalues $\lambda_{y}=1$, and the eigenvectors of $R^{z}_{\psi}$ to be lying on the $z$-axis with eigenvalues $\lambda_{z}=1$ (Figure \ref{fig:zrot}).
+
+\begin{figure}[H]
+	\centering
+	\tdplotsetmaincoords{70}{120}
+	\begin{tikzpicture}[tdplot_main_coords]
+		\Large
+		\draw[thick, dashed, fill=col3!20] (-4,-4,0) -- (4,-4,0) -- (4,4,0) -- (-4,4,0) -- cycle;
+		\draw[vector, ultra thick, col2] (0,0,0) -- (2,0,0) node [below left] {$x$};
+		\draw[vector, ultra thick, col4] (0,0,0) -- (0,2,0) node [right] {$y$};
+		\draw[vector, ultra thick, col1] (0,0,0) -- (0,0,2) node [above] {$z$};
+		\tdplotdrawarc[vector, col1!75!black]{(0,0,1)}{0.5}{10}{180}{anchor=west}{}
+		\tdplotdrawarc[vector, col1!75!black]{(0,0,1)}{0.5}{190}{350}{anchor=west}{}
+		\draw[-, ultra thick, col1] (0,0,1.0) -- (0,0,1.5);
+	\end{tikzpicture}
+	\caption{Rotation around the $z$-axis.}
+	\label{fig:zrot}
+\end{figure}
+
+We will only calculate the eigenvectors and corresponding eigenvalues of $R^{x}_{\theta}$. Calculation of the eigenvectors and eigenvalues of $R^{y}_{\varphi}$ and $R^{z}_{\psi}$ is left to the students.
+
+We begin by solving the equation
+\begin{equation}
+	\begin{vmatrix}
+		1-\lambda & 0 & 0\\
+		0 & \cos(\theta)-\lambda & -\sin(\theta)\\
+		0 & \sin(\theta) & \cos(\theta)-\lambda\\
+	\end{vmatrix}=0,
+	\label{eq:x_rot}
+\end{equation}
+which is very similar to equation \ref{eq:det2}, except for the multiplication by the expression $1-\lambda$, i.e.
+\begin{equation}
+	\left( 1-\lambda \right)\left[\left(\cos(\theta)-\lambda\right)^{2} + \sin^{2}(\theta)\right]=0,
+	\label{eq:xpoly}
+\end{equation}
+which has the same solutions as equation \ref{eq:det3}, and in addition $\lambda=1$, as expected.
+
+For the eigenvalue $\lambda=1$, the corresponding eigenvector can be found by solving
+\begin{equation}
+	\begin{pmatrix}
+		1 & 0 & 0\\
+		0 & \cos(\theta) & -\sin(\theta)\\
+		0 & \sin(\theta) & \cos(\theta)\\
+	\end{pmatrix}\colvec{3}{x}{y}{z} = \colvec{3}{x}{y}{z},
+	\label{eq:xeigvec}
+\end{equation}
+
+i.e.
+\begin{equation}
+	\colvec{3}{1}{\cos(\theta)y - \sin(\theta)z}{\sin(\theta)y + \cos(\theta)z} = \colvec{3}{x}{y}{z}.
+	\label{eq:xeigvec2}
+\end{equation}
+
+This system has a solution for \textbf{any} angle $\theta$ \textbf{only} when
+\begin{equation}
+	x=1,\ y=0,\ z=0,
+	\label{eq:xyz_sol}
+\end{equation}
+i.e. the vector
+\begin{equation}
+	\vec{u} = \colvec{3}{1}{0}{0} = \hat{x},
+	\label{eq:vecu}
+\end{equation}
+as expected.
+
+For $y\neq0$ and $z\neq0$, the solution only exist when $\theta=\ang{0}$, i.e. when the roation around the $x$-axis is by $\deg{0}$. This case is the identity operataion, for which all vectors are eigenvectors with eigenvalue $\lambda=1$.
+\end{document}

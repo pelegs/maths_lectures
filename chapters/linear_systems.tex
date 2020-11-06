@@ -1,0 +1,281 @@
+\chapter{Systems of Linear Equations}
+\section{Basics}
+A \emph{linear equation}\index{Linear equation} is an equation that is a linear combination of variables and an additional free coefficient.
+\begin{example}
+  The equation
+  \begin{equation*}
+  7x+y-3z=-4
+  \end{equation*}
+  is a linear equation.
+\end{example}
+
+A \emph{system of linear equations}\index{System of linear equations} is a set of several linear equations with the same variables.
+\begin{example}
+  The following is a system of linear equations of the variables $x, y$ and $z$:
+  \begin{align*}
+  &2x - 7y + z = 26\\
+  &-3x + y = -9\\
+  &9y - 4z = -31\\
+  \end{align*}
+  Notice that for the second equation the coefficient of $z$ is zero, while in the last equation the coefficient of $x$ is zero.
+\end{example}
+
+A system of linear equations can be written a matrix form as $A\vec{u}=\vec{v}$, where $A$ is a matrix in which each element $a_{ij}$ is the coefficient of the $j$-th variable in the $i$-th row, $\vec{u}$ is a column vector of the variables, and $\vec{v}$ is a column vector of the free variables.
+
+\begin{example}
+  The previous system can be written in a matrix form as
+  \begin{equation*}
+  \begin{pmatrix} 2 & -7 & 1\\ -3 & 1 & 0 \\ 0 & 9 & -4 \end{pmatrix}\colvec{3}{x}{y}{z} = \colvec{3}{26}{-9}{-31}.
+  \end{equation*}
+\end{example}
+
+A general system of $m$ linear equations in $n$ variables $x_{1}, x_{2}, \dots, x_{n}$ can be written as
+\begin{align*}
+  a_{11}x_{1} + a_{12}x_{2} + \dots + a_{1n}x_{n} &= b_{1}\\
+  a_{21}x_{1} + a_{22}x_{2} + \dots + a_{2n}x_{n} &= b_{2}\\
+  \vdots\\
+  a_{m1}x_{1} + a_{m2}x_{2} + \dots + a_{mn}x_{n} &= b_{m},
+\end{align*}
+which in a matrix form is simply
+\begin{equation*}
+  \begin{pmatrix} a_{11} & a_{12} & \dots & a_{1n}\\
+          a_{21} & a_{22} & \dots & a_{2n}\\
+          \vdots & \vdots & \ddots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn}
+  \end{pmatrix}\colvec{4}{x_{1}}{x_{2}}{\vdots}{x_{n}} = \colvec{4}{b_{1}}{b_{2}}{\vdots}{b_{m}}.
+\end{equation*}
+
+\section{Solution Set}
+A \emph{solution}\index{Solution of a linear system} is an ordered set of values which correspond to the variables of the system, such that all of its equations are satisfied.
+\begin{example}
+  The only solution for the previous system is
+  \begin{align*}
+  x &= 2\\
+  y &= -3\\
+  z &= 1,
+  \end{align*}
+  which in vector form can be written as
+  \begin{equation*}
+  \vec{u} = \colvec{3}{2}{-3}{1}.
+  \end{equation*}
+\end{example}
+
+Generally, a linear system might have any of the following:
+\begin{itemize}
+  \item An \textbf{infinite} amount of distinct solutions.
+  \item Only \textbf{a single} solution. 
+  \item \textbf{No solutions}.
+\end{itemize}
+
+The number of solutions depends on the properties of the system, which we will briefly explore in this chapter.
+
+\subsection{Geometric Interpretation of the Solution Set}
+Generally, A linear equation in two variables represents a line in $\Rs{2}$, a linear equation in three variables represents a plane in $\Rs{3}$, and so forth.
+
+Thus, a solution of several linear equations represents a set of points where the respective shapes intersect.
+
+\begin{example}
+  The equations
+  \begin{align*}
+  2x+y&=0\\
+  3x+5y&=19.5
+  \end{align*}
+  represent the following two lines:
+  \begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[every path/.style={-, very thick}]
+    \draw[<->, >=stealth, black!20] (-2,0) -- (5,0) node [right] {$x$};
+    \draw[<->, >=stealth, black!20] (0,-2) -- (0,5) node [above] {$y$};
+    \draw[col1] (-1,-2) -- node[pos=0.35, below, rotate=63.44] {$2x+y=0$} (3.5,7);
+    \draw[col2] (-1,4.5) -- node[pos=0.2, above, rotate=-30.96] {$3x+5y=19.5$} (3.5,1.8);
+    \filldraw[black] (1.5,3) circle (0.1) node [right] {$\left( 1.5,3 \right)$};
+  \end{tikzpicture}
+  \end{figure}
+  
+  As can be seen, the two lines intersect at $\left( 1.5, 3 \right)$. Thus, $x=1.5, y=3$ is a solution to the linear system represented by the two equations above.
+\end{example}
+
+The example above illustrates how two linear equations in two variables can have zero, one or infinite solutions:
+\begin{itemize}
+  \item If the two equations represent two different \textbf{parallel} lines, then there is no intersection point between the lines and thus no solution to the system.
+  \item If the two equations represent two lines with \textbf{different slopes} (as in the above example) then there is a single intersection point for the two lines and thus a single solution to the system.
+  \item If the two equations represent \textbf{the same line}, then there is an infinite amount of intersection points and thus an infinite amount of solutions to the system.
+\end{itemize}
+
+For a system of equations with three variables, as each equation represents a plane in $\Rs{3}$, any two of the equations can either intersect (the intersection being a line), be parallel or be the same plane.
+%\begin{example}
+%\pgfplotsset{colormap/viridis}
+%  \begin{figure}[H]
+%  \centering
+%  \begin{tikzpicture}
+%    \begin{axis}[
+%      axis equal image,
+%      grid = both,
+%      minor tick num = 2,
+%      xlabel = {$x$},
+%      ylabel = {$y$},
+%      zlabel = {$z$},
+%      major grid style = {draw = lightgray},
+%      minor grid style = {draw = lightgray!25},
+%      legend cell align={left},
+%      xmin = -1, xmax = 1,
+%      ymin = -1, ymax = 1,
+%      scale = 3,
+%      zmin = 0, zmax = 2,
+%      z buffer = sort,
+%    ]
+%    \addplot3[
+%      surf,
+%      shader = interp,
+%      opacity = 0.65,
+%      domain = -0.65:0.9,
+%      domain y = -1:1,
+%     colormap/Blues
+%    ] {-cos(60)/sin(60)*x+1};
+%    \addplot3[
+%      surf,
+%      shader = interp,
+%      opacity = 0.65,
+%      domain = -0.65:0.9,
+%      domain y = -1:1,
+%     colormap/Reds
+%    ] {cos(60)/sin(60)*x+1};
+%    \end{axis}
+%  \end{tikzpicture}
+%  \end{figure}
+%\end{example}
+
+And in the case of three equations in three variables, there can either be a single soultion (a point where all three planes intersect), no solution or infinite solutions.
+
+\subsection{General Number of Solutions}
+The number of equations and number of variables control the possible properties of the solution.
+
+\begin{example}
+  A geometric representation of the number of possible solutions for systems in two variables:
+\end{example}
+
+\section{Solving a System of Linear Equations}
+\subsection{Eliminating Variables}
+\subsection{Row Reduction (Gaussian Elimination)}
+As mentioned earlier, a system of linear equations can be written in a matrix form as
+\begin{equation*}
+  A\vec{u} = \vec{v},
+\end{equation*}
+where $A$ represents the coefficients of the variables in their respective equation, $\vec{u}$ represents the variables $x_{1}, x_{2}, \dots, x_{n}$ and $\vec{v}$ represents the free coefficients $b_{1}, b_{2}, \dots, b_{m}$. In the Gaussian elimination scheme we "stick" $A$ and $\vec{v}$ together, forming an augmented matrix of the following structure:
+\begin{equation*}
+  \left(\begin{array}{cccc|c}
+  a_{11} & a_{12} & \dots & a_{1n} & b_{1}\\
+  a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+  \vdots & \vdots & \ddots & \vdots & \vdots\\
+  a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+  \end{array}\right)
+\end{equation*}
+
+\begin{example}
+  The following system
+  \begin{align*}
+  -x + 3z &= 20\\
+  3x + y + 3z &= 15\\
+  9x + 3y &= -18
+  \end{align*}
+  is written in the augmented matrix form as
+  \begin{equation*}
+  \left(\begin{array}{ccc|c}
+    -1 & 0 & 3 & 20\\
+    3  & 1 & 3 & 15\\
+    9  & 3 & 0 & -18
+  \end{array}\right).
+  \end{equation*}
+\end{example}
+
+Then, a series of steps are performed, where each step is one of the following type (called \emph{elementry row operations}\index{Elementry row operation}):
+\begin{itemize}
+  \item Swapping two rows (notation: $R_{i} \leftrightarrow R_{j}$).
+  \item Multiplying a row by a scalar (notation: $\alpha R_{i} \rightarrow R_{i}$).
+  \item Adding to a row a scalar multiple of another row (notation: $R_{i}+\alpha R_{j} \rightarrow R_{i}$).
+\end{itemize}
+
+\begin{example}
+  Performing some elementry row operations on the previous matrix:
+  \begin{align*}
+  &
+  \left(\begin{array}{ccc|c}
+    -1 & 0 & 3 & 20\\
+    3  & 1 & 3 & 15\\
+    9  & 3 & 0 & -18
+  \end{array}\right) \xrightarrow[] {-\frac{1}{R_{1}} \rightarrow R_{1}}
+  \left(\begin{array}{ccc|c}
+    1 & 0 & -3 & -20\\
+    3  & 1 & 3 & 15\\
+    9  & 3 & 0 & -18
+  \end{array}\right) \xrightarrow[] {R_{2}-3R_{1} \rightarrow R_{2}}\\
+  &
+  \left(\begin{array}{ccc|c}
+    1 & 0 & -3 & -20\\
+    0  & 1 & 12 & 75\\
+    9  & 3 & 0 & -18
+  \end{array}\right) \xrightarrow[] {R_{3}-9R_{1} \rightarrow R_{3}}
+  \left(\begin{array}{ccc|c}
+    1 & 0 & -3 & -20\\
+    0  & 1 & 12 & 75\\
+    0  & 3 & 27 & 162
+  \end{array}\right) \xrightarrow[] {R_{3}-3R_{2} \rightarrow R_{3}}\\
+  &
+  \left(\begin{array}{ccc|c}
+    1 & 0 & -3 & -20\\
+    0  & 1 & 12 & 75\\
+    0  & 0 & -9 & -63 
+  \end{array}\right) \xrightarrow[] {-\frac{1}{9}R_{3} \rightarrow R_{3}}
+  \left(\begin{array}{ccc|c}
+    1 & 0 & -3 & -20\\
+    0  & 1 & 12 & 75\\
+    0  & 0 & 1 & 7 
+  \end{array}\right) \xrightarrow[] {R_{1}+3R_{3} \rightarrow R_{1}}\\
+  &
+  \left(\begin{array}{ccc|c}
+    1 & 0 & 0 & 1\\
+    0  & 1 & 12 & 75\\
+    0  & 0 & 1 & 7 
+  \end{array}\right) \xrightarrow[] {R_{2}-12R_{3} \rightarrow R_{2}}
+  \left(\begin{array}{ccc|c}
+    1 & 0 & 0 & 1\\
+    0  & 1 & 0 & -9\\
+    0  & 0 & 1 & 7 
+  \end{array}\right).
+  \end{align*}
+\end{example}
+
+The process stops when we reach a form known as the \emph{reduced row echelon form}\index{Reduced row echelon form} of the matrix. This form has the following properties:
+\begin{itemize}
+  \item The leading element in each non-zero row is equal to 1 (and is called a \emph{leading 1}\index{Leading 1}).
+  \item In each row all elements before the leading 1 are equal to 0.
+  \item The order of rows is such that the position of the leading 1s \textbf{increases} as we go down the rows.
+\end{itemize}
+
+\begin{example}
+  The following matrices are in the reduced row echelon forms:
+  \begin{align*}
+  \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}\quad
+  \begin{pmatrix} 1 & 5 & -2 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}\quad
+  \begin{pmatrix} 1 & 0 & 4 & 2 \\ 0 & 0 & 1 & 5 \\ 0 & 0 & 0 & 1 \end{pmatrix}\quad
+  \begin{pmatrix} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & -9 \\ 0 & 0 & 1 & 7 \end{pmatrix}
+  \end{align*}
+\end{example}
+
+The result of applying Gaussian elimination to the augmented matrix is a much simpler system to solve. In the example, the resulting matrix
+\begin{equation*}
+  \left(\begin{array}{ccc|c}
+  1 & 0 & 0 & 1\\
+  0  & 1 & 0 & -9\\
+  0  & 0 & 1 & 7 
+  \end{array}\right)
+\end{equation*}
+yields the solution directly:
+\begin{equation*}
+  x=1,\ y=-9,\ z=7.
+\end{equation*}
+
+However, the system in its row echelon form is not always as simple, and may require some more work isolating each variable. In addition, sometimes the row echelon form contains one or more rows of zeros, which indicate that the system is underdetermined.
+
+\subsection{Underdetermined Row Echelon Matrix}
+A row echelon form with one or more rows of zeros indicate an underdetermined system: in essence, the system has more variables than equations. This is because the row echelon form and the process to yield it actually tell us whether the rows of the matrix, when seen as vectors, form a linearly independent set. A row of zeros (or several of them) indicate that the set of row vectors comprising the matrix is linearly dependent, and thus at least one of the equations is a linear combination of the other equations. This in turn means that the set of equations has redundent information, and that the practical number of equations os lower than first seems.

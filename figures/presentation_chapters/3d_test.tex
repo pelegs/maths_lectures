@@ -1,0 +1,80 @@
+\documentclass{standalone}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{tikz}  
+\usepackage{tikz-3dplot} 
+\usepackage{amssymb}
+\usepackage{xifthen}
+
+\tdplotsetmaincoords{60}{125}
+\tdplotsetrotatedcoords{0}{0}{0} %<- rotate around (z,y,z)
+\begin{document}
+
+\begin{tikzpicture}[scale=3,tdplot_rotated_coords,
+		  cube/.style={very thick,black},
+		  grid/.style={very thin,gray},
+		  axis/.style={->,blue,ultra thick},
+		  rotated axis/.style={->,purple,ultra thick}]
+
+  %draw a grid in the x-y plane
+  \foreach \x in {-0.5,0,...,2.5}
+	\foreach \y in {-0.5,0,...,2.5}
+	{
+	  \draw[grid] (\x,-0.5) -- (\x,2.5);
+	  \draw[grid] (-0.5,\y) -- (2.5,\y);
+	}
+
+  %draw the main coordinate frame axes
+  \draw[axis,tdplot_main_coords] (0,0,0) -- (3.5,0,0) node[anchor=west]{$x$};
+  \draw[axis,tdplot_main_coords] (0,0,0) -- (0,3.5,0) node[anchor=north west]{$y$};
+  \draw[axis,tdplot_main_coords] (0,0,0) -- (0,0,3.5) node[anchor=west]{$z$};
+
+
+  %draw the rotated coordinate frame axes
+  \draw[rotated axis] (0,0,0) -- (3,0,0) node[anchor=west]{$x'$};
+  \draw[rotated axis] (0,0,0) -- (0,3,0) node[anchor=south west]{$y'$};
+  \draw[rotated axis] (0,0,0) -- (0,0,3) node[anchor=west]{$z'$};
+
+  %draw the top and bottom of the cube
+  \draw[cube,fill=blue!5] (0,0,0) -- (0,2,0) -- (2,2,0) -- (2,0,0) -- cycle;
+
+  %draw the top and bottom of the cube
+  \draw[cube,fill=red!5] (0,0,0) -- (0,2,0) -- (0,2,2) -- (0,0,2) -- cycle;
+
+  %draw the top and bottom of the cube
+  \draw[cube,fill=green!5] (0,0,0) -- (2,0,0) -- (2,0,2) -- (0,0,2) -- cycle;
+
+\foreach \x in {0,1,2}
+   \foreach \y in {0,1,2}
+	\foreach \z in {0,1,2}{
+	   %#####################################################
+	   \ifthenelse{  \lengthtest{\x pt < 2pt}  }
+	   {
+	   % True
+		\draw [black] (\x,\y,\z) -- (\x+1,\y,\z);
+	   }
+	   {% False
+	   }
+	   %#####################################################
+	   \ifthenelse{  \lengthtest{\y pt < 2pt}  }
+	   {
+	   % True
+		\draw [black] (\x,\y,\z) -- (\x,\y+1,\z);
+	   }
+	   {% False
+	   }
+	   %#####################################################
+	   \ifthenelse{  \lengthtest{\z pt < 2pt}  }
+	   {
+	   % True
+		\draw [black] (\x,\y,\z) -- (\x,\y,\z+1);
+	   }
+	   {% False
+	   }
+	   \shade[rotated axis,ball color = purple!80] (\x,\y,\z) circle (0.06cm);		
+}
+
+\end{tikzpicture}
+
+
+
+\end{document}

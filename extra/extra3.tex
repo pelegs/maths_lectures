@@ -1,0 +1,76 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\setlength\parindent{0pt}
+\setlength{\parskip}{1em}
+\input{../settings}
+\tikzset{
+	function/.style={ultra thick, samples=100, smooth}
+}
+\pgfkeys{/pgfplots/Axis Style/.style={
+		axis on top=true,
+		grid=major,
+    axis x line=center,
+    axis y line=middle,
+    samples=100,
+    xmin=-7.0, xmax=7.0,
+    ymin=-1.5, ymax=1.5,
+		label style={font=\large},
+		x label style={at={(axis description cs:1,0.5)},anchor=west},
+		y label style={at={(axis description cs:0.5,1)},anchor=south},
+		tick label style={font=\small},
+    axis line style={<->, stealth-stealth},
+}}
+
+\title{Integration?}
+\author{Peleg Bar Sapir}
+
+\begin{document}
+\maketitle
+
+\tikzset{
+	lower/.style={thick, fill=col3!30},
+	upper/.style={thick, fill=col1!30},
+	edge/.style={thick, dashed},
+}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[
+			declare function = {f(\x) = 8*exp(-0.1*(\x-4)^2);}	
+		]
+		\Large
+
+		\xaxis{-1}{10}
+		\yaxis{-1}{10}
+
+		\pgfmathsetmacro{\N}{11}
+		\pgfmathsetmacro{\n}{\N-1}
+		\pgfmathsetmacro{\a}{1}
+		\pgfmathsetmacro{\b}{8}
+		\pgfmathsetmacro{\dx}{(\b-\a)/\N}
+		\foreach \i in {0,...,\n}{
+			\pgfmathsetmacro{\x}{\a+\i*\dx}
+			\pgfmathsetmacro{\Fa}{f(\x)}
+			\pgfmathsetmacro{\Fb}{f(\x+\dx)}
+			\pgfmathsetmacro{\Fmin}{min(\Fa, \Fb)}
+			\pgfmathsetmacro{\Fmax}{max(\Fa, \Fb)}
+			\draw[upper] (\x,0) rectangle (\x+\dx,\Fmax);
+			\draw[lower] (\x,0) rectangle (\x+\dx,\Fmin);
+		
+		\draw[ultra thick, smooth, domain=0:10, variable=\x] plot ({\x}, {f(\x)});
+
+		\draw[edge] (\a,0) -- (\a,7) node [above] {$a$};
+		\draw[edge] (\b,0) -- (\b,7) node [above] {$b$};
+		\draw[black, thick, decorate, decoration={brace, amplitude=3pt, raise=5pt, mirror}]
+		(\a+\dx,0) -- ++(\dx,0) node[midway, below, yshift=-3mm]{$\Delta x$};
+		}
+	\end{tikzpicture}
+	\caption{Text}
+	\label{fig:test}
+\end{figure}
+
+\begin{equation}
+	\lim\limits_{\Delta x \longrightarrow 0} \sum\limits_{i=1}^{n} f(x)\Delta x = 
+	\label{eq:integration}
+\end{equation}
+\end{document}

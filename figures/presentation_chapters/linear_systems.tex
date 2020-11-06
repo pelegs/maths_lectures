@@ -1,0 +1,30 @@
+\input{local_settings}
+\input{../../settings}
+
+\newcommand{\form}{
+  $\left\{
+  \begin{array}{ccccc}
+	\tikzmarkin[set fill color=col1!50, set border color=col1]{A}2x & - & y & = & 1\tikzmarkend{A}\\
+	\tikzmarkin[set fill color=col2!50, set border color=col2]{B}x & + & y & = & 2\tikzmarkend{B}\\
+  \end{array}
+  \right.
+  \Rightarrow \begin{pmatrix} 2 & -1 \\ 1 & 1 \end{pmatrix}\colvec{2}{x}{y} = \colvec{2}{1}{2}$
+}
+
+\begin{document}
+\begin{tikzpicture}[scale=0.75]
+  \Large
+  \draw[step=1.0, black!20, thick] (5,5) grid (-5,-5);
+  \draw[vector, <->] (-5.5,0) -- (5.5,0) node [right] {$x$};
+  \draw[vector, <->] (0,-5.5) -- (0,5.5) node [above] (ysign) {$y$};
+
+  \draw[ultra thick, col1] (-2,-5) -- (3,5);
+  \draw[ultra thick, col2] (-3,5) -- (5,-3);
+
+  \filldraw (1,1) circle (0.05) node (solution) {};
+  \node[above left=of solution, xshift=-1.5cm, fill=white, draw=col4, thick, rounded corners, text=col4] (solution_text) {Solution};
+  \draw[->, >=stealth, thick, col4] (solution_text.south) to [out=-90, in=180] (solution.west);
+
+  \node[above=of ysign, yshift=-1cm] {\form};
+\end{tikzpicture}
+\end{document}

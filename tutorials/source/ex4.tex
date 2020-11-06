@@ -1,0 +1,343 @@
+\section{Determinants, Systems of Linear Equations}
+
+\subsection{Determinants}
+\begin{enumerate}
+	\item Find the determinants of the following matrices:
+		\begin{enumerate}
+			\item $\begin{pmatrix} 1 & 3 \\ 2 & 0 \\ \end{pmatrix}$
+				\if\withsol1{
+						\begin{answer}
+							$\det\left( \bm{M} \right)=\cancel{1\cdot0}-2\cdot3=-6$.
+					\end{answer}}
+				\fi
+
+			\item $\begin{pmatrix} 1 & 3 & -2 \\ 2 & 0 & 7 \\ 4 & 5 & 5 \end{pmatrix}$
+				\if\withsol1{
+						\begin{answer}
+							A quick reminder: a minor $m_{ij}$ of a matrix $\bm{M}$ is the matrix resulting from removing the row $i$ and column $j$ from the matrix.
+
+							Let us start with element $a_{11}$ (which equals $1$ in this case); we 'hide' the row and column of this element, and calculate the determinant of the resulting minor:
+							\begin{equation*}
+								\bm{M}=\left(
+									\begin{array}{>{\columncolor{black}}ccc}
+										\rowcolor{black}
+										1 & 3 & -2 \\
+										2 & 0 & 7  \\
+										4 & 5 & 5  \\
+									\end{array}
+								\right) \longrightarrow m_{11}=
+								\begin{pmatrix}
+									0 & 7 \\
+									5 & 5 \\
+								\end{pmatrix} \longrightarrow
+								\det\left( m_{11} \right)=\cancel{0\cdot5}-5\cdot7=-35.
+							\end{equation*}
+
+							We continue to the next element of the first row ($a_{12}=3$) and do the same:
+							\begin{equation*}
+								\bm{M}=\left(
+									\begin{array}{c>{\columncolor{black}}cc}
+										\rowcolor{black}
+										1 & 3 & -2 \\
+										2 & 0 & 7  \\
+										4 & 5 & 5  \\
+									\end{array}
+								\right) \longrightarrow m_{12}=
+								\begin{pmatrix}
+									2 & 7 \\
+									4 & 5 \\
+								\end{pmatrix} \longrightarrow
+								\det\left( m_{12} \right)=2\cdot5-4\cdot7=-18.
+							\end{equation*}
+
+							And for $a_{13}=-2$:
+							\begin{equation*}
+								\bm{M}=\left(
+									\begin{array}{cc>{\columncolor{black}}c}
+										\rowcolor{black}
+										1 & 3 & -2 \\
+										2 & 0 & 7  \\
+										4 & 5 & 5  \\
+									\end{array}
+								\right) \longrightarrow m_{13}=
+								\begin{pmatrix}
+									2 & 0 \\
+									4 & 5 \\
+								\end{pmatrix} \longrightarrow
+								\det\left( m_{13} \right)=2\cdot5-\cancel{4\cdot0}=10.
+							\end{equation*}
+
+							The resulting determinant is thus:
+							\begin{align*}
+								\det\left( \bm{M} \right)&=
+								a_{11}\cdot\det\left( m_{11} \right)-a_{12}\cdot\det\left( m_{12} \right)+a_{13}\cdot\det\left( m_{13} \right)\\
+								&=1\left(-35\right) -3\left(-18\right) -2\left(10\right)\\
+								&=-35 + 54 - 20\\
+								&=-1.
+							\end{align*}
+					\end{answer}}
+				\fi
+
+			\item $\begin{pmatrix} 3 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 3 \end{pmatrix}$
+				\if\withsol1{
+						\begin{answer}
+							\underline{The easy way}: if $\bm{A}$ is a matrix of dimension $n\times n$ then $\det\left( \alpha\cdot \bm{A} \right)=\alpha^{n}\cdot\det\left( \bm{A} \right)$.\\ In our case, $\bm{M}=3\cdot \bm{I}_{3}$, and therefore $\det\left( \bm{M} \right)=3^{3}\cdot\det\left( \bm{I}_{3} \right)=3^{3}=27$.
+					\end{answer}}
+				\fi
+
+			\item $
+				\begin{pmatrix}
+					1 & 0 & 2 \\
+					0 & 0 & 0 \\
+					2 & 4 & 7 \\
+				\end{pmatrix}$
+				\if\withsol1{
+
+						\begin{answer}
+							\underline{The easy way}: any matrix that has one or more zero-rows (or zero-columns) has a determinant of $0$.
+					\end{answer}}
+				\fi
+
+			\item $
+				\begin{pmatrix}
+					4 & 2 & 2 \\
+					2 & 1 & 1 \\
+					2 & 0 & 7 \\
+				\end{pmatrix}$
+				\if\withsol1{
+
+						\begin{answer}
+							\underline{The easy way}: notice that $\left( 4, 2, 2 \right)=2\cdot\left( 2, 1, 1 \right)$, meaning that these rows are linearly depended (and therefore the rank of the matrix is smaller than its row dimension). Any such matrix has a determinant of $0$.
+					\end{answer}}
+				\fi
+		\end{enumerate}
+	\item What does it mean when the determinant of a $2\times2$ matrix is negative?
+		\if\withsol1{
+
+				\begin{answer}
+					It means that the operation the matrix performs flips the space, either vertically or horizontally (but not both).
+				\end{answer}
+			}\fi
+	\end{enumerate}
+
+	\subsection{Row Operations and Rank}
+	A matrix is said to be in its \textit{Row Echelon Form} if:
+	\begin{enumerate}
+		\item All nonzero rows (rows with at least one nonzero element) are above any rows of all zeroes (all zero rows, if any, belong at the bottom of the matrix)
+		\item The leading coefficient (the first nonzero number from the left) of a nonzero row is always strictly to the right of the leading coefficient of the row above it.
+	\end{enumerate}
+
+	If the leading coefficients are all $1$, then the form is called a \textit{Reduced Row Echelon Form}.\\
+	For example, the following matrices are all presented in reduced row echelon form:
+	\begin{align*}
+		\begin{pmatrix}
+			1 & -2 & 0 & 5\\
+			0 & 1  & 3 & 7\\
+			0 & 0  & 0 & 1\\
+			0 & 0  & 0 & 0\\
+		\end{pmatrix},\quad
+		\begin{pmatrix}
+			1 & 7\\
+			0 & 1\\
+		\end{pmatrix},\quad
+		\begin{pmatrix}
+			1 & 3 & 7\\
+			0 & 1 & 2\\
+		\end{pmatrix},\quad
+		\begin{pmatrix}
+			1 & 0 & 5\\
+			0 & 1 & 1\\
+			0 & 0 & 1\\
+			0 & 0 & 0\\
+			0 & 0 & 0\\
+		\end{pmatrix}.
+	\end{align*}
+
+	\begin{enumerate}
+		\item Use row operations to bring the following two matrices to their reduced row echelon form:
+			\begin{equation*}
+				A=
+				\begin{pmatrix}
+					3 & 1 & 0\\
+					6 & 2 & 1\\
+					3 & 6 & 1\\
+				\end{pmatrix},\quad
+				B=
+				\begin{pmatrix}
+					1  & 0 & 1\\
+					2  & 0 & 2\\
+					-3 & 0 & -3\\
+				\end{pmatrix}.
+				\end{equation*}
+
+					\if\withsol1{
+
+							\begin{answer}
+								\begin{align*}
+									&\begin{pmatrix}
+										3 & 1 & 0\\
+										6 & 2 & 1\\
+										3 & 6 & 1
+									\end{pmatrix}\xrightarrow[]{R_{2}\rightarrow R_{2}-2R_{1}}
+									\begin{pmatrix}
+										3 & 1 & 0\\
+										0 & 0 & 1\\
+										3 & 6 & 1
+									\end{pmatrix}\xrightarrow[]{R_{2}\leftrightarrow R_{3}}
+									\begin{pmatrix}
+										3 & 1 & 0\\
+										3 & 6 & 1\\
+										0 & 0 & 1
+									\end{pmatrix}\xrightarrow[]{R_{1}\rightarrow R_{1}-R_{2}}
+									\begin{pmatrix}
+										0 & -5 & -1\\
+										3 & 6 & 1\\
+										0 & 0 & 1
+									\end{pmatrix}\xrightarrow[]{R_{1}\rightarrow R_{1}+R_{3}}\\[5mm]
+									&\begin{pmatrix}
+										0 & -5 & 0\\
+										3 & 6 & 1\\
+										0 & 0 & 1
+									\end{pmatrix}\xrightarrow[]{R_{1}\rightarrow-\frac{1}{5}R_{1}}
+									\begin{pmatrix}
+										0 & 1 & 0\\
+										3 & 6 & 1\\
+										0 & 0 & 1
+									\end{pmatrix}\xrightarrow[]{R_{1}\leftrightarrow R_{2}}
+									\begin{pmatrix}
+										3 & 6 & 1\\
+										0 & 1 & 0\\
+										0 & 0 & 1
+									\end{pmatrix}\xrightarrow[]{R_{1}\rightarrow R_{1}-6R_{2}}
+									\begin{pmatrix}
+										3 & 0 & 1\\
+										0 & 1 & 0\\
+										0 & 0 & 1
+									\end{pmatrix}\xrightarrow[]{R_{1}\rightarrow R_{1}-R_{3}}\\[5mm]
+									&\begin{pmatrix}
+										3 & 0 & 0\\
+										0 & 1 & 0\\
+										0 & 0 & 1
+									\end{pmatrix}\xrightarrow[]{R_{1}\rightarrow\frac{1}{3}R_{1}}
+									\begin{pmatrix}
+										1 & 0 & 0\\
+										0 & 1 & 0\\
+										0 & 0 & 1
+									\end{pmatrix}.
+								\end{align*}
+
+
+								~\\~\\
+								\begin{align*}
+									\begin{pmatrix}
+										1 & 0 & 1\\
+										2 & 0 & 2\\
+										-3 & 0 & -3
+									\end{pmatrix}\xrightarrow[]{R_{2}\rightarrow R_{2}-2R_{1}}
+									\begin{pmatrix}
+										1 & 0 & 1\\
+										0 & 0 & 0\\
+										-3 & 0 & -3
+									\end{pmatrix}\xrightarrow[]{R_{3}\rightarrow R_{3}+3R_{1}}
+									\begin{pmatrix}
+										1 & 0 & 1\\
+										0 & 0 & 0\\
+										0 & 0 & 0
+									\end{pmatrix}.
+								\end{align*}
+							\end{answer}
+						}\fi
+
+					\item What are the ranks of $A$ and $B$?
+						\if\withsol1{
+
+								\begin{answer}
+									Row operations do not change the rank of matrices, and so: $\text{rank}\left( A \right)=3,\ \text{rank}\left( B \right)=1$.
+								\end{answer}
+							}\fi
+					\end{enumerate}
+
+					\subsection{Systems of Linear Equations}
+					The following system of linear equations is given:
+					\begin{equation*}
+						\begin{cases}
+							-x+3z = 20\\
+							3x+y+3z = 15\\
+							9x+3y = -18\\
+						\end{cases}.
+					\end{equation*}
+					Solve the system using the Gaussian elimination method.
+
+					\if\withsol1{
+							\begin{answer}
+								First, let us write the system in matrix-vector form:
+								\begin{equation*}
+									\begin{pmatrix}
+										-1 & 0 & 3 \\
+										3  & 1 & 3 \\
+										9  & 3 & 0 \\
+									\end{pmatrix}\colvec{3}{x}{y}{z} = \colvec{3}{20}{15}{-18}.
+								\end{equation*}
+
+								We will perform the Gaussian elimination process on the augmented matrix
+								\begin{equation*}
+									\left(\begin{array}{ccc|c}
+											-1 & 0 & 3 & 20\\
+											3  & 1 & 3 & 15\\
+											9  & 3 & 0 & -18
+									\end{array}\right).
+								\end{equation*}
+
+								\begin{align*}
+									&
+									\left(\begin{array}{ccc|c}
+											-1 & 0 & 3 & 20\\
+											3  & 1 & 3 & 15\\
+											9  & 3 & 0 & -18
+									\end{array}\right) \xrightarrow[] {-\frac{1}{R_{1}} \rightarrow R_{1}}
+									\left(\begin{array}{ccc|c}
+											1 & 0 & -3 & -20\\
+											3  & 1 & 3 & 15\\
+											9  & 3 & 0 & -18
+									\end{array}\right) \xrightarrow[] {R_{2}-3R_{1} \rightarrow R_{2}}\\
+									&
+									\left(\begin{array}{ccc|c}
+											1 & 0 & -3 & -20\\
+											0  & 1 & 12 & 75\\
+											9  & 3 & 0 & -18
+									\end{array}\right) \xrightarrow[] {R_{3}-9R_{1} \rightarrow R_{3}}
+									\left(\begin{array}{ccc|c}
+											1 & 0 & -3 & -20\\
+											0  & 1 & 12 & 75\\
+											0  & 3 & 27 & 162
+									\end{array}\right) \xrightarrow[] {R_{3}-3R_{2} \rightarrow R_{3}}\\
+									&
+									\left(\begin{array}{ccc|c}
+											1 & 0 & -3 & -20\\
+											0  & 1 & 12 & 75\\
+											0  & 0 & -9 & -63 
+									\end{array}\right) \xrightarrow[] {-\frac{1}{9}R_{3} \rightarrow R_{3}}
+									\left(\begin{array}{ccc|c}
+											1 & 0 & -3 & -20\\
+											0  & 1 & 12 & 75\\
+											0  & 0 & 1 & 7 
+									\end{array}\right) \xrightarrow[] {R_{1}+3R_{3} \rightarrow R_{1}}\\
+									&
+									\left(\begin{array}{ccc|c}
+											1 & 0 & 0 & 1\\
+											0  & 1 & 12 & 75\\
+											0  & 0 & 1 & 7 
+									\end{array}\right) \xrightarrow[] {R_{2}-12R_{3} \rightarrow R_{2}}
+									\left(\begin{array}{ccc|c}
+											1 & 0 & 0 & 1\\
+											0  & 1 & 0 & -9\\
+											0  & 0 & 1 & 7 
+									\end{array}\right).
+								\end{align*}
+
+								Thus, the solution to the system is
+								\begin{equation*}
+									x=1,\quad y=-9,\quad z=7.
+								\end{equation*}
+							\end{answer}
+						}\fi

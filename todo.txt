@@ -1,0 +1,4 @@
+* Linear systems: Verify free coefficient issue, i.e. should it be imverted in the augmented matrix?
+* Eigenvectors: Verify the difference between geometric- and algebraic-multiplicity of eigenvectors.
+* Uses: Write.
+* General Vector Spaces: Write.

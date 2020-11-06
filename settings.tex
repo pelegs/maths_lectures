@@ -1,0 +1,445 @@
+%% ----- General Packages ----- %%
+
+\usepackage{pifont, mdframed}
+\usepackage{hyphenat}
+\usepackage{hyperref}
+\usepackage{soul}
+\usepackage{float}
+\usepackage{needspace}
+\usepackage{pythontex}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xargs}
+\usepackage{xstring}
+
+%% ----- Graphics ----- %%
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{svg}
+\definecolor{col0}{HTML}{FFFFFF}
+\definecolor{col1}{HTML}{FF7878}
+\definecolor{col2}{HTML}{51B5F8}
+\definecolor{col3}{HTML}{68E1AA}
+\definecolor{col4}{HTML}{B869EA}
+\definecolor{col5}{HTML}{FF5500}
+\definecolor{col6}{HTML}{FF7878}
+\definecolor{col7}{HTML}{FF7500}
+\definecolor{col8}{HTML}{FF4F93}
+\graphicspath{{./figures/}}
+\newcommand{\rcolor}[2]{
+  \color{#1}{#2}\color{black}
+}
+
+%% ----- Maths ----- %%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{scalerel}
+\usepackage[thicklines]{cancel}
+\renewcommand\CancelColor{\color{col1}}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\allowdisplaybreaks
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+\newcommand{\comp}{\mathsf{c}}
+\newcommand\Rs[1]{\mathbb{R}^{#1}}
+\newcommand\eb[1]{\hat{e}_{#1}}
+\newcommand\pdot[2]{\vec{#1}\cdot\vec{#2}}
+\newcommand\pcross[2]{\vec{#1}\times\vec{#2}}
+\newcommand\func[3]{#1:#2\rightarrow#3}
+
+% test
+\newcommand{\pgfprint}[1]{
+  \pgfmathparse{#1}\pgfmathprintnumber\pgfmathresult
+}
+
+% Empty square
+\def\msquare{\mathord{\scalerel*{\Box}{gX}}}
+
+% Column vectors
+\newcount\colveccount
+\newcommand*\colvec[1]{
+  \global\colveccount#1
+  \begin{pmatrix}
+  \colvecnext
+  }
+  \def\colvecnext#1{
+  #1
+  \global\advance\colveccount-1
+  \ifnum\colveccount>0
+  \\
+  \expandafter\colvecnext
+  \else
+  \end{pmatrix}
+  \fi
+}
+
+% Dim
+\renewcommand{\dim}{
+  \operatorname{dim}
+}
+
+% Rank
+\newcommand{\rank}{
+  \operatorname{rank}
+}
+
+% Null
+\newcommand{\nullspace}{
+  \operatorname{Null}
+}
+
+% Trace
+\newcommand{\tr}{
+  \operatorname{tr}
+}
+
+% Distance
+\newcommand{\dist}{
+  \operatorname{dist}
+}
+
+% Identity matrix
+\newcommand\idenmat[1]{
+  \pyc{import sys}
+  \pyc{sys.path.append('scripts')}
+  \pyc{from scripts import identity_matrix}
+  \pyc{identity_matrix(#1)}
+}
+
+% General identity matrix 1
+\newcommand\idnmtrx{
+  \NiceMatrixOptions{xdots/shorten = 0.6 em}
+  \begin{pNiceMatrix}
+  1& 0& \Cdots  &0     \\
+  0& 1& \Ddots  &\Vdots\\
+  \Vdots  &\Ddots  & 1&0\\
+  0&\Cdots  & 0&1
+  \CodeAfter
+  \line{2-2}{3-3}
+  \end{pNiceMatrix}
+}
+
+% General identity matrix 2
+\newcommand{\genidmt}{
+  \begin{psmallmatrix}
+  1 & 0 & 0 & \dots & 0 \\
+  0 & 1 & 0 & \dots & 0 \\
+  0 & 0 & 1 & \dots & 0 \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & 0 & \dots & 1 \\
+  \end{psmallmatrix}
+}
+
+% Norm of a vector
+\newcommand\vnorm[2][black]{
+  \left\| \color{#1} \vec{#2} \color{black} \right\|
+}
+
+% Inner product
+\newcommand\dotp[2]{
+  \langle #1,#2 \rangle
+}
+
+% Reflection and Rotation matrices
+\DeclareMathOperator{\Reflect}{Ref}
+\DeclareMathOperator{\Rot}{Rot}
+
+% Actual matrices
+\newcommandx*{\RotMat}[4][1=\theta, 2=\theta, 3=\theta, 4=\theta]{
+  \begin{pmatrix}
+  \cos(#1) & -\sin(#2)\\
+  \sin(#3) & \cos(#4)
+  \end{pmatrix}
+}
+
+% Projection of vectors
+\newcommandx*{\projection}[4][1=u, 2=v, 3=col1, 4=col2]{
+  \operatorname{proj}_{\rcolor{#4}{\vec{#2}}}\rcolor{#3}{\vec{#1}}
+}
+
+% Axes
+\newcommand{\xaxis}[2]{
+  \draw[vector, <->] (#1,0) -- (#2,0) node [right] {$x$};
+}
+\newcommand{\yaxis}[2]{
+  \draw[vector, <->] (0,#1) -- (0,#2) node [above] {$y$};
+}
+
+%% ----- Bibliography ----- %%
+
+\usepackage[backend=biber, style=nature]{biblatex}
+\bibliography{./bib/ref}
+
+%% ----- TikZ and PGF ----- %%
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{xspace}
+\newcommand{\TikZ}{\textup{Ti\textit{k}Z}}
+\usepackage[customcolors]{hf-tikz}
+\usetikzlibrary{positioning, calc, math, norm, shapes, fit, backgrounds, arrows, automata, decorations.pathreplacing, decorations.text, trees, matrix}
+\newcommand\tikzmark[1]{\tikz[overlay,remember picture] \node (#1) {};}
+\tikzset{
+  double arrow/.style args={#1 colored by #2 and #3}{
+  -stealth,line width=#1,#2, % first arrow
+  postaction={draw,-stealth,#3,line width=(#1)/3,
+  shorten <=(#1)/3,shorten >=2*(#1)/3}, % second arrow
+  }
+}
+
+\newcommand{\tikznode}[3][]{%based on https://tex.stackexchange.com/a/402466/121799
+  \ifmmode%
+  \tikz[remember picture,baseline=(#2.base),inner sep=0pt] \node[#1] (#2) {$#3$};%
+  \else
+  \tikz[remember picture,baseline=(#2.base),inner sep=0pt] \node[#1] (#2) {#3};%
+  \fi
+}
+\tikzstyle{every edge}=[draw=black, very thick]
+\tikzset{
+  My Node Style/.style={midway, right, xshift=3.0ex, align=left, font=\small, draw=none, thin, text=black},
+  highlight/.style={rectangle, rounded corners, draw, fill opacity=0.5, inner sep=0pt},
+  vector/.style={->, >=stealth, very thick},
+  perp/.style={-, densely dotted, thick, black!50},
+  graphstate/.style={draw=black, very thick, text=black, minimum size=7mm, inner sep=0pt, outer sep=0pt},
+  treenode/.style = {align=center, inner sep=0pt, text centered,
+  font=\sffamily},
+  tnode/.style = {treenode, circle, font=\sffamily\bfseries, draw=black,
+  fill=col2!50, text width=1.5em},
+  rnode/.style = {treenode, circle, font=\sffamily\bfseries, draw=black,
+  fill=col1!50, text width=1.5em},
+  lnode/.style = {treenode, circle, font=\sffamily\bfseries, draw=black,
+  fill=col3!50, text width=1.5em},
+  arr/.style = {vector, densely dotted},
+  annotation/.style = {draw=black!60},
+  annotationtext/.style = {text=black!60},
+}
+\def\dis{1.0cm}
+
+\newcommand{\boxgrid}[6]{
+  \pgfmathsetmacro{\a}{#1}
+  \pgfmathsetmacro{\nrow}{#2}
+  \pgfmathsetmacro{\ncol}{#3}
+  \pgfmathsetmacro{\dx}{#4}
+  \pgfmathsetmacro{\dy}{#5}
+  \foreach \row in {1,...,\nrow}{
+  \foreach \col in {1,...,\ncol}{
+  \draw[thick] (\row*\a+\dx,-\col*\a-\dy) rectangle ++(\a,-\a) node [midway] {$#6_{\col\row}$};
+  }
+  }
+  \draw[thick] (\dx+\a*1.7,\dy-\a*0.7) -- ++(-\a*2,0);
+}
+
+\usepackage{pgf}
+\pgfdeclarelayer{background layer}
+\pgfdeclarelayer{foreground layer}
+\pgfsetlayers{background layer,main,foreground layer}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usepgfplotslibrary{fillbetween, colormaps, colorbrewer}
+\pgfplotsset{every axis/.append style={
+  font=\small,
+  axis x line=middle,
+  axis y line=middle,
+  axis line style={<->, thick, black},
+  xlabel={$x$},
+  ylabel={$y$},
+  every axis x label/.style={at={(current axis.right of origin)}, xshift=10pt, anchor=east},
+  every axis y label/.style={at={(current axis.above origin)}, yshift=10pt, anchor=north},
+  every extra x tick/.style={xticklabel style={above}},
+  every extra y tick/.style={yticklabel style={right}}
+}}
+
+\newcommandx*{\drawaxes}[9][5=1, 6=black!25, 7=densely dotted, 8=black, 9=1]{
+  \ifthenelse{#9=0}
+  {}
+  {
+  \foreach \x in {#1,...,#3}{
+  \ifthenelse{\x = 0}
+  { }
+  {\draw[-, #8] (\x,-0.1) -- (\x,0.1) node [below, yshift=-1mm] {\tiny$\x$};}
+  }
+  \foreach \y in {#2,...,#4}{
+  \ifthenelse{\y = 0}
+  { }
+  {\draw[-, #8] (-0.1,\y) -- (0.1,\y) node [left, xshift=-1mm] {\tiny$\y$};}
+  }
+  }
+  \draw[step=#5, #6, thin, #7] (#1,#2) grid (#3,#4);
+  \draw[vector, thick, <->] (#1-0.5,0) to (#3+0.5,0) node [right] {$x$}; 
+  \draw[vector, thick, <->] (0,#2-0.5) to (0,#4+0.5) node [above] {$y$};
+}
+  
+\newcommandx*{\boxmatrix}[9][1=5, 2=7, 3=0.5, 4=0.5, 5=0, 6=0, 7=1, 8=M, 9=N, usedefault]{
+  \pgfmathsetmacro{\Nx}{#1}
+  \pgfmathsetmacro{\Ny}{#2}
+  \pgfmathsetmacro{\Lx}{#3}
+  \pgfmathsetmacro{\Ly}{#4}
+  \pgfmathsetmacro{\width}{\Lx*\Nx}
+  \pgfmathsetmacro{\height}{\Ly*\Ny}
+  \pgfmathsetmacro{\px}{#5}
+  \pgfmathsetmacro{\py}{#6}
+  \coordinate (corner1) at ($(\px,\py)-(\width*0.5,\height*0.5)$);
+  \coordinate (corner2) at ($(\px,\py)+(\width*0.5,\height*0.5)$);
+
+  \filldraw[col#7!50, draw=col#7, thick] (corner1) rectangle (corner2);
+  \foreach \col in {1,...,\Nx}
+  \draw[-, thick, col#7] ($(corner1)+(\col*\Lx,0)$) -- ++($(0, \height)$);
+  \foreach \row in {1,...,\Ny}
+  \draw[-, thick, col#7] ($(corner1)+(0,\row*\Ly)$) -- ++($(\width, 0)$);
+  \draw [col#7!75!black, thick, cap=round, decorate, decoration={brace, amplitude=3pt, raise=4pt}]
+  (corner1) -- ++(0,\height) node[midway, xshift=-15pt, text=col#7!75!black]{$#8$};
+  \draw [col#7!75!black, thick, cap=round, decorate, decoration={brace, amplitude=3pt, raise=4pt, mirror}]
+  (corner2) -- ++(-\width,0) node[midway, yshift=15pt, text=col#7!75!black]{$#9$};
+
+}
+
+\newcommandx*{\genvec}[2][1=x, 2=fff]{
+  \IfEq{#2}{fff}{
+  \colvec{4}{#1_{1}}{#1_{2}}{\vdots}{#1_{n}}
+  }{
+  \colvec{4}{#1_{1}+#2_{1}}{#1_{2}+#2_{2}}{\vdots}{#1_{n}+#2_{n}}
+  }
+}
+
+\newcommand{\minorblack}[1]{
+  \tikzmarkin[set fill color=black, set border color=black]{#1}
+}
+
+\newcommand{\xhat}{
+  \draw[vector, col1] (0,0) -- (1,0) node [above] {$\hat{x}$};
+}
+\newcommand{\yhat}{
+  \draw[vector, col2] (0,0) -- (0,1) node [right] {$\hat{y}$};
+}
+
+%% ----- Math definition ----- %%
+
+\mdfdefinestyle{theoremstyle}
+{
+  linewidth=2pt,
+  frametitlerule=true,
+  innertopmargin=\topskip,
+}
+\mdtheorem[
+  style=theoremstyle,
+  linecolor=col4!75,
+  frametitlebackgroundcolor=col4!25
+  ]{mathdef}{\color{col4!25!black}Definition}
+
+%% ----- Attention/Warning environment ----- %%
+
+\mdfdefinestyle{theoremstyle}
+{
+  linewidth=2pt,
+  frametitlerule=true,
+  innertopmargin=\topskip,
+}
+\mdtheorem[
+  style=theoremstyle,
+  linecolor=col1!75,
+  frametitlebackgroundcolor=col1!25
+  ]{warning}{\color{col1!25!black}Note}
+
+%% ----- Challange environment ----- %%
+
+\mdfdefinestyle{theoremstyle}
+{
+  linewidth=2pt,
+  frametitlerule=true,
+  innertopmargin=\topskip,
+}
+\mdtheorem[
+  style=theoremstyle,
+  linecolor=col3!75,
+  frametitlebackgroundcolor=col3!25
+  ]{challange}{\color{col3!25!black}Challange}
+
+%% ----- Important concept environment ----- %%
+
+\mdfdefinestyle{theoremstyle}
+{
+  linewidth=2pt,
+  frametitlerule=true,
+  innertopmargin=\topskip,
+}
+\mdtheorem[
+  style=theoremstyle,
+  linecolor=red!50!black,
+  frametitlebackgroundcolor=red
+  ]{important}{IMPORTANT!}
+
+%% ----- Example environment ----- %%
+
+\mdfdefinestyle{theoremstyle}
+{
+  linewidth=2pt,
+  frametitlerule=true,
+  innertopmargin=\topskip,
+}
+\mdtheorem[
+  style=theoremstyle,
+  linecolor=col2!75,
+  frametitlebackgroundcolor=col2!25
+  ]{example}{\color{col2!25!black}Example}
+
+%% ----- Misc. ----- %%
+
+\newcommand{\true}{\textcolor{col2}{\textbf{true}}}
+\newcommand{\false}{\textcolor{col1}{\textbf{false}}}
+\newcommand{\mtrue}{\textcolor{col2}{\mathbf{true}}}
+\newcommand{\mfalse}{\textcolor{col1}{\mathbf{false}}}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\newcommand{\thl}[1]{\mathcolorbox{col2!50}{#1}}
+\newcommand{\fhl}[1]{\mathcolorbox{col1!50}{#1}}
+\renewcommand{\emph}[1]{
+  \colorbox{col4!30}{\textbf{#1}}\xspace
+}
+
+%% ----- VERY specific coloring macros ----- %%
+
+
+\newcommand{\tmi}[2]{
+  \tikzmarkin[set fill color=col#1!20, set border color=col#1]{#2}
+}
+
+\newcommand{\hli}[3]{
+  \tmi{#1}{#2}#3\tikzmarkend{#2}
+}
+
+\newcommand{\xhl}[1][x]{
+  \rcolor{col1}{#1}
+}
+\newcommand{\yhl}[1][y]{
+  \rcolor{col2}{#1}
+}
+\newcommand{\zhl}[1][z]{
+  \rcolor{col3}{#1}
+}
+\newcommand{\whl}[1][w]{
+  \rcolor{col4}{#1}
+}
+
+\newcommandx{\mel}[3][1=a, 2=i, 3=j]{
+  #1_{\xhl[#2]\yhl[#3]}
+}
+
+\newcommand{\matcl}[2]{
+  \IfEqCase{#1}{
+  {A}{\ \tmi{4}{#2}A\tikzmarkend{#2}\ }
+  {B}{\ \tmi{5}{#2}B\tikzmarkend{#2}\ }
+  {C}{\ \tmi{8}{#2}C\tikzmarkend{#2}\ }
+  {MN}{\ \tmi{4}{#2}M\times N\tikzmarkend{#2}\ }
+  {NK}{\ \tmi{5}{#2}N\times K\tikzmarkend{#2}\ }
+  {MK}{\ \tmi{8}{#2}M\times K\tikzmarkend{#2}\ }
+  }[\PackageError{tree}{Undefined option: #1}{}]
+}
+

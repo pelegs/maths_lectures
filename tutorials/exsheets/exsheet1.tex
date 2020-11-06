@@ -1,0 +1,330 @@
+\section{Matrices}
+For each of the following matrices:
+\begin{enumerate}
+	\item Add it to each of the following matrices (if possible).
+	\item Multiply it with each of the following matrices (if possible).
+	\item Calculate its transpose.
+	\item Calculate its determinant (if possible).
+\end{enumerate}
+
+\vspace{1cm}
+\centering
+
+\begin{pycode}
+import numpy as np
+from scripts import draw_matrix, draw_add, draw_prod, draw_det
+from sys import stderr
+
+M = []
+for i in range(16):
+	m, n = 1, 1
+	while m==1 and n==1:
+		m, n = np.random.randint(1, 4, (2,1)).flatten()
+	M.append(np.random.randint(-20, 20, (m,n)))
+
+# This part is horrible
+A, B, C, D, E, F, G, H, J, K, L, M, N, O, P, Q = M
+\end{pycode}
+
+\setlength{\tabcolsep}{3mm}
+\begin{tabular}{cccc}
+	\draw{A} & \draw{B} & \draw{C} & \draw{D}\\[2cm]
+	\draw{E} & \draw{F} & \draw{G} & \draw{H}\\[2cm]
+	\draw{J} & \draw{K} & \draw{L} & \draw{M}\\[2cm]
+	\draw{N} & \draw{O} & \draw{P} & \draw{Q}\\[2cm]
+\end{tabular}
+\newpage
+
+\flushleft
+\begin{answer}
+	\begin{center}
+		\underline{\textbf{Additions}}
+	\end{center}
+	~\\~\\
+	\setlength{\tabcolsep}{1mm}
+	\begin{tabular}{c|cccc}
+		+ & (A) & (B) & (C) & (D)\\
+		\hline
+		(A) & \drawaddition{A}{A} & \drawaddition{A}{B} & \drawaddition{A}{C} & \drawaddition{A}{D} \\[2cm]
+		(B) & \drawaddition{B}{A} & \drawaddition{B}{B} & \drawaddition{B}{C} & \drawaddition{B}{D} \\[2cm]
+		(C) & \drawaddition{C}{A} & \drawaddition{C}{B} & \drawaddition{C}{C} & \drawaddition{C}{D} \\[2cm]
+		(D) & \drawaddition{D}{A} & \drawaddition{D}{B} & \drawaddition{D}{C} & \drawaddition{D}{D} \\[2cm]
+		(E) & \drawaddition{E}{A} & \drawaddition{E}{B} & \drawaddition{E}{C} & \drawaddition{E}{D} \\[2cm]
+		(F) & \drawaddition{F}{A} & \drawaddition{F}{B} & \drawaddition{F}{C} & \drawaddition{F}{D} \\[2cm]
+		(G) & \drawaddition{G}{A} & \drawaddition{G}{B} & \drawaddition{G}{C} & \drawaddition{G}{D} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (E) & (F) & (G) & (H)\\
+		\hline
+		(A) & \drawaddition{A}{E} & \drawaddition{A}{F} & \drawaddition{A}{G} & \drawaddition{A}{H} \\[2cm]
+		(B) & \drawaddition{B}{E} & \drawaddition{B}{F} & \drawaddition{B}{G} & \drawaddition{B}{H} \\[2cm]
+		(C) & \drawaddition{C}{E} & \drawaddition{C}{F} & \drawaddition{C}{G} & \drawaddition{C}{H} \\[2cm]
+		(D) & \drawaddition{D}{E} & \drawaddition{D}{F} & \drawaddition{D}{G} & \drawaddition{D}{H} \\[2cm]
+		(E) & \drawaddition{E}{E} & \drawaddition{E}{F} & \drawaddition{E}{G} & \drawaddition{E}{H} \\[2cm]
+		(F) & \drawaddition{F}{E} & \drawaddition{F}{F} & \drawaddition{F}{G} & \drawaddition{F}{H} \\[2cm]
+		(G) & \drawaddition{G}{E} & \drawaddition{G}{F} & \drawaddition{G}{G} & \drawaddition{G}{H} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (J) & (K) & (L) & (M)\\
+		\hline
+		(A) & \drawaddition{A}{J} & \drawaddition{A}{K} & \drawaddition{A}{L} & \drawaddition{A}{M} \\[2cm]
+		(B) & \drawaddition{B}{J} & \drawaddition{B}{K} & \drawaddition{B}{L} & \drawaddition{B}{M} \\[2cm]
+		(C) & \drawaddition{C}{J} & \drawaddition{C}{K} & \drawaddition{C}{L} & \drawaddition{C}{M} \\[2cm]
+		(D) & \drawaddition{D}{J} & \drawaddition{D}{K} & \drawaddition{D}{L} & \drawaddition{D}{M} \\[2cm]
+		(E) & \drawaddition{E}{J} & \drawaddition{E}{K} & \drawaddition{E}{L} & \drawaddition{E}{M} \\[2cm]
+		(F) & \drawaddition{F}{J} & \drawaddition{F}{K} & \drawaddition{F}{L} & \drawaddition{F}{M} \\[2cm]
+		(G) & \drawaddition{G}{J} & \drawaddition{G}{K} & \drawaddition{G}{L} & \drawaddition{G}{M} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (N) & (O) & (P) & (Q)\\
+		\hline
+		(A) & \drawaddition{A}{N} & \drawaddition{A}{O} & \drawaddition{A}{P} & \drawaddition{A}{Q} \\[2cm]
+		(B) & \drawaddition{B}{N} & \drawaddition{B}{O} & \drawaddition{B}{P} & \drawaddition{B}{Q} \\[2cm]
+		(C) & \drawaddition{C}{N} & \drawaddition{C}{O} & \drawaddition{C}{P} & \drawaddition{C}{Q} \\[2cm]
+		(D) & \drawaddition{D}{N} & \drawaddition{D}{O} & \drawaddition{D}{P} & \drawaddition{D}{Q} \\[2cm]
+		(E) & \drawaddition{E}{N} & \drawaddition{E}{O} & \drawaddition{E}{P} & \drawaddition{E}{Q} \\[2cm]
+		(F) & \drawaddition{F}{N} & \drawaddition{F}{O} & \drawaddition{F}{P} & \drawaddition{F}{Q} \\[2cm]
+		(G) & \drawaddition{G}{N} & \drawaddition{G}{O} & \drawaddition{G}{P} & \drawaddition{G}{Q} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (A) & (B) & (C) & (D)\\
+		\hline
+		(H) & \drawaddition{A}{A} & \drawaddition{H}{B} & \drawaddition{H}{C} & \drawaddition{H}{D} \\[2cm]
+		(J) & \drawaddition{B}{A} & \drawaddition{J}{B} & \drawaddition{J}{C} & \drawaddition{J}{D} \\[2cm]
+		(K) & \drawaddition{C}{A} & \drawaddition{K}{B} & \drawaddition{K}{C} & \drawaddition{K}{D} \\[2cm]
+		(L) & \drawaddition{D}{A} & \drawaddition{L}{B} & \drawaddition{L}{C} & \drawaddition{L}{D} \\[2cm]
+		(M) & \drawaddition{E}{A} & \drawaddition{M}{B} & \drawaddition{M}{C} & \drawaddition{M}{D} \\[2cm]
+		(N) & \drawaddition{F}{A} & \drawaddition{N}{B} & \drawaddition{N}{C} & \drawaddition{N}{D} \\[2cm]
+		(O) & \drawaddition{G}{A} & \drawaddition{O}{B} & \drawaddition{O}{C} & \drawaddition{O}{D} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (E) & (F) & (G) & (H)\\
+		\hline
+		(H) & \drawaddition{A}{E} & \drawaddition{H}{F} & \drawaddition{H}{G} & \drawaddition{H}{H} \\[2cm]
+		(J) & \drawaddition{B}{E} & \drawaddition{J}{F} & \drawaddition{J}{G} & \drawaddition{J}{H} \\[2cm]
+		(K) & \drawaddition{C}{E} & \drawaddition{K}{F} & \drawaddition{K}{G} & \drawaddition{K}{H} \\[2cm]
+		(L) & \drawaddition{D}{E} & \drawaddition{L}{F} & \drawaddition{L}{G} & \drawaddition{L}{H} \\[2cm]
+		(M) & \drawaddition{E}{E} & \drawaddition{M}{F} & \drawaddition{M}{G} & \drawaddition{M}{H} \\[2cm]
+		(N) & \drawaddition{F}{E} & \drawaddition{N}{F} & \drawaddition{N}{G} & \drawaddition{N}{H} \\[2cm]
+		(O) & \drawaddition{G}{E} & \drawaddition{O}{F} & \drawaddition{O}{G} & \drawaddition{O}{H} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (J) & (K) & (L) & (M)\\
+		\hline
+		(H) & \drawaddition{A}{J} & \drawaddition{H}{K} & \drawaddition{H}{L} & \drawaddition{H}{M} \\[2cm]
+		(J) & \drawaddition{B}{J} & \drawaddition{J}{K} & \drawaddition{J}{L} & \drawaddition{J}{M} \\[2cm]
+		(K) & \drawaddition{C}{J} & \drawaddition{K}{K} & \drawaddition{K}{L} & \drawaddition{K}{M} \\[2cm]
+		(L) & \drawaddition{D}{J} & \drawaddition{L}{K} & \drawaddition{L}{L} & \drawaddition{L}{M} \\[2cm]
+		(M) & \drawaddition{E}{J} & \drawaddition{M}{K} & \drawaddition{M}{L} & \drawaddition{M}{M} \\[2cm]
+		(N) & \drawaddition{F}{J} & \drawaddition{N}{K} & \drawaddition{N}{L} & \drawaddition{N}{M} \\[2cm]
+		(O) & \drawaddition{G}{J} & \drawaddition{O}{K} & \drawaddition{O}{L} & \drawaddition{O}{M} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (N) & (O) & (P) & (Q)\\
+		\hline
+		(H) & \drawaddition{A}{N} & \drawaddition{H}{O} & \drawaddition{H}{P} & \drawaddition{H}{Q} \\[2cm]
+		(J) & \drawaddition{B}{N} & \drawaddition{J}{O} & \drawaddition{J}{P} & \drawaddition{J}{Q} \\[2cm]
+		(K) & \drawaddition{C}{N} & \drawaddition{K}{O} & \drawaddition{K}{P} & \drawaddition{K}{Q} \\[2cm]
+		(L) & \drawaddition{D}{N} & \drawaddition{L}{O} & \drawaddition{L}{P} & \drawaddition{L}{Q} \\[2cm]
+		(M) & \drawaddition{E}{N} & \drawaddition{M}{O} & \drawaddition{M}{P} & \drawaddition{M}{Q} \\[2cm]
+		(N) & \drawaddition{F}{N} & \drawaddition{N}{O} & \drawaddition{N}{P} & \drawaddition{N}{Q} \\[2cm]
+		(O) & \drawaddition{G}{N} & \drawaddition{O}{O} & \drawaddition{O}{P} & \drawaddition{O}{Q} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (A) & (B) & (C) & (D)\\
+		\hline
+		(P) & \drawaddition{P}{A} & \drawaddition{P}{B} & \drawaddition{P}{C} & \drawaddition{P}{D} \\[2cm]
+		(Q) & \drawaddition{Q}{A} & \drawaddition{Q}{B} & \drawaddition{Q}{C} & \drawaddition{Q}{D} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (E) & (F) & (G) & (H)\\
+		\hline
+		(P) & \drawaddition{P}{E} & \drawaddition{P}{F} & \drawaddition{P}{G} & \drawaddition{P}{P} \\[2cm]
+		(Q) & \drawaddition{Q}{E} & \drawaddition{Q}{F} & \drawaddition{Q}{G} & \drawaddition{Q}{P} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (J) & (K) & (L) & (M)\\
+		\hline
+		(P) & \drawaddition{P}{J} & \drawaddition{P}{K} & \drawaddition{P}{L} & \drawaddition{P}{M} \\[2cm]
+		(Q) & \drawaddition{Q}{J} & \drawaddition{Q}{K} & \drawaddition{Q}{L} & \drawaddition{Q}{M} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (N) & (O) & (P) & (Q)\\
+		\hline
+		(P) & \drawaddition{P}{N} & \drawaddition{P}{O} & \drawaddition{P}{P} & \drawaddition{P}{Q} \\[2cm]
+		(Q) & \drawaddition{Q}{N} & \drawaddition{Q}{O} & \drawaddition{Q}{P} & \drawaddition{Q}{Q} \\[2cm]
+	\end{tabular}
+\end{answer}
+
+\newpage
+\begin{answer}
+	\begin{center}
+		\underline{\textbf{Products}}
+	\end{center}
+	~\\~\\
+	\setlength{\tabcolsep}{1mm}
+	\begin{tabular}{c|cccc}
+		+ & (A) & (B) & (C) & (D)\\
+		\hline
+		(A) & \drawprod{A}{A} & \drawprod{A}{B} & \drawprod{A}{C} & \drawprod{A}{D} \\[2cm]
+		(B) & \drawprod{B}{A} & \drawprod{B}{B} & \drawprod{B}{C} & \drawprod{B}{D} \\[2cm]
+		(C) & \drawprod{C}{A} & \drawprod{C}{B} & \drawprod{C}{C} & \drawprod{C}{D} \\[2cm]
+		(D) & \drawprod{D}{A} & \drawprod{D}{B} & \drawprod{D}{C} & \drawprod{D}{D} \\[2cm]
+		(E) & \drawprod{E}{A} & \drawprod{E}{B} & \drawprod{E}{C} & \drawprod{E}{D} \\[2cm]
+		(F) & \drawprod{F}{A} & \drawprod{F}{B} & \drawprod{F}{C} & \drawprod{F}{D} \\[2cm]
+		(G) & \drawprod{G}{A} & \drawprod{G}{B} & \drawprod{G}{C} & \drawprod{G}{D} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (E) & (F) & (G) & (H)\\
+		\hline
+		(A) & \drawprod{A}{E} & \drawprod{A}{F} & \drawprod{A}{G} & \drawprod{A}{H} \\[2cm]
+		(B) & \drawprod{B}{E} & \drawprod{B}{F} & \drawprod{B}{G} & \drawprod{B}{H} \\[2cm]
+		(C) & \drawprod{C}{E} & \drawprod{C}{F} & \drawprod{C}{G} & \drawprod{C}{H} \\[2cm]
+		(D) & \drawprod{D}{E} & \drawprod{D}{F} & \drawprod{D}{G} & \drawprod{D}{H} \\[2cm]
+		(E) & \drawprod{E}{E} & \drawprod{E}{F} & \drawprod{E}{G} & \drawprod{E}{H} \\[2cm]
+		(F) & \drawprod{F}{E} & \drawprod{F}{F} & \drawprod{F}{G} & \drawprod{F}{H} \\[2cm]
+		(G) & \drawprod{G}{E} & \drawprod{G}{F} & \drawprod{G}{G} & \drawprod{G}{H} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (J) & (K) & (L) & (M)\\
+		\hline
+		(A) & \drawprod{A}{J} & \drawprod{A}{K} & \drawprod{A}{L} & \drawprod{A}{M} \\[2cm]
+		(B) & \drawprod{B}{J} & \drawprod{B}{K} & \drawprod{B}{L} & \drawprod{B}{M} \\[2cm]
+		(C) & \drawprod{C}{J} & \drawprod{C}{K} & \drawprod{C}{L} & \drawprod{C}{M} \\[2cm]
+		(D) & \drawprod{D}{J} & \drawprod{D}{K} & \drawprod{D}{L} & \drawprod{D}{M} \\[2cm]
+		(E) & \drawprod{E}{J} & \drawprod{E}{K} & \drawprod{E}{L} & \drawprod{E}{M} \\[2cm]
+		(F) & \drawprod{F}{J} & \drawprod{F}{K} & \drawprod{F}{L} & \drawprod{F}{M} \\[2cm]
+		(G) & \drawprod{G}{J} & \drawprod{G}{K} & \drawprod{G}{L} & \drawprod{G}{M} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (N) & (O) & (P) & (Q)\\
+		\hline
+		(A) & \drawprod{A}{N} & \drawprod{A}{O} & \drawprod{A}{P} & \drawprod{A}{Q} \\[2cm]
+		(B) & \drawprod{B}{N} & \drawprod{B}{O} & \drawprod{B}{P} & \drawprod{B}{Q} \\[2cm]
+		(C) & \drawprod{C}{N} & \drawprod{C}{O} & \drawprod{C}{P} & \drawprod{C}{Q} \\[2cm]
+		(D) & \drawprod{D}{N} & \drawprod{D}{O} & \drawprod{D}{P} & \drawprod{D}{Q} \\[2cm]
+		(E) & \drawprod{E}{N} & \drawprod{E}{O} & \drawprod{E}{P} & \drawprod{E}{Q} \\[2cm]
+		(F) & \drawprod{F}{N} & \drawprod{F}{O} & \drawprod{F}{P} & \drawprod{F}{Q} \\[2cm]
+		(G) & \drawprod{G}{N} & \drawprod{G}{O} & \drawprod{G}{P} & \drawprod{G}{Q} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (A) & (B) & (C) & (D)\\
+		\hline
+		(H) & \drawprod{A}{A} & \drawprod{H}{B} & \drawprod{H}{C} & \drawprod{H}{D} \\[2cm]
+		(J) & \drawprod{B}{A} & \drawprod{J}{B} & \drawprod{J}{C} & \drawprod{J}{D} \\[2cm]
+		(K) & \drawprod{C}{A} & \drawprod{K}{B} & \drawprod{K}{C} & \drawprod{K}{D} \\[2cm]
+		(L) & \drawprod{D}{A} & \drawprod{L}{B} & \drawprod{L}{C} & \drawprod{L}{D} \\[2cm]
+		(M) & \drawprod{E}{A} & \drawprod{M}{B} & \drawprod{M}{C} & \drawprod{M}{D} \\[2cm]
+		(N) & \drawprod{F}{A} & \drawprod{N}{B} & \drawprod{N}{C} & \drawprod{N}{D} \\[2cm]
+		(O) & \drawprod{G}{A} & \drawprod{O}{B} & \drawprod{O}{C} & \drawprod{O}{D} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (E) & (F) & (G) & (H)\\
+		\hline
+		(H) & \drawprod{A}{E} & \drawprod{H}{F} & \drawprod{H}{G} & \drawprod{H}{H} \\[2cm]
+		(J) & \drawprod{B}{E} & \drawprod{J}{F} & \drawprod{J}{G} & \drawprod{J}{H} \\[2cm]
+		(K) & \drawprod{C}{E} & \drawprod{K}{F} & \drawprod{K}{G} & \drawprod{K}{H} \\[2cm]
+		(L) & \drawprod{D}{E} & \drawprod{L}{F} & \drawprod{L}{G} & \drawprod{L}{H} \\[2cm]
+		(M) & \drawprod{E}{E} & \drawprod{M}{F} & \drawprod{M}{G} & \drawprod{M}{H} \\[2cm]
+		(N) & \drawprod{F}{E} & \drawprod{N}{F} & \drawprod{N}{G} & \drawprod{N}{H} \\[2cm]
+		(O) & \drawprod{G}{E} & \drawprod{O}{F} & \drawprod{O}{G} & \drawprod{O}{H} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (J) & (K) & (L) & (M)\\
+		\hline
+		(H) & \drawprod{A}{J} & \drawprod{H}{K} & \drawprod{H}{L} & \drawprod{H}{M} \\[2cm]
+		(J) & \drawprod{B}{J} & \drawprod{J}{K} & \drawprod{J}{L} & \drawprod{J}{M} \\[2cm]
+		(K) & \drawprod{C}{J} & \drawprod{K}{K} & \drawprod{K}{L} & \drawprod{K}{M} \\[2cm]
+		(L) & \drawprod{D}{J} & \drawprod{L}{K} & \drawprod{L}{L} & \drawprod{L}{M} \\[2cm]
+		(M) & \drawprod{E}{J} & \drawprod{M}{K} & \drawprod{M}{L} & \drawprod{M}{M} \\[2cm]
+		(N) & \drawprod{F}{J} & \drawprod{N}{K} & \drawprod{N}{L} & \drawprod{N}{M} \\[2cm]
+		(O) & \drawprod{G}{J} & \drawprod{O}{K} & \drawprod{O}{L} & \drawprod{O}{M} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (N) & (O) & (P) & (Q)\\
+		\hline
+		(H) & \drawprod{A}{N} & \drawprod{H}{O} & \drawprod{H}{P} & \drawprod{H}{Q} \\[2cm]
+		(J) & \drawprod{B}{N} & \drawprod{J}{O} & \drawprod{J}{P} & \drawprod{J}{Q} \\[2cm]
+		(K) & \drawprod{C}{N} & \drawprod{K}{O} & \drawprod{K}{P} & \drawprod{K}{Q} \\[2cm]
+		(L) & \drawprod{D}{N} & \drawprod{L}{O} & \drawprod{L}{P} & \drawprod{L}{Q} \\[2cm]
+		(M) & \drawprod{E}{N} & \drawprod{M}{O} & \drawprod{M}{P} & \drawprod{M}{Q} \\[2cm]
+		(N) & \drawprod{F}{N} & \drawprod{N}{O} & \drawprod{N}{P} & \drawprod{N}{Q} \\[2cm]
+		(O) & \drawprod{G}{N} & \drawprod{O}{O} & \drawprod{O}{P} & \drawprod{O}{Q} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (A) & (B) & (C) & (D)\\
+		\hline
+		(P) & \drawprod{P}{A} & \drawprod{P}{B} & \drawprod{P}{C} & \drawprod{P}{D} \\[2cm]
+		(Q) & \drawprod{Q}{A} & \drawprod{Q}{B} & \drawprod{Q}{C} & \drawprod{Q}{D} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (E) & (F) & (G) & (H)\\
+		\hline
+		(P) & \drawprod{P}{E} & \drawprod{P}{F} & \drawprod{P}{G} & \drawprod{P}{P} \\[2cm]
+		(Q) & \drawprod{Q}{E} & \drawprod{Q}{F} & \drawprod{Q}{G} & \drawprod{Q}{P} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (J) & (K) & (L) & (M)\\
+		\hline
+		(P) & \drawprod{P}{J} & \drawprod{P}{K} & \drawprod{P}{L} & \drawprod{P}{M} \\[2cm]
+		(Q) & \drawprod{Q}{J} & \drawprod{Q}{K} & \drawprod{Q}{L} & \drawprod{Q}{M} \\[2cm]
+	\end{tabular}
+
+	\begin{tabular}{c|cccc}
+		+ & (N) & (O) & (P) & (Q)\\
+		\hline
+		(P) & \drawprod{P}{N} & \drawprod{P}{O} & \drawprod{P}{P} & \drawprod{P}{Q} \\[2cm]
+		(Q) & \drawprod{Q}{N} & \drawprod{Q}{O} & \drawprod{Q}{P} & \drawprod{Q}{Q} \\[2cm]
+	\end{tabular}
+\end{answer}
+\newpage
+
+\begin{answer}
+	\begin{center}
+		\underline{\textbf{Transposes}}
+	\end{center}
+	~\\~\\
+	\setlength{\tabcolsep}{2mm}
+	\begin{tabular}{cccc}
+		\drawtranspose{A} & \drawtranspose{B} & \drawtranspose{C} & \drawtranspose{D}\\[2cm]
+		\drawtranspose{E} & \drawtranspose{F} & \drawtranspose{G} & \drawtranspose{H}\\[2cm]
+		\drawtranspose{J} & \drawtranspose{K} & \drawtranspose{L} & \drawtranspose{M}\\[2cm]
+		\drawtranspose{N} & \drawtranspose{O} & \drawtranspose{P} & \drawtranspose{Q}\\[2cm]
+	\end{tabular}
+\end{answer}
+\newpage
+
+\begin{answer}
+	\begin{center}
+		\underline{\textbf{Determinants}}
+	\end{center}
+	~\\~\\
+	\setlength{\tabcolsep}{3mm}
+	\begin{tabular}{cccc}
+		\det{A} & \det{B} & \det{C} & \det{D}\\[2cm]
+		\det{E} & \det{F} & \det{G} & \det{H}\\[2cm]
+		\det{J} & \det{K} & \det{L} & \det{M}\\[2cm]
+		\det{N} & \det{O} & \det{P} & \det{Q}\\[2cm]
+	\end{tabular}
+\end{answer}

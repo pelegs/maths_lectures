@@ -1,0 +1,53 @@
+=>PYTHONTEX#py#default#default#0#code####ex1.tex#286#
+A = ['x', 'y', 'z']
+B = ['a', 'b', 'c']
+prod = ['\\left({}, {}\\right)'.format(i, j)
+        for i in A
+        for j in B]
+print(',\\ '.join(prod))
+=>PYTHONTEX#py#default#default#1#code####ex1.tex#310#
+A = ['x', 'y', 'z']
+A3 = ['\\left({}, {}, {}\\right)'.format(i, j, k)
+      for i in A
+      for j in A
+      for k in A]
+p0 = ',\\ '.join(A3[:9])
+p1 = ',\\ '.join(A3[9:18])
+p2 = ',\\ '.join(A3[18:])
+
+B = ['a', 'b', 'c']
+B2 = ['\\left({}, {}\\right)'.format(i, j)
+      for i in B
+for j in B]
+
+print('\\begin{align*}')
+print('B^{{2}}&=\\{{ {} \\}}\\\\'.format(',\\ '.join(B2)))
+print('A^{3}&=\{')
+print(p0, ',\\\\&', p1, ',\\\\&', p2)
+print('\}')
+print('\\end{align*}')
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-ex1_solution
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

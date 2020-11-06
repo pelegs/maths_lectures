@@ -1,0 +1,531 @@
+\sectionpic{Systems of Linear Equations}{../figures/presentation_chapters/linear_systems.pdf}
+
+\tikzset{empty/.style={nodehl, fill=col0, draw=col0, opacity=0, text opacity=1, minimum size=5mm}}
+\tikzset{var/.style={nodehl, fill=col1!20, draw=col1, minimum size=5mm}}
+\tikzset{coeff/.style={nodehl, fill=col2!20, draw=col2, minimum size=5mm}}
+\tikzset{freecoeff/.style={nodehl, fill=col3!20, draw=col3, minimum size=5mm}}
+\begin{frame}
+  \frametitle{Linear Equations}
+  \begin{presentation_definition}
+    A \emph{linear equation} is an equation of the form
+    \begin{equation*}
+      \only<1>{\tikznode[empty]{a1}{a_{1}}\tikznode[empty]{x1}{x_{1}} + \tikznode[empty]{a2}{a_{2}}\tikznode[empty]{x2}{x_{2}} + \cdots + \tikznode[empty]{an}{a_{n}}\tikznode[empty]{xn}{x_{n}} = \tikznode[empty]{b}{b}}
+      \only<2>{\tikznode[empty]{a1}{a_{1}}\tikznode[var]{x1}{x_{1}} + \tikznode[empty]{a2}{a_{2}}\tikznode[var]{x2}{x_{2}} + \cdots + \tikznode[empty]{an}{a_{n}}\tikznode[var]{xn}{x_{n}} = \tikznode[empty]{b}{b}}
+      \only<3>{\tikznode[coeff]{a1}{a_{1}}\tikznode[empty]{x1}{x_{1}} + \tikznode[coeff]{a2}{a_{2}}\tikznode[empty]{x2}{x_{2}} + \cdots + \tikznode[coeff]{an}{a_{n}}\tikznode[empty]{xn}{x_{n}} = \tikznode[empty]{b}{b}}
+      \only<4>{\tikznode[empty]{a1}{a_{1}}\tikznode[empty]{x1}{x_{1}} + \tikznode[empty]{a2}{a_{2}}\tikznode[empty]{x2}{x_{2}} + \cdots + \tikznode[empty]{an}{a_{n}}\tikznode[empty]{xn}{x_{n}} = \tikznode[freecoeff]{b}{b}}
+    \end{equation*}
+  \end{presentation_definition}
+
+  \begin{tikzpicture}[overlay, remember picture,
+                      every path/.style={->, >=stealth, thick}]
+    \only<2>{
+      \node[var, below=of x2] (vartxt) {Variables};
+      \foreach \k in {1,2,n}
+        \draw[col1] (vartxt.north) to [out=90, in=-90] (x\k.south);
+    }
+    \only<3>{
+      \node[coeff, below=of a2] (coefftxt) {Coefficients};
+      \foreach \k in {1,2,n}
+        \draw[col2] (coefftxt.north) to [out=90, in=-90] (a\k.south);
+    }
+    \only<4>{
+      \node[freecoeff, below=of b] (freecoefftxt) {Free coefficient};
+      \draw[col3] (freecoefftxt.north) to [out=90, in=-90] (b.south);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear Equations}
+  \begin{presentation_example}
+    The following are three linear equations of the variables $x, y$ and $z$:
+    \begin{align*}
+      &2x - 7y + z = 26\\
+      &-3x + y = -9\\
+      &9y - 4z = -31\\
+    \end{align*}
+  \end{presentation_example}
+  \begin{presentation_note}
+    In the second equation above the coefficient of $z$ is zero, while in the last equation the coefficient of $x$ is zero.
+  \end{presentation_note}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Systems of Linear Equations}
+  \begin{presentation_definition}
+    A \emph{system of linear equation} is a set of linear equations of the same variables.
+  \end{presentation_definition}
+  \begin{presentation_example}
+    The previous three equations can be combined together to form a system of three linear equations in three variables ($x,y$ and $z$).
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Systems of Linear Equations}
+  We can write systems of linear equations as product of a matrix (the coefficients) and a vector (the variables) equatling a vector (the free coefficients).
+
+  \begin{presentation_example}
+    The previous system can be written in matrix form as
+    \begin{equation*}
+      \begin{pmatrix} 2 & -7 & 1\\ -3 & 1 & 0 \\ 0 & 9 & -4 \end{pmatrix}\colvec{3}{x}{y}{z} = \colvec{3}{26}{-9}{-31}.
+    \end{equation*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Systems of Linear Equations}
+  A general system of $\xhl[m]$ linear equations in $\yhl[n]$ variables $x_{1}, x_{2}, \dots, x_{n}$ can be written as
+  \begin{align*}
+    a_{\xhl[1]\yhl[1]}x_{\yhl[1]} + a_{\xhl[1]\yhl[2]}x_{\yhl[2]} + \dots + a_{\xhl[1]\yhl[n]}x_{\yhl[n]} &= b_{\xhl[1]}\\
+    a_{\xhl[2]\yhl[1]}x_{\yhl[1]} + a_{\xhl[2]\yhl[2]}x_{\yhl[2]} + \dots + a_{\xhl[2]\yhl[n]}x_{\yhl[n]} &= b_{\xhl[2]}\\
+    \vdots\\
+    a_{\xhl[m]\yhl[1]}x_{\yhl[1]} + a_{\xhl[m]\yhl[2]}x_{\yhl[2]} + \dots + a_{\xhl[m]\yhl[n]}x_{\yhl[n]} &= b_{\xhl[m]}.
+  \end{align*}
+  
+  \onslide<2>{
+    In matrix form it is simply
+    \begin{equation*}
+      \begin{pmatrix}
+        a_{\xhl[1]\yhl[1]} & a_{\xhl[1]\yhl[2]} & \dots & a_{\xhl[1]\yhl[n]}\\
+        a_{\xhl[2]\yhl[1]} & a_{\xhl[2]\yhl[2]} & \dots & a_{\xhl[2]\yhl[n]}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        a_{\xhl[m]\yhl[1]} & a_{\xhl[m]\yhl[2]} & \dots & a_{\xhl[m]\yhl[n]}
+      \end{pmatrix}\colvec{4}{x_{\yhl[1]}}{x_{\yhl[2]}}{\vdots}{x_{\yhl[n]}} = \colvec{4}{b_{\xhl[1]}}{b_{\xhl[2]}}{\vdots}{b_{\xhl[m]}}.
+    \end{equation*}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution Set}
+  \begin{presentation_definition}
+    A \emph{solution}\index{Solution of a linear system} is an ordered set of values which correspond to the variables of the system, such that all of its equations are satisfied.
+  \end{presentation_definition}
+
+  \onslide<2>{
+    \begin{presentation_example}
+      The only solution for the previous system is
+      \begin{equation*}
+        x = 2,\ y = -3,\ z = 1,
+      \end{equation*}
+      which in vector form can be written as
+      $\vec{u} = \colvec{3}{2}{-3}{1}$.
+    \end{presentation_example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution Set}
+  Generally, a linear system might have any of the following:
+  \begin{itemize}
+    \item An \textbf{infinite} amount of distinct solutions.
+    \item Only \textbf{a single} solution. 
+    \item \textbf{No solutions}.
+  \end{itemize}
+  The number of solutions depends on the properties of the system, which we will briefly explore in this chapter.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Geometric Interpretation of the Solution Set}
+  A linear equation in \rcolor{col1}{\textbf{two}}\ variables represents a \rcolor{col1}{\textbf{line}}\ in $\Rs{2}$, a linear equation in \rcolor{col2}{\textbf{three}}\ variables represents a \rcolor{col2}{\textbf{plane}}\ in $\Rs{3}$, and so forth.
+
+  Thus, a solution of several linear equations represents a set of points where the respective shapes intersect.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Geometric Interpretation of the Solution Set}
+  \begin{presentation_example}
+    The equations
+    \begin{align*}
+      \color{col1}-2x+y \color{col1}&\color{col1}= \color{col1}0\\
+      \color{col2}3x+5y \color{col2}&\color{col2}= \color{col2}19.5
+    \end{align*}
+    represent the following two lines:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.55]
+        \tikzset{function/.style={ultra thick, samples=100}}
+        \begin{axis}[
+            domain=-1:6,
+            xmin=-1, xmax=6,
+            ymin=-1, ymax=5,
+            every axis x label/.style={
+              at={(ticklabel* cs:1.03)},
+              anchor=west,
+            },
+            every axis y label/.style={
+              at={(ticklabel* cs:1.03)},
+              anchor=south,
+            },
+          axis line style={-stealth},]
+          \addplot[function, col1] {2*\x} node [pos=0.24, below, rotate=63] {\Large$2x+y=0$};
+          \addplot[function, col2] {-0.6*\x+3.9} node [pos=0.75, above, rotate=-30] {\Large$3x+5y=19.5$};
+          \addplot[color=black, only marks, style={mark=*, fill=black}] coordinates {(1.5,3)} node [right, xshift=3mm] {\Large solution: $\left( 1.5,3 \right)$};
+        \end{axis}
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Geometric Interpretation of the Solution Set}
+  \begin{presentation_example}
+    Here will come explaination
+    \begin{figure}[H]
+      \centering
+      \tdplotsetmaincoords{70}{40}
+      \begin{tikzpicture}[tdplot_main_coords, scale=0.85]
+        \tikzset{plane/.style={opacity=0.5},
+          outline/.style={thick},
+        intersect/.style={thick, dashed}}
+      % planes
+        \draw[plane, fill=col1] (-3,0,-3) -- (-3,0,3) -- (3,0,3) -- (3,0,-3) -- cycle;
+        \draw[plane, fill=col2] (-3,-3,0) -- (-3,3,0) -- (3,3,0) -- (3,-3,0) -- cycle;
+        \draw[plane, fill=col3] (0,-3,-3) -- (0,-3,3) -- (0,3,3) -- (0,3,-3) -- cycle;
+        \draw[outline] (-3,0,-3) -- (-3,0,3) -- (3,0,3) -- (3,0,-3) -- cycle;
+        \draw[outline] (-3,-3,0) -- (-3,3,0) -- (3,3,0) -- (3,-3,0) -- cycle;
+        \draw[outline] (0,-3,-3) -- (0,-3,3) -- (0,3,3) -- (0,3,-3) -- cycle;
+
+      % intersection lines
+        \draw[intersect] (-3,0,0) -- (3,0,0);
+        \draw[intersect] (0,-3,0) -- (0,3,0);
+        \draw[intersect] (0,0,-3) -- (0,0,3);
+
+      % intersection point
+        \draw[fill=black] (0,0,0) circle (0.1) node (solpoint) {};
+        \node[below left=of solpoint, xshift=-2cm, yshift=0cm, text width=2cm] (solpointtxt) {Solution of all three equations};
+        \draw[vector] (solpointtxt.east) to [out=0, in=180] (solpoint.west);
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+  We will now introduct the \emph{Gaussian elimination method} for solving linear systems.
+
+  In matrix form, a system of linear equations looks as
+  \begin{equation*}
+    \tikznode[coeff]{A}{A}\tikznode[var]{x}{\vec{x}} = \tikznode[freecoeff]{b}{\vec{b}}.\\
+  \end{equation*}
+
+  \begin{equation*}
+    \tikznode[coeff]{A2}{
+    \begin{pmatrix}
+      a_{11} & a_{12} & \dots & a_{1n}\\
+      a_{21} & a_{22} & \dots & a_{2n}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{m1} & a_{m2} & \dots & a_{mn}
+  \end{pmatrix}}\tikznode[var]{x2}{\colvec{4}{x_{1}}{x_{2}}{\vdots}{x_{n}}} = \tikznode[freecoeff]{b2}{\colvec{4}{b_{1}}{b_{2}}{\vdots}{b_{m}}}.
+  \end{equation*}
+  \begin{tikzpicture}[overlay, remember picture]
+    \draw[vector, thick, col2] (A.south) to [out=-90, in=90] (A2.north);
+    \draw[vector, thick, col1] (x.south) to [out=-90, in=90] (x2.north);
+    \draw[vector, thick, col3] (b.south) to [out=-90, in=90] (b2.north);
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+  We can "stick" $A$ and $\vec{b}$ together to form an augmented matrix:
+  \begin{equation*}
+    \left(\begin{array}{cccc|c}
+        a_{11} & a_{12} & \dots & a_{1n} & b_{1}\\
+        a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+        \vdots & \vdots & \ddots & \vdots & \vdots\\
+        a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+    \end{array}\right)
+  \end{equation*}
+
+  We then apply to the matrix a sequence of \emph{row operations}, untill the matrix is in a form which we will introduce in a moment.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+  \only<1>{
+    \begin{equation*}
+      \left(\begin{array}{cccc|c}
+          \tmi{0}{i1}a_{11} & a_{12} & \dots & a_{1n} & b_{1}\tikzmarkend{i1}\\
+          a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+          \tmi{0}{j1}a_{31} & a_{32} & \dots & a_{3n} & b_{3}\tikzmarkend{j1}\\
+          \vdots & \vdots & \ddots & \vdots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+      \end{array}\right)
+    \end{equation*}
+  }
+
+  \only<2>{
+    \begin{equation*}
+      \left(\begin{array}{cccc|c}
+          \tmi{1}{i2}a_{11} & a_{12} & \dots & a_{1n} & b_{1}\tikzmarkend{i2}\\
+          a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+          \tmi{3}{j2}a_{31} & a_{32} & \dots & a_{3n} & b_{3}\tikzmarkend{j2}\\
+          \vdots & \vdots & \ddots & \vdots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+      \end{array}\right)
+    \end{equation*}
+  }
+
+  \only<3>{
+    \begin{equation*}
+      \left(\begin{array}{cccc|c}
+          \tmi{3}{j3}a_{31} & a_{32} & \dots & a_{3n} & b_{3}\tikzmarkend{j3}\\
+          a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+          \tmi{1}{i3}a_{11} & a_{12} & \dots & a_{1n} & b_{1}\tikzmarkend{i3}\\
+          \vdots & \vdots & \ddots & \vdots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+      \end{array}\right)
+    \end{equation*}
+  }
+
+  \only<4>{
+    \begin{equation*}
+      \left(\begin{array}{cccc|c}
+          a_{11} & a_{12} & \dots & a_{1n} & b_{1}\\
+          a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+          \tmi{3}{i4}a_{31} & a_{32} & \dots & a_{3n} & b_{3}\tikzmarkend{i4}\\
+          \vdots & \vdots & \ddots & \vdots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+      \end{array}\right)
+    \end{equation*}
+  }
+
+  \only<5>{
+    \begin{equation*}
+      \left(\begin{array}{cccc|c}
+          a_{11} & a_{12} & \dots & a_{1n} & b_{1}\\
+          a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+          \tmi{3}{i5}\gamma a_{31} & \gamma a_{32} & \dots & \gamma a_{3n} & \gamma b_{3}\tikzmarkend{i5}\\
+          \vdots & \vdots & \ddots & \vdots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+      \end{array}\right)
+    \end{equation*}
+  }
+
+  \only<6>{
+    \begin{equation*}
+      \left(\begin{array}{cccc|c}
+          \tmi{1}{i6}a_{11} & a_{12} & \dots & a_{1n} & b_{1}\tikzmarkend{i6}\\
+          a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+          \tmi{3}{j6}a_{31} & a_{32} & \dots & a_{3n} & b_{3}\tikzmarkend{j6}\\
+          \vdots & \vdots & \ddots & \vdots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+      \end{array}\right)
+    \end{equation*}
+  }
+
+  \only<7>{
+    \begin{equation*}
+      \left(\begin{array}{cccc|c}
+          \tmi{1}{i7}a_{11}-\gamma a_{31} & a_{12}-\gamma a_{21} & \dots & a_{1n}-\gamma a_{3n} & b_{1}-\gamma b_{3}\tikzmarkend{i7}\\
+          a_{21} & a_{22} & \dots & a_{2n} & b_{2}\\
+          \tmi{3}{j7}a_{31} & a_{32} & \dots & a_{3n} & b_{3}\tikzmarkend{j7}\\
+          \vdots & \vdots & \ddots & \vdots & \vdots\\
+          a_{m1} & a_{m2} & \dots & a_{mn} & b_{m}
+      \end{array}\right)
+    \end{equation*}
+  }
+
+  \vspace{5mm}
+  The three row operations are:
+  \begin{itemize}
+    \item Exchange any two rows $\only<2-3>{\tmi{1}{iA}}i\only<2-3>{\tikzmarkend{iA}}$ and $\only<2-3>{\tmi{3}{jA}}j\only<2-3>{\tikzmarkend{jA}}$.
+    \item Multiply any row $\only<4-5>{\tmi{3}{iB}}i\only<4-5>{\tikzmarkend{iB}}$ by a scalar $0\neq\gamma\in\mathbb{R}$.
+    \item Subtract any $\gamma$-scaled row $\only<6-7>{\tmi{3}{jC}}j\only<6-7>{\tikzmarkend{jC}}$ from a different row $\only<6-7>{\tmi{1}{iD}}i\only<6-7>{\tikzmarkend{iD}} \neq \only<6-7>{\tmi{3}{jD}}j\only<6-7>{\tikzmarkend{jD}}$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+  The process proceeds until the matrix is in a \emph{row echelon form}, which has the following properties:
+  \begin{itemize}
+    \item all nonzero rows are above any row of zeroes, and
+    \item the first nonzero number from the left, called the \emph{leading coefficient}, of a nonzero row is always strictly to the right of the leading coefficient of the row above it.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+  \begin{presentation_example}
+    Matrices in row echelon form:
+    \begin{align*}
+      \begin{pmatrix}
+        3 & 4 & -1 & 7\\
+        0 & -2 & 9 & -1\\
+        0 & 0 & 0 & 5\\
+      \end{pmatrix},\quad
+      \begin{pmatrix}
+        1 & 1 & 5\\
+        0 & 7 & 2\\
+        0 & 0 & 0 \\
+      \end{pmatrix},\quad
+      \begin{pmatrix}
+        0 & 6 & 2 & 5\\
+        0 & 0 & 4 & 4\\
+        0 & 0 & 0 & 9\\
+        0 & 0 & 0 & 0\\
+      \end{pmatrix}.
+    \end{align*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+  Further steps can be taken to bring a matrix to a \emph{reduced row echelon form}, which is a row echelon form in which
+  \begin{itemize}
+    \item the matrix is in a row echelon form,
+    \item the leading coefficients are all $1$ (called a \emph{leading 1}), and
+    \item each column containing a leading 1 has only zeros in its other components.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+  \begin{presentation_example}
+    Matrices in reduced row echelon form:
+    \begin{align*}
+      \begin{pmatrix}
+        1 & 0 & -1 & 0\\
+        0 & 1 & 9 & 0\\
+        0 & 0 & 0 & 1\\
+      \end{pmatrix},\quad
+      \begin{pmatrix}
+        1 & 0 & 5\\
+        0 & 1 & 2\\
+        0 & 0 & 0 \\
+      \end{pmatrix},\quad
+      \begin{pmatrix}
+        1 & 0 & 0 & 0\\
+        0 & 1 & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1\\
+      \end{pmatrix}.
+    \end{align*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gaussian Elimination Method}
+	When a matrix is in its reduced row echelon form, the system can be solved more easily, starting from the bottom-most non-zero row.
+	\begin{presentation_example}
+		\only<1>{
+			The following system is given:
+			\begin{equation*}
+				\begin{pmatrix}
+					0 & 1 & 7\\
+					-2 & 0 & 2\\
+					0 & 1 & 5
+				\end{pmatrix}\colvec{3}{x}{y}{z} = \colvec{3}{4}{6}{14}.
+			\end{equation*}
+		}
+		\only<2>{
+			Rearranging into an augemented matrix:
+			\begin{equation*}
+				\left(\begin{array}{ccc|c}
+					0 & 1 & 7 & -4\\
+					-2 & 0 & 2 & -6\\
+					0 & 1 & 5 & -14
+				\end{array}\right)
+			\end{equation*}
+		}
+		\only<3>{
+			\centering
+			$R_{1}\longleftrightarrow R_{2}$
+			\begin{equation*}
+				\left(\begin{array}{ccc|c}
+					-2 & 0 & 2 & -6\\
+					0 & 1 & 7 & -4\\
+					0 & 1 & 5 & -14
+				\end{array}\right)
+			\end{equation*}
+		}
+		\only<4>{
+			\centering
+			$R_{1}\longrightarrow -\frac{1}{2}R_{1}$
+			\begin{equation*}
+				\left(\begin{array}{ccc|c}
+					1 & 0 & -1 & 3\\
+					0 & 1 & 7 & -4\\
+					0 & 1 & 5 & -14
+				\end{array}\right)
+			\end{equation*}
+		}
+		\only<5>{
+			\centering
+			$R_{3}\longrightarrow R_{3}-R_{2}$
+			\begin{equation*}
+				\left(\begin{array}{ccc|c}
+					1 & 0 & -1 & 3\\
+					0 & 1 & 7 & -4\\
+					0 & 0 & -2 & -10
+				\end{array}\right)
+			\end{equation*}
+		}
+		\only<6>{
+			\centering
+			$R_{3}\longrightarrow -\frac{1}{2}R_{3}$
+			\begin{equation*}
+				\left(\begin{array}{ccc|c}
+					1 & 0 & -1 & 3\\
+					0 & 1 & 7 & -4\\
+					0 & 0 & 1 & 5
+				\end{array}\right)
+			\end{equation*}
+		}
+		\only<7>{
+			\centering
+			$R_{1}\longrightarrow R_{1}+R_{3}$
+			\begin{equation*}
+				\left(\begin{array}{ccc|c}
+					1 & 0 & 0 & 8\\
+					0 & 1 & 7 & -4\\
+					0 & 0 & 1 & 5
+				\end{array}\right)
+			\end{equation*}
+		}
+		\only<8>{
+			\centering
+			$R_{2}\longrightarrow R_{2}-7R_{3}$
+			\begin{equation*}
+				\left(\begin{array}{ccc|c}
+					1 & 0 & 0 & 8\\
+					0 & 1 & 0 & -39\\
+					0 & 0 & 1 & 5
+				\end{array}\right)
+			\end{equation*}
+		}
+		\only<9>{
+			Thus the solution to this system is
+			\begin{align*}
+				x &= 8,\\
+				y &= -39,\\
+				z &= 5.
+			\end{align*}
+		}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Gaussian Elimination}
+	The row operations introduced here do not change the rank and determinant of a matrix.
+
+	Thus, if the row echelon form of a matrix has one or more zero rows, then its determinant is zero, and in turn - the determinant of the original matrix is also zero.
+	\begin{equation*}
+		\rank(A) < n \Leftrightarrow |A|=0.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Gaussian Elimination}
+	The differnce between the number of rows in a matrix $A$ and its rank, $n-\rank(A)$, is the number of free variables in the solution.
+	\begin{presentation_example}
+		The augmented matrix
+		\begin{equation*}
+			\left(\begin{array}{ccc|c}
+				1 & 0 & 0 & -3\\
+				0 & 1 & 0 & 2\\
+				0 & 0 & 0 & 6
+			\end{array}\right)
+		\end{equation*}
+		has three rows and one zero rows. Thus, $\rank(A)=2$, and the solution for the system it represents has $d=3-2=1$ free variables. In this case $x=-3,\ y=2$ and $z$ can be chosen freely.
+	\end{presentation_example}
+\end{frame}

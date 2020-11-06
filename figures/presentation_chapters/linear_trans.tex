@@ -1,0 +1,49 @@
+\input{local_settings}
+\input{../../settings}
+
+\newcommand{\plane}[7]{
+	\pgfmathsetmacro{\dx}{#1/(#3+1)}
+	\pgfmathsetmacro{\a}{#4}
+	\pgfmathsetmacro{\b}{#5}
+	\pgfmathsetmacro{\c}{#6}
+	\pgfmathsetmacro{\d}{#7}
+	
+	\draw[very thick, fill=blue, fill opacity=0.1] (0,#2,0) -- (#1*\a,#2,#1*\c) -- (#1*\a+#1*\b,#2,#1*\c+#1*\d) -- (#1*\b,#2,#1*\d) -- cycle;
+
+	\tikzset{gridline/.style={black!30}}
+	\foreach \m in {1,...,#3}{
+		\draw[gridline] (\m*\dx*\a,#2,\m*\dx*\c) -- (\m*\dx*\a+#1*\b,#2,\m*\dx*\c+#1*\d);
+		\draw[gridline] (\m*\dx*\b,#2,\m*\dx*\d) -- (#1*\a+\m*\dx*\b,#2,#1*\c+\m*\dx*\d);
+	}
+
+	\draw[vector, col1] (#1*\dx*\a+#1*\dx*\b,#2,#1*\dx*\c+#1*\dx*\d) -- ++(#1*0.2*\a,0,#1*0.2*\c);
+	\draw[vector, col2] (#1*\dx*\a+#1*\dx*\b,#2,#1*\dx*\c+#1*\dx*\d) -- ++(#1*0.2*\b,0,#1*0.2*\d);
+
+	\filldraw[black] (#1*\dx*\a+#1*\dx*\b,#2,#1*\dx*\c+#1*\dx*\d) circle (0.03);
+
+	\filldraw[col3!50, draw=col3, thick] (3*\dx*\a+2*\dx*\b,#2,3*\dx*\c+2*\dx*\d) -- (4*\dx*\a+2*\dx*\b,#2,4*\dx*\c+2*\dx*\d) -- (4*\dx*\a+3*\dx*\b,#2,4*\dx*\c+3*\dx*\d) -- (3*\dx*\a+3*\dx*\b,#2,3*\dx*\c+3*\dx*\d) -- cycle;
+	\filldraw[col4!50, draw=col4, thick] (7*\dx*\a+6*\dx*\b,#2,7*\dx*\c+6*\dx*\d) -- (9*\dx*\a+6*\dx*\b,#2,9*\dx*\c+6*\dx*\d) -- (9*\dx*\a+8*\dx*\b,#2,9*\dx*\c+8*\dx*\d) -- (7*\dx*\a+8*\dx*\b,#2,7*\dx*\c+8*\dx*\d) -- cycle;
+	\filldraw[col5!50, draw=col5, thick] (1*\dx*\a+4*\dx*\b,#2,1*\dx*\c+4*\dx*\d) -- (2*\dx*\a+4*\dx*\b,#2,2*\dx*\c+4*\dx*\d) -- (2*\dx*\a+8*\dx*\b,#2,2*\dx*\c+8*\dx*\d) -- cycle;
+}
+
+\begin{document}
+\begin{tikzpicture}
+	\Large
+
+	\node (grid1) at (2,0,2.5) {};
+	\node (grid2) at (4.5,3,4) {};
+	\node (grid3) at (5,5,4) {};
+	\node (grid4) at (6.5,8,4) {};
+
+	\tikzset{arr/.style={->, >=stealth, thick, dashed}}
+	\plane{5}{0}{10}{1}{0}{0}{1}
+	\draw[arr] (grid1.north) to [out=120, in=-90] (grid2.south);
+	\plane{5}{2}{10}{1.2}{0}{0}{0.7}
+	\draw[arr] (grid2.north) to [out=120, in=-90] (grid3.south);
+	\plane{5}{4}{10}{1.5}{0.4}{-0.3}{0.5}
+	\draw[arr] (grid3.north) to [out=120, in=-90] (grid4.south);
+	\plane{5}{6}{10}{2}{0.6}{-0.5}{0.2}
+\end{tikzpicture}
+\end{document}
+
+% ax+by cx+dy

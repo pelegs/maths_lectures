@@ -1,0 +1,51 @@
+\begin{frame}
+  \frametitle{Course Structure}
+  Lectures: Tue. 14:15-16:00, Wed. 10:15-12:00.
+
+  \onslide<2->{
+	The course has three parts:
+  }
+  \begin{enumerate}
+	\item \onslide<3-> Introduction \& Linear Algebra\tikznode{A}{}
+	\item \onslide<4-> Computer Science\tikznode{B}{}
+	\item \onslide<5-> Calculus\tikznode{C}{}
+  \end{enumerate}
+
+  \tikzset{
+	  every node/.style={rounded corners, thick},
+	  every path/.style={->, >=stealth, thick}
+	}
+  \begin{tikzpicture}[overlay, remember picture]
+	\onslide<6->{
+	  \node[fill=col1!20, draw=col1, right=of A] (Atxt) {Peleg Bar Sapir};
+	  \draw[col1] (Atxt.west) -- (A.east);
+	}
+	\onslide<7->{
+	  \node[fill=col2!20, draw=col2, right=of B] (Btxt) {Prof. Winfried Kurth};
+	  \draw[col2] (Btxt.west) -- (B.east);
+	}
+	\onslide<8->{
+	  \node[fill=col3!20, draw=col3, right=of C] (Ctxt) {Aleksi Tavkhelidze};
+	  \draw[col3] (Ctxt.west) -- (C.east);
+	}
+  \end{tikzpicture}
+ 
+  \onslide<9->{
+	In addition, each week a \tikznode{tutorial}{tutorial session} (ca. 2 hours) will be held (time TBD).
+  }
+  \onslide<10->{
+	\begin{tikzpicture}[overlay, remember picture]
+	  \draw[col1] ($(Atxt.south)+(1cm,0)$) to [out=-90, in=90, looseness=.7] (tutorial.north);
+	\end{tikzpicture}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{About Me}
+  \begin{itemize}
+	\item \textbf{Position}: PhD Student, Max Planck Institute for Dynamics and Self-Organization
+	\item \textbf{Office}: xxx
+	\item \textbf{Phone}: xxx
+	\item \textbf{E-Mail}: pelegs@gmail.com,\ peleg.sapir@ds.mpg.de
+  \end{itemize}
+\end{frame}

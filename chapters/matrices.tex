@@ -1,0 +1,1193 @@
+\chapter{Matrices}
+\section{Matrices from Linear Transformations}
+A vector can be written as the linear combination of its components. These components can then be represented as a scalar $\alpha_{i}$ multiplied by the respective basis vector $\eb{i}$.
+\begin{example}
+  The vector $\vec{v}=\colvec{3}{-1}{2}{5}$ can be written as
+  \begin{align*}
+	\vec{v} &= \colvec{3}{-1}{0}{0} + \colvec{3}{0}{2}{0} + \colvec{3}{0}{0}{5}\\
+	&= -1\colvec{3}{1}{0}{0} + 2\colvec{3}{0}{1}{0} + 5\colvec{3}{0}{0}{1}\\
+	&= -1\eb{1} + 2\eb{2} + 5\eb{3}\\
+	&= -1\hat{x} + 2\hat{y} + 5\hat{z}.
+  \end{align*}
+  The last form is pretty standard when using $\Rs{3}$, especially in phyiscs.
+\end{example}
+
+When a linear transformation $T$ is applied to a vector $\vec{v}=\alpha_{1}\eb{1} + \alpha_{2}\eb{2} + \dots + \alpha_{n}\eb{n}$, linearity dictates the follows:
+\begin{align*}
+  T(\vec{v}) &= T\left(\alpha_{1}\eb{1} + \alpha_{2}\eb{2} + \dots + \alpha_{n}\eb{n}\right)\\
+  &= T\left( \alpha_{1}\eb{1} \right) + T\left( \alpha_{2}\eb{2} \right) + \dots + T\left( \alpha_{n}\eb{n} \right)\\
+  &= \alpha_{1}T\left( \eb{1} \right) + \alpha_{2}T\left( \eb{2} \right) + \dots + \alpha_{n}T\left( \eb{n} \right).
+\end{align*}
+This means that the transformed vector is a linear combination of the transformed basis using the same components as before the transformation.
+
+\begin{example}
+  $\vec{v}=\colvec{2}{3}{-1},\ T\colvec{2}{x}{y} = \colvec{2}{-2x+y}{3x-2y}$. Normally we would write
+  \begin{equation*}
+	T(\vec{v}) = T\colvec{2}{3}{-1} = \colvec{2}{-6-1}{9+2} = \colvec{2}{-7}{11}.
+  \end{equation*}
+
+  Instead, let's see how the basis vectors $\eb{1},\eb{2}$ transform:
+  \begin{align*}
+	T\left(\eb{1}\right) &= \colvec{2}{-2+0}{3+0} = \colvec{2}{-2}{3}\\
+	T\left(\eb{2}\right) &= \colvec{2}{0+1}{0-2} = \colvec{2}{1}{-2}.\\
+  \end{align*}
+
+  Then, we write $T(\vec{v})$ as a linear combination of these transformed basis vectors:
+  \begin{align*}
+	T(\vec{v}) &= 3T\left(\eb{1}\right) -T\left( \eb{2} \right) = 3\colvec{2}{-2}{3} -\colvec{2}{1}{-2}\\
+	&= \colvec{2}{-6}{9} - \colvec{2}{1}{-2} = \colvec{2}{-6-1}{9+2} = \colvec{2}{-7}{11}.
+  \end{align*}
+  This is, of course, the exact same result we got from the direct calculation.
+\end{example}
+
+If we look at a generic transformation $T$ (for the sake of simplicity $\func{T}{\Rs{2}}{\Rs{2}}$) acting on a generic vector $\vec{v}=\colvec{2}{x}{y}$,
+\begin{equation*}
+  T(\vec{v}) = T\colvec{2}{x}{y} = \colvec{2}{ax+by}{cx+dy},
+\end{equation*}
+we can see a nice pattern: the first component of the transformed vector is $ax+by$, which is a dot product of some vector $\colvec{2}{a}{b}$ with $\colvec{2}{x}{y}$. Similarily, the second component of the transformed vector is $cx+dy$, which is a dot product of some vector $\colvec{2}{c}{d}$ with $\colvec{2}{x}{y}$.
+
+We can write this observation in a compact way as a \emph{matrix}\index{Matrix, matrices} (plural: \emph{matrices}) we will call $M$:
+\begin{equation*}
+  M = \begin{pmatrix} a & b\\ c & d\\\end{pmatrix},
+\end{equation*}
+and we define the product of a matrix $M$ with a vector $\colvec{2}{x}{y}$ as
+\begin{equation*}
+  \begin{pmatrix}a&b\\c&d\\\end{pmatrix}\colvec{2}{x}{y} = \colvec{2}{ax+by}{cx+dy}.
+\end{equation*}
+In this sense, matrices are a compact way of writing linear transformations performed on vectors.
+
+\section{Basics of Matrices}
+In a more general sense, a matrix is a collection of numbers (refered to as \emph{elements}\index{Elements of a matrix}, and are usually real or complex) that are sorted into \emph{rows}\index{Rows of a matrix} and \emph{columns}\index{Columns of a matrix}.
+\begin{example}
+  
+  The follows matrix $A$ has 3 rows and 2 columns, and is therefore a $3\times2$ matrix:
+  \begin{equation*}A=
+	\begin{pmatrix}
+	  3 & 7\\
+	  1 & -2\\
+	  0 & -5\\
+	  \end{pmatrix}
+  \end{equation*}
+\end{example}
+
+We denote the elements of a matrix as undercase latin letters, with 2 indices that represent the element's row and column.
+\begin{example}
+  
+  The above matrix has the follows elements:
+  \begin{equation*}
+	\begin{array}{cc}
+	  a_{11}=3, & a_{12}=7,\\
+	  a_{21}=1, & a_{22}=-2,\\
+	  a_{31}=0, & a_{32}=-5.\\
+	\end{array}
+  \end{equation*}
+\end{example}
+
+\begin{warning}
+  The notation for matrix elements might cause confusion, for example reading $b_{12}$ as "bee twelve" (when in fact it is "bee one-two", i.e. first row, second column of the matrix $B$). Always pay attention to the context and what makes sense within it.
+\end{warning}
+
+A general $M\times N$ matrix looks as follows (indices in \color{col1}{red} \color{black} represent the row number of an element, while indices in \color{col2}{blue} \color{black} represent its column number):
+\begin{equation*}
+  \begin{pmatrix}
+	a_{\color{col1}{1}\color{col2}{1}} & a_{\color{col1}{1}\color{col2}{2}} & \dots & a_{\color{col1}{1}\color{col2}{N}}\\
+	a_{\color{col1}{2}\color{col2}{1}} & a_{\color{col1}{2}\color{col2}{2}} & \dots & a_{\color{col1}{2}\color{col2}{N}}\\
+	\vdots & \vdots & \ddots & \dots\\
+	a_{\color{col1}{M}\color{col2}{1}} & a_{\color{col1}{M}\color{col2}{2}} & \dots & a_{\color{col1}{M}\color{col2}{N}}\\
+  \end{pmatrix}
+\end{equation*}
+
+A matrix for which $M=N$ (i.e. it has the same number of rows and columns) is called a \emph{square matrix}\index{Square matrix}. In a square matrix, the elements where the two indices are equal (i.e. $i=j$) are said to be found on the \emph{main diagonal}\index{Main diagonal of a matrix} of the matrix (also called the \emph{major diagonal}\index{Major diagonal of a matrix}, the \emph{principal diagonal}\index{Principal diagonal of a matrix}, and the \emph{primary diagonal}\index{Primary diagonal of a matrix}).
+\begin{example}
+  
+  In the follows matrices, the main diagonal elements are \color{col1}{highlighted}\color{black}:
+  \begin{equation*}
+	A=\begin{pmatrix}
+	  \color{col1}{4} & -7 & 1 & 0\\
+	  1 & \color{col1}{5} & -1 & 3\\
+	  3 & -7 & \color{col1}{1} & 6\\
+	  -5 & 9 & 12 & \color{col1}{2}\\
+	\end{pmatrix},\quad
+	B=\begin{pmatrix}
+	  \color{col1}{1} & 0 & 1\\
+	  0 & \color{col1}{0} & -1\\
+	  1 & 1 & \color{col1}{0}\\
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+
+Also in a square matrix ($N\times N$ matrix), the elements $a_{ij}$ for which $j=N-i+1$ are said to be found on the \emph{antidiagonal}\index{Antidiagonal of a matrix} (also called the \emph{minor diagonal}\index{Minor diagonal of a matrix}, the \emph{counter diagonal}\index{Counter diagonal of a matrix}, and the \emph{secondary diagonal}\index{Secondary diagonal of a matrix})\begin{example}
+  
+  In the follows matrices, the anti-main diagonal elements are \color{col2}{highlighted}\color{black}:
+  \begin{equation*}
+	A=
+	\begin{pmatrix}
+	  3 & -1 & 5 & \color{col2}{7}\\
+	  0 & 2 & \color{col2}{-4} & 2\\
+	  4 & \color{col2}{0} & -3 & 2\\
+	  \color{col2}{1} & 3 & 4 & 5\\
+	\end{pmatrix},\quad
+	B=
+	\begin{pmatrix}
+	  2 & 0 & \color{col2}{-3}\\
+	  5 & \color{col2}{1} & 3\\
+	  \color{col2}{9} & 7 & -6\\
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+
+\needspace{3\baselineskip}
+\section{Diagonal and Triangular Matrices}
+A matrix with all elements outside the main diagonal equaling zero is called a \emph{diagonal matrix}\index{Diagonal matrix}.
+\begin{example}
+  
+  The follows matrices are diagonal matrices:
+  \begin{equation*}
+	A=
+	\begin{pmatrix}
+	  3 & 0 & 0 & 0\\
+	  0 & 2 & 0 & 0\\
+	  0 & 0 & -3 & 0\\
+	  0 & 0 & 0 & 5\\
+	\end{pmatrix},\quad
+	B=
+	\begin{pmatrix}
+	  2 & 0 & 0\\
+	  0 & 0 & 0\\
+	  0 & 0 & -6\\
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+\begin{warning}
+  Notice that the main diagonal elements in a diagonal matrix \textbf{could be} equal to zero. The only creterion is that the elements that are not on the diagonal \textbf{must be} zero.
+\end{warning}
+
+A matrix with all elements "above" the diagonal equaling zero is called an \emph{upper triangular matrix}\index{Upper triangular matrix}. Similarily, a matrix with all elements "below" the main diagonal equaling zero is called a \emph{lower triangular matrix}\index{Lower triangular matrix}.
+\begin{example}
+  
+  An upper triangular matrix:
+  \begin{equation*}
+	A=
+	\begin{pmatrix}
+	  5 & 0 & 0 & 0\\
+	  1 & 1 & 0 & 0\\
+	  -3 & 4 & 7 & 0\\
+	  2 & 2 & 0 & -1\\
+	\end{pmatrix}
+  \end{equation*}
+  A lower triangular matrix:
+  \begin{equation*}
+	B=
+	\begin{pmatrix}
+	  5 & 7 & 9 & 1\\
+	  0 & 3 & 4 & -3\\
+	  0 & 0 & -5 & 0\\
+	  0 & 0 & 0 & 2\\
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+
+\section{Transpose of a Matrix}
+\emph{Transposing}\index{Transpose of a matrix} a matrix is a common operation. When transposing a matrix $A$ (notated by $A^{\top}$), we take the elements and exchange their row with their column:
+\begin{equation*}
+  a_{ij} \overset{\text{transpose}}{\longrightarrow} a_{ji}
+\end{equation*}
+
+\begin{example}
+  
+  \begin{align*}
+	\begin{pmatrix}
+	  2 & 1 & 3\\
+	  0 & -7 & 1\\
+	  4 & 5 & 0\\
+	\end{pmatrix}&\overset{\top}{\longrightarrow}
+	\begin{pmatrix}
+	  2 & 0 & 4\\
+	  1 & -7 & 5\\
+	  3 & 1 & 0\\
+	\end{pmatrix}\\[5mm]
+	\begin{pmatrix}
+	  1 & 0 & 5\\
+	  4 & 3 & 2\\
+	\end{pmatrix}&\overset{\top}{\longrightarrow}
+	\begin{pmatrix}
+	  1 & 4\\
+	  0 & 3\\
+	  5 & 2\\
+	\end{pmatrix}\\[5mm]
+	\begin{pmatrix}
+	  2 & -1 & 3 & 7\\
+	\end{pmatrix}&\overset{\top}{\longrightarrow}
+	\begin{pmatrix}
+	  2\\
+	  -1\\
+	  3\\
+	  7\\
+	\end{pmatrix}
+  \end{align*}
+\end{example}
+
+The elements with identical row and column numbers (i.e. $a_{11}, a_{22}, a_{33}, \dots$) remain in their previous place. In the case of a square matrix, these are the elements on the main diagonal.
+\begin{example}
+  
+  \begin{equation*}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!50, set border color=col1]{a11}2\tikzmarkend{a11} & 1 & 3\\
+	  0 & \tikzmarkin[set fill color=col2!50, set border color=col2]{a22}-7\tikzmarkend{a22} & 1\\
+	  4 & 5 & \tikzmarkin[set fill color=col3!50, set border color=col3]{a33}0\tikzmarkend{a33}\\
+	\end{pmatrix}\overset{\top}{\longrightarrow}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!50, set border color=col1]{a11b}2\tikzmarkend{a11b} & 0 & 4\\
+	  1 & \tikzmarkin[set fill color=col2!50, set border color=col2]{a22b}-7\tikzmarkend{a22b} & 5\\
+	  3 & 1 & \tikzmarkin[set fill color=col3!50, set border color=col3]{a33b}0\tikzmarkend{a33b}\\
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+
+Of course, the transpose of a transposed matrix is the original matrix:
+\begin{equation*}
+  \left(A^{\top}\right)^{\top} = A,
+\end{equation*}
+and generally the transpose of an $M\times N$ matrix is an $N\times M$ matrix. Specifically, a transpose of a row vector is a column vector and vice-versa.
+
+\section{Adding Two Matrices}
+Addition of matrices is only allowed for matrices of the same exact size, and is done \textbf{element wise} (exactly like addition of vectors): for the matrices $A,B,C$ with elements $\left\{ a_{ij} \right\}, \left\{ b_{ij} \right\}, \left\{c_{ij}\right\}$ respectively,
+\begin{equation*}
+  c_{ij} = a_{ij} + b_{ij}.
+\end{equation*}
+\begin{example}
+  
+  \begin{align*}
+	\renewcommand{\baselinestretch}{2.5}
+	\begin{pmatrix}
+	  1 & 5 & 10\\
+	  -3 & 4 & 0\\
+	\end{pmatrix} +
+	\begin{pmatrix}
+	  2 & 0 & -7\\
+	  3 & 9 & -1\\
+	\end{pmatrix} &=
+	\begin{pmatrix}
+	  3 & 5 & 3\\
+	  0 & 13 & -1\\
+	\end{pmatrix}\\[5mm]
+	\begin{pmatrix}
+	  4 & 1 & 3 & 0.5\\
+	  -3 & 13 & -2 & -1\\
+	  2 & 1 & -1 & 5\\
+	  7 & -5 & -1 & 0\\
+	\end{pmatrix} + 
+	\begin{pmatrix}
+	  -1 & 1 & 2 & 2\\
+	  0 & 3 & -5 & 3\\
+	  3 & 3 & 4 & 5\\
+	  4 & 7 & 9 & 2\\
+	\end{pmatrix} &=
+	\begin{pmatrix}
+	  3 & 2 & 5 & 2.5\\
+	  -3 & 16 & -7 & -2\\
+	  5 & 4 & 3 & 10\\
+	  11 & 2 & 8 & 2\\
+	\end{pmatrix}\\[5mm]
+	\begin{pmatrix}
+	  2 \\
+	  5 \\
+	  9 \\
+	  1 \\
+	  4 \\
+	\end{pmatrix} +
+	\begin{pmatrix}
+	  0 \\
+	  -0.5 \\
+	  9 \\
+	  2 \\
+	  -3 \\
+	\end{pmatrix} &=
+	\begin{pmatrix}
+	  2 \\
+	  4.5 \\
+	  18 \\
+	  3 \\
+	  1 \\
+	\end{pmatrix}
+  \end{align*}
+\end{example}
+
+\section{Multiplying a Matrix by a Scalar}
+Similarily to vectors, matrices can be multiplied by a scalar. This is done by multiplying each element of the matrix by that same scalar.
+\begin{example}
+  \begin{align*}
+	3\cdot
+	\begin{pmatrix}
+	  1 & 2 & -4 \\
+	  5 & 7 & 1\\
+	\end{pmatrix} &=
+	\begin{pmatrix}
+	  3 & 6 & -12\\
+	  15 & 21 & 3\\
+	\end{pmatrix}\\[5mm]
+	-2\cdot
+	\begin{pmatrix}
+	  0 & 5 & 1 \\
+	  2 & -3 & 4\\
+	  6 & 3 & 7\\
+	\end{pmatrix} &=
+	\begin{pmatrix}
+	  0 & -10 & -2\\
+	  -4 & 6 & -8\\
+	  -12 & -6 & -14\\
+	\end{pmatrix}
+  \end{align*}
+\end{example}
+
+\section{Multiplying a Matrix and a Vector}
+As discussed briefly above, multiplying a matrix and a vector results in applying some linear transformation to the vector. This is of course possible only when the number of \textbf{columns} in the matrix is the same as the number of elements of the vector.
+\begin{example}
+  
+  The follows matrix-vector multiplication are \textbf{allowed}:
+  \begin{equation*}
+	\begin{pmatrix}
+	  5 & 3 & 1\\
+	  4 & -1 & 0
+	\end{pmatrix}\cdot\colvec{3}{3}{-1}{4}\qquad
+	\begin{pmatrix}
+	  1 & 5 \\
+	  5 & 0 \\
+	  -3 & 2\\
+	  4 & 7
+	\end{pmatrix}\cdot\colvec{2}{1}{-5}\qquad
+	\begin{pmatrix}
+	  1 & 0 & 0 & 2\\
+	  0 & 1 & 0 & 4\\
+	  0 & 0 & 1 & 3\\
+	  0 & 0 & 0 & 1\\
+	\end{pmatrix}\cdot\colvec{4}{3}{7}{5}{1}
+  \end{equation*}
+  
+  The follows matrix-vector multiplication are \textbf{NOT} allowed:
+  \begin{equation*}
+	\begin{pmatrix}
+	  5 & 3 & 1\\
+	  4 & -1 & 0
+	\end{pmatrix}\cdot\colvec{2}{3}{1}\qquad
+	\begin{pmatrix}
+	  1 & 5 \\
+	  5 & 0 \\
+	  -3 & 2\\
+	  4 & 7
+	\end{pmatrix}\cdot\colvec{4}{1}{-5}{0}{2}\qquad
+	\begin{pmatrix}
+	  1 & 0 & 0 & 2\\
+	  0 & 1 & 0 & 4\\
+	  0 & 0 & 1 & 3\\
+	  0 & 0 & 0 & 1\\
+	\end{pmatrix}\cdot\colvec{3}{3}{7}{1}
+  \end{equation*}
+\end{example}
+ 
+We can interpret the \textbf{columns} of the matrix as showing as how the standard basis vectors are transformed.
+
+Notice that in all of the examples above, the matrix is always \textbf{to the left} of the vector. This is a standard way to do matrix-vector multiplication when the vectors are \textbf{column vectors}. When they are \textbf{row vectors}, we usually position the matrix \textbf{to the right} of the vector. This will become more obvious when we discuss matrix-matrix multiplication soon.
+
+When multiplying an $M\times N$ matrix by an $N$-dimensional vector, the result is a vector of $M$-dimensions, with its $i$-th element being equal to the dot product of the $i$-th row of the matrix and the original vector.
+\begin{example}
+  
+  \begin{align*}
+	\begin{pmatrix}
+	  3 & -1\\
+	  1 & 5\\
+	\end{pmatrix}\colvec{2}{5}{0} &= \colvec{2}{3\cdot5 + (-1)\cdot0}{1\cdot5 + 5\cdot0} = \colvec{2}{15}{5}\\[5mm]
+	\begin{pmatrix}
+	  1 & 4 & 0 \\
+	  6 & -3 & 7\\
+	  4 & 2 & 1\\
+	\end{pmatrix}\colvec{3}{1}{6}{3} &= \colvec{3}{1\cdot1 + 4\cdot6 + 0\cdot3}{6\cdot1 + (-3)\cdot6 + 7\cdot3}{4\cdot1 + 2\cdot6 + 1\cdot3}=\colvec{3}{1+24+0}{6-18+21}{4+12+3}=\colvec{3}{25}{9}{18}\\[5mm]
+	\begin{pmatrix}
+	  1 & 2 & 1\\
+	  3 & -4 & 1\\
+	\end{pmatrix}\colvec{3}{0}{5}{-2} &= \colvec{2}{1\cdot0 + 2\cdot5 + 1\cdot(-2)}{3\cdot0 + (-4)\cdot5 + 1\cdot(-2)} = \colvec{2}{0+10-2}{0-20-2} = \colvec{2}{8}{-22}\\[5mm]
+	\begin{pmatrix}
+	  5 & 2\\
+	  1 & -1\\
+	  3 & 7\\
+	  6 & 0\\
+	\end{pmatrix}\colvec{2}{3}{1} &= \colvec{4}{5\cdot3 + 2\cdot1}{1\cdot3 + (-1)\cdot1}{3\cdot3 + 7\cdot3}{6\cdot3 + 0\cdot1} = \colvec{4}{15+2}{3-1}{9+21}{18+0} = \colvec{4}{17}{2}{30}{18}
+  \end{align*}
+\end{example}
+
+The last two multiplications above show us that a linear transformation of a vector via matrix multiplication can result in a new vector of different dimensionality. Generally, the transformation represented by a multiplication of a real $M\times N$ matrix and a real $N$-dimensional vector is of the type $\func{T}{\Rs{N}}{\Rs{M}}$.
+
+Let us show that a multiplication of any $2\times2$ matrix $A=\begin{pmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\\\end{pmatrix}$ and a 2-dimensional vector $\vec{v}=\colvec{2}{x}{y}$ is indeed a linear transformation:
+\begin{itemize}
+  \item $T(\beta x) = \beta T(x)$ (we use $\beta$ for a generic scalar as to avoid confusion with the matrix elements $\left\{ a_{ij} \right\}$):
+	\begin{align*}
+	  A\cdot\beta\vec{v} &= \begin{pmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\\\end{pmatrix}\colvec{2}{\beta x}{\beta y}\\
+	  &= \colvec{2}{\beta a_{11}x+\beta a_{12}y}{\beta a_{21}x+\beta a_{22}y}\\
+	  &= \colvec{2}{\beta\left( a_{11}x+a_{12}y \right)}{\beta\left( a_{21}x + a_{22}y \right)}\\
+	  &= \beta\colvec{2}{a_{11}x+a_{12}y}{a_{21}x+a_{12}y}\\
+	  &= \beta \begin{pmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\\\end{pmatrix}\colvec{2}{x}{y}\\
+	  &= \beta A\vec{v}.
+	\end{align*}
+  \item $T(x+y)=T(x)+T(y)$:
+	\begin{align*}
+	  A\cdot\left( \vec{v}_{1}+\vec{v}_{2} \right) &= \begin{pmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\\\end{pmatrix}\left( \colvec{2}{x_{1}}{y_{1}}+\colvec{2}{x_{2}}{y_{2}} \right)\\
+	  &= \begin{pmatrix} a_{11} & a_{12}\\a_{21} & a_{22}\\\end{pmatrix}\colvec{2}{x_{1}+x_{2}}{y_{1}+y_{2}}\\
+	  &= \colvec{2}{a_{11}\left( x_{1}+x_{2} \right) + a_{12}\left( y_{1}+y_{2} \right)}{a_{21}\left( x_{1}+x_{2} \right) + a_{22}\left( y_{1}+y_{2} \right)}\\
+	  &= \colvec{2}{a_{11}x_{1} + a_{11}x_{2} + a_{12}y_{1} + a_{12}y_{2}}{a_{21}x_{1} + a_{21}x_{2} + a_{22}y_{1} + a_{22}y_{2}}\\
+	  &= \colvec{2}{a_{11}x_{1}+a_{12}y_{1}}{a_{21}x_{1}+a_{22}y_{1}} + \colvec{2}{a_{11}x_{2}+a_{12}y_{2}}{a_{21}x_{2}+a_{22}y_{2}}\\
+	  &= A\vec{v}_{1} + A\vec{v}_{2}.
+	\end{align*}
+\end{itemize}
+
+\begin{challange}
+  Show that any $M\times N$ matrix multiplied by an $N$-dimensional vector is indeed a linear transformation.
+\end{challange}
+
+\section{Important Matrices}
+\subsection{The Identity Matrix}
+Each dimension $n=1,2,3,\dots$ has an identity matrix, written as $I_{n}$. The identity matrix has ones on its main diagonal, and zeros anywhere else:
+\begin{equation*}
+  I_{2}=\idenmat{2},\ I_{3}=\idenmat{3},\ \cdots ,\ I_{n}=\begin{pmatrix}1&0&0&\cdots &0\\0&1&0&\cdots &0\\0&0&1&\cdots &0\\\vdots &\vdots &\vdots &\ddots &\vdots \\0&0&0&\cdots &1\end{pmatrix}
+\end{equation*}
+The identity matrix when multiplied with a vector does not change the vector at all (hence its name).
+\begin{example}
+  \begin{align*}
+	\idenmat{2}\colvec{2}{-3}{2} &= \colvec{2}{1\cdot(-3) + \cancel{0\cdot(2)}}{\cancel{0\cdot(-3)}+1\cdot2}=\colvec{2}{-3}{2}\\[5mm]
+	\idenmat{3}\colvec{3}{5}{1}{-2} &= \colvec{3}{1\cdot5 + \cancel{0\cdot1} + \cancel{0\cdot(-2)}}{\cancel{0\cdot5} + 1\cdot1 + \cancel{0\cdot(-2)}}{\cancel{0\cdot5}+\cancel{0\cdot1}+1\cdot(-2)}=\colvec{3}{5}{1}{-2}
+  \end{align*}
+\end{example}
+
+A short-hand way of writing the identity matrix is by using the \emph{Kronecker delta}\index{Kronecker delta}. It is defined by
+\begin{equation*}
+  \delta_{ij} = \begin{cases} 1 & \text{ if } i=j,\\ 0 & \text{ if }i\neq j. \end{cases}
+\end{equation*}
+
+Thus, we can say that the identity matrix is simply $I=\left\{ \delta_{ij} \right\}$ (where as always, $i$ is the row index and $j$ is the column index).
+
+\subsection{Rotation Matrices}
+In $\Rs{2}$ the rotation matrix $\Rot(\theta)$ rotates the space by $\theta$ \textbf{counter clock-wise} around the origin. It is defined as:
+\begin{equation*}
+  \Rot(\theta) = \begin{pmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{pmatrix}.
+\end{equation*}
+\begin{example}
+  Rotation by $90\degree$ is done by
+  \begin{equation*}
+	\Rot(90\degree) = \begin{pmatrix} \cos\left(90\degree\right) & -\sin\left( 90\degree \right) \\ \sin\left( 90\degree \right) & \cos\left( 90\degree \right) \end{pmatrix}
+	= \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}.
+  \end{equation*}
+
+  Acting on a the vector $\vec{v}=\colvec{2}{1}{1}$ it yeilds
+  \begin{equation*}
+	\Rot(90\degree)\cdot\vec{v} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \colvec{2}{1}{1} = \colvec{2}{\cancel{0\cdot1} - 1\cdot1}{1\cdot1 + \cancel{0\cdot1}} = \colvec{2}{-1}{1},
+  \end{equation*}
+  which is indeed orthogonal to $\vec{v}$:
+  \begin{equation*}
+	\colvec{2}{1}{1} \cdot \colvec{2}{-1}{1} = 1\cdot(-1) + 1\cdot1 = -1+1 = 0.
+  \end{equation*}
+\end{example}
+
+\begin{challange}
+  Show that applying $\Rot(90\degree)$ to a vector $\vec{v}$ indeed yields a vector that is orthogonal to $\vec{v}$, i.e.
+  \begin{equation*}
+	\left(\Rot(90\degree)\cdot\vec{v}\right) \cdot \vec{v} = 0.
+  \end{equation*}
+\end{challange}
+
+In $\Rs{3}$ there are 3 standard rotation matrix: one for rotation around each axis ($x, y, z$):
+\begin{equation*}
+  R^{x}_{\theta} = \begin{pmatrix}
+					 1 & 0 & 0\\
+					 0 & \cos(\theta) & -\sin(\theta)\\
+					 0 & \sin(\theta) & \cos(\theta)
+				   \end{pmatrix},\quad
+  R^{y}_{\theta} = \begin{pmatrix}
+					 \cos(\theta) & 0 & \sin(\theta)\\
+					 0 & 1 & 0\\
+					 -\sin(\theta) & 0 & \cos(\theta)\\
+				   \end{pmatrix},\quad
+  R^{z}_{\theta} = \begin{pmatrix}
+					 \cos(\theta) & -\sin(\theta) & 0\\
+					 \sin(\theta) & \cos(\theta) & 0\\
+					 0 & 0 & 1
+				   \end{pmatrix}.
+\end{equation*}
+Notice that for each of these matrix, the corresponding row and column ($x=1, y=2, z=3$) are each the respective standard basis, and the rest of the matrix is simply $\Rot(\theta)$ in $\Rs{2}$ (with the small caviat that for $R^{y}_{\theta}$ the rotation is in the opposite direction).
+
+\subsection{Scaling Matrices}
+A matrix of the type
+\begin{equation*}
+  S_{\alpha} = \begin{pmatrix}
+				 \alpha & 0 & \dots & 0\\
+				 0 & \alpha & \dots & 0\\
+				 \vdots & \vdots & \ddots & \vdots\\
+				 0 & 0 & \dots & \alpha\\
+			   \end{pmatrix},
+\end{equation*}
+i.e. a diagonal matrix with the diagonal elements are all equal to $\alpha$, performs a scaling of the space by the parameter $\alpha$.
+\begin{example}
+  \begin{equation*}
+	\begin{pmatrix}
+	  3 & 0 & 0\\
+	  0 & 3 & 0\\
+	  0 & 0 & 3
+	\end{pmatrix}\colvec{3}{-1}{2}{5} = \colvec{3}{-3}{6}{15} = 3\colvec{3}{-1}{2}{5}.
+  \end{equation*}
+\end{example}
+This action should be somewhat obvious, as $S_{\alpha}=\alpha I_{n}$.
+
+Scaling can generally be done for each axis separately by multiplying each column of the identity matrix by a different scaling factor:
+\begin{equation*}
+  S = \begin{pmatrix}
+		\alpha_{1} & 0 & \dots & 0\\
+		0 & \alpha_{2} & \dots & 0\\
+		\vdots & \vdots & \ddots & \vdots\\
+		0 & 0 & \dots & \alpha_{n}\\
+	  \end{pmatrix},
+\end{equation*}
+which scales vectors in the $x$-axis by $\alpha_{1}$, in the $y$-axis by $\alpha_{2}$, etc. As can be seen, essentially any diagonal matrix is a scaling matrix.
+\begin{example}
+  The matrix $S = \begin{pmatrix} 3 & 0 \\ 0 & \frac{1}{2} \end{pmatrix}$ scales vectors by $3$ in the $x$-axis and and $\frac{1}{2}$ in the $y$-axis. For example,
+  \begin{equation*}
+	\begin{pmatrix} 3 & 0 \\ 0 & \frac{1}{2} \end{pmatrix}\colvec{2}{1}{-2} = \colvec{2}{3}{-1}.
+  \end{equation*}
+\end{example}
+
+\subsection{Reflection Matrices}
+A reflection is a linear transformation only if it's done across a line going through the origin.
+
+Reflecting across the $x$-axis ($0\degree$) is represented by the matrix
+\begin{equation*}
+  \Reflect(0\degree) = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
+\end{equation*}
+as it flips $\hat{y}$: transforming it from $\colvec{2}{0}{1}$ to $\colvec{2}{0}{-1}$.
+
+Similarily, reflecting across the $y$-axis ($90\degree$) is represented by the matrix
+\begin{equation*}
+  \Reflect(90\degree) = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix},
+\end{equation*}
+which flips $\hat{x}$.
+
+Reflecting across the line $y=x$ (which angled by $\theta=45\degree$ relative to the $x$-axis) is represented by the matrix
+\begin{equation*}
+  \Reflect(45\degree) = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},
+\end{equation*}
+which can be thought of as exchanging the base vectors $\hat{x}$ and $\hat{y}$.
+
+A general reflection across a line $y=mx$, where $m=\arctan(\theta)$ is represented by
+\begin{equation*}
+  \Reflect(\theta) = \begin{pmatrix} \cos(2\theta) & \sin(2\theta) \\ \sin(2\theta) & -\cos(2\theta) \end{pmatrix}.
+\end{equation*}
+
+\begin{challange}
+	Show that reflection across a line that doesn't go through the origin is \textbf{not} a linear transformation.
+\end{challange}
+
+\subsection{Skew Matrices}
+A \emph{skew matrix}\index{Skew matrix} (also known as a \emph{shear matrix}\index{Shear matrix} is a matrix that skews space by some amount $k$ in one direction (e.g. in the case of $\Rs{2}$ either $\hat{x}$ or $\hat{y}$).
+
+In $\Rs{2}$, A skew matrix in the $x$-direction has the form
+\begin{equation*}
+  \begin{pmatrix}
+	1 & k \\ 0 & 1
+  \end{pmatrix},
+\end{equation*}
+where $k$ is the skew parameter.
+
+Similarily, a skew matrix in the $y$-direction is given by
+\begin{equation*}
+  \begin{pmatrix}
+	1 & 0 \\ k & 1
+  \end{pmatrix},
+\end{equation*}
+where, again, $k$ is the skew parameter.
+
+\section{Multiplying Two Matrices}
+We can consider a matrix as a collection of column vectors.
+
+\begin{example}
+  
+  The following matrix can be considered a collection of 3 colum vectors, each of 4-dimensions:
+  \begin{equation*}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col2!50, set border color=col2]{colA}1 & \tikzmarkin[set fill color=col2!50, set border color=col2]{colB}5 & \tikzmarkin[set fill color=col2!50, set border color=col2]{colC}7 \\
+	  3 & 4 & 0 \\
+	  2 & 1 & -5\\
+	  0\tikzmarkend{colA} & -2\tikzmarkend{colB} & 3\tikzmarkend{colC}
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+
+With this in mind, matrix-matrix multiplication $A\cdot B$ can be viewed as follows: we multiply $A$ by each column vector in $B$ separately, and collecting the resulting vectors as columns in a new matrix $C$.
+
+\begin{example}
+  
+  Consider the follows matrix-matrix product:
+  \begin{equation*}
+	A\cdot B = \begin{pmatrix}1&2\\0&3\end{pmatrix}\cdot\begin{pmatrix}0&1\\4&5\end{pmatrix}
+  \end{equation*}
+
+  We now look at the product of the matrix $A$ with each column of $B$ separately (we will call these columns $\vec{B}_{1}$ and $\vec{B}_{2}$):
+  \begin{align*}
+	A\cdot\vec{B}_{1} &= \begin{pmatrix}1&2\\0&3\end{pmatrix}\colvec{2}{0}{4} = \colvec{2}{1\cdot0+2\cdot4}{0\cdot0+3\cdot4}=\colvec{2}{8}{12}\\
+	A\cdot\vec{B}_{2} &= \begin{pmatrix}1&2\\0&3\end{pmatrix}\colvec{2}{1}{5} = \colvec{2}{1\cdot1+2\cdot5}{0\cdot4+3\cdot5}=\colvec{2}{11}{15}\\
+  \end{align*}
+
+  Thus, the result of $A\cdot B$ is $C=\begin{pmatrix}8&11\\12&15\end{pmatrix}$.
+\end{example}
+
+We can see that there is a restriction on matrix-matrix multiplication: the number of \emph{columns} in the left matrix must be equal to the number of \emph{rows} in the right matrix. The multiplication results in a new matrix with the same number of rows as the left matrix, and same number of columns as the right matrix.
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[every node/.style={rounded corners}]
+	\boxmatrix[6][3][][][][][4][M][N]
+	\boxmatrix[4][6][][][4][][5][N][K]
+	\boxmatrix[4][3][][][9][][8][M][K]
+
+	\node[draw=col4, fill=col4!50, thick] at (0,-3) {\Huge$A$};
+	\node[draw=col5, fill=col5!50, thick] at (4,-3) {\Huge$B$};
+	\node[draw=col8, fill=col8!50, thick] at (9,-3) {\Huge$C$};
+
+
+	\node at (2,-3) {\Huge$\cdot$};
+	\node at (2, 0) {\Huge$\cdot$};
+	\node at (6,-3) {\Huge$=$};
+	\node at (6, 0) {\Huge$=$};
+  \end{tikzpicture}
+\end{figure}
+
+\begin{example}
+  
+  \textbf{Allowed} matrix-matrix multiplications:
+  \begin{equation*}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!25, set border color=col1]{row1}1 & 3 & -2\tikzmarkend{row1}\\
+	  -3 & 5 & 0\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!25, set border color=col1]{col1}1 & 3 & -2 & 0\\
+	  -3 & 5 & 0 & 7\\
+	  -4\tikzmarkend{col1} & 2 & 11 & 3\\
+	\end{pmatrix}\qquad
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col2!25, set border color=col2]{row2}5 & -1\tikzmarkend{row2}\\
+	  7 & 3\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col2!25, set border color=col2]{col2}7 & 4 & 0\\
+	  5\tikzmarkend{col2} & 3 & 1
+	\end{pmatrix}\qquad
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!25, set border color=col1]{row3}1 & 2 & 3\tikzmarkend{row3}\\
+	  4 & 5 & 6\\
+	  0 & 1 & 7\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!25, set border color=col1]{col3}0 & 1 & -1\\
+	  2 & 2 & 0\\
+	  0\tikzmarkend{col3} & 3 & -5\\
+	\end{pmatrix}
+  \end{equation*}
+
+  \textbf{Not allowed} matrix-matrix multiplications:
+  \begin{equation*}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!25, set border color=col1]{row4}1 & 3 & -2\tikzmarkend{row4}\\
+	  -3 & 5 & 0\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col2!25, set border color=col2]{col4}1 & 3 & -2\\
+	  -4\tikzmarkend{col4} & 2 & 11\\
+	\end{pmatrix}\qquad
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col2!25, set border color=col2]{row5}5 & -1\tikzmarkend{row5}\\
+	  7 & 3\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col3!25, set border color=col3]{col5}7 & 0\\
+	  2 & -1\\
+	  4 & 0\\
+	  5\tikzmarkend{col5} & \frac{1}{2}
+	\end{pmatrix}\qquad
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col1!25, set border color=col1]{row6}1 & 2 & 3\tikzmarkend{row6}\\
+	  4 & 5 & 6\\
+	  0 & 1 & 7\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  \tikzmarkin[set fill color=col3!25, set border color=col3]{col6}0 & 1 & -1 & 13\\
+	  2 & 2 & 0 & -7\\
+	  5 & 3 & 1 & 1\\
+	  0\tikzmarkend{col6} & 3 & -5 & 9\\
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+\begin{example}
+  
+  \begin{align*}
+	\begin{pmatrix}
+	  1 & 0 & 1 & 2\\
+	  2 & 3 & 5 & 0\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  1 & 3\\
+	  2 & 3\\
+	  0 & 5\\
+	  -1 & 2
+	\end{pmatrix} &= 
+	\begin{pmatrix}
+	  1\cdot1 + 0\cdot2 + 1\cdot0 + 2\cdot(-1) & 1\cdot3 + 0\cdot3 + 1\cdot5 + 2\cdot2\\
+	  2\cdot1 + 3\cdot2 + 5\cdot0 + 0\cdot(-1) & 2\cdot3 + 3\cdot3 + 5\cdot5 + 0\cdot2\\
+	\end{pmatrix} = 
+	\begin{pmatrix}
+	  -1 & 12\\
+	   8 & 40\\
+	\end{pmatrix}\\[5mm] 
+	\begin{pmatrix}
+	  -3 & 9\\
+	  5 & 4\\
+	\end{pmatrix}
+	\begin{pmatrix}
+	  1 & 6\\
+	  4 & 0\\
+	\end{pmatrix} &= 
+	\begin{pmatrix}
+	  (-3)\cdot1 + 9\cdot4 & (-3)\cdot6 + 9\cdot(0)\\
+	  5\cdot1 + 4\cdot4 & 5\cdot6 + 4\cdot(0)\\
+	\end{pmatrix} = 
+	\begin{pmatrix}
+	   33 & -18\\
+	   21 & 30\\
+	\end{pmatrix}\\[5mm] 
+  \end{align*}
+\end{example}
+
+An equivalent method of matrix-matrix multiplication is as follows: in the resulting matrix, the element in the $i$-th row and $j$-th column is equal to the dot product of the $i$-th row of the first matrix and the $j$-th column of the second matrix:
+\begin{equation*}
+  c_{ij} = \vec{A}_{i} \cdot \vec{B}^{j}
+\end{equation*}
+where here the lower index $i$ means the $i$-th row vector, and an upper index $j$ means the $j$-th column vector.
+
+\color{red}\textbf{Write here more about rhe "element-wise" multiplication scheme}\color{black}
+
+An important characteristic of matrix-matrix multiplication is that it is \textbf{not commutative}: $A\cdot B\neq B\cdot A$ (even if the matrices are both square matrices of equal dimensions).
+\begin{example}
+ 
+  For $A=\begin{pmatrix}2 & 7\\1 & 3\\\end{pmatrix},\ B=\begin{pmatrix}5 & 1\\4 & 4\\\end{pmatrix}$ - on one hand:
+  \begin{equation*}
+	\overset{A}{
+	  \begin{pmatrix}
+		2 & 7\\
+		1 & 3\\
+	\end{pmatrix}}
+	\overset{B}{
+	  \begin{pmatrix}
+		5 & 1\\
+		4 & 4\\
+	\end{pmatrix}}=
+	\overset{A\cdot B}{
+	  \begin{pmatrix}
+		38 & 30\\
+		17 & 13\\
+	\end{pmatrix}},
+  \end{equation*}
+
+  but on the other hand:
+  \begin{equation*}
+	\overset{B}{
+	  \begin{pmatrix}
+		5 & 1\\
+		4 & 4\\
+	\end{pmatrix}}
+	\overset{A}{
+	  \begin{pmatrix}
+		2 & 7\\
+		1 & 3\\
+	\end{pmatrix}}=
+	\overset{B\cdot A}{
+	  \begin{pmatrix}
+		11 & 38\\
+		12 & 40\\
+	\end{pmatrix}}.
+  \end{equation*}
+
+  We can see that $A\cdot B \neq B\cdot A$.
+\end{example}
+
+The identity matrix in matrix-matrix multiplication is the same one as in matrix-vector multiplication.
+\begin{example}
+  \begin{equation*}
+	\begin{pmatrix}
+	  1 & 0\\
+	  0 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+	  3 & 4\\
+	  7 & 2
+	\end{pmatrix}=
+	\begin{pmatrix}
+	  3 & 4\\
+	  7 & 2
+	\end{pmatrix}
+	\begin{pmatrix}
+	  1 & 0\\
+	  0 & 1
+	\end{pmatrix}=
+	\begin{pmatrix}
+	  3 & 4\\
+	  7 & 2
+	\end{pmatrix}
+  \end{equation*}
+\end{example}
+
+The identity matrix has the property that for any matrix $A$,
+\begin{equation*}
+  I\cdot A = A\cdot I = A.
+\end{equation*}
+
+A repeated multiplication of a matrix $A$ with itself $n$ times is denoted as $A^{n}$.
+\begin{example}
+ 
+  For $A=\begin{pmatrix}1&2\\0&3\end{pmatrix}$,
+  \begin{align*}
+	A^{2} &= \begin{pmatrix}1&2\\0&3\end{pmatrix}\cdot\begin{pmatrix}1&2\\0&3\end{pmatrix} = \begin{pmatrix}1&8\\0&9\end{pmatrix}\\[3mm]
+	A^{3} &= \begin{pmatrix}1&2\\0&3\end{pmatrix}\cdot\begin{pmatrix}1&2\\0&3\end{pmatrix}\cdot\begin{pmatrix}1&2\\0&3\end{pmatrix} = \begin{pmatrix}1&26\\0&27\end{pmatrix}\\[3mm]
+	A^{4} &= \begin{pmatrix}1&2\\0&3\end{pmatrix}\cdot\begin{pmatrix}1&2\\0&3\end{pmatrix}\cdot\begin{pmatrix}1&2\\0&3\end{pmatrix}\cdot\begin{pmatrix}1&2\\0&3\end{pmatrix} = \begin{pmatrix}1&80\\0&81\end{pmatrix}\\[3mm]
+	\vdots
+  \end{align*}
+\end{example}
+
+\section{Matrix-Matrix Multiplication as Transformation Composition}
+Multiplying matrices from the left generates a matrix that represents a composition of the corresponding linear transformations.
+\begin{example}
+  The matrix $A=\begin{pmatrix} \frac{\sqrt{3}}{2} & -\frac{1}{2} \\ \frac{1}{2} & \frac{\sqrt{3}}{2} \end{pmatrix}$ rotates the space by $30\degree$ counter clock-wise. The matrix $B=\begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$ shears space by a factor of $3$ in the $x$-axis.
+  The product $A\cdot B$ of these two matrix is
+  \begin{align*}
+	C &= A\cdot B\\
+	&= \begin{pmatrix} \frac{\sqrt{3}}{2} & -\frac{1}{2} \\ \frac{1}{2} & \frac{\sqrt{3}}{2} \end{pmatrix} \begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}\\
+	&= \begin{pmatrix} \frac{\sqrt{3}}{2} & \frac{3\sqrt{3}-1}{2} \\ \frac{1}{2} & \frac{3+\sqrt{3}}{2} \end{pmatrix}.
+  \end{align*}
+  This product represents a linear transformation that \textbf{first} skews space by $3$ in the $x$-axis, and \textbf{then} rotates it by $30\degree$ counter clock-wise.
+
+  ~\\
+  The other product, $B\cdot A=\begin{pmatrix} \frac{3+\sqrt{3}}{2} & \frac{3\sqrt{3}-1}{2} \\ \frac{1}{2} & \frac{\sqrt{3}}{2} \end{pmatrix}$ represents a transformation that \textbf{first} rotates space by $30\degree$ counter clock-wise, and \textbf{then} skews it by $3$ in the $x$-axis.
+\end{example}
+
+\section{Trace of a Matrix}
+The \emph{trace}\index{Trace of a matrix} $\tr(A)$ of a square $N\times N$ matrix $A$ is the sum of its diagonal elements:
+\begin{equation*}
+  \tr(A) = \sum_{i=1}^{N}a_{ii}.
+\end{equation*}
+
+\begin{example}
+  The trace of $A=\begin{pmatrix} 1 & 5 & 7 & -3 \\ 0 & 3 & 9 & 5 \\ -2 & 10 & 3 & 9 \\ 4 & 0 & 0 & 7 \end{pmatrix}$ is
+  \begin{equation*}
+	\tr(A) = 1 + 3 + 3 + 7 = 14.
+  \end{equation*}
+\end{example}
+
+The trace of a matrix-matrix product does not depend on the order of multiplication, i.e.
+\begin{equation*}
+  \tr\left( A\cdot B \right) = \tr\left( B\cdot A \right),
+\end{equation*}
+since
+\begin{equation*}
+  \tr\left( A\cdot B \right) = \sum\limits_{i=1}^{n}\sum\limits_{j=1}^{m}a_{ij}b_{ji} = \tr\left( B\cdot A \right).
+\end{equation*}
+
+\section{The Determinant}
+When viewing matrices as linear maps between vector spaces, the \emph{determinant}\index{Determinant} is defined as the change in a unit area (or for higher dimensional spaces: the volume) before and after the transformation. Since linear transformations preserve ratios between areas, this change is uniform across the entire space.
+
+\begin{example}
+  Applying the transformation represented by $A=\begin{pmatrix} 0.5 & 0.1 \\ 0.1 & 1.1 \end{pmatrix}$ to $\Rs{2}$ yields the following:
+	\begin{figure}[H]
+	  \centering
+	  \begin{tikzpicture}[scale=0.8]
+		\Large
+
+		\coordinate (shift) at (9, 0);
+		\pgfmathsetmacro{\a}{0.5}
+		\pgfmathsetmacro{\b}{0.1}
+		\pgfmathsetmacro{\c}{0.1}
+		\pgfmathsetmacro{\d}{1.1}
+		\coordinate (xhat) at (\a,\c);
+		\coordinate (yhat) at (\b,\d);
+
+		% Draw areas
+		\filldraw[col5!50] (0,0) rectangle (1,1);
+		\filldraw[col3!50] (shift) -- ($(xhat)+(shift)$) -- ($(xhat)+(yhat)+(shift)$) -- ($(yhat)+(shift)$) -- cycle;
+		\node at (0.5, 0.5) {\large$S_{0}$};
+		\node at ($(0.3, 0.5)+(shift)$) {\large$S_{1}$};
+	   
+		% Draw axes
+		\drawaxes{-3}{-3}{3}{3}
+		\drawaxes{-3}{-3}{3}{3}[9]
+
+		% Transform!
+		\foreach \x in {-3,...,3}{
+		  \foreach \y in {-3,...,3}{
+			% Original vector
+			\coordinate (v) at (\x, \y);
+			% Transformed vector
+			\coordinate (vnew) at (\a*\x+\b*\y, \c*\x+\d*\y);
+
+			% Draw new grid lines
+			% (transformed v + transformed baise vectors)
+			\draw[-, dotted] (vnew)++(shift) -- ++(xhat);
+			\draw[-, dotted] (vnew)++(shift) -- ++(yhat);
+		   
+			% Draw new points
+			\filldraw[col1] (v) circle (0.1);
+			\filldraw[col2] (vnew)++(shift) circle (0.1);
+		  }
+		}
+		\draw[->, >=stealth, very thick, dashed, col4] (2,3.5) to [out=45, in=135] (7,3.5);
+		\node at (4.5,5) {\color{col4}$T$};
+	  \end{tikzpicture}
+	\end{figure}
+	The area in orange on the left is $S_{0}=1$, and is transformed into the green area $S_{1}=0.54$ on the right.
+\end{example}
+
+The notation for the determinant of a matrix $A$ is $\det(A)$ or $\left|A\right|$.
+
+The determinant could be a positive value, a negative value or be equal to zero.
+
+\subsection{Negative Determinant}
+A negative determinant means that the transformation changes the orientation of the space (which can be determined by the right-hand rule). In $\Rs{2}$ the normal orientation used (right-handed orientation) is the one where the $x$-axis is to the right (clock-wise) to the $x$-axis. The flipped orientation (left-handed orientation) is the opposite:
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[every path/.style={>=stealth, very thick}]
+	\draw[<->] (-3,0) to (3,0) node [right] {$y$};
+	\draw[<->] (0,-3) to (0,3) node [above] {$x$};
+	\draw[->, dashed, col1] (1.97,0.35) arc[start angle=10, end angle=80, radius=2];
+	\node[col1] at (0,4) {Left-hand orientation};
+   
+	\coordinate (shift) at (8,0);
+	\draw[<->] ($(-3,0)+(shift)$) to ($(3,0)+(shift)$) node [right] {$x$};
+	\draw[<->] ($(0,-3)+(shift)$) to ($(0,3)+(shift)$) node [above] {$y$};
+	\draw[<-, dashed, col2] ($(1.97,0.35)+(shift)$) arc[start angle=10, end angle=80, radius=2];
+	\node[col2] at ($(0,4)+(shift)$) {Right-hand orientation};
+  \end{tikzpicture}
+\end{figure}
+
+\begin{example}
+  The transformation represented by $A=\begin{pmatrix} -1 & 2 \\ 1 & 1 \end{pmatrix}$ flips the orientation of $\Rs{2}$. This is evident by looking at how $\hat{x}$ and $\hat{y}$ transform, given by the columns of $A$, i.e.
+  \begin{align*}
+	\rcolor{col5}{\hat{x}} = \rcolor{col5}{\colvec{2}{1}{0}} &\overset{A}{\longrightarrow} \rcolor{col5}{\colvec{2}{-1}{2}} = \color{col5}{A\hat{x}}\\
+	\rcolor{col4}{\hat{y}} = \rcolor{col4}{\colvec{2}{0}{1}} &\overset{A}{\longrightarrow} \rcolor{col4}{\colvec{2}{ 1}{1}} = \color{col4}{A\hat{y}}\\
+  \end{align*}
+  Drawing $\rcolor{col5}{\hat{x}}, \rcolor{col4}{\hat{y}}$ vs. $\rcolor{col5}{\colvec{2}{-1}{2}}, \rcolor{col4}{\colvec{2}{1}{1}}$ reveals that the orientation of space has flipped:
+  \begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[every path/.style={->, >=stealth, thick}]
+	  \draw[col5] (0,0) to (1,0) node [right] {$\hat{x}$};
+	  \draw[col4] (0,0) to (0,1) node [above] {$\hat{y}$};
+	 
+	  \coordinate (shift) at (6,0);
+	  \draw[col5] (shift) to ($(-1,1) + (shift)$) node [above left] {$A\hat{x}$};
+	  \draw[col4] (shift) to ($(2,1)  + (shift)$) node [above right] {$A\hat{y}$};
+
+	  \draw (2,0.5) -- ++(2,0) node [midway, above] {$A$};
+	\end{tikzpicture}
+  \end{figure}
+\end{example}
+
+In $\Rs{3}$ the orientations look as follows:
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[every path/.style={->, >=stealth, very thick}]
+	\node[col1] at (0,5,0) {Left-hand orientation};
+	\draw (0,0,0) --++(4,0,0) node [right] {$z$};
+	\draw (0,0,0) --++(0,4,0) node [above] {$y$};
+	\draw (0,0,0) --++(0,0,4) node [left] {$x$};
+
+	\node[col2] at (7,5,0) {Right-hand orientation};
+	\draw (7,0,0) --++(4,0,0) node [right] {$x$};
+	\draw (7,0,0) --++(0,4,0) node [above] {$y$};
+	\draw (7,0,0) --++(0,0,4) node [left] {$z$};
+  \end{tikzpicture}
+\end{figure}
+
+\subsection{Zero Determinant}
+A zero determinant means that the dimensionality of the space after application of the matrix is lower than the dimensionality before the application. This can be easily understood in $\Rs{2}$: a transformation that transforms all vectors to a single line results in a change of area equaling zero (since a line has no area), and thus the determinant of the matrix representing the transformation is also zero.
+\begin{example}
+  The transformation represented by the matrix $A=\begin{pmatrix}3&6\\-1&-2\end{pmatrix}$ transfomrs all vectors to the same line.\\ 
+  For example:
+  \begin{align*}
+	A\colvec{2}{-1}{2} &= \colvec{2}{-3+12}{1-4} = \colvec{2}{9}{-3}\\
+	A\colvec{2}{0}{4} &= \colvec{2}{0+24}{0-8} = \colvec{2}{24}{-8}\\
+	A\colvec{2}{2}{-7} &= \colvec{2}{6-42}{-2+14} = \colvec{2}{-36}{12}
+  \end{align*}
+  Notice how all these vectors are of the form $\colvec{2}{x}{-\frac{x}{3}}$, meaning that they all lie on the line $y=-\frac{1}{3}x$.
+\end{example}
+
+The determinant of a matrix is zero if its columns (or rows) are \textbf{linearly depended}: that is the case since linearly depended columns mean the the matrix transform the standard basis vectors to a set of vectors that are linearly depended, i.e. of a lower dimensionality.
+
+Since a matrix with determinant zero transforms space to a lower dimensionality subspace, the transformation it represents is \textbf{not invertible}, i.e. the transformation is not a injective transformation.
+
+\subsection{Calculating the Determinant}
+The determinant of a $2\times2$ matrix $A=\begin{pmatrix}a & b \\ c & d \end{pmatrix}$ is
+\begin{equation*}
+  |A| = ad - cb,
+\end{equation*}
+or graphically:
+\begin{equation*}
+  \begin{vmatrix} \tikznode{a}{a} & & \tikznode{b}{b} \\ & & \\\tikznode{c}{c} & & \tikznode{d}{d} \end{vmatrix}.
+\end{equation*}
+\begin{tikzpicture}[overlay, remember picture]
+  \draw[<->, very thick, col2!50] (b) to (c);
+  \draw[<->, very thick, col1!50] (a) to (d);
+\end{tikzpicture}
+
+\begin{example}
+  The determinant of $A=\begin{pmatrix} 3 & -1\\ 2 & 7 \end{pmatrix}$ is
+  \begin{equation*}
+	|A| = 3\cdot7 - (-1)\cdot2 = 21 + 2 = 23.
+  \end{equation*}
+  The determinant of $B=\begin{pmatrix} 10 & 49\\ 100 & -3 \end{pmatrix}$ is
+  \begin{equation*}
+	|B| = 10\cdot(-3) - 49\cdot100 = -30 - 4900 = -4930.
+  \end{equation*}
+  The determinant of $C=\begin{pmatrix} 21 & 7\\ 9 & 3 \end{pmatrix}$ is
+  \begin{equation*}
+	|C| = 21\cdot3 - 7\cdot9 = 63 - 63 = 0.
+  \end{equation*}
+\end{example}
+
+The determinant of a $3\times3$ matrix is a bit more complicated. We first define the \emph{$ij$-minor}\index{Minor} (symbol: $m_{ij}$) of a $3\times3$ matrix $A$ as the $2\times2$ matrix resulting when discarding the $i$-th row and $j$-th column of $A$.
+\begin{example}
+  The matrix $A=\begin{pmatrix} 1 & 3 & 9 \\ 0 & 2 & -1 \\ 5 & 6 & 5 \end{pmatrix}$ has 9 minors. The $11$-minor can be found by hiding the 1st row and 1st column of $A$:
+  \begin{equation*}
+	\begin{pmatrix} \minorblack{m11row}\minorblack{m11col}1 & 3 & 9\tikzmarkend{m11row} \\ 0 & 2 & -1 \\ 5\tikzmarkend{m11col} & 6 & 5 \end{pmatrix} \longrightarrow m_{11} = \begin{pmatrix} 2 & -1 \\ 6 & 5 \end{pmatrix}.
+  \end{equation*}
+
+  Similarily, the $23$-minor is
+  \begin{equation*}
+	\begin{pmatrix} 1 & 3 & \minorblack{m23col}9 \\ \minorblack{m23row}0 & 2 & -1\tikzmarkend{m23row} \\ 5 & 6 & 5\tikzmarkend{m23col} \end{pmatrix} \longrightarrow m_{23} = \begin{pmatrix} 1 & 3 \\ 5 & 6 \end{pmatrix}.
+  \end{equation*}
+\end{example}
+Using the minors, the determinant of a $3\times3$ matrix $A=\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{pmatrix}$ is
+\begin{equation*}
+  |A| = a_{11}\left|m_{11}\right| - a_{12}\left|m_{12}\right| + a_{13}\left|m_{13}\right|.
+\end{equation*}
+\begin{example}
+  Let us calculate the determinant of $A=\begin{pmatrix} -3 & -9 & 2 \\ -1 & -5 & 4 \\ -6 & 5 & 1 \end{pmatrix}$. First, we calculate the minors:
+  \begin{align*}
+	m_{11}: \begin{pmatrix} \minorblack{m11Brow}\minorblack{m11Bcol}-3 & -9 & 2\tikzmarkend{m11Brow} \\ -1 & -5 & 4 \\ -6\tikzmarkend{m11Bcol} & 5 & 1 \end{pmatrix} &\longrightarrow m_{11} = \begin{pmatrix} -5 & 4 \\ 5 & 1 \end{pmatrix}\\[5mm]
+	m_{12}: \begin{pmatrix} \minorblack{m12Brow}-3 & \minorblack{m12Bcol}-9 & 2\tikzmarkend{m12Brow} \\ -1 & -5 & 4 \\ -6 & 5 \tikzmarkend{m12Bcol}& 1 \end{pmatrix} &\longrightarrow m_{12} = \begin{pmatrix} -1 & 4 \\ -6 & 1 \end{pmatrix}\\[5mm]
+	m_{13}: \begin{pmatrix} \minorblack{m13Brow}-3 & -9 & \minorblack{m13Bcol}2\tikzmarkend{m13Brow} \\ -1 & -5 & 4 \\ -6 & 5 & 1\tikzmarkend{m13Bcol}\end{pmatrix} &\longrightarrow m_{12} = \begin{pmatrix} -1 & -5 \\ -6 & 5 \end{pmatrix}\\[5mm]
+  \end{align*}
+
+  Thus, the determinant of $A$ is:
+  \begin{align*}
+	|A| &= -3m_{11} + 9m_{12} + 2m_{13}\\[3mm]
+	&= -3\cdot \begin{vmatrix} -5 & 4 \\ 5 & 1 \end{vmatrix} +9\cdot \begin{vmatrix}-1 & 4 \\ -6 & 1 \end{vmatrix} + 2\cdot \begin{vmatrix} -1 & -5 \\ -6 & 5 \end{vmatrix} \\
+	&= -3\left( -5-20 \right) + 9\left(-1+24  \right) + 2\left( -5-30 \right)\\[3mm]
+	&= (-3)\cdot(-25) + 9\cdot23 +2\cdot(-35)\\[3mm]
+	&= 75 + 207 - 70\\[3mm]
+	&= 212.
+  \end{align*}
+\end{example}
+
+\subsection{Determinant of Matrix-Matrix Product}
+Since the multiplication of two matrices represents a composition of the two corresponding linear transformations, the determinant of the product equals the product of the determinants of the two matrices:
+\begin{equation*}
+  \left|A\cdot B\right| = |A||B|.
+\end{equation*}
+For a product of $n$ matrices this becomes
+\begin{equation*}
+  \left| \prod\limits_{i=1}^{n}A_{i}\right| = \prod\limits_{i=1}^{n}\left|A_{i}\right|.
+\end{equation*}
+
+\section{Inverse Transformations}
+\subsection{Inverse Matrices}
+If for some matrix $A$, there exist a matrix $B$ such that $A\cdot B=I$, we say that $A$ is \emph{invertible}\index{Invertible matrix}, and that $B$ is the \emph{inverse}\index{Inverse of a matrix} matrix of $A$, and we denote it by $A^{-1}$.
+
+\begin{example}
+  
+  The inverse of $A=\begin{pmatrix}1&3\\2&5\end{pmatrix}$ is $A^{-1}=\begin{pmatrix}-5&3\\2&-1\end{pmatrix}$:
+  \begin{equation*}
+	\begin{pmatrix}
+	  1&3\\
+	  2&5
+	\end{pmatrix}
+	\begin{pmatrix}
+	  -5&3\\
+	  2&-1
+	\end{pmatrix}=
+	\begin{pmatrix}
+	  1\cdot(-5)+3\cdot2 & 1\cdot3 + (-1)\cdot3\\
+	  2\cdot(-5) + (5)\cdot2 & 2\cdot(3)+5\cdot(-1)
+	\end{pmatrix}=
+	\idenmat{2}
+  \end{equation*}
+\end{example}
+
+\begin{warning}
+  It is not a straight-forward task to find the inverse of a given matrix (don't be fooled by the nice structure seen in the above example!).
+\end{warning}
+
+Of course, the multiplication of $A$ and $A^{-1}$ is commutative, since both products are equal to $I$.
+
+As a linear mapping, an inverse of a matrix represents the inverse mapping: if $A\vec{v}=\vec{u}$, then $A^{-1}\vec{u}=\vec{v}$.
+\begin{example}
+  
+  Inverse transformation example
+\end{example}
+
+If a matrix does not have an inverse, it is called a \emph{singular matrix}\index{Singular matrix}. Such matrices have a determinant equal to zero. The reason for this is that if a matrix has a determinant of zero, it transforms some space to a subspace of lower dimensionality. Thus, the transformation results in a lost of information, and can't be inverted.
+\begin{example}
+  
+  plane to line transformation?
+\end{example}
+
+\subsection{Kernel and Nullspace of a Transformation}
+The \emph{kernel}\index{Kernel of a matrix} of a linear transformation $T$ is the set of vectors that are transformed to the zero vector. When the transformation is represented by a matrix, we call the kernel of $T$ the \emph{nullspace}\index{Nullspace} of $A$.
+\begin{example}
+  The linear transformation represented by the matrix $A=\begin{pmatrix} 1 & 2 & -5 \\ -2 & -4 & 10 \\ 0.5 & 1 & -2.5\end{pmatrix}$ affects the vectors $\vec{u}=\colvec{3}{-2}{1}{0}$ and $\vec{v}=\colvec{3}{5}{0}{1}$ as follows:
+  \begin{align*}
+	A\vec{u} &= \begin{pmatrix} 1 & 2 & -5 \\ -2 & -4 & 10 \\ 0.5 & 1 & -2.5 \end{pmatrix} \colvec{3}{-2}{1}{0}\\
+	& = \colvec{3}{1\cdot(-2) + 2\cdot1 - 5\cdot0}{-2\cdot(-2) - 4\cdot1 + 10\cdot0}{0.5\cdot(-2) + 1\cdot1 -2.5\cdot0}\\
+	&= \colvec{3}{-2+2}{4-4}{1-1}\\
+	&= \colvec{3}{0}{0}{0},\\[5mm]
+	A\vec{v} &= \begin{pmatrix} 1 & 2 & -5 \\ -2 & -4 & 10 \\ 0.5 & 1 & -2.5 \end{pmatrix} \colvec{3}{5}{0}{1}\\
+	& = \colvec{3}{1\cdot5 + 2\cdot0 + 5\cdot1}{-2\cdot5 - 4\cdot0 + 10\cdot1}{0.5\cdot5 + 1\cdot0 -2.5\cdot1}\\
+	&= \colvec{3}{-5+5}{-10+10}{2.5-2.5}\\
+	&= \colvec{3}{0}{0}{0}.
+  \end{align*}
+
+  Thus, the vectors $\vec{u},\vec{v}$ are in the kernel of $T$ and the nullspace of $A$.
+\end{example}
+
+Any linear combination of the vectors in a kernel of a linear transformation $T$ is also in the kernel of $T$:
+\begin{align*}
+  T\left(\vec{u}\right) &= T\left( \vec{v} \right)=\vec{0}\\
+  &\Downarrow\\
+  T\left( \alpha\vec{u} + \beta\vec{v}\right) &= \alpha T\left( \vec{u} \right) + \beta T\left( \vec{v} \right)\\
+  &= \alpha\vec{0} + \beta\vec{0}\\
+  &= \vec{0}.
+\end{align*}
+
+\begin{example}
+  Based on the previous example, the vector $\vec{w} = 2\vec{u}-3\vec{v}=\colvec{3}{-19}{2}{-3}$ is transformed by $A$ as follows:
+  \begin{align*}
+	A\vec{w} &= \begin{pmatrix} 1 & 2 & -5 \\ -2 & -4 & 10 \\ 0.5 & 1 & -2.5 \end{pmatrix} \colvec{3}{-19}{2}{-3}\\
+	& = \colvec{3}{1\cdot(-19)+2\cdot2 - 5\cdot(-3)}{-2\cdot(-19) - 4\cdot2 + 10\cdot(-3)}{0.5\cdot(-19) + 1\cdot2 - 2.5\cdot(-3)}\\
+	&= \colvec{3}{-19+4+15}{38-8-30}{-9.5 + 2 + 7.5}\\
+	&= \colvec{3}{0}{0}{0}.
+  \end{align*}
+  
+  Thus, $\vec{w}=2\vec{u}-3\vec{v}$ is also in the nullspace of $A$.
+\end{example}
+
+If the kernel of a linear transformation is only the zero vector, then the transformation is invertible, and correspondingly has a determinant different than zero. If the kernel of a linear transformation has any other vector, than the transformation is not invertible, and its determinant equals zero.
+
+The \emph{rank}\index{Rank of a matrix} of a square matrix is the difference between its dimension $N$ and the dimension $M$ of its nullspace:
+\begin{equation*}
+  R = M-N.
+\end{equation*}
+\begin{example}
+  The matrix $A$ from the previous two examples has a rank
+  \begin{equation*}
+	R = 3-2 = 1.
+  \end{equation*}
+\end{example}

@@ -1,0 +1,179 @@
+\documentclass[a4paper]{report}
+\setlength{\parindent}{0pt}
+
+\usepackage[margin=1.5cm]{geometry}
+\usepackage[bottom]{footmisc}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{xstring}
+\usepackage{mathtools}
+\usepackage{tabu}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{forloop}
+
+\usepackage{pythontex}
+
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{every axis/.append style={
+                    font=\tiny,
+                    axis x line=middle,
+                    axis y line=middle,
+                    axis line style={<->, thick, black},
+                    xlabel={$x$},
+                    ylabel={$y$},
+                    every axis x label/.style={at={(current axis.right of origin)}, xshift=10pt, anchor=east},
+                    every axis y label/.style={at={(current axis.above origin)}, yshift=10pt, anchor=north},
+                    every extra x tick/.style={xticklabel style={above}},
+                    every extra y tick/.style={yticklabel style={right}}
+}}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, decorations.pathreplacing, shapes, backgrounds, arrows, automata, fit}
+\tikzset{My Node Style/.style={midway, right, xshift=3.0ex, align=left, font=\small, draw=none, thin, text=black}}
+\tikzset{%
+  highlight/.style={rectangle, rounded corners, draw, fill opacity=0.5, inner sep=0pt}
+}
+\newcommand{\tikzmark}[1]{
+  \tikz[overlay, remember picture, baseline=(#1.base)] \node (#1) {};
+}
+
+\newcommand{\Highlight}[2][submatrix]{%
+    \tikz[overlay,remember picture]{
+    \node[highlight, fill=#2, fit=(left.north west) (right.south east)] (#1) {};}
+}
+\newcommand\VerticalBrace[4][]{%
+    % #1 = draw options
+    % #2 = top mark
+    % #3 = bottom mark
+    % #4 = label
+	\begin{tikzpicture}[overlay,remember picture]
+	  \draw[decorate,decoration={brace, amplitude=1.5ex}, #1] 
+	    ([yshift=1ex]#2.north east)  -- ([yshift=-1ex]#3.south east)
+	        node[My Node Style] {#4};
+	\end{tikzpicture}
+}
+
+\definecolor{light-gray}{gray}{0.95}
+
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+
+\newcommand{\dd}[1]{
+  \frac{d}{d#1}
+}
+
+\newcommand\rotMat[1]{%
+    \begin{bmatrix}
+      \cos\left( #1 \right) & -\sin\left( #1 \right) \\
+      \sin\left( #1 \right) &  \cos\left( #1 \right) \\
+    \end{bmatrix}
+}
+
+\newcommand\digits{} % just for safety
+\def\digits[#1](#2:#3:#4:#5)% [draw options](size:base:number)
+{
+    \pgfmathsetmacro{\n}{#5}
+    \draw[#1] (0,0) rectangle (#2*\n,#2);
+    \foreach \b in {1,...,\n}{
+        \draw[#1,-] (#2*\b,0) to (#2*\b,#2);
+        \pgfmathtruncatemacro{\A}{\n-\b}
+        \node at (#2*\b-#2/2,-0.25) {$#3^{\A}$};
+        \node at (#2*\b-#2/2,0.35) {$\StrChar{#4}{\b}$};
+    }
+}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\renewcommand\CancelColor{\color{red!70}}
+
+\newsavebox{\pycodebox}
+
+\newcommand\issolution[1]{%
+  \ifdefined\withsol
+    #1
+  \else
+  \fi
+}
+
+\newcommand{\drawvec}[5]{%
+  \coordinate (vec) at (#1,#2);
+  \draw[-, dashed, gray] (#1,#2) to (0,#2);
+  \draw[-, dashed, gray] (#1,#2) to (#1,0);
+  \draw[->, #3, very thick] (0,0) to (vec);
+  \node[#3, #4 = 0.1cm of vec] {\Large #5};
+}
+
+\newcommand{\highlight}[2][red]{\mathchoice%
+  {\colorbox{#1}{$\displaystyle#2$}}%
+  {\colorbox{#1}{$\textstyle#2$}}%
+  {\colorbox{#1}{$\scriptstyle#2$}}%
+{\colorbox{#1}{$\scriptscriptstyle#2$}}
+}%
+
+\newcommand{\solutionhead}{
+
+}
+
+\newenvironment{answer}
+  {
+    \begin{tcolorbox}[breakable, enhanced]
+  }
+  {
+    \end{tcolorbox}
+  }
+
+\pagestyle{fancy}
+\lhead{Computer Science and Mathematics (B.MES.108), SoSe19}
+
+\title{Computer Science and Mathematics (B.MES.108)\\Tutorial, Summer Semester 2019\\}
+\author{Peleg Bar Sapir}
+
+\begin{document}
+\maketitle
+\setcounter{tocdepth}{2}
+\chapter{Exercises}
+\def\withsol{0}
+\newcounter{ex}
+\newcounter{probnum}
+\forloop{ex}{1}{\value{ex} < 10}{
+  \setcounter{probnum}{0}
+  \def\exnum{\arabic{ex}}
+  \rhead{Exercise \exnum}
+  \include{ex\arabic{ex}}
+  \newpage
+}
+\setcounter{probnum}{0}
+\include{ex10}
+
+\chapter{Solutions}
+\def\withsol{1}
+\setcounter{ex}{1}
+\forloop{ex}{1}{\value{ex} < 10}{
+  \setcounter{probnum}{0}
+  \def\exnum{\arabic{ex}}
+  \rhead{Exercise \exnum}
+  \include{ex\arabic{ex}}
+  \newpage
+}
+\setcounter{probnum}{0}
+\include{ex10}
+\end{document}
+  \if\specific1{
+    \newcounter{probnum}
+    \setcounter{probnum}{0}
+    \def\exnum{\arabic{ex}}
+    \rhead{Exercise \exnum}
+    \def\withsol{0}
+    \include{ex\arabic{ex}}
+  }\fi
+
+  \if\specific0{

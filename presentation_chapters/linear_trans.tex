@@ -1,0 +1,343 @@
+\sectionpic{Linear Transformations}{../figures/presentation_chapters/linear_trans.pdf}
+\begin{frame}
+  \frametitle{Linear Transformations: Definition}
+  \begin{presentation_definition}
+    A \emph{linear transformation} is a transformation $\func{T}{A}{B}$, that obeys the following two criteria:
+    \begin{enumerate}
+        \onslide<2->{
+        \item \textbf{Scalability}: for each $x\in A$ and a scalar $\alpha\in\mathbb{R}$:
+          \begin{equation*}
+            T(\alpha x) = \alpha T(x).
+          \end{equation*}
+        }
+        \onslide<3>{
+        \item \textbf{Additivity}: For any $x,y\in A$:
+          \begin{equation*}
+            T(x+y) = T(x)+T(y).
+          \end{equation*}
+        }
+    \end{enumerate}
+  \end{presentation_definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear Transformations: Definition}
+  \begin{presentation_example}
+    The real function $f(x)=3x$ is linear. Proof by the above criteria:
+    \begin{enumerate}
+        \onslide<2->{
+        \item \textbf{Scalability}: for any scalar $\alpha\in\mathbb{R}$, 
+          \begin{equation*}
+            f(\alpha x)=3(\alpha x)=\alpha \cdot (3x)=\alpha f(x).
+          \end{equation*}
+        }
+        \onslide<3->{
+        \item \textbf{Additivity}: for any two numbers $x,y\in\mathbb{R}$
+          \begin{equation*}
+            f(x+y)=3(x+y)=3x+3y=f(x)+f(y).
+          \end{equation*}
+        }
+    \end{enumerate}
+    \onslide<4>{
+      Therefore, $f$ is linear.
+    }
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear Transformations: Definition}
+  \begin{presentation_example}
+    Is the real function $g(x)=3x+5$ linear? Let's check:
+    \begin{enumerate}
+        \onslide<2->{
+        \item \textbf{Scalability}:
+          \begin{equation*}
+            g(\alpha x) = 3\alpha x + 5,\quad \alpha g(x) = 3x\alpha + 5\alpha.
+          \end{equation*}
+        }
+        \onslide<3->{
+          If we subtitute $\alpha=0, x=1$, for example, we get
+          \begin{equation*}
+            g\left( \alpha x \right)=g\left( 0\cdot1 \right)=\cancel{3\cdot0} + 5=5,
+          \end{equation*}
+        }
+        \onslide<4->{
+          but on the other hand
+          \begin{equation*}
+            \alpha \cdot g(x) = \cancel{3\cdot1\cdot0} + \cancel{5\cdot0} = 0 \neq 5.
+          \end{equation*}
+        }
+        \onslide<5->{
+          Therefore, $g$ is \textbf{NOT} linear.
+        }
+    \end{enumerate}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear Transformations: Definition}
+  \begin{presentation_note}
+    In order to prove that a function is linear, \textbf{both criteria} need to apply to \textbf{all} numbers $\alpha, x,$ and $y$.
+
+    \vspace{5mm}
+    \onslide<2->{
+      In order to show that a function is \textbf{not} linear, it is enough to show that \textbf{just a single case} doesn't comply with \textbf{any of the criteria}.
+    }
+  \end{presentation_note}
+  \onslide<3>{
+    \begin{presentation_challenge}
+      Check whether the function $g$ from before complies with the 2nd criterion (additivity).
+    \end{presentation_challenge}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear Transformations: Definition}
+  \begin{presentation_example}
+    Is the function $h(x) = x^{2}$ linear? Let's check additivity first:
+    \begin{equation*}
+      h(x+y) = (x+y)^{2} = x^{2}+2xy+y^{2}, \quad h(x)+h(y) = x^{2}+y^{2}.
+    \end{equation*}
+    \onslide<2->{
+      Thus, for $x=1,y=-2$:
+      \begin{equation*}
+        h(x+y) =h(1-2) =h(-1) =(-1)^{2} =1.
+      \end{equation*}
+    }
+    \onslide<3->{
+      On the other hand,
+      \begin{align*}
+        h(x)+h(y)&=h(1)+h(-2)=1^{2} + (-2)^{2}\\&=1+4=5\neq 1.
+      \end{align*}
+    }
+    \onslide<4>{
+      Thus, $h$ is also \textbf{NOT} linear.
+    }
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Linear Transformations: Definition}
+  \begin{presentation_challenge}
+    Check whether $h$ fulfills the 1st criterion (scalability).
+  \end{presentation_challenge}
+
+  \onslide<2->{
+    We can combine both criteria to a single test for linearity of a transformation $T$:
+    \begin{presentation_definition}
+      A transformation $\func{T}{A}{B}$ is linear, if for all $x,y\in A$ and $\alpha,\beta\in\mathbb{R}$ 
+      \begin{equation*}
+        T\left(\alpha x + \beta y \right) = \alpha T(x) + \beta T(y).
+      \end{equation*}
+    \end{presentation_definition}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transforming Vectors}
+  Vectors can also be transformed, specifically by functions of the type $\func{T}{\Rs{n}}{\Rs{m}}$, with $n, m\in\mathbb{N}$.
+
+  \onslide<2->{
+    In this course we will mostly concentrate on transformations of the types
+  \begin{itemize}
+      \item $\func{T}{\Rs{2}}{\Rs{2}}$ and
+      \item $\func{T}{\Rs{3}}{\Rs{3}}$.
+  \end{itemize}
+    since they are more easy to conceptualize (and infintely easier to draw than higher dimensional transformations).
+  }
+
+  \onslide<3>{
+    However, everything we learn about these transformations is applicable for any linear transformation, \textbf{regardless of its dimensionality}.
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transforming Vectors}
+  \begin{presentation_example}
+    Applying the transformation $\func{T}{\Rs{2}}{\Rs{2}}$,
+    \begin{equation*}
+      T\colvec{2}{\xhl}{\yhl} = \colvec{2}{-\xhl}{3\yhl}
+    \end{equation*}
+    to the vector $\vec{u}=\colvec{2}{\xhl[3]}{\yhl[1]}$:
+    \begin{equation*}
+      T\colvec{2}{\xhl[3]}{\yhl[1]} = \colvec{2}{-\xhl[3]}{3\cdot\yhl[1]} = \colvec{2}{-3}{3}.
+    \end{equation*}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transforming Vectors}
+  \begin{presentation_example}
+    Graphically, the transformation looks as follows:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.75]
+        \Large
+
+        \coordinate (o) at (0,0);
+        \coordinate (u) at (3,1);
+        \coordinate (Tu) at (-3,3);
+
+        \drawaxes{-4}{-1}{4}{4}
+
+        \draw[vector, col4] (o) --(u) node [above right, yshift=-1mm] {$\vec{v}$};
+        \draw[vector, col4!65] (o) --(Tu) node [above] {$T(\vec{v})$};
+
+        \draw[vector, ultra thick, densely dotted, col5!40!col4] (2,1) to [out=120, in=30] node [midway, above, text=col5!40!col4] {$T$} (-1.5,1.75);
+        \;
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transforming Spaces}
+  \only<1>{
+    We can visualize the way an entire space is transformed by a transformation $\rcolor{col4}{T}$ by looking at how the axes and main gridlines of the space are transformed.
+  }
+  \only<2>{
+    This method also allows us to see how the basis vectors $\rcolor{col1}{\hat{x}}$ and $\rcolor{col2}{\hat{y}}$ are transformed by linear transformations, and also the transformations of shapes (all this will come in handy later).
+  }
+  \begin{presentation_example}
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.35]
+        \drawaxes{-5}{-5}{5}{5}[0.5][black!50][-][white]
+        \only<2>{
+          \draw[vector, col1] (0,0) -- (2.5,0);
+          \draw[vector, col2] (0,0) -- (0,2.5);
+          \draw[col1, thick, fill=col1!50, fill opacity=0.5] (3,2) -- (4,4) -- (2,3) -- cycle;
+          \draw[col2, thick, fill=col2!50, fill opacity=0.5] (3,-3) circle (1.2);
+          \draw[col3, thick, fill=col3!50, fill opacity=0.5] (-4,4) rectangle (-3,-3);
+        }
+        \pgftransformcm{1}{0.3}{0.4}{0.7}{\pgfpoint{14cm}{0cm}}
+        \drawaxes{-5}{-5}{5}{5}[0.5][black!50][-][white]
+        \only<2>{
+          \draw[vector, col1] (0,0) -- (2.5,0);
+          \draw[vector, col2] (0,0) -- (0,2.5);
+          \draw[col1, thick, fill=col1!50, fill opacity=0.5] (3,2) -- (4,4) -- (2,3) -- cycle;
+          \draw[col2, thick, fill=col2!50, fill opacity=0.5] (3,-3) circle (1.2);
+          \draw[col3, thick, fill=col3!50, fill opacity=0.5] (-4,4) rectangle (-3,-3);
+        }
+        \pgftransformreset
+        \draw[vector, col4] (2,1) -- node[midway, above] {$T$} ++(1.5,0);
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Properties of Linear Transformations}
+  Some important properties of linear transformations are:
+  \begin{itemize}
+      \onslide<2->{
+      \item The origin is preserved, i.e.
+        \begin{equation*}
+          T\left( \vec{0} \right) = \vec{0}.
+        \end{equation*}
+      }
+      \onslide<3->{
+      \item Parallel lines remain parallel.
+      }
+      \onslide<4->{
+      \item All areas are scaled by the same number.
+      }
+  \end{itemize}
+  \onslide<5->{
+    \begin{presentation_challenge}
+      Show that these properties can be derived from the definition of linear transformations.
+    \end{presentation_challenge}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Types of Linear Transformations}
+  Many linear transformations $\func{T}{\Rs{2}}{\Rs{2}}$ can be created by composition of two or more of the following basic transformations:
+
+  \onslide<2->{
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.35]
+        \draw[opacity=0] (-6,-5) rectangle (23,11);
+
+        \drawaxes{-5}{-5}{5}{5}[0.5][black!50][-][white]
+        \draw[col1, thick, fill=col1!50, fill opacity=0.5] (3,2) -- (4,4) -- (2,3) -- cycle;
+        \draw[col2, thick, fill=col2!50, fill opacity=0.5] (3,-3) circle (1.2);
+        \draw[col3, thick, fill=col3!50, fill opacity=0.5] (-4,4) rectangle (-3,-3);
+
+        \only<2> \pgftransformcm{0.7}{0}{0}{1}{\pgfpoint{14cm}{0cm}}
+        \only<3> \pgftransformcm{1}{0}{0}{0.5}{\pgfpoint{16cm}{0cm}}
+        \only<4> \pgftransformcm{0.87}{0.5}{-0.5}{0.87}{\pgfpoint{16cm}{0cm}}
+        \only<5> \pgftransformcm{1}{0}{0.3}{1}{\pgfpoint{16cm}{0cm}}
+        \only<6> \pgftransformcm{1}{-0.5}{0}{1}{\pgfpoint{16cm}{0cm}}
+        \only<7> {
+          \draw[-, densely dotted, col4, very thick] (-5,-5) -- (5,5);
+          \pgftransformcm{0}{1}{1}{0}{\pgfpoint{16cm}{0cm}}
+          \draw[-, densely dotted, col4, very thick] (-5,-5) -- (5,5);
+        }
+
+        \drawaxes{-5}{-5}{5}{5}[0.5][black!50][-][white]
+        \draw[col1, thick, fill=col1!50, fill opacity=0.5] (3,2) -- (4,4) -- (2,3) -- cycle;
+        \draw[col2, thick, fill=col2!50, fill opacity=0.5] (3,-3) circle (1.2);
+        \draw[col3, thick, fill=col3!50, fill opacity=0.5] (-4,4) rectangle (-3,-3);
+
+        \pgftransformreset
+
+        \draw[vector, col4] (2,1) -- node[midway, above] (T) {$T$} ++(1.5,0);
+        \node[above=of T, yshift=5mm] {
+          \only<2>{Scaling in the $x$-axis}
+          \only<3>{Scaling in the $y$-axis}
+          \only<4>{Rotation around the origin}
+          \only<5>{Shear in the $x$-axis}
+          \only<6>{Shear in the $y$-axis}
+          \only<7>{Reflection by a line going through the origin}
+        };
+      \end{tikzpicture}
+    \end{figure}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Types of Linear Transformations}
+  \begin{presentation_example}
+    The following transformation is a composition of a scaling transformation in the $y$-axis, followed by a rotation around the origin:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.35]
+        \draw[opacity=0] (-7,-7) rectangle (7,7);
+
+  % Original
+        \only<1>{
+          \drawaxes{-5}{-5}{5}{5}[0.5][black!50][-][white]
+          \draw[vector, col1] (0,0) -- (2.5,0);
+          \draw[vector, col2] (0,0) -- (0,2.5);
+          \draw[col1, thick, fill=col1!50, fill opacity=0.5] (3,2) -- (4,4) -- (2,3) -- cycle;
+          \draw[col2, thick, fill=col2!50, fill opacity=0.5] (3,-3) circle (1.2);
+          \draw[col3, thick, fill=col3!50, fill opacity=0.5] (-4,4) rectangle (-3,-3);
+        }
+
+  % Scale in y-axis
+        \only<2>{
+          \pgftransformcm{1}{0}{0}{0.5}{\pgfpoint{0cm}{0cm}}
+          \drawaxes{-5}{-5}{5}{5}[0.5][black!50][-][white]
+          \draw[vector, col1] (0,0) -- (2.5,0);
+          \draw[vector, col2] (0,0) -- (0,2.5);
+          \draw[col1, thick, fill=col1!50, fill opacity=0.5] (3,2) -- (4,4) -- (2,3) -- cycle;
+          \draw[col2, thick, fill=col2!50, fill opacity=0.5] (3,-3) circle (1.2);
+          \draw[col3, thick, fill=col3!50, fill opacity=0.5] (-4,4) rectangle (-3,-3);
+        }
+
+  % Scale in y-axis
+        \only<3>{
+          \pgftransformcm{0.71}{-0.71}{0.25}{0.25}{\pgfpoint{0cm}{0cm}}
+          \drawaxes{-5}{-5}{5}{5}[0.5][black!50][-][white]
+          \draw[vector, col1] (0,0) -- (2.5,0);
+          \draw[vector, col2] (0,0) -- (0,2.5);
+          \draw[col1, thick, fill=col1!50, fill opacity=0.5] (3,2) -- (4,4) -- (2,3) -- cycle;
+          \draw[col2, thick, fill=col2!50, fill opacity=0.5] (3,-3) circle (1.2);
+          \draw[col3, thick, fill=col3!50, fill opacity=0.5] (-4,4) rectangle (-3,-3);
+        }
+      \end{tikzpicture}
+    \end{figure}
+  \end{presentation_example}
+\end{frame}

@@ -1,0 +1,33 @@
+\input{local_settings}
+\input{../../settings}
+
+\newcommand{\tgrid}{
+  \draw[step=0.5, black!10, thick] (-3,-3) grid (3,3);
+  \draw[vector, <->] (-3.5,0) -- (3.5,0) node [right] {$x$};
+  \draw[vector, <->] (0,-3.5) -- (0,3.5) node [above] {$y$};
+
+  \draw[vector, line width=1mm, col1] (0,0) -- ++(1,0);
+  \draw[vector, line width=1mm, col2] (0,0) -- ++(0,1);
+  \draw[very thick, dashed, cap=round, col3] (-3,3) -- (3,-3);
+  \draw[very thick, dashed, cap=round, col4] (-3,-3) -- (3,3);
+
+  \filldraw (-0.05,-0.05) rectangle (0.05,0.05);
+}
+
+\newcommand{\mat}{
+  T(\vec{v})=\begin{pmatrix} \tikzmarkin[set fill color=col1!50, set border color=col1]{A}1 & \tikzmarkin[set fill color=col2!50, set border color=col2]{B}\frac{1}{2}\\ \frac{1}{2}\tikzmarkend{A} & 1\tikzmarkend{B} \end{pmatrix}\cdot\vec{v}
+}
+
+\begin{document}
+\begin{tikzpicture}[scale=0.9]
+  \Large
+
+  \tgrid
+  \pgftransformcm{1}{0.5}{0.5}{1}{\pgfpoint{11cm}{0cm}}
+  \tgrid
+  \pgftransformreset
+  \draw[->, >=stealth, ultra thick] (4,1) -- node (text) [midway, above] {$\mat$} (8,1);
+  \node[below=of text, yshift=0.85cm] {$\rcolor{col3}{\lambda_{1}}=\frac{1}{2},\rcolor{col4}{\lambda_{2}}=\frac{3}{2}$};
+
+\end{tikzpicture}
+\end{document}

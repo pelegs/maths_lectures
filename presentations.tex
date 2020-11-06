@@ -1,0 +1,157 @@
+\documentclass{beamer}
+\usetheme[progressbar=frametitle, block=fill]{metropolis}
+\usefonttheme[onlymath]{serif}
+
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+  \centering
+  \begin{minipage}{22em}
+  \raggedright
+  \usebeamercolor[fg]{section title}
+  \usebeamerfont{section title}
+  \insertsectionhead\\[-1ex]
+  \usebeamertemplate*{progress bar in section page}
+  \par
+  \ifx\insertsubsectionhead\@empty\else%
+  \usebeamercolor[fg]{subsection title}%
+  \usebeamerfont{subsection title}%
+  \insertsubsectionhead
+  \fi
+  \vskip0.5cm
+  \ifstrempty{#1}{}{%
+  \centering
+  \includegraphics[scale=0.5]{#1}%
+  }
+  \end{minipage}
+  \par
+  \vspace{\baselineskip}
+}
+\makeatother
+
+\newcommand{\sectionpic}[2]{
+   \setbeamertemplate{section page}[mytheme][#2]
+   \section{Chapter \thesection: #1}
+   \setbeamertemplate{section page}[mytheme]
+}
+
+%% ----- Colors ----- %%
+
+\setbeamercolor{frametitle}{fg=col2!10, bg=col2!50!black}
+\setbeamercolor{title separator}{fg=col2!50!black}
+\setbeamercolor{progress bar}{fg=col2!50!black, bg=col2!25}
+
+%% ----- Settings ----- %%
+
+\include{settings}
+\usepackage{tcolorbox}%
+
+%% ----- Example ----- %%
+
+\newenvironment{presentation_example}{
+  \begin{tcolorbox}[colback=col2!7, colframe=col2!50, coltitle=col2!30!black, fonttitle=\bfseries, title=Example]
+}
+{
+  \end{tcolorbox}
+}
+
+%% ----- Definition ----- %%
+
+\newenvironment{presentation_definition}{
+  \begin{tcolorbox}[colback=col4!10, colframe=col4!50, coltitle=col4!30!black, fonttitle=\bfseries, title=Definition]
+}
+{
+  \end{tcolorbox}
+}
+
+%% ----- Note ----- %%
+
+\newenvironment{presentation_note}{
+  \begin{tcolorbox}[colback=col1!10, colframe=col1!50, coltitle=col1!30!black, fonttitle=\bfseries, title=Note]
+}
+{
+  \end{tcolorbox}
+}
+
+%% ----- Proof ----- %%
+
+\newenvironment{presentation_proof}{
+  \begin{tcolorbox}[colback=col5!10, colframe=col5!50, coltitle=col5!30!black, fonttitle=\bfseries, title=Proof]
+}
+{
+  \end{tcolorbox}
+}
+
+%% ----- Challenge ----- %%
+
+\newenvironment{presentation_challenge}{
+  \begin{tcolorbox}[colback=col3!10, colframe=col3!50, coltitle=col3!30!black, fonttitle=\bfseries, title=Challenge]
+}
+{
+  \end{tcolorbox}
+}
+
+%% ----- Node highlight ----- %%
+
+\tikzset{
+  nodehl/.style={thick, rounded corners},
+  arrowhl/.style={->, >=stealth, thick}
+}
+
+%% ----- Title ----- %%
+
+\setbeamertemplate{title page}{
+  \begin{picture}(0,0)
+		\put(100,-130){%
+			\begin{tikzpicture}
+				\tiny
+				\node at (0,0) {\includegraphics[width=5cm]{cover/tapir}};
+				\node[rotate=-5, text=black!65] at (0.0,1.8) {$\langle \eb{i},\eb{j} \rangle = \delta_{ij}$};
+				\node[rotate=5, text=black!45] at (-2.7,1.6) {$T\left( \alpha\vec{u} + \beta\vec{v} \right)=\alpha T\left( \vec{u} \right) + \beta T\left( \vec{v} \right)$};
+				\node[rotate=-3, text=black!45] at (-0.5,2.7) {$A\vec{v}=\lambda\vec{v}$};
+				\node[rotate=0, text=black!45] at (0.2,2.3) {$\int\limits_{a}^{b}f(x)\dif x = F(b)-F(a)$};
+				\node[rotate=1, text=black!40] at (-3.0, 2.3) {$\Rot(\theta)=\begin{bmatrix}\cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{bmatrix}$};
+				\node[rotate=10, text=black!30] at (0.7,3.2) {$A=Q\Lambda Q^{-1}$};
+				\node[rotate=-4, text=black!25] at (-0.8,3.4) {$\vec{v} = \sum\limits_{i=1}^{n}\alpha_{i}\eb{i}$};
+				\node[rotate=0, text=black!20] at (0.9,3.8) {$\Rs{n}\overset{T}{\longrightarrow}\Rs{m}$};
+				\node[rotate=0, text=black!20] at (-2.9,3.0) {$\od{f}{x}=\lim\limits_{\Delta x\rightarrow0}\frac{f(x+\Delta x)-f(x)}{\Delta x}$};
+				\node[rotate=-3, text=black!10] at (-1.2,4.3) {$\int\limits_{a}^{b}f(x)\dif x = \lim\limits_{\Delta x\rightarrow0}\sum\limits_{k=1}^{N}f(x_{k})\Delta x$};
+				\node[rotate=5, text=black!13] at (-2.5,3.7) {$\left( AB \right)^{\top} = B^{\top}A^{\top}$};
+			\end{tikzpicture}
+		}
+	%\put(-10,85){%
+	%\includegraphics[width=6cm]{cover/gau_logo}
+	%}
+		\put(-10,-55){%
+			\begin{minipage}[b][45mm][t]{226mm}
+				\usebeamerfont{title}{\color{col2!20!black}\inserttitle\par}
+				\color{col2!60!black}\rule{0.25\textwidth}{0.5pt}
+
+				\vspace{3mm}
+				\usebeamerfont{author}{\color{col2!40!black}\insertauthor}
+			\end{minipage}
+		}
+  \end{picture}
+}
+
+\title{Basic Maths for Non-mathematicians}
+\author{Peleg Bar Sapir}
+
+%% ----- Document ----- %%
+
+\begin{document}
+\frame{\titlepage}
+
+\ifdefined\full{
+  \include{presentation_chapters/intro}
+  \include{presentation_chapters/vectors}
+  \include{presentation_chapters/linear_trans}
+  \include{presentation_chapters/matrices}
+  \include{presentation_chapters/linear_systems}
+  \include{presentation_chapters/eigenvectors}
+}
+\else{
+  \setcounter{section}{\chnum-1}
+  \input{presentation_chapters/\jobname}
+}
+\fi
+\end{document}

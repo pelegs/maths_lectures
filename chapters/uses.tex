@@ -1,0 +1,407 @@
+\chapter{Real-Life Uses of Linear Algebra}
+\section{Stable Populations in Predator-Pray Models / Leslie Models?}
+Linear algebra sometimes shows up in rather surprising circumstances.
+
+For example, a population of lions and zebras live in the same area. Each year $i$, the number of lions $L_{i}$ depends on the number of lions in the previous year $L_{i-1}$, but also on the number of zebras in that year, $Z_{i-1}$ (as the lions need zebras for food). The dependency is
+\begin{equation*}
+  L_{i} = 0.86L_{i-1} + 0.08Z_{i-1}.
+\end{equation*}
+
+Similarily, the number of zebras $Z_{i}$ depends on the number of zebras in the previous year (as zebras reproduce), but also on the number of lions in the previous year, since again - the lions eat the zebras:
+\begin{equation*}
+  Z_{i} = -0.12L_{i-1} + 1.14Z_{i-1}.
+\end{equation*}
+
+Together, the relation can be rewritten as (replacing $i$ with $i+1$ and $i-1$ with $i$)
+\begin{equation*}
+  \begin{cases}
+    L_{i+1} = & 0.86L_{i} + 0.08Z_{i-1}\\
+    Z_{i+1} = & -0.12L_{i} + 1.14Z_{i-1}
+  \end{cases},
+\end{equation*}
+and can be expressed as a matrix-vector multiplication:
+\begin{equation*}
+  \colvec{2}{L_{i+1}}{Z_{i+1}} = \begin{pmatrix} 0.86 & 0.08 \\ -0.12 & 1.14 \end{pmatrix}\colvec{2}{L_{i}}{Z_{i}}.
+\end{equation*}
+
+We can graph the vector $\colvec{2}{L_{i}}{Z_{i}}$ as a point in a coordinate system, and follow how the numbers of lions and zebras evolve every year, starting from $L=350,\ Z=150$ (red) and $L=25,\ Z=100$ (blue):
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=5mm,
+                      scale=1.75,
+                      dot/.style = {circle, minimum size=1mm, inner sep=0pt}]
+    \Large
+    \draw[vector] (0,0) to (4,0) node [right] {$L$};
+    \draw[vector] (0,0) to (0,4) node [above] {$Z$};
+    \begin{pycode}
+import numpy as np
+
+N = 30
+A = np.array([[0.86,0.08],[-0.12,1.14]])
+
+v1 = np.zeros((N,2))
+v1[0] = np.array([0.5,1.7])
+v1[:N] = np.array([np.dot(np.linalg.matrix_power(A,i), v1[0]) for i in range(N)])
+
+v2 = np.zeros((N,2))
+v2[0] = np.array([3.5,2])
+v2[:N] = np.array([np.dot(np.linalg.matrix_power(A,i), v2[0]) for i in range(N)])
+
+v3 = np.zeros((N,2))
+v3[0] = np.array([3.5,1.5])
+v3[:N] = np.array([np.dot(np.linalg.matrix_power(A,i), v3[0]) for i in range(N)])
+
+draw_params = '->, >=stealth, very thick, black!50'
+
+for i in range(N):
+  if 0 < v1[i,1] < 4:
+    print('\\node[dot, fill=col1] (p1{}) at ({}) {{}};'.format(i,','.join(map(str, v1[i]))))
+    if i > 0:
+      print('\\draw[{}] (p1{}) to (p1{});'.format(draw_params, i-1, i))
+  if 0 < v2[i,1] < 4:
+    print('\\node[dot, fill=col2] (p2{}) at ({}) {{}};'.format(i,','.join(map(str, v2[i]))))
+    if i > 0:
+      print('\\draw[{}] (p2{}) to (p2{});'.format(draw_params, i-1, i))
+  if 0 < v3[i,1] < 4:
+    print('\\node[dot, fill=col3] (p3{}) at ({}) {{}};'.format(i,','.join(map(str, v3[i]))))
+    if i > 0:
+      print('\\draw[{}] (p3{}) to (p3{});'.format(draw_params, i-1, i))
+    \end{pycode}
+    
+    \foreach \x in {0.5, 1.5, ..., 3.5}{
+      \pgfmathtruncatemacro{\X}{\x*100}
+      \draw[thick] (\x,-1mm) -- ++(0,2mm) node [below, yshift=-3mm] {$\X$};
+      \draw[thick] (-1mm,\x) -- ++(2mm,0) node [left,  xshift=-3mm] {$\X$};
+    }
+  \end{tikzpicture}
+\end{figure}
+
+These three examples all behave differently from eachother: in the sequence drawn in \colorbox{col1}{red} (starting at $\colvec{2}{50}{170}$) the numbers of both lions and zebras are increasing in each subsequent year.
+
+In the sequence drawn in \colorbox{col2}{blue} (starting at $\colvec{2}{350}{200}$) the numbers of both lions and zebras decline at first, but then at around 10th year, when there are about 105 lions and 140 zerbras, the number of zebras starts to increase rapidly, with the number of lions inreasing too starting from about the 13th year.
+
+In the last sequence which is drawn in \colorbox{col3}{green} (starting at $\colvec{2}{350}{150}$), the numbers of both lions and zebras decreases each year from the beginning.
+
+Drawing many more such sequences reveals a pattern:
+  
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=5mm,
+                      scale=1.75,
+                      dot/.style = {circle, minimum size=1mm, inner sep=0pt}]
+    \Large
+    \draw[vector] (0,0) to (4,0) node [right] {$L$};
+    \draw[vector] (0,0) to (0,4) node [above] {$Z$};
+    \begin{pycode}
+import numpy as np
+
+N = 100
+A = np.array([[0.86,0.08],[-0.12,1.14]])
+
+for n in range(150):
+  v = np.zeros((N,2))
+  if n < 30:
+    x = np.random.uniform(0, 1.5)
+    y = np.random.uniform(2*x, 4)
+  elif 30 <= n < 120:
+    x = np.random.uniform(2, 4)
+    y = np.random.uniform(0.5*x, 3*x)
+  else:
+    x = np.random.uniform(2.5, 4)
+    y = np.random.uniform(0.5, 0.5*x)
+  v[0] = np.array([x,y])
+  v[:N] = np.array([np.dot(np.linalg.matrix_power(A,i), v[0]) for i in range(N)])
+  
+  for i, p in enumerate(v):
+    if (0 < p[0] < 4) and (0 < p[1] < 4):
+      print('\\node[dot, fill=col4] (p{}) at ({}) {{}};'.format(i,','.join(map(str, p))))
+      if i > 0:
+        print('\\draw[->, >=stealth, black!75] (p{}) to (p{});'.format(i-1, i))
+    \end{pycode}
+    
+    \foreach \x in {0.5, 1.5, ..., 3.5}{
+      \pgfmathtruncatemacro{\X}{\x*100}
+      \draw[thick] (\x,-1mm) -- ++(0,2mm) node [below, yshift=-3mm] {$\X$};
+      \draw[thick] (-1mm,\x) -- ++(2mm,0) node [left,  xshift=-3mm] {$\X$};
+    }
+
+    \draw[very thick, densely dotted, cap=curved, col1] (0,0) --++(1.25,4);
+    \draw[very thick, densely dotted, cap=curved, col2] (0,0) --++(4,2);
+  \end{tikzpicture}
+\end{figure}
+
+We can see two lines, here drawn in \colorbox{col1}{red} and \colorbox{col2}{blue}. Above the \colorbox{col1}{red} line, the number of both lions and zebras always increses. Below the \colorbox{col2}{blue} line, the number of both lions and zebras always decreases. Between the two lines, the number of both lions and zenras eventually increases, and depending on the inital position they might decrease at first.
+
+What happens to points on these lines? Let's take a look:
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=5mm,
+                      scale=1.75,
+                      dot/.style = {circle, minimum size=1mm, inner sep=0pt}]
+    \Large
+    \draw[vector] (0,0) to (4,0) node [right] {$L$};
+    \draw[vector] (0,0) to (0,4) node [above] {$Z$};
+    
+    \draw[very thick, densely dotted, cap=curved, col1] (0,0) --++(0.5,1.5);
+    \draw[very thick, densely dotted, cap=curved, col2] (0,0) --++(1.1,0.55);
+
+    \begin{pycode}
+import numpy as np
+
+N = 13
+A = np.array([[0.86,0.08],[-0.12,1.14]])
+
+v1 = np.zeros((N,2))
+v1[0] = np.array([0.5,1.5])
+v1[:N] = np.array([np.dot(np.linalg.matrix_power(A,i), v1[0]) for i in range(N)])
+
+v2 = np.zeros((N,2))
+v2[0] = np.array([4,2])
+v2[:N] = np.array([np.dot(np.linalg.matrix_power(A,i), v2[0]) for i in range(N)])
+
+for i, (p1, p2) in enumerate(zip(v1, v2)):
+  if (0 < p1[0] <= 4) and (0 < p1[1] <= 4):
+    print('\\node[dot, fill=col1] (pA{}) at ({}) {{}};'.format(i, ','.join(map(str, p1))))
+    if 0 < i < N:
+      print('\\draw[->, >=stealth, thick, black!75] (pA{}) to (pA{});'.format(i-1, i))
+  if (0 < p2[0] <= 4) and (0 < p2[1] <= 4):
+    print('\\node[dot, fill=col2] (pB{}) at ({}) {{}};'.format(i, ','.join(map(str, p2))))
+    if 0 < i < N:
+      print('\\draw[->, >=stealth, thick, black!75] (pB{}) to (pB{});'.format(i-1, i))
+    \end{pycode}
+    
+    \foreach \x in {0.5, 1.5, ..., 3.5}{
+      \pgfmathtruncatemacro{\X}{\x*100}
+      \draw[thick] (\x,-1mm) -- ++(0,2mm) node [below, yshift=-3mm] {$\X$};
+      \draw[thick] (-1mm,\x) -- ++(2mm,0) node [left,  xshift=-3mm] {$\X$};
+    }
+  \end{tikzpicture}
+\end{figure}
+
+As can be seen, after applying the tranformation to points on these lines, the results stay on the lines. This means that the lines represent eigenvectors of the tranformation.
+
+Calculating the possible eigenvectors of the matrix $\begin{pmatrix} 0.86 & 0.08 \\ -0.12 & 1.14 \end{pmatrix}$ we get
+\begin{equation*}
+  \vec{u}_{1} = \colvec{2}{1}{3},\ \vec{u}_{2}=\colvec{2}{2}{1},
+\end{equation*}
+with the corresponding eigenvalues being $\lambda_{1}=1.1, \lambda_{2}=0.9$. This means that points on the lines spanned by $\vec{u}_{1}$ and $\vec{u}_{2}$ (separetly) are scenarios where the ratio between the number of lions and of zebras stay stable over time.
+
+\section{Least Squares Approximation}
+\subsection{Linear Functions}
+Say we have a set of $n$ observed measurements stored as 2D points, i.e.
+\begin{align*}
+  p_{1} &= \left( x_{1}, y_{1} \right)\\
+  p_{2} &= \left( x_{2}, y_{2} \right)\\
+  &\vdots\\
+  p_{n} &= \left( x_{n}, y_{n} \right)\\
+\end{align*}
+and we wish to find a line $f(x)=ax+b$ that best approximates these points, e.g.
+
+\pgfmathsetmacro{\a}{0.35}
+\pgfmathsetmacro{\b}{-0.5}
+\tikzset{point/.style={fill=col1, circle, radius=2pt}}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \coordinate (p-7) at (-7, -7*\a+\b+1.15);
+    \coordinate (p7) at (7, 7*\a+\b-0.85);
+    \foreach \x in {-6,...,6}{
+      \pgfmathsetmacro{\R}{(rand-0.5)*0.2};
+      \coordinate (p\x) at (\x, \a*\x+\b+rand);
+      \draw[point] (p\x) circle;
+    }
+    \draw[point] (p-7) circle;
+    \draw[point] (p7) circle;
+    
+    \draw[-, dashed, thick] (-7, -\a*7+\b) to (7, \a*7+\b);
+  \end{tikzpicture}
+\end{figure}
+
+We will consider such an approximation as the one for which the sum of the distances from each $y_{i}$ to its expected value $f(x_{i})$, i.e. $\sum\limits_{i=1}^{n}\left[f(x_{n})-y_{n}\right]$, is minimal.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \foreach \x in {-6,...,6}{
+      \draw[point] (p\x) circle;
+      \draw[-, dotted, thick, col1!75!black] (p\x) to (\x, \a*\x+\b);
+    }
+    \draw[point] (p-7) circle;
+    \draw[point] (p7) circle;
+    \draw[-, dotted, thick, col1!75!black] (p-7) to (-7, -7*\a+\b);
+    \draw[-, dotted, thick, col1!75!black] (p7) to (7, 7*\a+\b);
+    
+    \draw [decorate, decoration={brace, amplitude=3pt, raise=4pt, mirror}]
+    (p-7) to (-7,-7*\a+\b) node[left, xshift=-7pt, yshift=17pt]{$f(x_{1})-y_{1}$};
+    \draw [decorate, decoration={brace, amplitude=3pt, raise=4pt, mirror}]
+    (p7) to (7,7*\a+\b) node[right, xshift=7pt, yshift=-13pt]{$f(x_{n})-y_{n}$};
+
+    \draw[-, dashed, thick] (-7, -\a*7+\b) to (7, \a*7+\b);
+  \end{tikzpicture}
+\end{figure}
+
+If we define the vectors $\vec{f}=\colvec{4}{f(x_{1})}{f(x_{2})}{\vdots}{f(x_{n})}$ and $\vec{y}=\colvec{4}{y_{1}}{y_{2}}{\vdots}{y_{n}}$, the sum of the distances $\sum\limits_{i=1}^{n}\left[f(x_{n})-y_{n}\right]$ is then simply
+\begin{equation*}
+  \sqrt{\vec{f}-\vec{y}},
+\end{equation*}
+but this distance is problematic since it is hard to calculate (square roots are computationally expensive to calculate), and there's a chance the sum is negative. Therefore, we instead calculate the square distance
+\begin{equation*}
+  \left( \sum\limits_{i=1}^{n}\left[f(x_{n})-y_{n}\right] \right)^{2} = \left( \vec{f}-\vec{y} \right)^{2}.
+\end{equation*}
+
+Therefore, for the best approximation we would want to find $a$ and $b$ such that $\left( \vec{f}-\vec{y} \right)^{2}$ is minimal. This of course will happen when $\vec{f}-\vec{y}$ is minimal. Drawing all these vectors helps to illustrate the problem geometrically:
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[every path/.style={->, >=stealth, ultra thick}]
+    \coordinate (o) at (0,0);
+    \coordinate (a) at (1,4);
+    \coordinate (b) at (5,1);
+    \draw[col1] (o) to node [midway, above left] {\Large$\vec{f}$} (a);
+    \draw[col2] (o) to node [midway, below] {\Large$\vec{y}$} (b);    
+    \draw[col3] (b) to node [midway, above right] {\Large$\vec{f}-\vec{y}$} (a);
+  \end{tikzpicture}
+\end{figure}
+
+The minimal distance is achieved when $\vec{f}-\vec{y}$ is orthogonal to $\vec{f}$.
+\begin{challange}
+  Prove the last statement.
+\end{challange}
+
+Of course, orthogonality happens when $\vec{f} \cdot \left( \vec{f}-\vec{y} \right)=0$. We will now find the conditions that will enable this equality.
+
+Explicitly, the vector $\vec{f}$ is
+\begin{equation*}
+  \vec{f} = \colvec{4}{ax_{1}+b}{ax_{2}+b}{\vdots}{ax_{n}+b},
+\end{equation*}
+which can be written as a matrix $A$ operated on a vector $\vec{v}$:
+\begin{equation*}
+  \vec{f} = A\vec{v} = \begin{pmatrix} x_{1} & 1 \\ x_{2} & 1 \\ \vdots \\ x_{n} & 1 \end{pmatrix} \colvec{2}{a}{b}.
+\end{equation*}
+
+Designating the matrix as $A$ and the vector as $\vec{v}$ yields $A\vec{v}$, and we wish to find the condition for which
+\begin{equation*}
+  A\vec{v}\left( A\vec{v}-\vec{y} \right)=0.
+\end{equation*}
+
+Multiplying the equation by $A\vec{v}$ and rearranging the equation gives
+\begin{equation*}
+  A\vec{v} \cdot A\vec{v} = A\vec{v} \cdot \vec{y}.
+\end{equation*}
+
+Both sides now are dot products of vectors. We can consider each as being products of a column vector with a row vector, and write them as matrices (switching the dot product with a matrix-matrix product). Then, the matrices on the right must be transposed:
+\begin{equation*}
+  \left( A\vec{v} \right)^{\top} A\vec{v} = \left( A\vec{v} \right)^{\top}\vec{y}.
+\end{equation*}
+
+Due to the rules of transposing a matrix product ($\left( AB \right)^{\top} = B^{\top}A^{\top}$, see Equation xxx), we get (writing the column vector $\vec{v}$ as a matrix $V$)
+\begin{equation*}
+  V^{\top}A^{\top} A\vec{v} = V^{\top}A^{\top}\vec{y}.
+\end{equation*}
+
+Now, since $V^{\top}$ is simply a matrix with one row, we can remove it from both sides without changing the equality, yielding:
+\begin{equation*}
+  A^{\top}\vec{v} = A^{\top}vec{y}.
+\end{equation*}
+
+Thus, to find $a$ and $b$ that will yield the minimum total distance to of the line $f(x)=ax+b$ to the points $\left\{ p_{i} \right\}$, we simply need to solve this linear system (which is easier than it looks!).
+
+\begin{example}
+  Let's look at 6 points:
+  \begin{align*}
+    p_{1} &= \left( -2, -7.3 \right)\\
+    p_{2} &= \left( -1, -3.9 \right)\\
+    p_{3} &= \left( 0, -1.2 \right)\\
+    p_{4} &= \left( 1, 2.4 \right)\\
+    p_{5} &= \left( 2, 4.7 \right)\\
+    p_{6} &= \left( 3, 7.7 \right)\\
+  \end{align*}
+
+  The linear system we need to solve is thus
+  \begin{equation*}
+    \begin{pmatrix} -2 & -1 & 0 & 1 & 2 & 3 \\ 1 & 1 & 1 & 1 & 1 & 1 \end{pmatrix}\begin{pmatrix} -2 & 1 \\ -1 & 1 \\0 & 1 \\1 & 1 \\2 & 1 \\3 & 1 \end{pmatrix} \colvec{2}{a}{b} = \begin{pmatrix} -2 & -1 & 0 & 1 & 2 & 3 \\ 1 & 1 & 1 & 1 & 1 & 1 \end{pmatrix} \colvec{6}{-7.3}{-3.9}{-1.2}{2.4}{4.7}{7.7}.
+  \end{equation*}
+
+  Multiplying both matrix-matrix products yields
+  \begin{equation*}
+    \begin{pmatrix} 19 & 3 \\ 3 & 6 \end{pmatrix} \colvec{2}{a}{b} = \begin{pmatrix} 53.4 & 2.4 \end{pmatrix},
+  \end{equation*}
+
+  which when solved for $a$ and $b$ yields
+  \begin{equation*}
+    a = 2.98\quad b=-1.09.
+  \end{equation*}
+\end{example}
+
+\subsection{General Polynomials}
+The method above can yield an approximation that is a general polynomial, which is an expressions of the form
+\begin{equation*}
+  P_{m}(x) = a_{0} + a_{1}x + a_{2}x^{2} + \dots + a_{m}x^{m} = \sum_{k=0}^{m}a_{k}x^{k},
+\end{equation*}
+with the restriction $n \geq m+1$ (\textbf{note}: $n$ is the number of points, while $m$ is the degree of the polynomial!).
+
+The difference in that case would be that the vectors $\vec{f}$ and $\vec{y}$ would be $n$-dimensional and the vectors $\vec{u}$ $(m+1)$-dimensional:
+\begin{equation*}
+  \vec{y} = \colvec{4}{y_{1}}{y_{2}}{\vdots}{y_{n}},\ \vec{v} = \colvec{5}{a_{m}}{a_{m-1}}{\vdots}{a_{1}}{a_{0}},
+\end{equation*}
+
+while the matrix $A$ would be of dimension $n\times (m+1)$, and has the form
+\begin{equation*}
+  A = \begin{pmatrix} x_{1}^{m} & x_{1}^{m-1} & \dots & x_{1} & 1 \\ x_{2}^{m} & x_{2}^{m-1} & \dots & x_{2} & 1 \\ \vdots \\ x_{n}^{m} & x_{n}^{m-1} & \dots & x_{n} & 1 \end{pmatrix}.
+\end{equation*}
+
+\begin{warning}
+  The reason that the dimension of $\vec{u}$ is $m+1$ and of $A$ is $n\times(m+1)$, instead of $m$, is that we must include the free variable $a_{0}$ of the polynomial. This is reflected in both the vector $\vec{u}$ were it is seen explicitly, and in the matrix $A$ where it is represented by the value $1$.
+\end{warning}
+
+\begin{example}
+  Using the same points from before, we can try and find a polynomial of order $n=3$ that best approximates these points. This polynomial is of the form
+  \begin{equation*}
+    P(x) = a_{0} + a_{1}x + a_{2}x^{2} + a_{3}x^{3}.
+  \end{equation*}
+
+  The least square method would yield the following matrix and vectors:
+  \begin{align*}
+    A &= \begin{pmatrix} (-2)^{3} & (-2)^{2} & -2 & 1 \\ (-1)^{3} & (-1)^{2} & -1 & 1 \\ (0)^{3} & (0)^{2} & 0 & 1 \\ (1)^{3} & (1)^{2} & 1 & 1 \\ (2)^{3} & (2)^{2} & 2 & 1 \\ (3)^{3} & (3)^{2} & 3 & 1 \end{pmatrix}  = \begin{pmatrix} -8 & 4 & 2 & 1 \\ -1 & 1 & 1 & 1 \\ 0 & 0 & 0 & 1 \\ 1 & 1 & 1 & 1 \\ 8 & 4 & 2 & 1 \\ 27 & 9 & 3 & 1 \end{pmatrix},\\
+    \vec{v} &= \colvec{4}{a_{3}}{a_{2}}{a_{1}}{a_{0}},\ \vec{y} = \colvec{6}{-7.3}{-3.9}{-1.2}{2.4}{4.7}{7.7}.
+  \end{align*}
+
+  As before, we calculate the products $A^{\top}A$ and $A^{\top}\vec{y}$, which yield the system
+  \begin{equation*}
+    \begin{pmatrix} 859 & 243 & 115 & 27 \\ 243 & 115 & 27 & 19 \\ 115 & 27 & 19 & 3 \\ 27 & 19 & 3 & 6 \end{pmatrix}\colvec{4}{a_{3}}{a_{2}}{a_{1}}{a_{0}} = \colvec{4}{310.2}{57.4}{53.4}{2.4},
+  \end{equation*}
+  which when solved yields
+  \begin{equation*}
+    a_{3} = 0.004,\ a_{2}=-0.07,\ a_{1}=3.0312,\ a_{0}=-0.9111,
+  \end{equation*}
+  i.e. the polynomial
+  \begin{equation*}
+    P(x) = 0.004x^{3} -0.07x^{2} + 3.0312x - 0.9111.
+  \end{equation*}
+\end{example}
+
+\begin{warning}
+  Approximating these points with a polynomial of degree $n=3$ (or any order $n>1$ for that matter) gives a bad approximation, as these points were generated from a line.
+\end{warning}
+
+\subsection{Other Functions}
+The method can be extended to any linear-like function. One example is a generic exponential function,
+\begin{equation*}
+  f(x) = ae^{bx},
+\end{equation*}
+which at first look doesn't seem linear, but can be made linear by using a logarithm:
+\begin{align*}
+  \log\left[f(x)\right] &= \log\left( Be^{Ax} \right)\\
+  &= \log(B) + \log\left(e^{Ax}\right)\\
+  &= \log(B) + Ax. 
+\end{align*}
+
+Thus, if we consider the vector $\vec{y}=\colvec{2}{A}{\log(B)}$ and proceed with a linear approximation, we can use the least squares method for exponential functions as well.
+
+Conversly, logarithmic functions of the type $f(x)=A\log(Bx)$ can be made linear by use of exponentiation.
+%\section{Principal Component Analysis}
+
+\section{Principal Component Analysis (PCA)}

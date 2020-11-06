@@ -1,0 +1,25 @@
+\input{local_settings}
+\input{../../settings}
+\usetikzlibrary{snakes}
+
+\begin{document}
+\pagestyle{empty}
+\tikzstyle{level 1}=[sibling angle=120]
+\tikzstyle{level 2}=[sibling angle=60]
+\tikzstyle{level 3}=[sibling angle=30]
+\tikzstyle{every node}=[fill, draw=black, minimum width=8mm]
+\tikzstyle{edge from parent}=[draw=black]
+
+\begin{tikzpicture}[scale=1.5, grow cyclic, shape=circle, line width=1mm, level distance=13mm, cap=round]
+  \Large
+  \node (root) {} child [fill=\A] foreach \A in {col1,col2,col4}
+  { node {} child [fill=\A!50!\B] foreach \B in {col4,col5,col6}
+  { node {} child [fill=\A!50!\B!50!\C] foreach \C in {col3,white,col5}
+  { node {} }
+  }
+  };
+  \node[left=of root, xshift=7mm, fill=none, draw=none] {$\Rs{3}\overset{f}{\longrightarrow}\Rs{2}$};
+  \node[above right=of root, xshift=5mm, yshift=-11mm, rotate=60, fill=none, draw=none] {$A\times B \neq B\times A$};
+  \node[below right=of root, xshift=-1mm, yshift=9mm, rotate=-60, fill=none, draw=none] {$\emptyset\subset\left\{ 1,2,3 \right\}$};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,316 @@
+\sectionpic{Some Real-World Uses of Linear Algebra}{../figures/presentation_chapters/uses.pdf}
+
+\tikzset{point/.style={fill=col3, circle, radius=2pt}}
+\pgfmathsetmacro{\a}{0.35}
+\pgfmathsetmacro{\b}{0.5}
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	What is the best linear approximation to a set of measurements?
+
+\begin{figure}[H]
+  \centering
+	\begin{tikzpicture}[scale=0.5]
+	
+		\draw[vector, <->, thin] (-7,0) -- (7,0) node [right] {$x$};
+		\draw[vector, <->, thin] (0,-3) -- (0,3) node [above] {$y$};
+
+		\pgfmathsetseed{13}
+		\foreach \x [count=\xi] in {-7,-6.5,...,7}{
+			\coordinate (\xi) at (\x, \a*\x+\b+rand*2);
+			\draw[point] (\xi) circle;
+			\onslide<3>{
+				\pgfmathsetmacro{\nx}{-7+(\xi-1)*0.5}
+				\draw[densely dotted, col3!50!black] (\xi) -- (\nx, \a*\nx+\b);
+			}
+    }
+    
+		\onslide<2->{\draw[thick] (-7, -\a*7+\b) to (7, \a*7+\b);}
+  \end{tikzpicture}
+\end{figure}
+	\onslide<3>{
+		A good approximation is the line $f(x)=ax+b$ for which the sum of the distances from the line to each point $\left(x_{i},y_{i}\right)$ is minimal, i.e.
+		\begin{equation*}
+			S=\min\left( \sum\limits_{i=1}^{n}\left[f\left(x_{i}\right)-y_{i}\right] \right).
+		\end{equation*}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	We can collect all the $y$ values of our measurement points to a vector:
+	\begin{equation*}
+		\vec{y} = \colvec{4}{y_{1}}{y_{2}}{\vdots}{y_{n}},
+	\end{equation*}
+	and similarily collect all the $y=f(x)$ values of the line:
+	\begin{equation*}
+		\vec{f} = \colvec{4}{f\left(x_{1}\right)}{f\left(x_{2}\right)}{\vdots}{f\left(x_{n}\right)}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	The sum $s=\sum\limits_{i=1}^{n}\left[f\left( x_{i}\right)-y_{i}\right]$ then becomes:
+	\begin{align*}
+		s &= \sum\limits_{i=1}^{n}\left[f\left( x_{i}\right)-y_{i}\right]\\
+		&= \sum\limits_{i=1}^{n}\left[\vec{f}_{i} - \vec{y}_{i}\right].
+	\end{align*}
+
+	However, $s$ is a bit problematic, as some elements $\vec{f}_{i}-\vec{y}_{i}$ can be negative. Instead, we can minimize the following expression:
+	\begin{equation*}
+		s^{*} = \sum\limits_{i=1}^{n}\left[\vec{f}_{i} - \vec{y}_{i}\right]^{2}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	...and the expression
+	\begin{equation*}
+		s^{*} = \sum\limits_{i=1}^{n}\left[\vec{f}_{i} - \vec{y}_{i}\right]^{2}
+	\end{equation*}
+	is exactly the square norm of the vector
+	\begin{equation*}
+		\vec{\Delta} = \colvec{4}{f_{1}-y_{1}}{f_{2}-y_{2}}{\vdots}{f_{n}-y_{n}} = \vec{f} - \vec{y}.
+	\end{equation*}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	Drawing the a 2-dimentional scheme of the vectors $\vec{v}, \vec{f}$ and their difference $\vec{\Delta}=\vec{f}-\vec{v}$:
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\Large
+			\coordinate (o) at (0,0);
+			\coordinate (a) at (1,4);
+			\coordinate (b) at (5,1);
+			\draw[vector, col1] (o) to node [midway, above left] {$\vec{f}$} (a);
+			\draw[vector, col2] (o) to node [midway, below] {$\vec{y}$} (b);    
+			\draw[vector, col3] (b) to node [midway, above right] {$\vec{\Delta}=\vec{f}-\vec{y}$} (a);
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	The norm of the vector $\vec{\Delta}=\vec{f}-\vec{y}$ is minimal when $\vec{f} \perp \vec{\Delta}$, i.e. when
+	\begin{equation*}
+		\vec{f} \cdot \vec{\Delta} = \vec{f} \cdot \left( \vec{f}-\vec{y} \right) = 0.
+	\end{equation*}
+	Let's find what condition on $\vec{f}$ yields this.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	First, we note that the vector $\vec{f}$ can be written as a matrix-vector product:
+	\begin{equation*}
+		\vec{f} = \colvec{4}{f\left( x_{1} \right)}{f\left( x_{2} \right)}{\vdots}{f\left( x_{n} \right)} = \colvec{4}{ax_{1}+b}{ax_{2}+b}{\vdots}{ax_{n}+b} = \tikznode[nodehl, fill=col1!40]{A}{\begin{pmatrix} x_{1} & 1 \\ x_{2} & 1 \\ \vdots \\ x_{n} & 1 \end{pmatrix}} \tikznode[nodehl, fill=col3!50]{v}{\colvec{2}{a}{b}}.
+	\end{equation*}
+	\begin{tikzpicture}[overlay, remember picture]
+		\node[nodehl, fill=col1!40, below=of A, yshift=5mm] (Atxt) {$A$};
+		\node[nodehl, fill=col3!50, below=of v, yshift=-2.5mm] (vtxt) {$v$};
+		\draw[vector, col1!40] (Atxt.north) -- (A.south);
+		\draw[vector, col3!50] (vtxt.north) -- (v.south);
+	\end{tikzpicture}
+	
+	\vspace{5mm}
+	Thus, the condition $\vec{f} \cdot \left( \vec{f}-\vec{y} \right) = 0$ becomes
+	\begin{equation*}
+		A\vec{v} \cdot \left( A\vec{v}-\vec{y} \right) = 0.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	Some algebra:
+	\begin{equation*}
+		\only<1>{A\vec{v} \cdot \left( A\vec{v}-\vec{y} \right) = 0.}
+		\only<2>{A\vec{v} \cdot A\vec{v} - A\vec{v} \cdot \vec{y} = 0.}
+		\only<3->{A\vec{v} \cdot A\vec{v} = A\vec{v} \cdot \vec{y}.}
+	\end{equation*}
+
+	\onslide<4->{
+		Since $A\vec{v}$ is a vector, it can be dotted with either itself or $\vec{y}$. However, we can consider $A\vec{v}$ as an $n\times1$ matrix, and to keep the product defined we transpose it, i.e.
+		\begin{equation*}
+			\left( A\vec{v} \right)^{\top} \cdot A\vec{v} = \left( A\vec{v} \right)^{\top} \cdot \vec{y}.
+		\end{equation*}
+
+		This doesn't change the truthness of the equation.
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	Expanding the transposed product $\left( A\vec{v} \right)^{\top}$ yields
+	\begin{equation*}
+		\vec{v}^{\top}A^{\top} A\vec{v} = \vec{v}^{\top}A^{\top} \vec{y},
+	\end{equation*}
+	where $\vec{v}^{\top}$ is a row vector.
+
+	We can remove $\vec{v}^{\top}$ from both sides, leaving us with
+	\begin{equation*}
+		A^{\top} A\vec{v} = A^{\top} \vec{y}.
+	\end{equation*}
+
+	This linear system is surprisingly easy to solve!
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	\begin{presentation_example}
+		Let's look at 6 points:
+		\begin{align*}
+			p_{1} &= \left( -2, -7.3 \right)\\
+			p_{2} &= \left( -1, -3.9 \right)\\
+			p_{3} &= \left( 0, -1.2 \right)\\
+			p_{4} &= \left( 1, 2.4 \right)\\
+			p_{5} &= \left( 2, 4.7 \right)\\
+			p_{6} &= \left( 3, 7.7 \right)\\
+		\end{align*}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	\begin{presentation_example}
+		The linear system we need to solve is thus
+		\begin{equation*}
+			\fontsize{4}{4} \selectfont
+			\begin{pmatrix} -2 & -1 & 0 & 1 & 2 & 3 \\ 1 & 1 & 1 & 1 & 1 & 1 \end{pmatrix}\begin{pmatrix} -2 & 1 \\ -1 & 1 \\0 & 1 \\1 & 1 \\2 & 1 \\3 & 1 \end{pmatrix} \colvec{2}{a}{b} = \begin{pmatrix} -2 & -1 & 0 & 1 & 2 & 3 \\ 1 & 1 & 1 & 1 & 1 & 1 \end{pmatrix} \colvec{6}{-7.3}{-3.9}{-1.2}{2.4}{4.7}{7.7}.
+		\end{equation*}
+
+		Multiplying both matrix-matrix products yields
+		\begin{equation*}
+			\begin{pmatrix} 19 & 3 \\ 3 & 6 \end{pmatrix} \colvec{2}{a}{b} = \begin{pmatrix} 53.4 & 2.4 \end{pmatrix},
+		\end{equation*}
+
+		which when solved for $a$ and $b$ yields
+		\begin{equation*}
+			a = 2.98\quad b=-1.09.
+		\end{equation*}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	How can we quantify the "goodness" of fit between the proposed approximation and out data points?
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	\only<1>{We can first look at the average difference between $y_{i}$ and the linear approximation (the \emph{variance} in the $y$-values in respect to the line):}
+	\only<2>{Then we look at the average $y$ value of our data points:}
+	\only<3>{We can calculate the total distance of out data points to $\bar{y}$:}
+	\only<4>{The average of $\text{SE}_{\bar{y}}$ is the variance in the $y$-values:}
+		\begin{equation*}
+			\only<1>{
+				\sigma_{\text{line}} = \frac{1}{n}\sum\limits_{i=1}^{n}\left[f\left(x_{i}\right)-y_{i}\right]^{2}.
+			}
+			\only<2>{
+				\bar{y} = \frac{1}{n}\sum\limits_{i=1}^{n}y_{i}.
+			}
+			\only<3>{
+				\text{SE}_{\bar{y}} = \left( y_{1}-\bar{y} \right)^{2} + \left( y_{2}-\bar{y} \right)^{2} + \cdots + \left( y_{n}-\bar{y} \right)^{2} = \sum\limits_{i=1}^{n}\left( y_{i}-\bar{y} \right)^{2}.
+			}
+			\only<4>{
+				\sigma_{y} = \frac{1}{n}\text{SE}_{\bar{y}} = \frac{1}{n}\sum\limits_{i=1}^{n}\left( y_{i}-\bar{y} \right)^{2}.
+			}e
+		\end{equation*}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[scale=0.5]
+			\draw[vector, <->, thin] (-7,0) -- (7,0) node [right] {$x$};
+			\draw[vector, <->, thin] (0,-3) -- (0,3) node [above] {$y$};
+
+			\pgfmathsetseed{13}
+			\pgfmathsetmacro{\avg}{0}
+			\foreach \x [count=\xi] in {-7,-6.5,...,7}{
+				\pgfmathsetmacro{\y}{\a*\x+\b+rand*2}
+				\coordinate (\xi) at (\x, \y);
+				\draw[point] (\xi) circle;
+				\pgfmathsetmacro{\tmp}{\avg+\y}
+				\global\let\avg\tmp
+				\only<1>{
+					\pgfmathsetmacro{\nx}{-7+(\xi-1)*0.5}
+					\draw[densely dotted, col3!50!black] (\xi) -- (\nx, \a*\nx+\b);
+				}
+			}
+			\pgfmathsetmacro{\avgn}{\avg/29}
+			\only<1>{
+				\draw[thick] (-7, -\a*7+\b) to (7, \a*7+\b);
+			}
+			\only<2-4>{
+				\draw[perp, black] (-7,\avgn) node [left] {$\bar{y}$} -- ++(14,0);
+			}
+			\only<3-4>{
+				\foreach \x [count=\xi] in {-7,-6.5,...,7}{
+					\draw[perp, col3!50!black, thin] (\xi) -- (\x, \avgn);
+				}
+			}
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	The ratio of the two variances
+	\begin{equation*}
+		\rho=\frac{\sigma_{\text{line}}}{\sigma_{\bar{y}}}
+	\end{equation*}
+	is a measurement of what percentage of the total variation is \textbf{NOT} described by the linear approximaion. It is in the range
+	\begin{equation*}
+		0 \leq \rho \leq 1.
+	\end{equation*}
+
+	Thus,
+	\begin{equation*}
+		r^{2} \equiv 1-\rho = 1-\frac{\sigma_{\text{line}}}{\sigma_{\bar{y}}}
+	\end{equation*}
+	describes how much of the total variation is described by the linear approximation.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	An $r^{2}$ close to $1$ means that $\rho$ is close to $0$, i.e. the variation of $y_{i}$ from the line, $\sigma_{\text{line}}$, is small compared to the total variance of the points.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	\begin{presentation_example}
+		The average $y$ value of the points in the previous example is
+		\begin{equation*}
+			\bar{y} = \frac{1}{6}\left( -7.3-3.9-1.2+2.4+4.7+7.7 \right) = \frac{2.4}{6} = 0.4.
+		\end{equation*}
+		Their total variance is thus
+		\begin{align*}
+			\sigma_{\bar{y}} &= \frac{1}{6}\left[ \left( -7.3-0.4 \right)^{2} + \left( -3.9-0.4 \right)^{2} + \left( -1.2-0.4 \right)^{2}\right.\\
+			&\left.+ \left( 2.4-0.4 \right)^{2} + \left( 4.7-0.4 \right)^{2} + \left( 7.7-0.4 \right)^{2} \right]\\
+			&= \frac{1}{6}\left[ 59.29 + 18.49 + 2.56 + 4 + 18.49 + 53.29 \right]\\
+			&= 26.02.
+		\end{align*}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	\begin{presentation_example}
+		The linear approximation was calculated as $f(x)=2.98x-1.09$, and so the variance to the linear approximation is
+		\begin{align*}
+		\sigma_{\text{line}} &= \frac{1}{6}\left[ (-7.05+7.3)^{2}+(-4.07+3.9)^{2}+(-1.09+1.2)^{2}\right.\\
+			&\left.+(1.89-2.4)^{2}+(4.87-4.7)^{2}+(7.85-7.7)^{2}\right]\\
+			&= \frac{1}{6}\left[0.06+0.03+0.01+0.26+0.03+0.02\right]\\
+			&= 0.0692.
+		\end{align*}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Squares Approximation}
+	\begin{presentation_example}
+		Thus,
+		\begin{equation*}
+			r^{2} = 1-\frac{\sigma_{\text{line}}}{\sigma_{\bar{y}}} = 1-\frac{0.0692}{26.02} = 1-0.0027 = 0.9973,
+		\end{equation*}
+		which means that the linear approximation given by the least squares method for this set of points is an exceptionally good approximation.
+	\end{presentation_example}
+\end{frame}

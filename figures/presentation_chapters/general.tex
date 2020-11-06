@@ -1,0 +1,40 @@
+\input{local_settings}
+\input{../../settings}
+
+\begin{document}
+\pgfplotsset{
+  vasymptote/.style={before end axis/.append code={\draw[dashed] ({rel axis cs:0,0} -| {axis cs:#1,0}) -- ({rel axis cs:0,1} -| {axis cs:#1,0}); }},
+}
+\pgfkeys{/pgfplots/Axis Style/.style={
+    width=13.5cm, height=5cm,
+    axis x line=center,
+    axis y line=middle,
+    samples=200,
+    xmin=-7.0, xmax=7.0,
+    ymin=-1.5, ymax=1.5,
+    domain=-2*pi:2*pi,
+    axis line style={<->, stealth-stealth},
+    vasymptote={-pi}, vasymptote={pi},
+}}
+\begin{tikzpicture}[scale=1, align=center]
+  \Large
+  \begin{axis}[
+      Axis Style,
+      xtick={
+        -6.28318, -4.7123889, -3.14159, -1.5708,
+        1.5708, 3.14159, 4.7123889, 6.28318
+      },
+      xticklabels={
+        $-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$,
+        $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$
+      }
+    ]
+    \path[name path=axis] (axis cs:0,0) -- (axis cs:1,0);
+		\addplot [name path=f, mark=none, ultra thick, col1] {sin(deg(2*x))} node [pos=0.8, above, xshift=7mm, yshift=1mm] {$f(x)=\sin(x)$};
+		\addplot [name path=g, mark=none, ultra thick, col2] {sin(deg(x))} node [pos=0.4, above, xshift=-2mm, yshift=-7mm] {$g(x)=\sin(2x)$};
+    \addplot [thick, color=blue, fill=col1, fill opacity=0.2] fill between [of=f and axis];
+    \addplot [thick, color=blue, fill=col2, fill opacity=0.2] fill between [of=g and axis];
+  \end{axis}
+  \node at (6,4) {$\langle \rcolor{col1}{f},\rcolor{col2}{g} \rangle=\int\limits_{-\pi}^{\pi}\rcolor{col1}{f^{*}(x)}\rcolor{col2}{g(x)}\dif x=0$};
+\end{tikzpicture}
+\end{document}

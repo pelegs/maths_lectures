@@ -1,0 +1,327 @@
+\sectionpic{Eigenvectors and Eigenvalues}{../figures/presentation_chapters/eigenvectors.pdf}
+
+\begin{frame}
+	\frametitle{Definition}
+	An \emph{eigenvector} of a transformation $\func{T}{\Rs{n}}{\Rs{m}}$ is a vector that doesn't change its direction under the transformation.
+	\onslide<2>{
+		\begin{presentation_example}
+			The transformation represented by the matrix
+			\begin{equation*}
+				A=\begin{pmatrix} 1.75 & 0 \\ 0 & 0.5 \end{pmatrix}
+			\end{equation*}
+			scales each vector by $1.75$ in the $x$-direction and by $0.5$ in the $y$-direction. After aplication of the transformation, any vector on the $x$-axis remains on the $x$-axis (and is scaled by $1.75$), and any vector on the $y$-axis remains on the $y$-axis (and is scaled by $0.5$).
+		\end{presentation_example}
+	}
+\end{frame}
+
+\pgfmathsetseed{1337}
+\begin{frame}
+	\frametitle{Definition}
+	\begin{presentation_example}
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[scale=0.35]
+				\draw[opacity=0] (-13,-7) rectangle (13,7);
+				\only<2>{\pgftransformcm{1.75}{0}{0}{0.5}{\pgfpoint{0cm}{0cm}}}
+				\drawaxes{-5}{-5}{5}{5}[1][black!20][][][0]
+				\foreach \th in {30,60,...,330}{
+					\draw[vector, black!30] (0,0) -- ($({2*cos(\th)},{3*sin(\th)})$);
+				}
+				\draw[vector, col1] (0,0) -- (0,3);
+				\draw[vector, col2] (0,0) -- (2,0);
+				\draw[vector, col1] (0,0) -- (0,-3);
+				\draw[vector, col2] (0,0) -- (-2,0);
+				\filldraw (0,0) circle (0.05);
+			\end{tikzpicture}
+		\end{figure}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Definition}
+	In matrix form, the general eigenvalue equation looks as follows:
+	\begin{equation*}
+		A\vec{v} = \lambda\vec{v},
+	\end{equation*}
+	where $\lambda\in\mathbb{R}$ is the scalar by which $\vec{v}$ is streched after the application of $A$.
+
+	We call $\lambda$ the \emph{eigenvalue} corresponding to the eigenvector $\vec{v}$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Definition}
+	\begin{presentation_example}
+		In the previous example, the vectors lying on the $x$-axis have the corresponding eigenvalue $\lambda_{1}=1.75$, while the vectors lying on the $y$-axis have the corresponding eigenvalue $\lambda_{2}=0.5$.
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Some Properties of Eigenvectors and Eigenvalues}
+	Due to linearity, any scale of an eigenvector of a transformation $T$ is also an eigenvector of the transformation, with the same eigenvalue.
+	\vspace{5mm}
+	\begin{presentation_proof}
+		Let $A$ be a matrix with an eigenvector $\vec{v}$. Then for any scale $\alpha\vec{v}$ ($\alpha\in\mathbb{R}$):
+		\begin{equation*}
+			A\left(\alpha\vec{v}\right) = \alpha A\vec{v} = \alpha \left(\lambda\vec{v}\right) = \lambda \left(\alpha \vec{v}\right).
+		\end{equation*}
+	\end{presentation_proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Some Properties of Eigenvectors and Eigenvalues}
+	All the linearly independent eigenvectors of a transformation $\func{T}{\Rs{n}}{\Rs{n}}$ form a subspace of $\Rs{n}$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Some Properties of Eigenvectors and Eigenvalues}
+	Linearly independent eigenvectors can have the same eigenvalues.
+	\begin{presentation_example}
+		The matrix
+		\begin{equation*}
+			A=
+			\begin{pmatrix}
+				1&0&1\\
+				-2&3&1\\
+				-2&0&4\\
+			\end{pmatrix}
+		\end{equation*}
+		has three linearly independent eigenvectors:
+		\begin{equation*}
+			\vec{v}_{1}=\colvec{3}{1}{1}{1},\ \vec{v}_{2}=\colvec{3}{0}{1}{0},\ \vec{v}_{3}=\colvec{3}{1}{0}{2},
+		\end{equation*}
+		with respective eigenvalues $\lambda_{1}=2,\ \lambda_{2}=\lambda_{3}=3$.
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Some Properties of Eigenvectors and Eigenvalues}
+	\begin{presentation_definition}
+		The number of linearly independent vectors with the same eigenvalue is called the \emph{geometric multiplicity} of the eigenvalue
+	\end{presentation_definition}
+	\begin{presentation_example}
+		In the previous matrix, the eigenvalue $\lambda=2$ has a geometric multiplicity of $1$, and the eigenvalue $\lambda=3$ has a geometric multiplicity of $2$.
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Finding the Eigenvectors of a Matrix}
+	We can rearrange the eigenvalue equation 
+	\begin{equation*}
+		A\vec{v} = \lambda\vec{v}
+	\end{equation*}
+	to the form
+	\begin{equation*}
+		A\vec{v} - \lambda\vec{v} = \vec{0},
+	\end{equation*}
+	and group $\vec{v}$ together, yielding
+	\begin{equation*}
+		\left(A - \lambda I\right)\vec{v} = \vec{0}.
+	\end{equation*}
+	We get that $\vec{v}$ is the null space of the matrix $A-\lambda I$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Finding the Eigenvectors of a Matrix}
+	Since we assume that $\vec{v}\neq\vec{0}$ (otherwise the eigenvalue equation is somewhat pointless), this means that $\left| A-\lambda I \right|=0$, since the null space of $A-\lambda I$ has more than just the zero vector.
+
+	The expression $P(\lambda)=\left| A-\lambda I \right|$ is actually a polynomial equation, due to way determinants are calculated. We therefore call $P(\lambda)$ the \emph{characteristic polynomial} of the matrix $A$.
+
+	Solving for $P(\lambda)=0$ yields all the eigenvalues of $A$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Finding the Eigenvectors of a Matrix}
+	\begin{presentation_example}
+		The characteristic polynomial of the matrix
+		\begin{equation*}
+			A=
+			\begin{pmatrix}
+				1 & 0\\
+				-1 & 3
+			\end{pmatrix}
+		\end{equation*}
+		is
+		\begin{equation*}
+			P(\lambda)=
+			\begin{vmatrix}
+				1-\lambda & 0\\
+				-1 & 3-\lambda
+			\end{vmatrix} = \left( 1-\lambda \right)\left( 3-\lambda \right) - \cancel{0\cdot(-1)}.
+		\end{equation*}
+		Thus, the solutions for $P(\lambda)=0$ are $\lambda_{1}=1,\ \lambda_{2}=3$.
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Finding the Eigenvectors of a Matrix}
+	\begin{presentation_example}
+		We therefore know that the matrix $A$ has some eigenvector with eigenvalue $\lambda=1$. Let's find it: we want to multiply $A$ by a generic vector, and equate the solution to the generic vector (meaning that it has an eigenvalue $\lambda=1$).
+		\begin{equation*}
+			\begin{pmatrix}
+				1 & 0\\
+				-1 & 3
+			\end{pmatrix}\colvec{2}{x}{y} = \colvec{2}{x}{-x+3y} = 1\cdot\colvec{2}{x}{y},
+		\end{equation*}
+		this will happen when $x=1, y=0.5$, i.e. the vector $\vec{v}_{1} = \colvec{2}{1}{0.5}$ is an eigenvector of $A$. Let's verify this by applying $A$ to $\vec{v}_{1}$.
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+		\frametitle{Finding the Eigenvectors of a Matrix}
+		\begin{presentation_example}
+		This yields
+		\begin{equation*}
+			\begin{pmatrix}
+				1 & 0\\
+				-1 & 3
+			\end{pmatrix}\colvec{2}{1}{0.5} = \colvec{2}{1+0}{-1+1.5} = \colvec{2}{1}{0.5},
+		\end{equation*}
+		i.e. $\vec{v}_{1}$ is indeed an eigenvector of $A$ with $\lambda=1$.
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Finding the Eigenvectors of a Matrix}
+	\begin{presentation_example}
+		Now for $\lambda=3$:
+		\begin{equation*}
+			\begin{pmatrix}
+				1 & 0\\
+				-1 & 3
+			\end{pmatrix}\colvec{2}{x}{y} = 3\cdot\colvec{2}{x}{y} = \colvec{2}{x}{-x+3y}.
+		\end{equation*}
+		The solution in this case is $x=0,\ y=1$, i.e. the vector $\vec{v}_{2} = \colvec{2}{0}{1}$. Verifying:
+		\begin{equation*}
+			\begin{pmatrix}
+				1 & 0\\
+				-1 & 3
+			\end{pmatrix}\colvec{2}{0}{1} = \colvec{2}{1\cdot0 + 0\cdot1}{-1\cdot0 + 3\cdot1} = \colvec{2}{0}{3} = 3\colvec{2}{0}{1}.
+		\end{equation*}
+		This means that $\vec{v}_{2}$ is indeed an eigenvector of $A$ with $\lambda_{2}=3$.
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagonalizing Matrices}
+	Some matrices can represent complicated looking transformations but actually perform a simple scaling if we change our perspective.
+	\begin{presentation_example}
+		The matrix $A =
+		\begin{pmatrix}
+			1.25 & 0.75 \\
+			0.75 & 1.25 \\
+		\end{pmatrix}$ performs the following transformation:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[scale=0.2]
+				\draw[opacity=0] (-9,-9) rectangle (9,9);
+				\only<2>{\pgftransformcm{1.25}{0.75}{0.75}{1.25}{\pgfpoint{0cm}{0cm}}}
+				\drawaxes{-4}{-4}{4}{4}[1][black!50][densely dotted][black][0]
+			\end{tikzpicture}
+		\end{figure}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagonalizing Matrices}
+	\begin{presentation_example}
+		We can rotate space such that its eigenvectors, $\color{col1}\vec{v}_{1}=\colvec{2}{1}{1} \left( \lambda_{1}=2 \right)$ and $\color{col2}\vec{v}_{2}=\colvec{2}{-1}{1} \left( \lambda_{2} \right)=0.5$, are aligned with the axes:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[scale=0.3]
+				\draw[opacity=0] (-6.5,-6.5) rectangle (6.5,6.5);
+				\only<2>{\pgftransformcm{0.71}{-0.71}{0.71}{0.71}{\pgfpoint{0cm}{0cm}}}
+				\drawaxes{-4}{-4}{4}{4}[1][black!50][densely dotted][black][0]
+				\draw[vector, col1] (0,0) -- (3,3);
+				\draw[vector, col2] (0,0) -- (-3,3);
+			\end{tikzpicture}
+		\end{figure}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagonalizing Matrices}
+	\begin{presentation_example}
+		In this perspective, applying $A$ is simply a scaling by $2$ in the $x$-direction and by $0.5$ in the $y$-direction:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[scale=0.3]
+				\draw[opacity=0] (-6.5,-6.5) rectangle (6.5,6.5);
+				\only<1>{\pgftransformcm{0.71}{-0.71}{0.71}{0.71}{\pgfpoint{0cm}{0cm}}}
+				\only<2>{\pgftransformcm{1}{-0.25}{1}{0.25}{\pgfpoint{0cm}{0cm}}}
+				\drawaxes{-4}{-4}{4}{4}[1][black!50][densely dotted][black][0]
+				\draw[vector, col1] (0,0) -- (3,3);
+				\draw[vector, col2] (0,0) -- (-3,3);
+			\end{tikzpicture}
+		\end{figure}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagonalizing Matrices}
+	\begin{presentation_example}
+		This unisotropic scaling is expressed as a diagonal matrix:
+		\begin{equation*}
+			D =
+			\begin{pmatrix}
+				2 & 0\\
+				0 & 0.5
+			\end{pmatrix}.
+		\end{equation*}
+
+		To bring the diagonal matrix $D$ "back" to be the original matrix $A$, we need to multiply it from both sides:
+		\vspace{1cm}
+		\begin{equation*}
+			A =
+			\begin{pmatrix}
+				1.25 & 0.75\\
+				0.75 & 1.25
+			\end{pmatrix} =
+			\tikznode[nodehl, fill=col1!30]{P}{
+			\begin{pmatrix}
+				1 & -1\\
+				1 & 1
+			\end{pmatrix}}
+			\tikznode[nodehl, fill=col2!30]{D}{
+			\begin{pmatrix}
+				2 & 0\\
+				0 & 0.5
+			\end{pmatrix}}
+			\tikznode[nodehl, fill=col3!30]{Pinv}{
+			\begin{pmatrix}
+				0.5 & 0.5\\
+				-0.5 & 0.5
+			\end{pmatrix}}.
+		\end{equation*}
+		\begin{tikzpicture}[overlay, remember picture]
+			\node[nodehl, fill=col1!30, below=of P, yshift=6mm] (Ptxt) {$P=$ Eigenvectors of $A$};
+			\node[nodehl, fill=col2!30, above=of D, yshift=-5mm] (Dtxt) {$D$, Eigenvalues of $A$};
+			\node[nodehl, fill=col3!30, below=of Pinv, yshift=6mm] (Pinvtxt) {$P^{-1}$};
+			\draw[vector, col1!30] (Ptxt) -- (P);
+			\draw[vector, col2!30] (Dtxt) -- (D);
+			\draw[vector, col3!30] (Pinvtxt) -- (Pinv);
+		\end{tikzpicture}
+		\vspace{5mm}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagonalizing Matrices}
+	A matrix $A$ that can be brought to a diagonal form is called a \emph{diagonalizable matrix}. It can be \emph{decomposed} as following:
+	\begin{equation*}
+		A =
+		\tikznode[nodehl, draw=col1, fill=col1!30, minimum size=5mm]{P}{P}
+		\tikznode[nodehl, draw=col2, fill=col2!30, minimum size=5mm]{D}{D}
+		\tikznode[nodehl, draw=col3, fill=col3!30, minimum size=5mm]{Pinv}{P^{-1}}
+	\end{equation*}
+	\begin{tikzpicture}[overlay, remember picture]
+		\node[nodehl, draw=col1, fill=col1!30, below=of P, xshift=-2cm, yshift=5mm] (Ptxt) {Eigenvectors of $A$};
+		\node[nodehl, draw=col2, fill=col2!30, below=of D, yshift=-5mm] (Dtxt) {Eigenvalues of $A$};
+		\node[nodehl, draw=col3, fill=col3!30, below=of Pinv, xshift=2cm, yshift=5mm] (Pinvtxt) {Inverse of $P$};
+		\draw[vector, col1] (Ptxt) to [out=90, in=-90, looseness=0.7] (P);
+		\draw[vector, col2] (Dtxt) -- (D);
+		\draw[vector, col3] (Pinvtxt) to [out=90, in=-90, looseness=0.7] (Pinv);
+	\end{tikzpicture}
+	
+	\vspace{2cm}
+	A matrix which can't be diagonalized is called a \emph{defective matrix}.
+\end{frame}

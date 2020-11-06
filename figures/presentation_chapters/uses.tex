@@ -1,0 +1,23 @@
+\input{local_settings}
+\input{../../settings}
+
+\begin{document}
+\begin{tikzpicture}
+	\Large
+	\drawaxes{0}{0}{10}{6}[1][black!10][densely dotted][][1]
+	\pgftransformcm{0.87}{0.5}{-0.5}{0.87}{\pgfpoint{3cm}{-1cm}}
+	\pgfmathsetmacro{\xrad}{15}
+	\pgfmathsetmacro{\yrad}{7}
+	\begin{axis}[
+			hide axis,
+			axis equal,
+			declare function={a(\x) = sqrt(\yrad^2 * (1 - \x^2/(\xrad^2));},
+			declare function={b(\x) = -sqrt(\yrad^2 * (1 - \x^2/(\xrad^2));},
+			declare function={f(\x) = \yrad * rad(asin(x/4)) * \xrad / pi;}
+		]
+		\addplot [col4!75, only marks, samples=200, domain=-4:4] ({f(x)},{rand * ( a(f(x)) - b(f(x)) ) / 2});
+			\end{axis}
+			\draw[vector, ultra thick, col1] (0,3) -- ++(7.5,0) node [right] {$\text{PCA}_{1}$};
+			\draw[vector, ultra thick, col2] (3,1) -- ++(0,4) node [above] {$\text{PCA}_{2}$};
+		\end{tikzpicture}
+\end{document}

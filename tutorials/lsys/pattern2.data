@@ -1,0 +1,23 @@
+{
+    "rules": {
+        "X": "XFX-YF-YF+FX+FX-YF-YFFX+YF+FXFXYF-FX+YF+FXFX+YF-FXYF-YF-FX+FX+YFYF-",
+        "Y": "+FXFX-YF-YF+FX+FXYF+FX-YFYF-FX-YF+FXYFYF-FX-YFFX+FX+YF-YF-FX+FX+YFY",
+        "F": "F",
+        "-": "-",
+        "+": "+",
+        "(": "(",
+        ")": ")"
+    },
+    "convert": {
+        "X": "F{0}",
+        "Y": "F{0}",
+        "F": "F{10}",
+        "-": "T{90}",
+        "+": "T{-90}",
+        "(": "(",
+        ")": ")"
+    },
+    "axiom": "-YF",
+    "pos0": [0, 800],
+    "N": 1
+}

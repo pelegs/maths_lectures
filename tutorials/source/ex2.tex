@@ -1,0 +1,298 @@
+\section{Vectors}
+
+\subsection{General Vectors Operations}
+The following column vectors are defined:
+\begin{align*}
+  \vec{u}&=\colvec{2}{5}{-2},\quad \vec{v}=\colvec{2}{2}{5},\quad \vec{w}=\colvec{2}{0}{1},\\
+  \vec{a}&=\colvec{3}{1}{3}{7},\quad \vec{b}=\colvec{3}{-2}{0}{5},\quad \vec{c}=\colvec{3}{1}{1}{0}.
+\end{align*} 
+\begin{enumerate}
+  \item Calculate $\vec{u}+\vec{v},\quad \vec{u}-\vec{w},\quad \vec{u}\cdot\vec{v},\quad \vec{u}\cdot\vec{w}$.\\
+  What does the result for $\vec{u}\cdot\vec{v}$ mean for these two vectors?
+  \if\withsol1{
+  
+  \begin{answer}
+  \textbf{(\underline{Remember:} vectors are added/subtracted element-wise!)}\\
+  \begin{align*} 
+  \vec{u}+\vec{v}&=\colvec{2}{5+2}{-2+5}=\colvec{2}{7}{3} \\
+  \vec{u}-\vec{w}&=\colvec{2}{5+0}{-2-1}=\colvec{2}{5}{-3}\\
+  \vec{u}\cdot\vec{v}&=5\times2 + \left( -2 \right)\times5 = 10-10 = 0\\
+  \vec{u}\cdot\vec{w}&=\cancel{5\times0} + \left( -2 \right)\times1 = 0-2 = -2\\
+  \end{align*}
+  Since $\vec{u}\cdot\vec{v}=0$, these two vectors are orthogonal.\\
+	Generally, on a 2D plane ($\mathbb{R}^{2}$) any two vectors of the form $\colvec{2}{x}{y}$ and $\colvec{2}{-y}{x}$, where both $x\neq0$ and $y\neq0$, are orthogonal.
+  \end{answer}
+}\fi
+  
+  \item Draw $\vec{u},\ \vec{v},\ \vec{u}+\vec{v},\ -\vec{v}$ on a cartesian coordinate system.
+  \if\withsol1{
+  
+  \begin{answer}
+  \centering
+  \begin{tikzpicture}[scale=0.5]
+  \draw[step=1cm, gray!30!white, very thin] (-8, -8) grid (8,8);
+  
+  \draw[<->, thick] (-8,0) to (8,0);
+  \node(x) at (8,0) {};
+  \node[right = 0.1cm of x]() {$x$};
+  \draw[<->, thick] (0,-8) to (0,8);
+  \node(y) at (0,8) {};
+  \node[above = 0.1cm of y]() {$y$};
+
+  \foreach \x in {-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}{
+	\coordinate(tic) at (\x,0);
+	\node[below = 0.1cm of tic, black!75] {\tiny$\x$};
+	\draw[thick] (\x,-0.1) to (\x,0.1);
+}
+  \foreach \y in {-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}{
+	\coordinate(tic) at (0,\y);
+	\node[right = 0.1cm of tic, black!75] {\tiny$\y$};
+	\draw[thick] (-0.1,\y) to (0.1,\y);
+}
+
+  \drawvec{5}{-2}{blue}{right}{$\vec{u}$}
+  \drawvec{2}{5}{green!75!black}{right}{$\vec{v}$}
+  \drawvec{7}{3}{red}{right}{$\vec{u}+\vec{v}$}
+  \drawvec{-2}{-5}{purple}{left}{$-\vec{v}$}
+  \end{tikzpicture}
+  \end{answer}
+}\fi
+ 
+
+  \item Calculate $5\vec{a}-3\vec{b}$.
+  \if\withsol1{
+  \begin{answer}
+  Multiplying a vector by a scalar is simply multiplying each of its elements by that scalar, hence:
+  \begin{align*}
+	5\vec{a} &= 5\colvec{3}{1}{3}{7} \\ 
+	&= \colvec{3}{5\cdot1}{5\cdot3}{5\cdot7} \\
+	&= \colvec{3}{5}{15}{35}.
+  \end{align*}
+  Similarly,
+  \begin{align*}
+	3\vec{b} &= \left( 3\cdot\left( -2 \right), 3\cdot0, 3\cdot5 \right)\\
+	&= \colvec{3}{-6}{0}{15}.
+  \end{align*}
+  and thus -
+  \begin{align*}
+	5\vec{a} - 3\vec{b} &= \colvec{3}{5}{15}{35} - \colvec{3}{-6}{0}{10}\\
+	&= \colvec{3}{-11}{15}{20}.
+  \end{align*}
+  \end{answer}
+  }\fi
+
+  \item Calculate $\vec{a}+\vec{w},\quad \vec{a}+\vec{b},\quad \vec{b}\cdot\vec{w},\quad \vec{a}\cdot\vec{c}$.
+  \if\withsol1{
+  
+  \begin{answer}
+  $\vec{a}+\vec{w}$ is undefined since these vectors are of a different dimension ($3$ and $2$, respectively).\\
+  The same is true for $\vec{b}\cdot\vec{w}$.
+  \begin{align*} 
+	\vec{a}+\vec{b}&=\colvec{3}{1-2}{3+0}{7+5}\\
+	&=\colvec{3}{-1}{3}{12}\\
+	\vec{a}\cdot\vec{c}&=1\cdot1+3\cdot1+\cancel{7\cdot0}\\
+	&=1+3\\
+	&=4.
+  \end{align*}
+  \end{answer}
+}\fi
+
+  \item What are the lengths of $\vec{u},\ \vec{v},\ \vec{a}$ and $\vec{c}$?
+  \if\withsol1{
+  \begin{answer}
+	The (Euclidean) length of a vector of $N$ dimension is the square root of the sum of the squares of its elements, or as a general formula,
+	\begin{align*}
+	\left\|\vec{x}\right\|=\sqrt{\sum_{i=1}^{N} x_{i}^{2}}.
+	\end{align*}
+
+	In the case of 2D and 3D vectors, this general formula simplifies to
+	\begin{align*}
+	\left\| \left( x_{1}, x_{2} \right) \right\|=\sqrt{x_{1}^{2}+x_{2}^{2}},
+	\end{align*}
+	and
+	\begin{align*}
+	\left\| \left( x_{1}, x_{2}, x_{3} \right) \right\|=\sqrt{x_{1}^{2}+x_{2}^{2}+x_{3}^{2}}.
+	\end{align*}
+	respectively. Therefore:
+	\begin{pycode}
+from scripts import *
+
+print(r'\begin{align*}')
+print(r'\left\|\vec{u}\right\|&=', vlen([5, -2]), r'\\')
+print(r'\left\|\vec{v}\right\|&=', vlen([2, 5]), r'\\')
+print(r'\left\|\vec{a}\right\|&=', vlen([1, 3, 7]), r'\\')
+print(r'\left\|\vec{c}\right\|&=', vlen([1, 1, 0]), r'.')
+print(r'\end{align*}')
+	\end{pycode}
+  \end{answer}
+}\fi
+
+  \item What is the angle between $\vec{v}$ and the $x$-axis?
+  \if\withsol1{
+	\begin{answer}
+	  The angle between any vector in $\Rs{2}$ and the $x$-axis is the inverse $\tan$ (i.e. $\arctan$) of its $y$-component divided by its $x$-component. In this case,
+	  \begin{align*}
+	  \theta_{\vec{v}} &= \arctan\left( \frac{v_{y}}{v_{x}} \right)\\
+	  &= \arctan\left( \frac{5}{2} \right)\\
+	  &\approx 1.19\ [\radian]\\
+	  &\approx \ang{68.18}.
+	  \end{align*}
+	\end{answer}
+	}\fi
+  
+  \item What would be the cartesian coordinates of the vector $\vec{v}$ rotated by $\ang{42}$ counter clockwise?
+  \if\withsol1{
+	\begin{answer}
+	  Rotating $\vec{v}$ by $\ang{42}$ will result in a vector with the same length (magnitude) as $\vec{u}$ and an angle of $\ang{68.18}+\ang{42}=\ang{110.18}$ to the $x$-axis.
+	  Recalling that
+	  \begin{align*}
+	  u_{x} &= \norm{\vec{u}}\cos(\theta)\\
+	  u_{y} &= \norm{\vec{u}}\sin(\theta),
+	  \end{align*}
+	  we can subtitute $\norm{\vec{u}}\approx5.39$ and $\theta=\ang{110.18}$ and get the components:
+	  \begin{align*}
+	  u_{x} &= 5.39\cos(\ang{110.18}) = 5.39\cdot \approx -0.35 \approx -1.89\\
+	  u_{y} &= 5.39\sin(\ang{110.18}) = 5.39\cdot \approx 0.94	\approx 5.07,
+	  \end{align*}
+	  which as a column vector is $\vec{u}'=\colvec{2}{-1.89}{5.07}$.
+	\end{answer}
+	}\fi
+  
+  \item What is the angle between $\vec{a}$ and $\vec{b}$?
+  \if\withsol1{
+  
+  \begin{answer}
+  For any two vectors $\vec{x},\ \vec{y}$, the following always applies:
+  \begin{equation*}
+	\vec{x}\cdot\vec{y}=\left\|\vec{x}\right\|\left\|\vec{y}\right\|\cos\left( \theta \right),
+  \end{equation*}
+  where $\theta$ is the angle between the two vectors.
+
+  Solving for $\theta$ we get 
+  \begin{equation*}
+	\cos\left( \theta \right)=\frac{\vec{x}\cdot\vec{y}}{\left\|\vec{x}\right\|\left\|\vec{y}\right\|}.
+  \end{equation*}
+
+  In our case
+  \begin{equation*}
+	\vec{a}\cdot\vec{b}=1\times\left( -2 \right) + \cancel{3\times0} + 7\times5 = 33,
+  \end{equation*}
+  and
+  \begin{align*}
+	\left\|\vec{x}\right\|\left\|\vec{y}\right\|&=\sqrt{1^{2}+3^{2}+7^{2}}\cdot\sqrt{2^{2}+\cancel{0^{2}}+5^{2}}\\
+			  &=\sqrt{1+9+49}\cdot\sqrt{4+25}\\
+			  &=\sqrt{59}\cdot\sqrt{29}\\
+			  &=\sqrt{59\times29}\\
+			  &=\sqrt{1711}\\
+			  &\approx41.36.
+  \end{align*}
+
+  Therefore,
+  \begin{equation*}
+	\cos\left( \theta \right)\approx\frac{33}{41.36}\approx0.798,
+  \end{equation*}
+  and thus
+  \begin{equation*}
+	\theta\approx\arccos\left( 0.789 \right)\approx37^{\circ}.
+  \end{equation*}
+  \end{answer}
+}\fi
+
+  \item Calculate $\vec{c}=\vec{a}\times\vec{b}$. What is the general formula for all the vectors that are orthogonal to $\vec{c}$?
+  \if\withsol1{
+  
+  \begin{answer}
+  \begin{align*}
+	\vec{c}=
+	\vec{a}\times\vec{b}&=\colvec{3}{1}{3}{7}\times\colvec{3}{-2}{0}{5}\\
+	&=\colvec{3}{3\cdot5-\cancel{7\cdot0}}{7\cdot\left( -2 \right)-1\cdot5}{\cancel{1\cdot0}-3\cdot\left( -2 \right)}\\
+	&=\colvec{3}{15}{-14-5}{-\left( -6 \right)}\\
+	&=\colvec{3}{15}{-19}{6}.
+  \end{align*}
+
+  Every 3D-vector can be associated with a plane, to which it is orthogonal. All vectors on the plane will therefore also be orthogonal to that vector.
+
+  To define a plane in 3D-space, one needs two linearly independent vectors (meaning two non-zero vectors that are not on the same line).
+
+  $\vec{a}$ and $\vec{b}$ are indeed linearly independent, and thus all possible linear combinations of them would correspond to the general formula we are looking for, meaning that
+  \begin{equation*}
+	\vec{d}=\alpha\cdot\colvec{3}{1}{3}{7} + \beta\cdot\colvec{3}{-2}{0}{5},
+  \end{equation*}
+  for any non-zero $\alpha,\beta\in\mathbb{R}$, is the general formula of the vectors we are looking for.
+
+  Verifying the result can be done by calculating the dot product between $\vec{c}=\colvec{3}{15}{-19}{6}$ and $\alpha\cdot\colvec{3}{1}{3}{7} + \beta\cdot\colvec{3}{-2}{0}{5}$:
+  \begin{align*}
+	\alpha\cdot\colvec{3}{1}{3}{7} + \beta\cdot\colvec{3}{-2}{0}{5} &= \colvec{3}{\alpha-2\beta}{3\alpha}{7\alpha+5\beta} \\
+	&\Downarrow \\
+	\colvec{3}{\alpha-2\beta}{3\alpha}{7\alpha+5\beta} \cdot \colvec{3}{15}{-19}{6} &= 15\alpha-30\beta + \left(-57\right)\alpha + 42\alpha + 30\beta\\
+	&= 15\alpha-57\alpha+42\alpha + 30\beta-30\beta\\
+	&= 0,
+  \end{align*}
+  confirming that indeed $\alpha\colvec{3}{1}{3}{7}+\beta\colvec{3}{2}{0}{5}$ and $\colvec{3}{15}{-19}{6}$ are orthogonal.
+  \end{answer}
+}\fi
+\end{enumerate}
+
+\subsection{Linear Combinations of Vectors}
+  Write the vector $\vec{v}=\colvec{4}{1}{3}{3}{7}$ as a linear combination of the following vectors:
+  \begin{equation*}
+  \vec{u}_{1} = \colvec{4}{-2}{5}{0}{5},\ \vec{u}_{2}=\colvec{4}{1}{0}{1}{-1},\ \vec{u}_{3}=\colvec{4}{-4}{4}{-8}{-2}.
+  \end{equation*}
+  \if\withsol1{
+  \begin{answer}
+	Let's start with adding $\vec{u}_{1}$ and $\vec{u}_{2}$ together:
+	\begin{align*}
+	\vec{u}_{1} + \vec{u}_{2} &= \colvec{4}{-2}{5}{0}{5} + \colvec{4}{-1}{0}{-1}{1}\\
+	&= \colvec{4}{-2+1}{5+0}{0-1}{5+1}\\
+	&= \colvec{4}{-1}{5}{-1}{6}.
+	\end{align*}
+	We can then see what is the result of subtracting $\vec{w}$ from $\vec{u}_{1}+\vec{u}_{2}$:
+	\begin{align*}
+	\vec{w} - \left( \vec{u}_{1}+\vec{u}_{2} \right) &= \colvec{4}{1}{3}{3}{7} - \colvec{4}{-1}{5}{1}{6}\\
+	&= \colvec{4}{1-(-1)}{3-5}{3-1}{7-6}\\
+	&= \colvec{4}{2}{-2}{4}{1}.
+	\end{align*}
+	This is exactly equal to $-\frac{1}{2}\vec{u}_{3}$. Thus, adding $-\frac{1}{2}\vec{u}_{3}$ to $\vec{u}_{1}+\vec{u}_{2}$ should give us $\vec{w}$. Let's check this:
+	\begin{align*}
+	\vec{u}_{1} + \vec{u}_{2} -\frac{1}{2}\vec{u}_{3} &= \colvec{4}{-1}{5}{-1}{6} - \frac{1}{2}\colvec{4}{-4}{4}{-8}{-2}\\
+	&= \colvec{4}{-1+2}{5-2}{-1+4}{6+1}\\
+	&= \colvec{4}{1}{3}{3}{7}\\
+	&= \vec{w},
+	\end{align*}
+	as expected. Thus, with the coefficients $\alpha_{1}=\alpha_{2}=1,\ \alpha_{3}=-\frac{1}{2}$, we get
+	\begin{equation*}
+	\vec{w} = \vec{u}_{1} + \vec{u}_{2} -\frac{1}{2}\vec{u}_{3}.
+	\end{equation*}
+  \end{answer}
+  }\fi
+
+\subsection{Linear Independence of Vectors}
+Which of the following sets of vectors are linearly independent?
+\begin{enumerate}
+  \item $\vec{a} = \colvec{4}{1}{0}{3}{-2},\enskip\vec{b} = \colvec{4}{2}{6}{0}{1}$
+  \if\withsol1{
+  \begin{answer}
+  There is no $\alpha\in\mathbb{R}$ such that $\vec{b} = \alpha\vec{a}$, and thus these vectors are linearly independent.
+  \end{answer}
+  }\fi
+  \item $\vec{a} = \colvec{3}{1}{-2}{5},\enskip\vec{b} = \colvec{3}{-2}{4}{-10}$
+  \if\withsol1{
+  \begin{answer}
+  Since $\vec{b} = -2\vec{a}$, the two vectors are \textbf{not} linearly independent.
+  \end{answer}
+  }\fi
+  \item $\vec{a} = \colvec{3}{1}{3}{0},\enskip\vec{b} = \colvec{3}{5}{1}{-3},\enskip\vec{c} = \colvec{3}{-9}{1}{6}$
+  \if\withsol1{
+  \begin{answer}
+  Since $\vec{c} = \vec{a}-2\vec{b}$, the three vectors are \textbf{not} linearly independent.
+  \end{answer}
+  }\fi
+  \item $\vec{a} = \colvec{3}{1}{5}{-2},\enskip\vec{b} = \colvec{3}{0}{1}{-1},\enskip\vec{c} = \colvec{3}{3}{2}{3},\enskip\vec{d} = \colvec{3}{-1}{-7}{7}$
+  \if\withsol1{
+  \begin{answer}
+  For vectors of dimension $N$, any set of vectors with $M>N$ elements are \textbf{not} linearly independent.
+  In this case $N=3$ and $M=4$, and thus these vectors are not linearly independent.
+  \end{answer}
+  }\fi
+\end{enumerate}
+

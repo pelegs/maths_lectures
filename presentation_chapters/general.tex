@@ -1,0 +1,151 @@
+\sectionpic{General Vector Spaces}{../figures/presentation_chapters/general.pdf}
+
+\begin{frame}
+	\frametitle{Properties of $\Rs{n}$}
+	Let us review some properties of the space $\Rs{n}$, some of them we already used implicetly without giving them too much thought.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Properties of $\Rs{n}$}
+	\only<1-6>{Relating to vector-vector addition}\only<7->{Relating to scalar-vector product}:
+	\begin{itemize}
+			\only<1>{
+				\item The addition of any two vectors $\vec{u},\vec{v}\in\Rs{n}$ yields a vector $\vec{w}=\vec{u}+\vec{v}$ that is also in $\Rs{n}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						For $\vec{u}=\colvec{3}{1}{2}{-1}$ and $\vec{v}=\colvec{3}{-1}{3}{0}$ (both in $\Rs{3}$),
+						\begin{equation*}
+							\vec{w} = \vec{u}+\vec{v} = \colvec{3}{0}{5}{-1}\in\Rs{3}.
+						\end{equation*}
+					\end{presentation_example}
+			}
+			\only<2>{
+			\item Vector addition is commutative: $\vec{v}+\vec{u}=\vec{u}+\vec{v}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						For the same vectors as before:
+						\begin{align*}
+							\vec{u}+\vec{v} &= \colvec{3}{1}{2}{-1} + \colvec{3}{-1}{3}{0} = \colvec{3}{1+(-1)}{2+3}{-1+0} = \colvec{3}{0}{5}{-1}.\\
+							\vec{v}+\vec{u} &= \colvec{3}{-1}{3}{0} + \colvec{3}{1}{2}{-1} = \colvec{3}{-1+1}{3+2}{0+(-1)} = \colvec{3}{0}{5}{-1}.
+						\end{align*}
+					\end{presentation_example}
+			}
+			\only<3-4>{
+			\item Vector addition is assosiative: $\vec{v}+\left(\vec{u}+\vec{w}\right)=\left(\vec{u}+\vec{v}\right)+\vec{w}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						For $\vec{a}=\colvec{2}{1}{0},\ \vec{b}=\colvec{2}{0}{-1},\ \vec{c}=\colvec{2}{3}{1}$:
+						\begin{align*}
+							\only<3>{
+								\vec{a}+\left(\vec{b}+\vec{c}\right) &= \colvec{2}{1}{0} + \left[ \colvec{2}{0}{-1} + \colvec{2}{3}{1} \right]\\
+								&= \colvec{2}{1}{0} + \colvec{2}{3}{0} = \colvec{2}{4}{0}.
+							}
+							\only<4>{
+								\left(\vec{a}+\vec{b}\right)+\vec{c} &= \left[ \colvec{2}{1}{0} + \colvec{2}{0}{-1} \right] + \colvec{2}{3}{1}\\
+								&= \colvec{2}{1}{-1} + \colvec{2}{3}{1} = \colvec{2}{4}{0}.
+							}
+						\end{align*}
+					\end{presentation_example}
+			}
+			\only<5>{
+			\item The zero vector $\vec{0}$ is unique and has the property that $\vec{v}+\vec{0} = \vec{v}$ for any vector $\vec{v}\in\Rs{n}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{equation*}
+							\colvec{6}{4}{-1}{0}{3}{-6}{2} + \colvec{6}{0}{0}{0}{0}{0}{0} = \colvec{6}{4}{-1}{0}{3}{-6}{2}.
+						\end{equation*}
+					\end{presentation_example}
+			}
+			\only<6>{
+			\item Any vector $\vec{v}\in\Rs{n}$ has an opposite vector $\left( -\vec{v} \right)\in\Rs{n}$ such that $\vec{v}+\left( -\vec{v} \right)=\vec{0}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{equation*}
+							\colvec{6}{4}{-1}{0}{3}{-6}{2} + \colvec{6}{-4}{1}{0}{-3}{6}{-2} = \colvec{6}{0}{0}{0}{0}{0}{0}.
+						\end{equation*}
+					\end{presentation_example}
+			}
+			\only<7>{
+			\item Any scale by $\alpha\in\mathbb{R}$ of a vector $\vec{v}\in\Rs{n}$ is also in $\Rs{n}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{equation*}
+							-3\cdot\colvec{7}{1}{-1}{2}{0}{-1}{3}{-2} = \colvec{7}{-3}{3}{-6}{0}{3}{-9}{6}.
+						\end{equation*}
+					\end{presentation_example}
+			}
+			\only<8>{
+			\item Any scale by $\alpha\in\mathbb{R}$ of a vector $\vec{v}\in\Rs{n}$ is also in $\Rs{n}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{equation*}
+							-3\cdot\colvec{7}{1}{-1}{2}{0}{-1}{3}{-2} = \colvec{7}{-3}{3}{-6}{0}{3}{-9}{6}.
+						\end{equation*}
+					\end{presentation_example}
+			}
+			\only<9>{
+			\item Scalar-vector multiplication is associative: $\alpha\left( \beta\vec{v} \right) = \left( \alpha\beta \right)\vec{v}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{align*}
+							-3\left[ 2\colvec{3}{1}{-4}{5} \right] &= -3\colvec{3}{2}{-8}{10} = \colvec{3}{-6}{24}{-30}\\
+							\left( -3\cdot2 \right)\colvec{3}{1}{-4}{5} &= -6\colvec{3}{1}{-4}{5} = \colvec{3}{-6}{24}{-30}.
+						\end{align*}
+					\end{presentation_example}
+			}
+			\only<10>{
+			\item Scalar-vector multiplication is distributive in respect to scalar addition: $\left( \alpha+\beta \right)\vec{v} = \alpha\vec{v} + \beta\vec{v}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{align*}
+							(5-2)\colvec{3}{2}{-1}{0} &= 3\colvec{3}{2}{-1}{0} = \colvec{3}{6}{-3}{0}.\\
+							5\colvec{3}{2}{-1}{0} - 2\colvec{3}{2}{-1}{0} &= \colvec{3}{10}{-5}{0} - \colvec{3}{4}{-2}{0} = \colvec{3}{6}{-3}{0}.
+						\end{align*}
+					\end{presentation_example}
+			}
+			\only<11>{
+			\item Scalar-vector multiplication is distributive in respect to vector addition: $\alpha\left( \vec{v}+\vec{u} \right) = \alpha\vec{v} + \alpha\vec{u}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{align*}
+							5\left[ \colvec{3}{1}{-1}{3} + \colvec{3}{0}{2}{-1}\right] &= 5\colvec{3}{1}{1}{2} = \colvec{3}{5}{5}{10}.\\
+							5\colvec{3}{1}{-1}{3} + 5\colvec{3}{0}{2}{-1} &= \colvec{3}{5}{-5}{15} + \colvec{3}{0}{10}{-5} = \colvec{3}{5}{5}{10}.
+						\end{align*}
+					\end{presentation_example}
+			}
+			\only<12>{
+			\item The scalar $\alpha=1$ is neutral in respect to scalar-vector products: $1\vec{v} = \vec{v}$.
+					\vspace{5mm}
+					\begin{presentation_example}
+						\begin{equation*}
+							1\colvec{7}{1}{3}{2}{6}{-5}{7}{-4} = \colvec{7}{1}{3}{2}{6}{-5}{7}{-4}.
+						\end{equation*}
+					\end{presentation_example}
+			}
+	\end{itemize}
+%				\onslide<12>{\item The scalar $\alpha=1$ is neutral in scalar-vector products: $1\vec{v}=\vec{v}$.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Abstract Vector Spaces}
+	These properties are somewhat obvious on $\Rs{n}$. However, many times it is worthwhile to use more abstract vector spaces, which can help us model diverse physical and theoretical systems, since once a construct behaves as a vector space, it is a relatively simple process to apply to it all the analysis tools learned so far.
+
+	We will not bother here with the formal definition of a vector space\footnote{For such definition, see here: \href{http://www.math.niu.edu/~beachy/courses/240/06spring/vectorspace.html}{http://www.math.niu.edu/~beachy/courses/240/06spring/vectorspace.html}.}, but look at one example, which we will later expand on: the space of all real functions $\func{f}{\mathbb{R}}{\mathbb{R}}$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Real Functions as a Vector Space}
+	\begin{itemize}
+			\onslide<2-6>{\item For any two real functions $f(x),g(x)$ the addition $(f+g)(x)=f(x)+g(x)$ is also a real function.}
+			\onslide<3-6>{\item The addition of two real functions is commutative: $(f+g)(x)=f(x)+g(x)=g(x)+f(x)=(g+f)(x)$.}
+		\onslide<4-6>{\item This addition is also associative: $xxx$.}
+		\onslide<5-6>{\item The function $z(x)=0$ is the zero function, since for any other real function $f(x)$,
+			\begin{equation*}
+				(f+z)(x) = f(x)+z(x) = f(x)+0 = f(x).			
+		\end{equation*}}
+		\onslide<6>{\item For each real function $f(x)$ there exists an opposite function $(-f)(x)=-f(x)$, for which
+			\begin{equation*}
+				f(x)+\left(-f(x)\right)=f(x)-f(x)=0=z(x).
+		\end{equation*}}
+	\end{itemize}
+\end{frame}

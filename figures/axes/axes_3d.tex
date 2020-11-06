@@ -1,0 +1,131 @@
+
+% Otherwise some colors may look a bit different in ipe and TeX
+\PassOptionsToPackage{rgb}{xcolor}
+
+\documentclass{article}
+\usepackage[papersize={470bp,842bp},scale=1,margin=0pt]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,patterns}
+\usetikzlibrary{ipe} % ipe compatibility library
+
+\tikzstyle{ipe stylesheet} = [
+  ipe import,
+  even odd rule,
+  line join=round,
+  line cap=butt,
+  ipe pen normal/.style={line width=0.4},
+  ipe pen heavier/.style={line width=0.8},
+  ipe pen fat/.style={line width=1.2},
+  ipe pen ultrafat/.style={line width=2},
+  ipe pen normal,
+  ipe mark normal/.style={ipe mark scale=3},
+  ipe mark large/.style={ipe mark scale=5},
+  ipe mark small/.style={ipe mark scale=2},
+  ipe mark tiny/.style={ipe mark scale=1.1},
+  ipe mark normal,
+  /pgf/arrow keys/.cd,
+  ipe arrow normal/.style={scale=7},
+  ipe arrow large/.style={scale=10},
+  ipe arrow small/.style={scale=5},
+  ipe arrow tiny/.style={scale=3},
+  ipe arrow normal,
+  /tikz/.cd,
+  ipe arrows, % update arrows
+  <->/.tip = ipe normal,
+  ipe dash normal/.style={dash pattern=},
+  ipe dash dashed/.style={dash pattern=on 4bp off 4bp},
+  ipe dash dotted/.style={dash pattern=on 1bp off 3bp},
+  ipe dash dash dotted/.style={dash pattern=on 4bp off 2bp on 1bp off 2bp},
+  ipe dash dash dot dotted/.style={dash pattern=on 4bp off 2bp on 1bp off 2bp on 1bp off 2bp},
+  ipe dash normal,
+  ipe node/.append style={font=\normalsize},
+  ipe stretch normal/.style={ipe node stretch=1},
+  ipe stretch normal,
+  ipe opacity 10/.style={opacity=0.1},
+  ipe opacity 30/.style={opacity=0.3},
+  ipe opacity 50/.style={opacity=0.5},
+  ipe opacity 75/.style={opacity=0.75},
+  ipe opacity opaque/.style={opacity=1},
+  ipe opacity opaque,
+]
+
+\definecolor{col1}{rgb}{0.99609375,0.46875,0.46875}
+\definecolor{col2}{rgb}{0.31640625,0.70703125,0.96875}
+\definecolor{col3}{rgb}{0.40625,0.87890625,0.6640625}
+\definecolor{gray}{rgb}{0.75, 0.75, 0.75}
+
+\begin{document}
+\thispagestyle{empty}
+\noindent
+\begin{tikzpicture}[ipe stylesheet]
+  \useasboundingbox (0, 0) rectangle (595, 842);
+  \filldraw[fill=gray]
+    (249.8974, 573.9658)
+     -- (256, 576)
+     -- (263.1978, 573.6007)
+     -- (256.7348, 571.3459)
+     -- cycle;
+  \filldraw[fill=gray]
+    (256, 581.6474)
+     -- (256, 576)
+     -- (249.8974, 573.9658)
+     -- (249.8934, 579.6119)
+     -- cycle;
+  \filldraw[fill=gray]
+    (256, 581.6474)
+     -- (256, 576)
+     -- (261.5523, 574.1492)
+     -- (261.5334, 579.8029)
+     -- cycle;
+  \draw[col2, ipe pen fat, ->]
+    (256, 576)
+     -- (448, 512);
+  \draw[col1, ipe pen fat, ->]
+    (256, 576)
+     -- (64, 512);
+  \draw[col3, ipe pen fat, ->]
+    (256, 576)
+     -- (256, 768);
+  \draw[ipe pen ultrafat, ->]
+    (256, 576)
+     -- (336, 672);
+  \draw[ipe pen heavier, ipe dash dotted]
+    (336, 672)
+     -- (336, 496);
+  \draw[ipe pen heavier, ipe dash dotted]
+    (336, 496.1807)
+     -- (402.7932, 527.0689);
+  \draw[ipe pen heavier, ipe dash dotted]
+    (336, 496)
+     -- (191.5051, 554.5017);
+  \node[ipe node, font=\huge, text=col2]
+     at (454.565, 504.433) {$y$};
+  \node[ipe node, font=\huge, text=col1]
+     at (48.065, 502.334) {$x$};
+  \node[ipe node, font=\huge, text=col3]
+     at (249.929, 774.334) {$z$};
+  \node[ipe node, font=\LARGE]
+     at (339.562, 676.249) {$\vec{v}$};
+  \node[ipe node, font=\LARGE, text=col2]
+     at (405.423, 534.005) {$v_{y}$};
+  \node[ipe node, font=\LARGE, text=col1]
+     at (174.87, 564.042) {$v_{x}$};
+  \pic[col1]
+     at (192.4174, 554.8058) {ipe disk};
+  \pic[col2]
+     at (403.5685, 526.8105) {ipe disk};
+  \pic[col3]
+     at (256.4736, 751.1374) {ipe disk};
+  \node[ipe node, font=\LARGE, text=col3]
+     at (235.712, 751.11) {$v_{z}$};
+  \pic[ipe mark small]
+     at (256, 576) {ipe disk};
+  \filldraw[ipe pen heavier, ipe dash dotted, fill=gray]
+    (336, 672)
+     -- (256, 752);
+  \filldraw[ipe pen heavier, ipe dash dotted, fill=gray]
+    (336, 496)
+     -- (256, 576);
+\end{tikzpicture}
+\end{document}
+

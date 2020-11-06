@@ -1,0 +1,54 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\setlength\parindent{0pt}
+\setlength{\parskip}{1em}
+\input{../settings}
+
+\title{Spatial Translations Using Matrices}
+\author{Peleg Bar Sapir}
+
+\begin{document}
+\maketitle
+A translation is a transformation which adds a \textit{displacement vector} $\vec{\Delta}$ to every vector in the space. For example, the following is a translation $\func{T}{\Rs{3}}{\Rs{3}}$:
+\begin{equation}
+	T\colvec{3}{x}{y}{z} = \colvec{3}{x+\Delta_{x}}{y+\Delta_{y}}{z+\Delta_{z}},
+	\label{eq:translation3d}
+\end{equation}
+where $\vec{\Delta}=\colvec{3}{\Delta_{x}}{\Delta_{y}}{\Delta_{z}}$ is the displacement vector.
+
+Translations are not linear transformations. The easiest way to see this is by observing the change to the zero vector:
+\begin{equation}
+	T\left( \vec{0} \right) = \vec{0}+\vec{\Delta} = \vec{\Delta}.
+	\label{eq:notlinear}
+\end{equation}
+Since the transformation does not preserve the zero vector, it is not linear.
+
+There is, however, a way to express translations in as matrices, despite their nonlinearity which involves representing the vectors in a higher dimension. For example, consider the 3-dimensional vector $\vec{u}=\colvec{3}{x}{y}{z}$. By extending the vector with an additional component equaling $1$, we get
+\begin{equation}
+	\vec{u}^{4} = \colvec{4}{x}{y}{z}{1}.
+	\label{eq:4-vector}
+\end{equation}
+We can now use the following matrix to perform a translation by the vector $\vec{\Delta}=\colvec{4}{\Delta_{x}}{\Delta_{y}}{\Delta_{z}}{0}$:
+\begin{equation}
+	D =
+	\begin{pmatrix}
+		1 & 0 & 0 & \Delta_{x}\\
+		0 & 1 & 0 & \Delta_{y}\\
+		0 & 0 & 1 & \Delta_{z}\\
+		0 & 0 & 0 & 1\\
+	\end{pmatrix}.
+	\label{eq:translation_matrix}
+\end{equation}
+
+Applying this matrix to the vector $\vec{v}$ yields
+\begin{equation}
+	D\vec{u}^{4} = 
+	\begin{pmatrix}
+		1 & 0 & 0 & \Delta_{x}\\
+		0 & 1 & 0 & \Delta_{y}\\
+		0 & 0 & 1 & \Delta_{z}\\
+		0 & 0 & 0 & 1\\
+	\end{pmatrix}\colvec{4}{x}{y}{z}{1} = \colvec{4}{x+\Delta{x}}{y+\Delta_{y}}{z+\Delta_{z}}{1} = \vec{u}^{4}+\vec{\Delta}.
+	\label{eq:transformed_4vec}
+\end{equation}
+\end{document}
