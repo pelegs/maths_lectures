@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  30 OCT 2020 20:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  9 NOV 2020 19:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**../
+**cagne
 (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/x.tex
 LaTeX2e <2020-02-02> patch level 4
 L3 programming layer <2020-02-25>
@@ -17,12 +17,12 @@ and deduce the truth by order and method.
  ) 
 Here is how much of TeX's memory you used:
  18 strings out of 480997
- 512 string characters out of 5912179
+ 514 string characters out of 5912179
  237551 words of memory out of 5000000
  15626 multiletter control sequences out of 15000+600000
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 12i,0n,15p,83b,8s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 12i,0n,15p,85b,8s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 No pages of output.
 PDF statistics:
