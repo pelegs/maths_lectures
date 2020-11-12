@@ -136,7 +136,7 @@
 %----------------------------%
 
 \begin{frame}
-	\frametitle{The Antiderivative}
+	\frametitle{The Antiderivative (Indefinite Integral)}
 	Similar to linear transformations (with a non-zero determinant), one might try to find an inverse operator to derivative. We call such an operator the \emph{Antiderivative}, or the \emph{Non-definite integral}.
 
 	We can think of it a derivative of order $-1$, i.e. $\od[-1]{}{x}$:
@@ -155,7 +155,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{The Antiderivative}
+	\frametitle{The Antiderivative (Indefinite Integral)}
 	Recall that constants are derived to $0$, and thus don't affect the derivative:
 	\begin{equation*}
 		\left( f(x) + C \right)' = f'(x) + \cancel{C'} = f'(x).
@@ -168,7 +168,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{The Antiderivative}
+	\frametitle{The Antiderivative (Indefinite Integral)}
 	A common way to denote the antiderivative of a function $f$ by the variable x is
 	\begin{equation*}
 		\int f(x) \dif x,
@@ -179,16 +179,30 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{The Antiderivative}
+	\frametitle{The Antiderivative (Indefinite Integral)}
 	\centering
 	\begin{tabular}{lll}
 		\toprule
 		$f(x)$ & $\od{f(x)}{x}$ & $\displaystyle\int f(x)\dif x\ (C=0)$\\
 		\midrule
-		\multicolumn{3}{c}{Linearity}\\
+		\multicolumn{3}{c}{\textbf{Linearity}}\\
 		$Ag(x)$ & $A\od{g(x)}{x}$ & $A\displaystyle\int g(x)\dif x$\\
 		$f_{1}(x)+f_{2}(x)$ & $\od{f_{1}(x)}{x} + \od{f_{2}(x)}{x}$ & $\displaystyle{\int f_{1}(x)\dif x + \int f_{2}(x)\dif x}$\\
-		\multicolumn{3}{c}{Polynomials}\\
+		\multicolumn{3}{c}{\textbf{General Properties}}\\
+		$f_{1}(x)f_{2}(x)$ & $f'_{1}(x)f_{2}(x)+f_{1}(x)f'_{2}(x)$ & Depends on $f_{1}$ and $f_{2}$\\
+		$\frac{f_{1}(x)}{f_{2}(x)}$ & $\frac{f'_{1}(x)f_{2}(x)-f_{1}(x)f'_{2}(x)}{f_{2}^{2}}$ & Depends on $f_{1}$ and $f_{2}$\\
+		\bottomrule
+	\end{tabular}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The Antiderivative (Indefinite Integral)}
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		$f(x)$ & $\od{f(x)}{x}$ & $\displaystyle\int f(x)\dif x\ (C=0)$\\
+		\midrule
+		\multicolumn{3}{c}{\textbf{Polynomials}}\\
 		$B$ & $0$ & $Bx$\\
 		$x$ & $1$ & $\frac{1}{2}x^{2}$\\
 		$x^{2}$ & $2x$ & $\frac{1}{3}x^{3}$\\
@@ -204,17 +218,39 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{The Antiderivative}
+	\frametitle{The Antiderivative (Indefinite Integral)}
 	\centering
 	\begin{tabular}{lll}
 		\toprule
 		$f(x)$ & $\od{f(x)}{x}$ & $\displaystyle\int f(x)\dif x\ (C=0)$\\
 		\midrule
+		\multicolumn{3}{c}{\textbf{Reciprocal Functions}}\\
 		$\frac{1}{x}$ & $-\frac{1}{x^{2}}$ & $\log(|x|)$\\
 		$\frac{1}{x^{2}}$ & $-\frac{2}{x^{3}}$ & $-\frac{1}{x}$\\
+		\multicolumn{3}{c}{\textbf{Exponents and Logarthims}}\\
 		$e^{x}$ & $e^{x}$ & $e^{x}$\\
 		$e^{-x}$ & $-e^{-x}$ & $-e^{-x}$\\
-		$e^{g(x)}$ & $\od{g(x)}{x}e^{g(x)}$ & $?$\\
+		$e^{g(x)}$ & $\od{g(x)}{x}e^{g(x)}$ & Depends on $g(x)$\\
+		$a^{x}$ & $a^{x}\log(a)$ & $\frac{a^{x}}{\log(a)}$\\
+		$\log(x)$ & $\frac{1}{x}$ & $x\left( \log(x)-1 \right)$\\
+		\bottomrule
+	\end{tabular}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The Antiderivative (Indefinite Integral)}
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		$f(x)$ & $\od{f(x)}{x}$ & $\displaystyle\int f(x)\dif x\ (C=0)$\\
+		\midrule
+		\multicolumn{3}{c}{\textbf{Trigonometric Functions}}\\
+		$\sin(x)$ & $\cos(x)$ & $-\cos(x)$\\
+		$\cos(x)$ & $-\sin(x)$ & $\sin(x)$\\
+		$\tan(x)$ & $\frac{1}{\cos^{2}(x)}$ & $\frac{1}{1+x^{2}}$\\
+		$\arcsin(x)$ & $\frac{1}{\sqrt{1-x^{2}}}$ & $x\arcsin(x)+\sqrt{1-x^{2}}$\\
+		$\arccos(x)$ & $-\frac{1}{\sqrt{1-x^{2}}}$ & $x\arcsin(x)-\sqrt{1-x^{2}}$\\
+		$\arctan(x)$ & $\frac{1}{x^{2}+1}$ & $x\arctan(x)-\frac{\log(x^{2}+1)}{2}$\\
 		\bottomrule
 	\end{tabular}
 \end{frame}
