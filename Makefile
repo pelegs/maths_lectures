@@ -1,5 +1,5 @@
 lectures_folder="lecture_notes"
-CHAPTERS = preface intro vectors linear_trans matrices linear_systems eigenvectors uses integrals
+CHAPTERS = preface intro vectors linear_trans matrices linear_systems eigenvectors uses integrals general quantum
 $(eval CHPTRNM=$(shell echo $$(($(NUM)+1))))
 CHAPTER = $(word $(CHPTRNM), $(CHAPTERS))
 

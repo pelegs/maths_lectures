@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  29 OCT 2020 23:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  12 NOV 2020 23:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -784,6 +784,11 @@ Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \TX@cols=\count322
 \TX@ftn=\toks39
 )
+(/usr/local/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+\everycr=\toks40
+\minrowclearance=\skip121
+)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen268
@@ -807,8 +812,8 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 (/usr/local/texlive/2019/texmf-dist/tex/latex/xargs/xargs.sty
 Package: xargs 2008/03/22 v1.1  extended macro definitions  (mpg)
 \xargs@max=\count327
-\xargs@toksa=\toks40
-\xargs@toksb=\toks41
+\xargs@toksa=\toks41
+\xargs@toksb=\toks42
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2020/01/03 v3.4h Customizing captions (AR)
@@ -863,7 +868,7 @@ Package: transparent 2019/11/29 v1.4 Transparency via pdfTeX's color stack (HO)
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2020/01/20 v2.17e AMS math features
-\@mathmargin=\skip121
+\@mathmargin=\skip122
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -871,7 +876,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks42
+\@emptytoks=\toks43
 \ex@=\dimen288
 ))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
@@ -901,21 +906,21 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
 \dotsspace@=\muskip17
 \c@parentequation=\count341
 \dspbrk@lvl=\count342
-\tag@help=\toks43
+\tag@help=\toks44
 \row@=\count343
 \column@=\count344
 \maxfields@=\count345
-\andhelp@=\toks44
+\andhelp@=\toks45
 \eqnshift@=\dimen291
 \alignsep@=\dimen292
 \tagshift@=\dimen293
 \tagwidth@=\dimen294
 \totwidth@=\dimen295
 \lineht@=\dimen296
-\@envbody=\toks45
-\multlinegap=\skip122
-\multlinetaggap=\skip123
-\mathdisplay@stack=\toks46
+\@envbody=\toks46
+\multlinegap=\skip123
+\multlinetaggap=\skip124
+\mathdisplay@stack=\toks47
 LaTeX Info: Redefining \[ on input line 2859.
 LaTeX Info: Redefining \] on input line 2860.
 )
@@ -932,15 +937,15 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2017/10/31 v2.20.4
-\thm@style=\toks47
-\thm@bodyfont=\toks48
-\thm@headfont=\toks49
-\thm@notefont=\toks50
-\thm@headpunct=\toks51
-\thm@preskip=\skip124
-\thm@postskip=\skip125
-\thm@headsep=\skip126
-\dth@everypar=\toks52
+\thm@style=\toks48
+\thm@bodyfont=\toks49
+\thm@headfont=\toks50
+\thm@notefont=\toks51
+\thm@headpunct=\toks52
+\thm@preskip=\skip125
+\thm@postskip=\skip126
+\thm@headsep=\skip127
+\dth@everypar=\toks53
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
@@ -964,20 +969,20 @@ Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Bcount=\count347
 \calc@Adimen=\dimen297
 \calc@Bdimen=\dimen298
-\calc@Askip=\skip127
-\calc@Bskip=\skip128
+\calc@Askip=\skip128
+\calc@Bskip=\skip129
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count348
-\calc@Cskip=\skip129
+\calc@Cskip=\skip130
 )
-\thesrwidth=\skip130
-\thesrheight=\skip131
-\srblobheight=\skip132
-\srblobdepth=\skip133
-\mnxsrwidth=\skip134
-\LMex=\skip135
-\LMpt=\skip136
+\thesrwidth=\skip131
+\thesrheight=\skip132
+\srblobheight=\skip133
+\srblobdepth=\skip134
+\mnxsrwidth=\skip135
+\LMex=\skip136
+\LMpt=\skip137
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/cancel/cancel.sty
 Package: cancel 2013/04/12 v2.2 Cancel math terms
@@ -994,7 +999,7 @@ LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \g_MT_multlinerow_int=\count349
 \l_MT_multwidth_dim=\dimen299
-\origjot=\skip137
+\origjot=\skip138
 \l_MT_shortvdotswithinadjustabove_dim=\dimen300
 \l_MT_shortvdotswithinadjustbelow_dim=\dimen301
 \l_MT_above_intertext_sep=\dimen302
@@ -1031,8 +1036,8 @@ Package: l3keys2e 2020-02-25 LaTeX2e option processing using LaTeX3 keys
 \l__siunitx_unit_prefix_base_int=\count364
 \l__siunitx_unit_prefix_gram_int=\count365
 \l__siunitx_number_product_int=\count366
-\c__siunitx_one_fill_skip=\skip138
-\l__siunitx_table_unit_align_skip=\skip139
+\c__siunitx_one_fill_skip=\skip139
+\l__siunitx_table_unit_align_skip=\skip140
 \l__siunitx_table_exponent_dim=\dimen309
 \l__siunitx_table_integer_dim=\dimen310
 \l__siunitx_table_mantissa_dim=\dimen311
@@ -1046,8 +1051,8 @@ Package: l3keys2e 2020-02-25 LaTeX2e option processing using LaTeX3 keys
 \l__siunitx_table_post_box=\box80
 \l__siunitx_table_mantissa_box=\box81
 \l__siunitx_table_result_box=\box82
-\l__siunitx_table_number_align_skip=\skip140
-\l__siunitx_table_text_align_skip=\skip141
+\l__siunitx_table_number_align_skip=\skip141
+\l__siunitx_table_text_align_skip=\skip142
 (/usr/local/texlive/2019/texmf-dist/tex/latex/translator/translator.sty
 Package: translator 2019-05-31 v1.12a Easy translation of strings in LaTeX
 ))
@@ -1129,14 +1134,14 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@parenlevel@foot=\count415
 \blx@sectionciteorder@0=\count416
 \blx@entrysetcounter=\count417
-\labelnumberwidth=\skip142
-\labelalphawidth=\skip143
-\biblabelsep=\skip144
-\bibitemsep=\skip145
-\bibnamesep=\skip146
-\bibinitsep=\skip147
-\bibparsep=\skip148
-\bibhang=\skip149
+\labelnumberwidth=\skip143
+\labelalphawidth=\skip144
+\biblabelsep=\skip145
+\bibitemsep=\skip146
+\bibnamesep=\skip147
+\bibinitsep=\skip148
+\bibparsep=\skip149
+\bibhang=\skip150
 \blx@bcfin=\read4
 \blx@bcfout=\write6
 \blx@langwohyphens=\language86
@@ -1221,20 +1226,20 @@ Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@savedoriglanguage=\count486
 \c@pageref=\count487
 \c@savedpageref=\count488
-\shorthandwidth=\skip150
-\shortjournalwidth=\skip151
-\shortserieswidth=\skip152
-\shorttitlewidth=\skip153
-\shortauthorwidth=\skip154
-\shorteditorwidth=\skip155
-\locallabelnumberwidth=\skip156
-\locallabelalphawidth=\skip157
-\localshorthandwidth=\skip158
-\localshortjournalwidth=\skip159
-\localshortserieswidth=\skip160
-\localshorttitlewidth=\skip161
-\localshortauthorwidth=\skip162
-\localshorteditorwidth=\skip163
+\shorthandwidth=\skip151
+\shortjournalwidth=\skip152
+\shortserieswidth=\skip153
+\shorttitlewidth=\skip154
+\shortauthorwidth=\skip155
+\shorteditorwidth=\skip156
+\locallabelnumberwidth=\skip157
+\locallabelalphawidth=\skip158
+\localshorthandwidth=\skip159
+\localshortjournalwidth=\skip160
+\localshortserieswidth=\skip161
+\localshorttitlewidth=\skip162
+\localshortauthorwidth=\skip163
+\localshorteditorwidth=\skip164
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -1357,7 +1362,7 @@ s/tikzlibraryfpu.code.tex
 e.tex))
 \tikz@math@for@depth=\count502
 \tikz@math@dimen=\dimen329
-\tikz@math@toks=\toks53
+\tikz@math@toks=\toks54
 ) (/home/pelegs/texmf/tex/generic/pgf/tikzlibrarynorm.code.tex
 \qrr@pgf@normcs@from@x=\dimen330
 \qrr@pgf@normcs@from@y=\dimen331
@@ -1481,9 +1486,9 @@ File: tikzlibrarytrees.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 Package: pgfplots 2018/03/28 v1.16 Data Visualization (1.16)
 (/usr/local/texlive/2019/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
 (/usr/local/texlive/2019/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
-\t@pgfplots@toka=\toks54
-\t@pgfplots@tokb=\toks55
-\t@pgfplots@tokc=\toks56
+\t@pgfplots@toka=\toks55
+\t@pgfplots@tokb=\toks56
+\t@pgfplots@tokc=\toks57
 \pgfplots@tmpa=\dimen339
 \c@pgfplots@coordindex=\count504
 \c@pgfplots@scanlineindex=\count505
@@ -1509,7 +1514,7 @@ matrix.code.tex)
 (/usr/local/texlive/2019/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstable
 shared.code.tex
 \c@pgfplotstable@counta=\count507
-\t@pgfplotstable@a=\toks57
+\t@pgfplotstable@a=\toks58
 )
 (/usr/local/texlive/2019/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
 deque.code.tex)
@@ -1602,22 +1607,22 @@ rewer.code.tex))
  (./integrals.aux)
 \openout1 = `integrals.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
  ABD: EveryShipout initializing macros
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1626,12 +1631,12 @@ LaTeX Font Info:    ... okay on input line 24.
 \scratchbox=\box112
 \nofMPsegments=\count519
 \nofMParguments=\count520
-\everyMPshowfont=\toks58
+\everyMPshowfont=\toks59
 \MPscratchCnt=\count521
 \MPscratchDim=\dimen347
 \MPnumerator=\count522
 \makeMPintoPDFobject=\count523
-\everyMPtoPDFconversion=\toks59
+\everyMPtoPDFconversion=\toks60
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1642,7 +1647,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box113
-Package hyperref Info: Link coloring OFF on input line 24.
+Package hyperref Info: Link coloring OFF on input line 21.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1656,9 +1661,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count524
 )
-LaTeX Info: Redefining \ref on input line 24.
-LaTeX Info: Redefining \pageref on input line 24.
-LaTeX Info: Redefining \nameref on input line 24.
+LaTeX Info: Redefining \ref on input line 21.
+LaTeX Info: Redefining \pageref on input line 21.
+LaTeX Info: Redefining \nameref on input line 21.
  (./integrals.out) (./integrals.out)
 \@outlinefile=\write7
 \openout7 = `integrals.out'.
@@ -1668,20 +1673,20 @@ Package newfloat Info: `float' package detected.
 No file pythontex-files-integrals/integrals.pytxmcr.
 Run PythonTeX to create it.
 Package newfloat Info: New float `listing' with options `fileext=lopytx' on inp
-ut line 24.
+ut line 21.
 \c@listing=\count525
-Package newfloat Info: float type `listing'=4 on input line 24.
+Package newfloat Info: float type `listing'=4 on input line 21.
 \c@sublisting=\count526
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \celsius on input line 24.
-Package gensymb Info: Faking symbols for \degree and \celsius on input line 24.
+LaTeX Info: Redefining \celsius on input line 21.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 21.
 
 
 Package gensymb Warning: Not defining \perthousand.
 
-LaTeX Info: Redefining \ohm on input line 24.
-Package gensymb Info: Using \Omega for \ohm on input line 24.
+LaTeX Info: Redefining \ohm on input line 21.
+Package gensymb Info: Using \Omega for \ohm on input line 21.
 
 Package gensymb Warning: Not defining \micro.
 
@@ -1707,17 +1712,17 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'integrals.bbl' not found.
 
 No file integrals.bbl.
-Package biblatex Info: Reference section=0 on input line 24.
-Package biblatex Info: Reference segment=0 on input line 24.
+Package biblatex Info: Reference section=0 on input line 21.
+Package biblatex Info: Reference segment=0 on input line 21.
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 24.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 21.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 24.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 21.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1725,11 +1730,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 45.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 45.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 42.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 42.
  (./integrals.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 45.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 45.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 42.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 42.
 Package rerunfilecheck Info: File `integrals.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package logreq Info: Writing requests to 'integrals.run.xml'.
@@ -1737,10 +1742,10 @@ Package logreq Info: Writing requests to 'integrals.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 50183 strings out of 480997
- 1201935 string characters out of 5912179
- 2151890 words of memory out of 5000000
- 64813 multiletter control sequences out of 15000+600000
+ 50228 strings out of 480997
+ 1202491 string characters out of 5912179
+ 2152952 words of memory out of 5000000
+ 64854 multiletter control sequences out of 15000+600000
  551269 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  76i,14n,129p,1130b,2190s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1750,7 +1755,7 @@ Here is how much of TeX's memory you used:
 /usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
 sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
 /local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on integrals.pdf (1 page, 53856 bytes).
+Output written on integrals.pdf (1 page, 54458 bytes).
 PDF statistics:
  40 PDF objects out of 1000 (max. 8388607)
  30 compressed objects within 1 object stream
