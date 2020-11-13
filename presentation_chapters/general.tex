@@ -1,4 +1,25 @@
 \sectionpic{General Vector Spaces}{../figures/presentation_chapters/general.pdf}
+\tikzset{
+	operator/.style={circle, inner sep=0pt, minimum size=1cm, text opacity=1, fill opacity=0.5},
+	arrow/.style={->, >=stealth},
+				}
+\pgfkeys{/pgfplots/Axis Style/.style={
+    axis x line=middle,
+    axis y line=left,
+		every axis x label/.style={at={(current axis.right of origin)}, anchor=west},
+		every axis y label/.style={at={(axis description cs:0,1)}, anchor=south},
+    samples=200,
+		xmin=-5, xmax=5,
+		ymin=-0.5, ymax=2,
+		domain=-5:5,
+		axis line style={thick},
+		label style={font=\large},
+		tick label style={font=\tiny},
+		declare function={gauss(\x,\y,\z) = exp(-(\x-\y)^2/(2*\z^2));},
+		declare function={func(\x) = gauss(\x, \mu, \sig);},
+		declare function={gaussderiv(\x,\y,\z) = -(\x-\y)*gauss(\x,\y,\z)/\z^2;},
+		declare function={funcderiv(\x) = gaussderiv(\x, \mu, \sig);},
+}}
 
 \begin{frame}
 	\frametitle{Properties of $\Rs{n}$}
@@ -157,13 +178,14 @@
 \begin{frame}
 	\frametitle{Components (temp name)}
 	Recall that a vector in $\Rs{n}$ can be written using its component in any basis, e.g. the standard basis vectors $\left\{ \eb{1},\eb{2},\dots,\eb{n} \right\}$:
-	\begin{equation*}
-		\vec{v} = v_{1}\eb{1} + v_{2}\eb{2} + \cdots + v_{n}\eb{n}.
-	\end{equation*}
+	\begin{align*}
+		\vec{v} &= v_{1}\eb{1} + v_{2}\eb{2} + \cdots + v_{n}\eb{n}\\
+		&= \sum\limits_{i=1}^{n}v_{i}\eb{i}.
+	\end{align*}
 
 	How can we "decompose" a function in a similar way?
 
-	The \emph{Dirac delta function} comes in handy.
+	For this purpose, the \emph{Dirac delta function} comes in handy.
 \end{frame}
 
 \begin{frame}
@@ -176,4 +198,139 @@
 			0, & x\neq0.
 		\end{cases}
 	\end{equation*}
+
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				Axis Style,
+				axis line style={<->, stealth-stealth, thick},
+				axis y line=none,
+				xmin=-2, xmax=2,
+				ymin=-1, ymax=1,
+				xtick={-2,-1,...,2},
+			]
+			\path[draw=col1, very thick, dashed] (axis cs:0,0) to (axis cs:0,2);
+		\end{axis}
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The Dirac Delta Function}
+We can then define infinitaly many dirac functions, for each point $\tilde{x}\in\mathbb{R}$:
+\begin{equation*}
+	\delta_{\tilde{x}}(x) = \delta(x-\tilde{x}).
+\end{equation*}
+
+	\vspace{1cm}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				Axis Style,
+				axis line style={<->, stealth-stealth, thick},
+				axis y line=none,
+				xmin=-2, xmax=2,
+				ymin=0, ymax=3,
+				xtick={-2,-1,...,2},
+			]
+			\path[draw=col1, very thick, dashed] (axis cs:0,0) to (axis cs:0,1.5) node [col1, above] {$\delta_{0}(x)$};
+			\path[draw=col2, very thick, dashed] (axis cs:1,0) to (axis cs:1,1.5) node [col2, above] {$\delta_{1}(x)$};
+			\path[draw=col3!75!black, very thick, dashed] (axis cs:-0.75,0) to (axis cs:-0.75,1.5) node [col3!75!black, above] {$\delta_{-\frac{3}{4}}(x)$};
+			\path[draw=col4, very thick, dashed] (axis cs:pi/2,0) to (axis cs:pi/2,1.5) node [col4, above] {$\delta_{\frac{\pi}{2}}(x)$};
+			\path[draw=col5, very thick, dashed] (axis cs:-1.6,0) to (axis cs:-1.6,1.5) node [col5, above] {$\delta_{-1.6}(x)$};
+		\end{axis}
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Spanning a Function Space}
+	Using the Dirac delta function, we can now decompose a function to its components in a similar way we did with vectors:
+	\begin{align*}
+		\vec{v} & =\sum\limits_{i=1}^{n}v_{i}\eb{i}\\
+		&\Downarrow\\
+		f(x) &= \text{to do}.
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dot Product of Two Functions}
+	Recall the definition of a dot product of two vectors $\vec{u}$ and $\vec{v}$:
+	\begin{align*}
+		\langle \vec{u}, \vec{v} \rangle &= u_{1}v_{1} + u_{2}v_{2} + \cdots + v_{n}u_{n}\\
+		&= \sum\limits_{i=1}^{n} u_{i}v_{i}.
+	\end{align*}
+
+	The dot product of two functions $f(x), g(x)$ on the interval $\left[ a,b \right]$ can be similarily defined:
+	\begin{equation*}
+		\langle f(x), g(x) \rangle = \int\limits_{a}^{b} f(x)g(x) \dif x.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dot Product of Two Functions}
+	\begin{presentation_note}
+		\only<1>{
+			Over $\mathbb{C}^{n}$, the dot product of two vectors $\vec{u}, \vec{v}$ is defined as
+			\begin{align*}
+				\langle \vec{u}, \vec{v} \rangle &= \bar{u}_{1}v_{1} + \bar{u}_{2}v_{2} + \cdots + \bar{u}_{n}v_{n}\\
+				&= \sum\limits_{i=1}^{n}\bar{u}_{i}v_{i},
+			\end{align*}
+			where $\bar{z}$ is the \emph{complex conjugate} of $z$. For a real number $x$, $\bar{x}=x$ - i.e. real numbers are their own complex conjugates.
+		}
+
+		\only<2>{
+			The definition of a dot product of two complex functions $f(z), g(z)$ is similar:
+			\begin{equation*}
+				\langle f(z), g(z) \rangle = \int\limits_{\Omega}\bar{f}(z)g(z) \dif z,
+			\end{equation*}
+			where $\Omega$ is the space over which the integration is done.
+			
+			\vspace{5mm}
+			Sometimes, especially in physics, the complex conjugate of a function $f(z)$ is denoted as $f^{*}(z)$.
+		}
+	\end{presentation_note}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dot Product of Two Functions}
+	If the dot product of two functions $f(x), g(x)$ is zero, we say that the functions are \emph{orthogonal} (just as with vectors).
+
+	\begin{presentation_example}
+		The functions $f(x)=x, f(x)=x^{2}$ are orthogonal over the entire real line, since
+		\begin{equation*}
+			\langle x, x^{2} \rangle = \int\limits_{-\infty}^{\infty} x\cdot x^{2} \dif x = \int\limits_{-\infty}^{\infty}x^{3} \dif x = 0.
+		\end{equation*}
+		(recall that integrals over the real line of anti-symmetric functions, such as $x^{3}$, always equal $0$)
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Norm of Functions}
+	The \emph{norm} of a function $f$ over an interval $\left[ a,b \right]$ can be defined as
+	\begin{equation*}
+		\norm{f} = \sqrt{\langle f, f \rangle} = \sqrt{\int\limits_{a}^{b} f^{2}(x) \dif x}.
+	\end{equation*}
+
+	\begin{presentation_example}
+		The norm of $f(x)=-x^{2}$ on $\left[ -2,2 \right]$ is
+		\begin{align*}
+			\norm{f} &= \sqrt{\int\limits_{-2}^{2} \left(-x^{2}\right)^{2} \dif x} = \sqrt{2\int\limits_{0}^{2} x^{4} \dif x}\\
+			&= \sqrt{\left.\frac{2}{5}x^{5}\right|_{0}^{2}} = \sqrt{\frac{2}{5}\left( 32 - 0 \right)} = \frac{8}{\sqrt{5}} \approx 3.578.
+		\end{align*}
+	\end{presentation_example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Norm of Functions}
+	A function that has a norm of $1$ is said to be \emph{normalized}.
+
+	\begin{presentation_example}
+		The \emph{Gaussian distribution}
+		\begin{equation*}
+			\mathcal{G}(x) = e^{-\frac{x^{2}}{2}}
+		\end{equation*}
+		has a \textbf{squared} norm
+		\begin{align*}
+			\norm{\mathcal{G}}^{2} &= \int\limits_{-\infty}^{\infty}\left(e^{-\frac{x^{2}}{2}}\right)^{2}\dif x = \int\limits_{-\infty}^{\infty}e^{-\cancel{2}\frac{x^{2}}{\cancel{2}}}\dif x = \int\limits_{-\infty}^{\infty}e^{-x^{2}}\dif x = \sqrt{\pi}.\\
+		\end{align*}
+	\end{presentation_example}
 \end{frame}
