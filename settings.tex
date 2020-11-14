@@ -194,7 +194,11 @@
   -stealth,line width=#1,#2, % first arrow
   postaction={draw,-stealth,#3,line width=(#1)/3,
   shorten <=(#1)/3,shorten >=2*(#1)/3}, % second arrow
-  }
+},
+	declare function={gauss(\x,\y,\z) = exp(-(\x-\y)^2/(2*\z^2));},
+	declare function={func(\x) = gauss(\x, \mu, \sig);},
+	declare function={gaussderiv(\x,\y,\z) = -(\x-\y)*gauss(\x,\y,\z)/\z^2;},
+	declare function={funcderiv(\x) = gaussderiv(\x, \mu, \sig);},
 }
 
 \newcommand{\tikznode}[3][]{%based on https://tex.stackexchange.com/a/402466/121799
@@ -239,6 +243,8 @@
   \draw[thick] (\dx+\a*1.7,\dy-\a*0.7) -- ++(-\a*2,0);
 }
 
+%% ----- PGF Plots stuff ----- %%
+
 \usepackage{pgf}
 \pgfdeclarelayer{background layer}
 \pgfdeclarelayer{foreground layer}
@@ -246,7 +252,8 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.16}
 \usepgfplotslibrary{fillbetween, colormaps, colorbrewer}
-\pgfplotsset{every axis/.append style={
+\pgfplotsset{
+	every axis/.append style={
   font=\small,
   axis x line=middle,
   axis y line=middle,
@@ -258,6 +265,21 @@
   every extra x tick/.style={xticklabel style={above}},
   every extra y tick/.style={yticklabel style={right}}
 }}
+
+\pgfkeys{/pgfplots/Axis Style/.style={
+    axis x line=center,
+    axis y line=middle,
+    samples=200,
+    xmin=-7, xmax=7,
+    ymin=-7, ymax=7,
+    axis line style={<->, stealth-stealth},
+		axis y line=none,
+		ticks=none,
+}}
+
+\pgfplotsset{
+  funcdraw/.style={thick},
+}
 
 \newcommandx*{\drawaxes}[9][5=1, 6=black!25, 7=densely dotted, 8=black, 9=1]{
   \ifthenelse{#9=0}
@@ -444,3 +466,11 @@
   }[\PackageError{tree}{Undefined option: #1}{}]
 }
 
+%% ----- Bra-Ket ----- %%
+\newcommand{\bra}[1]{
+	\langle| \left. #1 \right|
+}
+
+\newcommand{\ket}[1]{
+	\left| #1 \right. \rangle
+}

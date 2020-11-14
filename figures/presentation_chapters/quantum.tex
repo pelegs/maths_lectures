@@ -1,0 +1,27 @@
+\input{local_settings}
+\input{../../settings}
+
+\begin{document}
+\begin{tikzpicture}[scale=1.5, align=center]
+  \Large
+  \begin{axis}[
+      Axis Style,
+			samples=1000,
+			xmin=-4, xmax=4,
+			ymin=-2, ymax=2,
+			domain={-3:3},
+			declare function={psi(\x) = gauss(x,0,1)*sin(x*120*pi);},
+    ]
+    \path[name path=axis] (axis cs:0,0) -- (axis cs:1,0);
+		\addplot[name path=psi_sqr, funcdraw, col2] {psi(x)^2};
+		\addplot[fill=col2, fill opacity=0.1] fill between [of=psi_sqr and axis];
+		\node[col1] at (axis cs:-2,0.5) {$\Re\left[\Psi(x)\right]$};
+
+		\addplot[name path=psi, funcdraw, col1] {psi(x)};
+		\addplot[fill=col1, fill opacity=0.1] fill between [of=psi and axis];
+		\node[col2] at (axis cs:1,1) {$\norm{\Psi(x)}^{2}$};
+
+		\node at (axis cs:0,1.5) {\huge$i\hbar\pd{}{t}\ket{\Psi(t)}=\hat{H}\ket{\Psi(t)}$};
+  \end{axis}
+\end{tikzpicture}
+\end{document}
