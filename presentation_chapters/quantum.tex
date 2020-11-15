@@ -1,6 +1,30 @@
 \sectionpic{Linear Algebra, Calculus and (a bit of) Quatum Physics}{../figures/presentation_chapters/quantum.pdf}
 
 \begin{frame}
-	\frametitle{Test}
-	Meow.
+	\frametitle{Classical Mechanics}
+	\only<1>{
+		In \emph{classical mechanics} we charecterize a point-like particle as having a well-defined \emph{position} represented as an $\Rs{3}$ vector:
+	}
+	\only<2>{
+		A particle also has a \emph{velocity} (change of position over time), which is also represented by an $\Rs{3}$ vector:
+	}
+
+	\vspace{1cm}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				Axis Style,
+				width=5cm, height=5cm,
+				axis line style={->, -stealth, thick},
+				xmin=0, xmax=2,
+				ymin=0, ymax=2,
+				ticks=none,
+			]
+				\draw[vector, dashed, thick, black!50] (axis cs: 0,0) to (axis cs: 1,1.5) node [xshift=3mm] {$\vec{r}$};
+			\only<2>{
+				\draw[vector, thick, black!50] (axis cs: 1,1.5) to (axis cs: 1.3,1) node [xshift=3mm] {$\vec{v}$};
+			}
+			\node[circle, fill=col1, inner sep=0pt, minimum size=3pt] at (axis cs: 1,1.5) {};
+		\end{axis}
+	\end{tikzpicture}
 \end{frame}
