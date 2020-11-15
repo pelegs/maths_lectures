@@ -2,7 +2,7 @@
 \input{../../settings}
 
 \begin{document}
-\begin{tikzpicture}[scale=1.5, align=center]
+\begin{tikzpicture}[scale=1.75, align=center]
   \Large
   \begin{axis}[
       Axis Style,
@@ -10,7 +10,7 @@
 			xmin=-4, xmax=4,
 			ymin=-2, ymax=2,
 			domain={-3:3},
-			declare function={psi(\x) = gauss(x,0,1)*sin(x*120*pi);},
+			declare function={psi(\x) = 0.9*gauss(x,0,1)*sin(x*120*pi);},
     ]
     \path[name path=axis] (axis cs:0,0) -- (axis cs:1,0);
 		\addplot[name path=psi_sqr, funcdraw, col2] {psi(x)^2};
@@ -22,6 +22,7 @@
 		\node[col2] at (axis cs:1,1) {$\norm{\Psi(x)}^{2}$};
 
 		\node at (axis cs:0,1.5) {\huge$i\hbar\pd{}{t}\ket{\Psi(t)}=\hat{H}\ket{\Psi(t)}$};
+		\node at (axis cs:0,-1.4) {\includegraphics[scale=0.1]{../others/cat.pdf}};
   \end{axis}
 \end{tikzpicture}
 \end{document}
