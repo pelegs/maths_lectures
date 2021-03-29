@@ -1,0 +1,578 @@
+\section{Linear Transformations and Matrices}
+
+\subsection{Linear Transformations}
+Which of the following functions/transformations are linear? Prove your answer by showing that the two criteria for linearity are met (in the case of linear functions), or by giving an example which contraditcs a criterion or a property of linear functions (in the case of non linear functions).
+\begin{enumerate}
+	\item $f(x) = |x|$.
+		\if\withsol1{
+			\begin{answer}
+				On one hand,
+				\begin{equation*}
+					f(-4+3) = |-4+3| + |-1| = 1.
+				\end{equation*}
+				On the other hand,
+				\begin{equation*}
+					f(-4) + f(3) = |-4| + |3| = 4+3 = 7 \neq 1.
+				\end{equation*}
+				Thus $f$ is not linear.
+			\end{answer}
+		}\fi
+	
+	\item $\sgn(x) = \begin{cases} 1 & \text{ if } x > 0,\\ 0 & \text{ if } x=0,\\ -1 & \text{ if } x<0.\end{cases}$
+		\if\withsol1{
+			\begin{answer}
+				For $x=3,\ \alpha=2$:
+				\begin{equation*}
+					\sgn(\alpha x) = \sgn(2\cdot 3) = \sgn(6) = 1.
+				\end{equation*}
+				However,
+				\begin{equation*}
+					\alpha\cdot\sgn(x) = 2\cdot\sgn(3) = 2\cdot1 = 2 \neq 1.
+				\end{equation*}
+				Therefore, $\sgn(x)$ is not linear.
+			\end{answer}
+		}\fi
+
+	\item $T\colvec{2}{x}{y} = \colvec{2}{y}{x}$.
+	\if\withsol1{
+			\begin{answer}
+				\begin{itemize}
+					\item \textbf{Scalability}:
+						\begin{equation*}
+							T\left(\alpha\cdot\colvec{2}{x}{y}\right) = T\left( \colvec{2}{\alpha x}{\alpha y} \right) = \colvec{2}{\alpha y}{\alpha x} = \alpha \colvec{2}{y}{x} = \alpha T\colvec{2}{x}{y}.
+						\end{equation*}
+					\item \textbf{Additivity}:
+						\begin{equation*}
+							T\left( \colvec{2}{a}{b} + \colvec{2}{c}{d}\right) = T\colvec{2}{a+c}{b+d} = \colvec{2}{b+d}{a+c} = \colvec{2}{b}{a} + \colvec{2}{d}{c} = T\colvec{2}{a}{b} + T\colvec{2}{c}{d}.
+						\end{equation*}
+						Therefore, $T$ is linear.
+				\end{itemize}
+			\end{answer}
+		}\fi
+	
+	\item $T\colvec{2}{x}{y} = \colvec{2}{3x}{2y}+\colvec{2}{1}{-5}$.
+		\if\withsol1{
+				\begin{answer}
+					$T$ does not perserve $\vec{0}$:
+					\begin{equation*}
+						T\colvec{2}{0}{0} = \colvec{2}{1}{-5},
+					\end{equation*}
+					and thus is not linear.
+				\end{answer}
+			}\fi
+	
+		\item $T\colvec{3}{x}{y}{z} = 3x+y^{2}-z$.
+			\if\withsol1{
+					\begin{answer}
+						\begin{align*}
+							T\left( \colvec{3}{x_{1}}{y_{1}}{z_{1}} + \colvec{3}{x_{2}}{y_{2}}{z_{2}} \right) &= T\colvec{3}{x_{1}+x_{2}}{y_{1}+y_{2}}{z_{1}+z_{2}} = 3\left( x_{1}+x_{2} \right) + \left( y_{1}+y_{2} \right)^{2} - \left( z_{1}+z_{2} \right)\\
+							&= 3\left( x_{1}+x_{2} \right) + y_{1}^{2} + 2y_{1}y_{2} + y_{2}^{2} + \left( z_{1}+z_{2} \right).
+						\end{align*}
+						On the other hand,
+						\begin{align*}
+							T\colvec{3}{x_{1}}{y_{2}}{z_{1}} + T\colvec{3}{x_{2}}{y_{2}}{z_{2}} &= 3x_{1}+y_{1}^{2}-z_{1} + 3x_{2}+y_{2}^{2}-z_{2}\\
+							&= 3\left( x_{1}+x_{2} \right) + y_{1}^{2} + y_{2}^{2} + \left( z_{1}+z_{2} \right).
+						\end{align*}
+						We can see that the difference between the expressions is
+						\begin{equation*}
+							y_{1}y_{2},
+						\end{equation*}
+						which means that for any vector for which $y_{1}\neq0$ and $y_{2}\neq0$, the product $y_{1}y_{2}$ is also $\neq0$, and thus the two expressions are not equal. Therefore $T$ is not linear.
+					\end{answer}
+				}\fi
+\end{enumerate}
+
+\if\withsol1{
+	\newpage
+}\fi
+
+			\subsection{Matrices}
+			\begin{enumerate}
+				\item The following matrices are defined:
+					\begin{equation*}
+						A =
+						\begin{pmatrix}
+							1 & 3  & 7\\
+							0 & -4 & 1\\
+							2 & 2  & 5\\
+						\end{pmatrix},
+						\qquad
+						B =
+						\begin{pmatrix}
+							1 & 0 & 1\\
+							2 & 0 & 2\\
+							3 & 7 & 0\\
+						\end{pmatrix},
+						\qquad
+						C =
+						\begin{pmatrix}
+							1 & 0 & 0\\
+							0 & 1 & 0\\
+							0 & 0 & 1\\
+						\end{pmatrix}.
+					\end{equation*}
+					\begin{enumerate}
+						\item Calculate the following: $A+B,\ A-C,\ A\cdot B,\ B\cdot A, A\cdot C, C\cdot A$.
+							\if\withsol1{
+									\begin{answer}
+										Adding and subtracting matrices is straight-forward and is simply done element-wise.\\
+										Thus:
+										\begin{align*}
+											A+B &=
+											\begin{pmatrix}
+												1+1 & 3+0  & 7+1\\
+												0+2 & -4+0 & 1+2\\
+												2+3 & 2+7  & 5+0\\
+											\end{pmatrix}
+											=
+											\begin{pmatrix}
+												2 & 3  & 8\\
+												2 & -4 & 3\\
+												5 & 9  & 5\\
+											\end{pmatrix}\\
+											A-C &=
+											\begin{pmatrix}
+												1-1 & 3-0  & 7-0\\
+												0-0 & -4-1 & 1-0\\
+												2-0 & 2-0  & 5-1\\
+											\end{pmatrix}
+											=
+											\begin{pmatrix}
+												0 & 3  & 7\\
+												0 & -5 & 1\\
+												2 & 2  & 4\\
+											\end{pmatrix}
+										\end{align*}
+										Multiplying matrices is \underline{\textbf{NOT}} done element-wise, but by calculating each element $c_{\colorbox{col1!25}{i}\colorbox{col2!25}{j}}$ of the resulting matrix as a dot product of the $\colorbox{col1!25}{i}$-th row of $A$ with the $\colorbox{col2!25}{j}$-th column of $B$:\\
+						  \begin{pycode}
+from scripts import *
+A=np.array([[1, 3, 7],[0, -4, 1],[2, 2, 5]])
+B=np.array([[1, 0, 1],[2, 0, 2], [3, 7, 0]])
+print(r'\begin{tabular}{l c c c c r}')
+print(r'& $A$ & $B$ &&&\\')
+for i in range(3):
+		for j in range(3):
+				colordot(A, B, a=i, b=j, col1='col1', col2='col2')
+		print(r'\\')
+print(r'\end{tabular}')
+						  \end{pycode}
+										Therefore:
+										\begin{equation*}
+											A\cdot B = \pyc{draw_matrix(np.dot(A, B))}.
+										\end{equation*}
+										On the other hand,
+										\begin{equation*}
+											B\cdot A = \pyc{draw_matrix(np.dot(B, A))}.
+										\end{equation*}
+										Notice how $A\cdot B \neq B\cdot A$! This is an important property of matrix product: it is generally \textbf{NOT} commutative.
+
+										Continuing:
+										\begin{equation*}
+											A\cdot C = C\cdot A = \pyc{draw_matrix(A)} = A.
+										\end{equation*}
+
+										This is because $C$ is the unitary (from "unit") matrix of size $3$, also known as the \textit{identity matrix}, written as $I$.
+
+										This matrix has the property that for any matrix $A$, the following is always true:
+										\begin{equation*}
+											I\cdot A = A\cdot I = A.
+										\end{equation*}
+
+										The general identity matrix of size-$N$, $I_{N}$ looks as following:
+										\begin{align*}
+											I_{N}=
+											\begin{pmatrix}
+												1&0&0&\cdots &0\\0&1&0&\cdots &0\\0&0&1&\cdots &0\\\vdots &\vdots &\vdots &\ddots &\vdots\\0&0&0&\cdots &1
+											\end{pmatrix},
+										\end{align*}
+										i.e. all the main diagonal elements are $1$ while the others are all $0$.
+								\end{answer}}
+							\fi
+
+						\item For each matrix write its transpose.
+							\if\withsol1{
+									\begin{answer}
+										Transposing a matrix is simply exchanging its rows with columns, i.e. each element $a_{ij}$ becomes $a_{ji}$.\\
+
+										Therefore:
+										\begin{pycode}
+print(r'\begin{align*}')
+print(r'A^{\mathbf{T}}&=')
+draw_matrix(np.transpose(A))
+print(r',\\B^{\mathbf{T}}&=')
+draw_matrix(np.transpose(B))
+print(r',\\C^{\mathbf{T}}&=')
+draw_matrix(np.identity(3).astype(int))
+print(r'.\end{align*}')
+										\end{pycode}
+								\end{answer}}
+							\fi
+					\end{enumerate}
+				\item Which of the following products $A\cdot B=C$ are defined? Calculate the product if it is possible.
+
+					\begin{enumerate}
+						\item $
+							\begin{pmatrix}
+								1  & 2\\
+								-5 & 8\\
+							\end{pmatrix}
+							\cdot
+							\begin{pmatrix}
+								2 & 0\\
+								0 & 1\\
+							\end{pmatrix}
+							$
+							\if\withsol1{
+
+									\begin{answer}
+										\begin{pycode}
+A=np.array([[1,2],[-5,8]])
+B=np.array([[2,0],[0,1]])
+mdot(A, B)
+										\end{pycode}
+								\end{answer}}
+							\fi
+
+						\item $
+							\begin{pmatrix}
+								1  & 2 & 6\\
+								-5 & 8 & 6\\
+							\end{pmatrix}
+							\cdot
+							\begin{pmatrix}
+								0 & 1 & -2\\
+								1 & 0 & 1\\
+								3 & 7 & 2\\
+							\end{pmatrix}
+							$
+							\if\withsol1{
+
+									\begin{answer}
+										\begin{pycode}
+A=np.array([[1,2,6],[-5,8,6]])
+B=np.array([[0,1,-2],[1,0,1],[3,7,2]])
+mdot(A, B)
+										\end{pycode}
+								\end{answer}}
+							\fi
+
+						\item $
+							\begin{pmatrix}
+								2 & 2\\
+								7 & 1\\
+								0 & 5\\
+							\end{pmatrix}
+							\cdot
+							\begin{pmatrix}
+								2 & 0\\
+								1 & -1\\
+								8 & 1\\
+							\end{pmatrix}
+							$
+							\if\withsol1{
+
+									\begin{answer}
+										This multiplication is not possible since the rows of $A$ have $2$ elements each, while the columns of $B$ have $3$ elements each. This is undefined.
+								\end{answer}}
+							\fi
+						\item $
+							\begin{pmatrix}
+								2 & 2\\
+								7 & 1\\
+								0 & 5\\
+							\end{pmatrix}
+							\cdot
+							\begin{pmatrix}
+								2 & 0\\
+								1 & -1\\
+								8 & 1\\
+							\end{pmatrix}^{\top}
+							$
+							\if\withsol1{
+
+									\begin{answer}
+										This product exists because:
+										\begin{equation*}
+											\begin{pmatrix}
+												2 & 0\\
+												1 & -1\\
+												8 & 1\\
+											\end{pmatrix}^{\mathbf{T}}=
+											\begin{pmatrix}
+												2 & 1  & 8\\
+												0 & -1 & 1\\
+											\end{pmatrix},
+										\end{equation*}
+										and so
+										\begin{equation*}
+											C = 
+											\begin{pmatrix}
+												2 & 2\\
+												7 & 1\\
+												0 & 5\\
+											\end{pmatrix}
+											\cdot
+											\begin{pmatrix}
+												2 & 1  & 8\\
+												0 & -1 & 1\\
+											\end{pmatrix},
+										\end{equation*}
+
+										yielding:
+
+										\begin{pycode}
+A = np.array([[2,2],[7,1],[0,5]])
+B = np.array([[2,0],[1,-1],[8,1]])
+mdot(A, np.transpose(B))
+										\end{pycode}
+								\end{answer}}
+							\fi
+
+						\item $
+							\begin{pmatrix}
+								7 & 0 & 4\\
+							\end{pmatrix}
+							\cdot
+							\begin{pmatrix}
+								-3\\
+								1 \\
+								8 \\
+							\end{pmatrix}
+							$
+							\if\withsol1{
+									\begin{answer}
+										\begin{pycode}
+a = np.array([7, 0, 4])
+b = np.array([-3, 1, 8])
+vdot(0, 0, a, b, alone=True)
+										\end{pycode}
+								\end{answer}}
+							\fi
+
+						\item $
+							\begin{pmatrix}
+								1 & 0 & 0\\
+								0 & 3 & 0\\
+								0 & 0 & -1\\
+							\end{pmatrix}
+							\cdot
+							\begin{pmatrix}
+								1\\
+								5\\
+								5\\
+							\end{pmatrix}
+							$
+							\if\withsol1{
+									\begin{answer}
+										\begin{pycode}
+a = np.array([[1, 0, 0],[0, 3, 0],[0, 0, -1]])
+b = np.array([[1],[5],[5]])
+mdot(a, b)
+										\end{pycode}
+								\end{answer}}
+							\fi
+
+					\end{enumerate}
+			\end{enumerate}
+			\if\withsol1{
+				\newpage
+			\fi
+
+			\subsection{Matrix-Vector Multiplication}
+			\begin{enumerate}
+				\item The matrix $R_{\theta}=\begin{pmatrix} \cos\left( \theta \right) & -\sin\left( \theta \right) \\ \sin\left( \theta \right) & \cos\left( \theta \right)\\ \end{pmatrix}$ is a 2D-rotation matrix: it rotates any 2D-vector $\vec{v}=\colvec{2}{x}{y}$ by the angle $\theta$ counter clockwise.
+					\begin{enumerate}
+						\item What do you expect the determinant of $R_{\theta}$ to be? Check your answer via direct calculation.
+							\if\withsol1{
+									\begin{answer}
+										We expect the determinant to be $1$, since rotation does not alter area.\\
+										Let's check this via direct calculation:
+										\begin{align*}
+											\det\left( R_{\theta} \right) &= \begin{pmatrix} \cos\left( \theta \right) & -\sin\left( \theta \right) \\ \sin\left( \theta \right) & \cos\left( \theta \right)\\ \end{pmatrix} \\ 
+											&= \cos\left( \theta \right) \cdot \cos\left( \theta \right) - \left(-\sin\left( \theta \right) \cdot \sin\left( \theta \right)\right)\\
+											&= \left[\cos\left( \theta \right)\right]^{2} + \left[\sin\left( \theta \right)\right]^{2} \\
+											&= 1.
+										\end{align*}
+									\end{answer}
+								}\fi
+
+							\item Show that for $\theta=\ang{180}$ applying the matrix on a vector $\vec{v}=\colvec{2}{x}{y}$ inverts the vector.
+								\if\withsol1{
+										\begin{answer}
+											$R_{\ang{180}}=\begin{pmatrix}
+												\cos\left( \ang{180} \right) & -\sin\left( \ang{180} \right) \\
+												\sin\left( \ang{180} \right) &  \cos\left( \ang{180} \right) \\
+											\end{pmatrix}=
+											\begin{pmatrix}
+												-1 &	0 \\
+												0 & -1 \\
+											\end{pmatrix}$
+
+											Applying $R_{\ang{180}}$ on a vector $\vec{v}=\colvec{2}{x}{y}$ results in
+											\begin{align*}
+												\begin{pmatrix}
+													-1 &	0 \\
+													0 & -1 \\
+												\end{pmatrix}\colvec{2}{x}{y}=
+												\begin{pmatrix}
+													-x+\cancel{0\cdot y} \\
+													\cancel{0\cdot x} -y	\\
+												\end{pmatrix}=\colvec{2}{-x}{-y}=-\colvec{2}{x}{y},
+											\end{align*}
+											which is indeed what we expect from a $\ang{180}$ rotation.
+										\end{answer}
+									}\fi
+
+									\if\withsol1{
+										}\fi
+
+									\item Show that for a vector $\vec{v}=\colvec{2}{x}{y}$ the resulting rotation by $\pm\ang{90}$ using $R$ is orthogonal to $\vec{v}$.
+										\if\withsol1{
+
+												\begin{answer}
+													Substituting $\ang{90}$ into $R$ yields:
+													\begin{align*}  
+														R_{\ang{90}}&=
+														\begin{pmatrix}
+															\cos\left( \ang{90} \right) & -\sin\left( \ang{90} \right) \\
+															\sin\left( \ang{90} \right) &  \cos\left( \ang{90} \right) \\
+														\end{pmatrix}
+														= \begin{pmatrix}
+															0 & -1 \\
+															1 & 0  \\
+														\end{pmatrix}.
+													\end{align*}
+
+													Applying $R_{\ang{90}}$ on $\vec{v}=\colvec{2}{x}{y}$ thus yields:
+													\begin{align*}
+														\begin{pmatrix}
+															0 & -1 \\
+															1 & 0  \\
+														\end{pmatrix}\colvec{2}{x}{y}=
+														\begin{pmatrix}
+															\cancel{0\cdot x}-1\cdot y \\
+															1\cdot x + \cancel{0\cdot y} \\
+														\end{pmatrix}=\colvec{2}{x}{y}.
+													\end{align*}
+
+													Now let's check that $\colvec{2}{-y}{x}$ is indeed orthogonal to $\colvec{2}{x}{y}$:
+													\begin{equation*}
+														\colvec{2}{x}{y} \cdot \colvec{2}{-y}{x} = -xy+xy = 0,
+													\end{equation*}
+													which shows that these two vectors are indeed orthogonal.
+
+													The same for $\theta=-\ang{90}$:
+													\begin{align*}  
+														R_{-\ang{90}}&=
+														\begin{pmatrix}
+															\cos\left( -\ang{90} \right) & -\sin\left( -\ang{90} \right) \\
+															\sin\left( -\ang{90} \right) &  \cos\left( -\ang{90} \right) \\
+														\end{pmatrix}
+														= \begin{pmatrix}
+															0 & -1 \\
+															1 & 0  \\
+														\end{pmatrix}.
+													\end{align*}
+
+													Applying $R_{-\ang{90}}$ on $\vec{v}=\colvec{2}{x}{y}$ thus yields:
+													\begin{align*}
+														\begin{pmatrix}
+															0 & -1 \\
+															1 & 0  \\
+														\end{pmatrix}\colvec{2}{x}{y}=
+														\begin{pmatrix}
+															\cancel{0\cdot x}-1\cdot y \\
+															1\cdot x + \cancel{0\cdot y} \\
+														\end{pmatrix}=\colvec{2}{x}{y}.
+													\end{align*}
+
+													Now let's check that $\colvec{2}{-y}{x}$ is indeed orthogonal to $\colvec{2}{x}{y}$:
+													\begin{equation*}
+														\colvec{2}{x}{y} \cdot \colvec{2}{-y}{x} = -xy+xy = 0,
+													\end{equation*}
+													which shows that these two vectors are indeed orthogonal.
+												\end{answer}
+											}\fi
+
+										\item Show that applying $R_{\theta}$ to a 2D-vector $\vec{v}$ indeed results in a rotation of $\vec{v}$ by $\theta$.
+											\if\withsol1{
+													\begin{answer}
+														Applying the matrix $R(\theta)$ to the vector $\vec{v}=\colvec{2}{v_{x}}{v_{y}}$ results in
+														\begin{align*}
+															\vec{u} &= R(\theta)\cdot\vec{v}\\
+															&= \begin{pmatrix}
+																\cos(\theta) & -\sin(\theta)\\
+																\sin(\theta) & \cos(\theta)
+															\end{pmatrix}\colvec{2}{v_{x}}{v_{y}}\\
+															&= \colvec{2}{\cos(\theta)v_{x}-\sin(\theta)v_{u}}{\sin(\theta)v_{x}+\cos(\theta)v_{y}}.
+														\end{align*}
+
+														The dot product between $\vec{v}$ and $\vec{u}=R(\theta)\cdot\vec{v}$ is
+														\begin{align*}
+															\vec{v}\cdot\vec{u} &= v_{x}\left[\cos(\theta)v_{x}-\sin(\theta)v_{y}\right] + v_{y}\left[ \sin(\theta)v_{x}+\cos(\theta)v_{y} \right]\\
+															&= v_{x}^{2}\cos(\theta) + v_{y}^{2}\cos(\theta) + v_{x}v_{y}\left[ \cancelto{=0}{\sin(\theta)-\sin(\theta)} \right]\\
+															&= \cos(\theta)\left[ v_{x}^{2}+v_{y}^{2} \right]\\
+															&= \cos(\theta)\cdot\norm{\vec{v}}^{2}.
+														\end{align*}
+
+														This is exactly the definition of a dot product between two vectors of the same norm (in this case $\norm{\vec{v}}$) and an angle $\theta$ between them. This means that the angle between $\vec{v}$ and $\vec{u}=R(\theta)\cdot\vec{v}$ is indeed $\theta$.
+													\end{answer}
+												}\fi
+
+										\end{enumerate} 
+									\item What operation does the following matrix perform? $A = \begin{pmatrix} N & 0 \\ 0 & N \end{pmatrix}$
+										\if\withsol1{
+												\begin{answer}
+													Applying $A$ to a generic 2D-vector $\vec{v}=\colvec{2}{x}{y}$:
+													\begin{align*}
+														A &= \begin{pmatrix} N & 0 \\ 0 & N \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix} \\
+														&= \colvec{2}{Nx + \cancel{0\cdot y}}{\cancel{0\cdot x} + Ny}\\
+														&= \colvec{2}{Nx}{Ny}\\
+														&= N\colvec{2}{x}{y}.
+													\end{align*}
+													This is simply a scalar multiplication of $\vec{v}$ by $N$ - i.e. scaling $\vec{v}$ by $N$.
+												\end{answer}
+											}\fi
+
+										\item Construct a $2\times2$ matrix that scales a vector by 2 and then rotates it by $\ang{30}$.
+											\if\withsol1{
+
+													\begin{answer}
+														Every linear operation on a vector is simply the left-product of a matrix with that matrix (for column vectors. For row vectors this changes to the right-product).\\
+														Since scaling and rotating are both linear operations, we can represent them by matrices (as seen in this tutorial) and apply them one after the other.
+														Let's first find the value of $R_{\ang{30}}$:
+														\begin{align*}
+															R_{\ang{30}} &= \rotMat{\ang{30}}\\
+															&= \begin{pmatrix} \frac{\sqrt{3}}{2} & -\frac{1}{2} \\ \frac{1}{2} & \frac{\sqrt{3}}{2} \\ \end{pmatrix}\\
+														\end{align*}
+														Now we can apply both matrices:
+														\begin{align*}
+															\begin{pmatrix} \frac{\sqrt{3}}{2} & -\frac{1}{2} \\ \frac{1}{2} & \frac{\sqrt{3}}{2} \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}
+															&=
+															\begin{pmatrix} \frac{\sqrt{3}}{\cancel{2}}\cdot\cancel{2}-\cancel{\frac{1}{2}\cdot0} & \cancel{\frac{\sqrt{3}}{2}\cdot0} - \frac{1}{\cancel{2}}\cdot\cancel{2} \\
+																\frac{1}{\cancel{2}}\cdot\cancel{2} - \cancel{\frac{\sqrt{3}}{2}\cdot0} & \cancel{\frac{1}{2}\cdot0} + \frac{\sqrt{3}}{\cancel{2}}\cdot\cancel{2}\\
+															\end{pmatrix}
+															\begin{pmatrix}
+																x \\
+																y \\
+															\end{pmatrix}\\
+															&=
+															\begin{pmatrix}  \sqrt{3} & -1 \\
+																1 &	\sqrt{3} \\
+															\end{pmatrix}
+															\begin{pmatrix}
+																x \\
+																y \\
+															\end{pmatrix}
+														\end{align*}
+														Meaning that
+														$\begin{pmatrix}  \sqrt{3} & -1 \\
+															1 &	\sqrt{3} \\
+														\end{pmatrix}$
+														will perform the entire operation of scaling by $2$ and then rotating by $\ang{30}$.\\
+														~\\~\\
+														\textbf{Moral of the question}: multiplying matrices is equivalent to compositing the respective transformations they represent.
+													\end{answer}
+												}\fi
+
+											\end{enumerate}

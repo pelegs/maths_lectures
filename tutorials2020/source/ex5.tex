@@ -1,0 +1,360 @@
+\section{Eigenvectors and Eigenvalues}
+\subsection{Geometric Interpretation}
+What are the eigenvectors and corresponding eigenvalues for the following transformations (answer without direct calculations)?
+\begin{enumerate}
+	\item $T\left( \vec{v} \right) = -3\vec{v}$.
+	\if\withsol1{
+			\begin{answer}
+				The transformation scales all vectors by $\lambda=-3$. Since all vectors keep their directions, this is the only eigenvalue, and all vectors are eigenvectors of the transformation.
+			\end{answer}
+		}\fi
+	
+	\item $T\colvec{2}{x}{y} = \colvec{2}{x}{-y}$.
+	\if\withsol1{
+			\begin{answer}
+				The transformation flips the $y$-component of any vector in $\Rs{2}$. The only vectors that remain on the same direction before and after application of the transformation are vectors on the $x$-axis, that do not change and thus have corresponding eigenvalues $\lambda_{1}=1$, and vectors on the $y$-axis which are flipped, and thus have a corresponding eigenvalue $\lambda_{2}=-1$.
+			\end{answer}
+		}\fi
+
+	\item $T\colvec{2}{x}{y} = \colvec{2}{y}{x}$.
+	\if\withsol1{
+			\begin{answer}
+				The transformation exchanges the $x$- and $y$-components of any vector in $\Rs{2}$. The only vectors which do not change their directions before and after application of the transformation are the vectors with angles $\theta=\pm\ang{45}$ or $\theta=\pm\ang{135}$ (where $-\ang{135}=\ang{225}$ and $-\ang{45}=\ang{315}$) in respect to the $x$-axis. For example:
+				\begin{equation*}
+					T\colvec{2}{1}{1} = \colvec{2}{1}{1},\quad T\colvec{2}{-3}{3} = \colvec{2}{3}{-3}, \colvec{2}{-2}{2} = \colvec{2}{2}{-2}.
+				\end{equation*}
+				
+				Vectors at $\ang{45},\ang{225}$ relative to the $x$-axis are unchanged (e.g. $\vec{v}=\colvec{2}{1}{1}=\colvec{2}{1}{1}$, while vectors with angle $\ang{135},\ang{315}$ relative to the $x$-axis are scaled bt $\lambda=-1$.
+
+				Thus, the two families of eigenvectors are represented by
+				\begin{equation*}
+					\vec{v}_{1} = \colvec{2}{1}{1},\quad \vec{v}_{2}=\colvec{2}{1}{-1},
+				\end{equation*}
+				with corresponding eigenvalues
+				\begin{equation*}
+					\lambda_{1}=1,\quad \lambda_{2}=-1.
+				\end{equation*}
+			\end{answer}
+		}\fi
+\end{enumerate}
+\subsection{Calculating Eigenvectors and Eigenvalues}
+Calculate all eigenvectors and corresponding eigenvalues for the following transformations:
+\begin{enumerate}
+	\item $\begin{pmatrix} -3 & 0 \\ 0 & -3 \end{pmatrix}$
+	\if\withsol1{
+		\begin{answer}
+			As always, we start with solving
+			\begin{equation*}
+				\left| A-\lambda I \right| = 0,
+			\end{equation*}
+			which in this case is
+			\begin{equation*}
+				\begin{vmatrix}
+					-3-\lambda & 0 \\
+					0 & -3-\lambda \\
+				\end{vmatrix} = \left(-3-\lambda\right)^{2} = 0,
+			\end{equation*}
+			for which the solution is $\lambda=-3$.
+
+			Subtituting $\lambda=-3$ into the equation $A\vec{v}=\lambda\vec{v}$ we get
+			\begin{equation*}
+				\begin{pmatrix}
+					-3 & 0\\
+					0 & -3
+				\end{pmatrix}\colvec{2}{x}{y} = -3\colvec{2}{x}{y},
+			\end{equation*}
+			which translates to
+			\begin{equation*}
+				-3x = -3x,
+			\end{equation*}
+			and
+			\begin{equation*}
+				-3y = -3y,
+			\end{equation*}
+			which translate both to any vector in $\Rs{2}$, as any $x$ and $y$ solve these equations.
+
+			This is exactly what we expect from an isometric scaling matrix.
+		\end{answer}
+	}\fi
+
+	\item $\begin{pmatrix} -3 & 0 \\ 0 & 3 \end{pmatrix}$
+	\if\withsol1{
+		\begin{answer}
+			Again, strating with
+			\begin{equation*}
+				0 = 
+				\begin{vmatrix}
+					-3-\lambda & 0\\
+					0 & 3-\lambda
+				\end{vmatrix} = \left( -3-\lambda \right)\left( 3-\lambda \right) = -9+3\lambda-3\lambda+\lambda^{2} = \lambda^{2}-9,
+			\end{equation*}
+			which has the solutions
+			\begin{equation*}
+				\lambda_{1,2} = \pm3.
+			\end{equation*}
+
+			For $\lambda_{1}=-3$,
+			\begin{equation*}
+				\begin{pmatrix}
+					-3 & 0 \\
+					0 & 3
+				\end{pmatrix}\colvec{2}{x}{y} = -3\colvec{2}{x}{y},
+			\end{equation*}
+			which translates to
+			\begin{equation*}
+				-3x = -3x,\quad 3y=-3y,
+			\end{equation*}
+			i.e. any non zero $x\in\mathbb{R}$, and $y=0$. This corresponds to the vectors of the family $\vec{v}_{1}=\colvec{2}{1}{0}$, i.e. vectors on the $x$-axis. When plugged back into the equation,
+			\begin{equation*}
+				\begin{pmatrix}
+					-3 & 0 \\
+					0 & 3
+				\end{pmatrix}\colvec{2}{1}{0} = \colvec{2}{-3}{0} = -3\colvec{2}{1}{0},
+			\end{equation*}
+			as expected.
+
+			Similarily, for $\lambda_{2}=3$, we get the family of vectors $\vec{v}_{2}=\colvec{2}{0}{1}$, i.e. vectors lying on the $y$-axis.
+		\end{answer}
+	}\fi
+
+
+	\item $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$
+	\if\withsol1{
+		\begin{answer}
+			Starting with
+			\begin{equation*}
+				\begin{vmatrix}
+					1-\lambda & 0 \\
+					0 & -1-\lambda
+				\end{vmatrix}=0
+			\end{equation*}
+			we get
+			\begin{equation*}
+				\left( 1-\lambda \right)\left( -1-\lambda \right) = -1-\lambda+\lambda+\lambda^{2} = \lambda^{2}-1,
+			\end{equation*}
+			for which the solution is
+			\begin{equation*}
+				\lambda_{1,2} = \pm 1.
+			\end{equation*}
+
+			For $\lambda_{1}=1$,
+			\begin{equation*}
+				\begin{pmatrix}
+					1 & 0 \\
+					0 & -1
+				\end{pmatrix}\colvec{2}{x}{y} = \colvec{2}{x}{y}
+			\end{equation*}
+			means
+			\begin{equation*}
+				x = x \text{ and } -y=y,
+			\end{equation*}
+			i.e. any (non-zero) $x$-value and $y=0$. A representative of this family is $\vec{v}_{1} = \colvec{2}{1}{0}$.
+
+			Verifying:
+			\begin{equation*}
+				\begin{pmatrix}
+					1 & 0 \\
+					0 & -1
+				\end{pmatrix}\colvec{2}{1}{0} = \colvec{2}{1\cdot1+0\cdot0}{0\cdot1-1\cdot0} = \colvec{2}{1}{0}.
+			\end{equation*}
+
+			For $\lambda_{1}=-1$,
+			\begin{equation*}
+				\begin{pmatrix}
+					1 & 0 \\
+					0 & -1
+				\end{pmatrix}\colvec{2}{x}{y} = -\colvec{2}{x}{y}
+			\end{equation*}
+			means
+			\begin{equation*}
+				x = -x \text{ and } y=y,
+			\end{equation*}
+			i.e. $x=0$ and any (non-zero) $y$-value. A representative of this family is $\vec{v}_{2} = \colvec{2}{0}{1}$.
+
+			Verifying:
+			\begin{equation*}
+				\begin{pmatrix}
+					1 & 0 \\
+					0 & -1
+				\end{pmatrix}\colvec{2}{0}{1} = \colvec{2}{1\cdot0+0\cdot1}{0\cdot0-1\cdot1} = \colvec{2}{0}{-1} = -\colvec{2}{0}{1}.
+			\end{equation*}
+		\end{answer}
+	}\fi
+	
+	\item $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$
+	\if\withsol1{
+		\begin{answer}
+			As always, we start with
+			\begin{equation*}
+				0 =
+				\begin{vmatrix}
+					0-\lambda & 1\\
+					1 & 0-\lambda
+				\end{vmatrix} =
+				\begin{vmatrix}
+					-\lambda & 1\\
+					1 & -\lambda
+				\end{vmatrix} =
+				\lambda^{2} - 1,
+			\end{equation*}
+			for which the solution is $\lambda_{1,2}=\pm1$.
+
+			For $\lambda_{1}=1$:
+			\begin{equation*}
+				\begin{pmatrix}
+					0 & 1\\
+					1 & 0
+				\end{pmatrix}\colvec{2}{x}{y} = \colvec{2}{x}{y},
+			\end{equation*}
+			i.e. $x=y$. A representive vector for this family is $\vec{v}_{1}=\colvec{2}{1}{1}$.
+
+			Verifying:
+			\begin{equation*}
+				\begin{pmatrix}
+					0 & 1\\
+					1 & 0
+				\end{pmatrix}\colvec{2}{1}{1} = \colvec{2}{0\cdot1+1\cdot1}{1\cdot1+0\cdot1} = \colvec{2}{1}{1}.
+			\end{equation*}
+
+			For $\lambda_{1}=-1$:
+			\begin{equation*}
+				\begin{pmatrix}
+					0 & 1\\
+					1 & 0
+				\end{pmatrix}\colvec{2}{x}{y} = -\colvec{2}{x}{y},
+			\end{equation*}
+			i.e. $y=-x$. A representive for this family is $\vec{v}_{2}=\colvec{2}{1}{-1}$.
+
+			Verifying:
+			\begin{equation*}
+				\begin{pmatrix}
+					0 & 1\\
+					1 & 0
+				\end{pmatrix}\colvec{2}{1}{-1} = \colvec{2}{0\cdot1+1\cdot(-1)}{1\cdot1+0\cdot(-1)} = \colvec{2}{-1}{1} = -\colvec{2}{1}{-1}.
+			\end{equation*}
+		\end{answer}
+	}\fi
+	
+	\item $\begin{pmatrix} 5 & 4 \\ 2 & -2 \end{pmatrix}$
+	\if\withsol1{
+		\begin{answer}
+			We start with
+			\begin{equation*}
+				0 =
+				\begin{vmatrix}
+					5-\lambda & 4 \\
+					2 & -2-\lambda
+				\end{vmatrix} = \left( 5-\lambda \right)\left( -2-\lambda \right) - 8 = -10 - 5\lambda+2\lambda+\lambda^{2}-8 = \lambda^{2}-3\lambda-18,
+			\end{equation*}
+			
+			Solving the equation using the quadratic formula yields
+			\begin{equation*}
+				\lambda_{1,2} = \frac{3\pm\sqrt{3^{2}+4\cdot18}}{2} = \frac{3\pm\sqrt{81}}{2} = \frac{3\pm9}{2} = -3,6.
+			\end{equation*}
+
+			For $\lambda_{1}=-3$,
+			\begin{equation*}
+				\begin{pmatrix}
+					5 & 4 \\
+					2 & -2
+				\end{pmatrix}\colvec{2}{x}{y} = -3\colvec{2}{x}{y},
+			\end{equation*}
+			which translates to
+			\begin{equation*}
+				5x + 4y = -3x,
+			\end{equation*}
+			i.e. $8x+4y=0$ or an $x:y$ ratio of $1:-2$. We can use $\vec{v}_{1}=\colvec{2}{1}{-2}$ as a representive of this vector family.
+			Verifying:
+			\begin{equation*}
+				\begin{pmatrix}
+					5 & 4 \\
+					2 & -2
+				\end{pmatrix}\colvec{2}{1}{-2} = \colvec{2}{5\cdot1-4\cdot2}{2\cdot1+2\cdot2} = \colvec{2}{-3}{6} = -3\colvec{2}{1}{-2}.
+			\end{equation*}
+
+			Now for $\lambda_{2}=6$:
+			\begin{equation*}
+				\begin{pmatrix}
+					5 & 4 \\
+					2 & -2
+				\end{pmatrix}\colvec{2}{x}{y} = 6\colvec{2}{x}{y},
+			\end{equation*}
+			i.e. $5x+4y = 6x$, or $x=4y$, which can be represented by $\vec{v}_{2}=\colvec{2}{4}{1}$. Verifying:
+			\begin{equation*}
+				\begin{pmatrix}
+					5 & 4 \\
+					2 & -2
+				\end{pmatrix}\colvec{2}{4}{1} = \colvec{2}{5\cdot4+4\cdot1}{2\cdot4-2\cdot1} = \colvec{2}{24}{6} = 6\colvec{2}{4}{1}.
+			\end{equation*}
+
+			\underline{Summary}:
+			\begin{equation*}
+				\vec{v}_{1} = \colvec{2}{1}{-2} (\lambda_{1}=-3),\quad \vec{v}_{2} = \colvec{2}{4}{1} (\lambda_{2}=6).
+			\end{equation*}
+		\end{answer}
+	}\fi
+\end{enumerate}
+
+\subsection{Challange}
+What do you expect would are the eigenvectors and eigenvalues of the 3-dimensional rotation matrices by $\varphi,\psi$ around the $y$- and $z$-axes, respectively? Explain and then calculate them directly. The two matrices are:
+\begin{equation*}
+	R^{y}_{\varphi} =
+	\begin{pmatrix}
+		\cos(\varphi) & 0 & \sin(\varphi)\\
+		0 & 1 & 0\\
+		-\sin(\varphi) & 0 & \cos(\varphi)
+	\end{pmatrix},\quad
+	R^{z}_{\psi}  =
+	\begin{pmatrix}
+		\cos(\psi) & -\sin(\psi)& 0\\
+		\sin(\psi) & \cos(\psi) & 0\\
+		0 & 0 & 1
+	\end{pmatrix}.
+	\label{eq:3d_rot}
+\end{equation*}
+\if\withsol1{
+	\begin{answer}
+		For $R^{y}_{\varphi}$,
+		\begin{align*}
+			0 &= 
+			\begin{vmatrix}
+				\cos(\varphi)-\lambda & 0 & \sin(\varphi)\\
+				0 & 1-\lambda & 0\\
+				-\sin(\varphi) & 0 & \cos(\varphi)-\lambda
+			\end{vmatrix}\\
+			& = \left(\cos(\varphi)-\lambda\right)\left( 1-\lambda \right)\left( \cos(\varphi)-\lambda \right) + \sin(\varphi)\left( 1-\lambda \right)\sin(\varphi)\\
+			&= \left( \cos^{2}(\varphi)-2\lambda\cos(\varphi)+\lambda^{2} \right)\left( 1-\lambda \right)+\left( 1-\lambda \right)\sin^{2}(\varphi)\\
+			&= \left( 1-\lambda \right)\left[ \cos^{2}(\varphi)-2\lambda\cos(\varphi)+\lambda^{2}+\sin^{2}(\varphi) \right]\\
+			&= \left( 1-\lambda \right)\left[ \lambda^{2}-2\lambda\cos(\varphi)+1\right].\\
+		\end{align*}
+
+		The solution for this polynomial is either $\lambda_{1}=1$ (from the left parantheses), and
+		\begin{equation*}
+			\lambda_{2,3} = \frac{2\cos(\varphi)\pm\sqrt{4\cos^{2}(\varphi)-4}}{2} = \frac{2\cos(\varphi)\pm2\sqrt{\cos^{2}(\varphi)-1}}{2} = \cos(\varphi)\pm\sqrt{\cos^{2}(\varphi)-1}.
+		\end{equation*}
+		Since the image of $\cos(\varphi)$ is $\left[ -1,1 \right]$, the image of $\cos^{2}(\varphi)$ is $\left[ 0,1 \right]$, and thus $\lambda_{2,3}$ exist only for $\cos(\varphi)=\pm1$, i.e. for $\varphi=\ang{0}$ or $\varphi=\ang{180}$. These angles correspond to either the identity matrix (no rotation), and to a flip in the $xz$-plane($\ang{180}$), respectively. Both actions have all vectors as eigenvectors.
+
+		The general case, therefore, is for the eigenvalue $\lambda_{1}=1$. Let's calculate its corresponding eigenvectors:
+		\begin{equation*}
+			\begin{pmatrix}
+				\cos(\varphi) & 0 & \sin(\varphi)\\
+				0 & 1 & 0\\
+				-\sin(\varphi) & 0 & \cos(\varphi)
+			\end{pmatrix}\colvec{3}{x}{y}{z} = \colvec{3}{x}{y}{z},
+		\end{equation*}
+		which corresponds to
+		\begin{equation*}
+			\begin{cases}
+				\cos(\varphi)x + \sin(\varphi)z=x,\\
+				y=y,\\
+				-\sin(\varphi)x + \cos(\varphi)z=z.
+			\end{cases}
+		\end{equation*}
+		
+		The first and third equations force one of two cases:
+		\begin{enumerate}
+			\item If $\varphi\neq\ang{0}$, then both $\cos(\varphi)$ and $\sin(\varphi)$ are different than $0$, and the only possible solution is $x=z=0$, which gives vectors of the form $\vec{v}=\colvec{3}{0}{y}{0}$, and can be represented by the vector $\colvec{3}{0}{1}{0}$.
+			\item If $\varphi=\ang{0}$ then $\cos(\varphi)=1,\ \sin(\varphi)=0$, and we get $x=x,\ y=y,\ z=z$, which means that any vector is an eigenvector.
+		\end{enumerate}
+	\end{answer}
+}\fi

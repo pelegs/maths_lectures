@@ -1,0 +1,310 @@
+\section{Summation and Sequences}
+
+\subsection{Summation}
+\begin{enumerate}
+  \item Write the following expressions explicitly:
+    \begin{enumerate}
+      \item $\sum\limits_{n=1}^{5}\left(n^{2}-2n\right)$
+        \if\withsol1{
+        \begin{answer}
+          \begin{align*}
+          \sum_{n=1}^{5}\left(n^{2}-2n\right) &= \left(1^{2}-2\right) + \left(2^{2}-4\right) + \left(3^{2}-6\right) + \left(4^{2}-8\right) + \left(5^{2}-10\right)\\
+            &= -1 + 0 + 3 + 8 + 15\\
+						&= 25.
+          \end{align*}
+        \end{answer}
+}\fi
+
+      \item $\sum\limits_{n=-3}^{3}2^{n}$
+        \if\withsol1{
+        \begin{answer}
+          \begin{align*}
+            \sum_{n=-3}^{3}2^{n} &= 2^{-3} + 2^{-2} + 2^{-1} + 2^{0} + 2^{1} + 2^{2} + 2^{3} \\
+            &= \frac{1}{2^{3}} + \frac{1}{2^{2}} + \frac{1}{2^{1}} + \frac{1}{2^{0}} + 2^{1} + 2^{2} + 2^{3}\\
+            &= \frac{1}{8} + \frac{1}{4} + \frac{1}{2} + 1 + 2 + 4 + 8\\
+						&= 15.875.
+          \end{align*}
+        \end{answer}
+}\fi
+
+      \item $\sum\limits_{i=1}^{3}\sum\limits_{j=1}^{4}a_{ij}$
+        \if\withsol1{
+      \begin{answer}
+        \begingroup\tikzset{every node/.append style={inner sep=3pt,rounded corners,draw=black}}
+\begin{align*}
+  \sum\limits_{i=1}^{3}\sum\limits_{j=1}^{4} a_{ij}&=
+  \tikznode[fill=col1!50]{red1}{\sum\limits_{j=1}^{4}a_{1j}} +
+  \tikznode[fill=col2!50]{blue1}{\sum\limits_{j=1}^{4}a_{2j}} +
+	\tikznode[fill=col3!50]{green1}{\sum\limits_{j=1}^{4}a_{3j}}\\
+  \\~\\
+  &=
+  \tikznode[fill=col1!50]{red2}{a_{11} + a_{12} + a_{13} + a_{14}} +
+  \tikznode[fill=col2!50]{blue2}{a_{21} + a_{22} + a_{23} + a_{24}} +
+  \tikznode[fill=col3!50]{green2}{a_{31} + a_{32} + a_{33} + a_{34}}
+\end{align*}\endgroup
+\begin{tikzpicture}[overlay, remember picture,>=stealth,very thick]
+	\draw[vector, thin] (red1.south) to [out=-90, in=90] (red2.north);
+	\draw[vector, thin] (blue1) to [out=-90, in=90, looseness=0.5] (blue2);
+	\draw[vector, thin] (green1) to [out=-90, in=90, looseness=0.5] (green2);
+\end{tikzpicture} 
+\end{answer}
+        }\fi
+
+    \end{enumerate}
+  \item Use the summation form to write the product of two matrices $C=A\cdot B$, with dimensions $M\times N$ and $N\times K$, respectively.\\
+    \if\withsol1{
+      \begin{answer}
+        Let's define $a_{ij}$ as the elements of matrix $A$, $b_{ij}$ the elements of matrix $B$ and $c_{ij}$ the elements of the resulting matrix $C=AB$. The element $c{ij}$ is the result of the dot product between the $i$-th row of matrix $A$ and the $j$-th column of matrix $B$:
+        \begin{align*}
+          c_{ij} &= \vec{a}_{\text{row}=i} \cdot \vec{b}_{\text{column}=j}\\
+          &= \sum\limits_{k=1}^{N} a_{ik}b_{kj}
+        \end{align*}
+        ~\\
+        Let's look at a specific example: $A=\begin{bmatrix}1 & 2 & 3\\4 & 5 & 6\\\end{bmatrix}, B=\begin{bmatrix}10 & 9\\8 & 7\\6 & 5\\\end{bmatrix}$. The element $c_{12}$ of the resulting matrix $C$ is a product of the first row of $A$: $\begin{bmatrix}\colorbox{col1!50}{$1$}&\colorbox{col2!50}{$2$}&\colorbox{col3!50}{$3$}\end{bmatrix}$, and the second column of $B$: $\begin{bmatrix}\colorbox{col1!50}{$9$}\\\colorbox{col2!50}{$7$}\\\colorbox{col3!50}{$5$}\end{bmatrix}$. We therefore set $i=1,j=2$ in the resulting general sum above, and get
+        \begin{align*}
+          c_{12} &= \sum\limits_{k=1}^{3} a_{1k}b_{k2}\\
+          &= \colorbox{col1!50}{$a_{11}b_{12}$} + \colorbox{col2!50}{$a_{12}b_{22}$} + \colorbox{col3!50}{$a_{13}b_{32}$}\\
+					&= \colorbox{col1!50}{$1\times9$} + \colorbox{col2!50}{$2\times7$} + \colorbox{col3!50}{$3\times5$}.
+        \end{align*}
+      \end{answer}
+    }\fi
+  \item Write in summation form the general real polynomial of order $n$: $P_{n}\left( x \right)=a_{0} + a_{1}x + a_{2}x^{2} + \dots + a_{n}x^{n}$, where $a_{0}, a_{1}, \dots, a_{n}$ are real numbers and $a_{n}\neq0$.
+        \if\withsol1{
+
+        \begin{answer}
+          \begin{align*}
+						P_{n}\left( x \right)=\sum_{i=1}^{n}a_{i}x^{i},\quad \left\{ a_{i} \right\}\in\mathbb{R},\quad a_{n}\neq0.
+          \end{align*}
+        \end{answer}
+}\fi
+
+  \item The binomial coefficient $\binom{n}{k}$ is defined as $\binom{n}{k}=\frac{n!}{k!(n-k)!}$, where $n!$ is defined as $n!=1\times2\times3\dots\times \left( n-1 \right)\times n$.\\
+        What is $\binom{4}{2}$? 
+        \if\withsol1{
+
+        \begin{answer}
+          \begin{align*}
+            \binom{4}{2} &= \frac{4!}{2!\left( 4-2 \right)!} \\
+            &= \frac{1\times2\times3\times4}{\left( 1\times2 \right)\times\left( 2 \right)!}\\
+            &= \frac{\cancel{1\times2}\times3\times4}{\cancel{\left( 1\times2 \right)}\times\left( 1\times2 \right)}\\
+            &= \frac{12}{2} \\
+						&= 6.
+          \end{align*}
+        \end{answer}
+}\fi
+  
+      \item The general expension formula for $\left( x+y \right)^{n}$ (where $x,y\in\mathbb{R}$ and $n\in\mathbb{N}$) is:
+        $$\left( x+y \right)^{n}=\sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^{k}$$
+        Show that for $n=2$ the formula yields the known expression $\left( x+y \right)^{2}=x^{2}+2xy+y^{2}$, and write the full formula for $\left( x+y \right)^{4}$.
+        \if\withsol1{
+        \begin{answer}
+          For $n=2$ we get: 
+          \begin{align*}
+            \left( x+y \right)^{2} &= \sum\limits_{k=0}^{2}\binom{2}{k}x^{2-k}y^{k} \\
+            &= \binom{2}{0}x^{2}y^{0} + \binom{2}{1}x^{1}y^{1} + \binom{2}{2}x^{0}y^{2} \\
+            &= \frac{2!}{0!2!}x^{2} + \frac{2!}{1!1!}xy + \frac{2!}{2!0!}y^{2} \\
+            &= \frac{1}{0!}x^{2} + 2xy + \frac{1}{0!}y^{2} \\
+						&= x^{2} + 2xy + y^{2}.
+          \end{align*}
+          ~\\
+          For $n=4$ we get:
+          \begin{align*}
+            \left( x+y \right)^{4} &= \sum\limits_{k=0}^{4}\binom{4}{k}x^{4-k}y^{k} \\
+            &= \binom{4}{0}x^{4}y^{0} + \binom{4}{1}x^{4-1}y^{1} + \binom{4}{2}x^{4-2}y^{2} + \binom{4}{3}x^{4-3}y^{3} + \binom{4}{4}x^{4-4}y^{4} \\ 
+						&= x^{4} + 4x^{3}y + 6x^{2}y^{2} + 4xy^{3} + y^{4}. 
+          \end{align*}
+        \end{answer}
+}\fi
+\end{enumerate}
+
+\subsection{Sequences}
+\begin{enumerate}
+  \item Write the first $10$ elements of the following sequences:
+    $$a_{n}=3n-2,\quad b_{n}=1,\quad c_{n}=\frac{1}{n},\quad d_{n}=\left(-1\right)^{n},\quad e_{n}=\begin{cases} 2^{-n} & \text{if } n \text{ is odd}\\n & \text{if } n \text{ is even}\end{cases}$$
+     \if\withsol1{
+       \begin{answer}
+\begin{enumerate}
+	\item $a=1,\ 4,\ 7,\ 10,\ 13,\ 16,\ 19,\ 22,\ 25,\ 28,\ \dots$
+  \item $b=1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1,\ \dots$
+  \item $c=1,\ \frac{1}{2},\ \frac{1}{3},\ \frac{1}{4},\ \frac{1}{5},\ \frac{1}{6},\ \frac{1}{7},\ \frac{1}{8},\ \frac{1}{9},\ \frac{1}{10},\ \dots$
+  \item $d=-1,\ 1,\ -1,\ 1,\ -1,\ 1,\ -1,\ 1,\ -1,\ 1,\ -1,\ 1,\ \dots$
+  \item $e=\frac{1}{2},\  2,\  \frac{1}{8},\  4,\  \frac{1}{32},\  6,\  \frac{1}{128},\  8,\  \frac{1}{512},\  10,\ \dots$
+\end{enumerate}
+       \end{answer}
+}\fi
+  
+   \item Which of the above sequences are bounded from above and what are their upper boundaries? Which are bounded from below and what are their lower boundaries?
+     \if\withsol1{
+
+     \begin{answer}
+       \begin{itemize}
+         \item $\left\{ a_{n} \right\}$ has a lower boundary equal to $1$, and no upper boundary.
+         \item $\left\{ b_{n} \right\}$ has both a lower and an upper boundaries, and they are both equal to $1$.
+         \item $\left\{ c_{n} \right\}$ has a lower boundary equal to $0$ and an upper boundary equal to $1$.
+         \item $\left\{ d_{n} \right\}$ has a lower boundary equal to $-1$ and an upper boundary equal to $1$.
+         \item $\left\{ e_{n} \right\}$ has a lower boundary equal to $0$ and no upper boundary.
+       \end{itemize}
+     \end{answer}
+}\fi
+
+\tikzset{highlight/.style={fill opacity=0.4, text opacity=1, rounded corners, minimum height=5mm},
+				 arrow/.style={->, >=stealth}}
+   \item Which of the above sequences converge for $n\longrightarrow\infty$? For those that don't, find a sub-sequence that does.
+     \if\withsol1{
+
+     \begin{answer}
+       The sequences $b$ and $c$ converge. The rest don't.\\
+       Subsequences convergence:
+       \begin{itemize}
+         \item $\left\{a_{n}\right\}$: does not have any converging subsequence.
+         \item $\left\{d_{n}\right\}$: there are infinite converging subsequences, e.g. if one takes only the elements with even indices.
+         \item $\left\{e_{n}\right\}$: an example of a converging subsequence would be only the elements with odd indices.
+       \end{itemize}
+     \end{answer}
+}\fi
+
+	\item Prove that the following sequences converge to the given limits:
+		\begin{itemize}
+			\item $a_{n} = \frac{1}{n}\longrightarrow0$.
+			\if\withsol1{
+				\begin{answer}
+					Let $\varepsilon>0$ be a real number. For an $n > n_{\varepsilon}=\ceil{\frac{1}{\varepsilon}}$ (where $\ceil{x}$ of some $x\in\mathbb{R}$ is the smallest integer $n$ that is bigger than $x$) we get
+					\begin{equation*}
+						a_{n} = \frac{1}{n} \tikznode[highlight, fill=col1]{A1}{<} \frac{1}{n_{\varepsilon}} = \frac{1}{\ceil{\frac{1}{\varepsilon}}} \tikznode[highlight, fill=col3]{B1}{\leq} \frac{1}{\frac{1}{\varepsilon}} = \varepsilon,
+					\end{equation*}
+					\begin{tikzpicture}[overlay, remember picture]
+						\tiny
+						\node[below=of A1, highlight, fill=col1] (A1txt) {since $n>n_{\varepsilon}$};
+						\draw[arrow] ($(A1txt)+(0,4mm)$) to ($(A1)+(0,-4mm)$);
+						\node[below=of B1, highlight, fill=col3] (B1txt) {since $\ceil{\frac{1}{\varepsilon}} \geq \frac{1}{\varepsilon}$};
+						\draw[arrow] ($(B1txt)+(0,4mm)$) to ($(B1)+(0,-4mm)$);
+					\end{tikzpicture}
+
+					\vspace{1cm}
+				meaning that for each real $\varepsilon>0$, there is an $n_{\varepsilon}=\ceil{\frac{1}{\varepsilon}}$ for which for any $n>n_{\varepsilon}$ the sequence values are within $\varepsilon$ of $0$, and therefore this is the limit of the sequence.
+				\end{answer}
+			}\fi
+
+		\item $a_{n} = \frac{n+2}{n} \longrightarrow 1$.
+		\if\withsol1{
+			\begin{answer}
+				Let $\varepsilon>0$ be a real number. Then for $n\neq0$,
+				\begin{equation*}
+					\frac{n+2}{n} = \frac{\cancel{\frac{n}{n}}+\frac{2}{n}}{\cancel{\frac{n}{n}}} = \frac{1+\frac{2}{n}}{1} = 1+\frac{2}{n}.
+				\end{equation*}
+				
+				Then, similarly to the previous sequence, for
+				\begin{equation*}
+					n_{\varepsilon} = \ceil{\frac{2}{\varepsilon}},
+				\end{equation*}
+				we get that any $n>n_{\varepsilon}$ will confirm to the following:
+				\begin{equation*}
+					\left|a_{n} - 1\right| \tikznode[highlight, fill=col1]{A2}{<} \left|a_{n_{\varepsilon}} -1\right| = \left|\cancel{1}+ \frac{2}{\ceil{\frac{2}{\varepsilon}}} - \cancel{1}\right|  = \left|\frac{2}{\ceil{\frac{2}{\varepsilon}}}\right| \tikznode[highlight, fill=col2]{B2}{\leq} \left| \frac{2}{\frac{2}{\varepsilon}}\right| = \left|\varepsilon\right| \tikznode[highlight, fill=col3]{C2}{=} \varepsilon.
+				\end{equation*}
+					\begin{tikzpicture}[overlay, remember picture]
+						\tiny
+						\node[below=of A2, highlight, fill=col1] (A2txt) {since $n>n_{\varepsilon}, n>1$ and $a_{n+1}<a_{n}$};
+						\draw[arrow] ($(A2txt)+(0,4mm)$) to ($(A2)+(0,-4mm)$);
+						\node[below=of B2, highlight, fill=col2] (B2txt) {since $\ceil{\frac{2}{\varepsilon}} \geq \frac{2}{\varepsilon}$};
+						\draw[arrow] ($(B2txt)+(0,4mm)$) to ($(B2)+(0,-4mm)$);
+						\node[below=of C2, highlight, fill=col3] (C2txt) {since $\varepsilon>0$};
+						\draw[arrow] ($(C2txt)+(0,4mm)$) to ($(C2)+(0,-4mm)$);
+					\end{tikzpicture}
+
+					\vspace{1cm}
+					Thus, for any real number $\varepsilon>0$, there exists an integer $n_{\varepsilon}$ such that for each $n>n_{\varepsilon}$
+					\begin{equation*}
+						\left| a_{n}-1 \right| < \varepsilon,
+					\end{equation*}
+					and $a_{n}\longrightarrow1$.
+
+					\vspace{1cm}
+					\textbf{Note}: during this proof it is claimed that $a_{n+1} < a_{n}$. Let us show this by calculating the ratio $\frac{a_{n+1}}{a_{n}}$:
+					\begin{align*}
+						\frac{a_{n+1}}{a_{n}} &= \frac{\frac{n+1+2}{n+1}}{\frac{n+2}{n}}\\
+						&= \frac{\frac{n+3}{n+1}}{\frac{n+2}{n}}\\
+						&= \frac{n\left( n+3 \right)}{\left( n+1 \right)\left( n+2 \right)}\\
+						&= \frac{n^{2}+3n}{n^{2}+3n+2}.
+					\end{align*}
+					For $n\geq0$, as we have here, $\frac{n^{2}+3n}{n^{2}+3n+2}<1$, i.e. $a_{n+1} < a_{n}$.
+			\end{answer}
+		}\fi
+
+		\item $a_{n} = \frac{\sin(n)}{n} \longrightarrow 0 $.
+		\if\withsol1{
+			\begin{answer}
+				For any $x\in\mathbb{R}$, and thus any $n\in\mathbb{N}$,
+				\begin{equation*}
+					\sin(x) \in \left[ -1,1 \right],
+				\end{equation*}
+				and therefore
+				\begin{equation*}
+					\left| \frac{\sin(n)}{n} \right| \leq \left|\frac{1}{n}\right|.
+				\end{equation*}
+					
+				Since we already proved that $\frac{1}{n}\longrightarrow0$, this is true for $\frac{\sin(n)}{n}$ as well.
+			\end{answer}
+		}\fi
+		\end{itemize}
+\end{enumerate}
+
+\subsection{Series}
+Calculate the following expressions:
+\begin{enumerate}
+	\item $\sum\limits_{n=0}^{\infty}\frac{5}{2^{n}}$.
+	\if\withsol1{
+		\begin{answer}
+			This is a geometric series with first time $a=5$ and ratio $r=\frac{1}{2}$. Thus,
+			\begin{align*}
+				\sum\limits_{n=0}^{\infty}\frac{5}{2^{n}} &= \frac{a}{1-r}\\
+				&= \frac{5}{1-\frac{1}{2}}\\
+				&= \frac{5}{\frac{1}{2}}\\
+				&= 5\cdot2\\
+				&= 10.
+			\end{align*}
+		\end{answer}
+	}\fi
+
+	\item $\sum\limits_{n=2}^{\infty}\frac{1}{n^{2}-n}$.
+	\if\withsol1{
+		\begin{answer}
+			\begin{align*}
+				\sum\limits_{n=2}^{\infty}\frac{1}{n^{2}-n} &= \sum\limits_{n=2}^{\infty}\frac{1}{n\left( n-1 \right)}\\
+				&= \sum\limits_{n=2}^{\infty}\left( \frac{1}{n-1} - \frac{1}{n} \right)\\
+				&= \lim\limits_{n\rightarrow\infty} \left( \frac{1}{1}-\frac{1}{2} \right) + \left( \frac{1}{2}-\frac{1}{3} \right) + \left( \frac{1}{3}-\frac{1}{4} \right) + \cdots + \left( \frac{1}{n-1} - \frac{1}{n} \right).
+			\end{align*}
+
+			Note how in each term the last element is cancelling the first element of the next term, i.e.
+			\begin{equation*}
+				\left( \frac{1}{1}-\cancel{\frac{1}{2}} \right) + \left( \cancel{\frac{1}{2}}-\cancel{\frac{1}{3}} \right) + \left( \cancel{\frac{1}{3}}-\cancel{\frac{1}{4}} \right) + \cdots + \left( \cancel{\frac{1}{n-1}} - \frac{1}{n} \right),
+			\end{equation*}
+			and thus
+			\begin{equation*}
+				\sum\limits_{n=2}^{\infty}\frac{1}{n^{2}-n} = \lim\limits_{n\rightarrow\infty}\left( 1-\frac{1}{n} \right) = 1.
+			\end{equation*}
+		\end{answer}
+	}\fi
+
+	\item $\sum\limits_{n=0}^{\infty}\frac{n!}{2^{n}}$.
+	\if\withsol1{
+		\begin{answer}
+			Note that
+			\begin{equation*}
+				2^{n} = 2\cdot2\cdot2\cdots2,
+			\end{equation*}
+			while
+			\begin{equation*}
+				n! = 1\cdot2\cdot3\cdots(n-1)\cdot n.
+			\end{equation*}
+			
+			For any $n>2$, $n!>2^{n}$, and thus
+			\begin{equation*}
+				\lim\limits_{n\rightarrow\infty}\frac{n!}{2^{n}}=\infty,
+			\end{equation*}
+			meaning that
+			\begin{equation*}
+				\sum\limits_{n=0}^{\infty}\frac{n!}{2^{n}}=\infty.
+			\end{equation*}
+		\end{answer}
+	}\fi
+\end{enumerate}

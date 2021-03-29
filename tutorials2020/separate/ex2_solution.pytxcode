@@ -1,0 +1,34 @@
+=>PYTHONTEX#py#default#default#0#code####ex2.tex#117#
+from scripts import *
+
+print(r'\begin{align*}')
+print(r'\left\|\vec{u}\right\|&=', vlen([5, -2]), r'\\')
+print(r'\left\|\vec{v}\right\|&=', vlen([2, 5]), r'\\')
+print(r'\left\|\vec{a}\right\|&=', vlen([1, 3, 7]), r'\\')
+print(r'\left\|\vec{c}\right\|&=', vlen([1, 1, 0]), r'.')
+print(r'\end{align*}')
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-ex2_solution
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

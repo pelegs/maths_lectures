@@ -1,0 +1,36 @@
+public int foo(int[] arr)
+{
+    int m = arr[0];
+    for (int i=0; i<arr.length; i++)
+    {
+        if (arr[i] > m)
+          m = arr[i];
+    }
+    return m;
+}
+        if (arr[i] < m)
+
+public boolean bar(int n)
+{
+    if (n < 2 || (n % 2 == 0 && n != 2))
+      return false;
+
+    int i = 3;
+    while (i < n)
+    {
+        if (n % i == 0)
+            return false;
+        i = i + 2;
+    }
+    return true;
+}
+
+public int baz(int n)
+{
+    int x = 1;
+    for (i=1; i<=n; i++)
+    {
+        x = x * i;
+    }
+    return x;
+}

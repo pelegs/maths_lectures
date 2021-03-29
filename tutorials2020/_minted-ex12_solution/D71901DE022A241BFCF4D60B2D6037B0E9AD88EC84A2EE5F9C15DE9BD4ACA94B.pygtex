@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{k+kt}{int} \PYG{n+nf}{f}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{x}\PYG{o}{[]}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{a}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k+kt}{boolean} \PYG{n}{b} \PYG{o}{=} \PYG{k+kc}{true}\PYG{p}{;}
+    \PYG{k}{while} \PYG{p}{(}\PYG{n}{b} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{x}\PYG{p}{.}\PYG{n+na}{length}\PYG{p}{))}
+    \PYG{p}{\PYGZob{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{x}\PYG{o}{[}\PYG{n}{i}\PYG{o}{]} \PYG{o}{==} \PYG{n}{a}\PYG{p}{)}
+            \PYG{n}{b} \PYG{o}{=} \PYG{k+kc}{false}
+        \PYG{k}{else}
+            \PYG{n}{i} \PYG{o}{=} \PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{b}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Error!\PYGZdq{}}\PYG{p}{);}
+        \PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{k}{else}
+        \PYG{k}{return} \PYG{n}{i}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

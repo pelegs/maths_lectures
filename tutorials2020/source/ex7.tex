@@ -1,0 +1,213 @@
+\section{Basics of computer science, part \rom{2}}
+\subsection{Binary Arithmetic}
+    \begin{enumerate}
+      \item Find the 8-bit two's complement representation of the following integers: -23, -42.
+        \if\withsol1{
+\begin{answer}
+            \begin{pycode}
+from scripts import twos
+twos(23, 8)
+print('\\\\')
+twos(42, 8)
+print('\\\\')
+            \end{pycode}
+              \end{answer}
+}\fi
+      
+      \item Solve using two's complement: $-13+52=?$.
+        \if\withsol1{
+\begin{answer}
+            \begin{pycode}
+from scripts import twos
+twos(13, 8)
+print('\\\\')
+            \end{pycode}
+        $52 \xrightarrow[\text{8 bit}]{\text{binary}} 00110100$\\
+        Adding both:\\ 
+        +\ 
+        \begin{tabu}[]{ c c c c c c c c c}
+          \rowfont{\color{red}}
+          1 & 1 & 1 & 1 &   &   &   &   &   \\
+          \rowfont{\color{black}}
+            & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 \\
+          \hline
+          \rowfont{\color{black}}
+            & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 \\ 
+          \hline 
+          \rowfont{\color{blue}}
+          1 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 1 \\ 
+        \end{tabu} \\~\\
+        Ignoring the MSB (Most Significant Bit), we get $00100111_{2}$.\\
+        $100111_{2}=39_{10}$, which is exactly what we expect.
+              \end{answer}
+}\fi
+
+      \item Solve the following expressions in binary representation: $126\cdot16=?$, $\frac{74}{2}=?$, $\frac{91}{8}=?$
+        \if\withsol1{
+\begin{answer}
+        When multiplying a base-10 number by 10, we simply add a 0 to the number: $157\times10=1570$. When dividing by 10, we simply move the period to the left: $\frac{634.17}{10}=63.417$. For 100 we perform the same operations only twice ($100=10^{2}$), for 1000 three times ($1000=10^{3}$), etc.
+    The same applies for powers of 2\ in binary! Since $2=2^{1}, 8=2^{3}, 16=2^{4}$, we can easily convert to binary, move the period the right places, and convert back to decimal:\\
+    $126_{10}=1111110_{2}$, multiplying by $16=2^{4}$ yields $1111110 0000$ (adding four 0s). Converting back to decimal yields $2016_{10}$.\\
+    Same for 74: $74_{10}=1001010_{2} \xrightarrow[]{\text{move period 2 places left}} 100101.0 \xrightarrow[]{\text{back to dec}} 37_{10}$.\\
+    Same for 91: $91_{10}=1011011_{2} \xrightarrow[]{\text{move period 3 places left}} 1011.011 \xrightarrow[]{\text{back to dec}} 11.375_{10}$
+          \end{answer}
+}\fi
+    \end{enumerate}
+   
+%% --------- %%
+%% PROBLEM 4 %%
+%% --------- %%
+
+\subsection{Floating Point}
+    \begin{enumerate}
+      \item How many bits are in a standard floating point number? In a double-precision floating point number?
+        \if\withsol1{
+\begin{answer}
+            A standard (IEEE-754) floating point number has 32 bits. A double-precision floating point number has 64 bits.
+              \end{answer}
+}\fi
+      \item Name the different components of a floating point number.
+        \if\withsol1{
+          \begin{answer}
+            \begin{tikzpicture}[scale=0.93]
+              \draw[fill=red!20]   (0,0)   rectangle (0.5,1);
+              \draw[fill=blue!20]  (0.5,0) rectangle (4.5,1);
+              \draw[fill=green!20] (4.5,0) rectangle (16,1);
+              \draw[thick] (0,0) rectangle (16,1);
+              \foreach \x in {0,...,31}{
+                \draw[thick] ($(\x/2,0)$) to ($(\x/2,1)$);
+}
+              \node[fill=red!20]   (S) at (1.25, 1.35) {$S$, Sign: 1 bit};
+              \node[fill=blue!20]  (E) at (2.5, -0.35) {$E$, Exponent: 8 bits};
+              \node[fill=green!20] (M) at (10.75,1.35) {$M$, Mantisa: 23 bits};
+            \end{tikzpicture}
+              \end{answer}
+}\fi
+      \item Convert the following 32-bit floating point number to a real base-10 number:\\1 1000 0001 011 0000 0000 0000 0000 0000.
+        \if\withsol1{
+          \begin{answer}
+            \begin{pycode}
+from scripts import show_fp
+show_fp(-5.5, scale=0.93)
+            \end{pycode}
+            
+            $\colorbox{red!25}{$S=1$}, \colorbox{blue!25}{$E=1000\ 0001$}, \colorbox{green!25}{$M=011\ 0000\ 0000\ 0000\ 0000\ 0000$}$.\\
+            \begin{enumerate}
+              \item $\colorbox{red!25}{$S=1$}$ means this is a negative number.
+              \item The exponent $\colorbox{blue!25}{$E$}$ must is relative to $-127$. In this case $\colorbox{blue!25}{$E=1000\ 0001_{2}=129_{10}$}$, and so the total exponent is $\colorbox{blue!25}{$E=129-127=2$}$.
+              \item The mantisa is normalized, and so $\colorbox{green!25}{$M=1.011\ 0000\ \dots$}$, which means\\$\colorbox{green!25}{$M=1\times2^{0}+1\times2^{-2}+1\times2^{-3}=1.375$}$.
+            \end{enumerate}
+            The total number is therefore $-1\times1.375\times2^{2}=-5.5$.\\
+              \end{answer}
+          }\fi
+      
+      \item What is the 32-bit floating point representation of 17.75?
+        \if\withsol1{
+          \begin{answer}
+            \begin{enumerate}
+              \item The sign is positive, hence $\colorbox{red!25}{$S=0$}$.
+              \item $17.75_{10}=10001.11_{2}$. To normalize, we divide $10001.11$ by $2^{4}$ (to yield $1.000111$).\\Therefore, the exponent is $\colorbox{blue!25}{$E=4+127=131_{10}=10000011_{2}$}$.
+              \item The mantisa is the resulting normalized form, starting from the first $1$: $\colorbox{green!25}{$M=1110\ 0000\ \dots\ $}$.
+            \end{enumerate}
+            All together this yields $17.75 = $\\
+            \begin{pycode}
+from scripts import show_fp
+show_fp(17.75, scale=0.93)
+            \end{pycode}
+              \end{answer}
+          }\fi
+
+    \end{enumerate}
+
+%% --------- %%
+%% PROBLEM 5 %%
+%% --------- %%
+    
+\subsection{Data Representation}
+The English alphabet has 26 letters. Assuming they occur with equal probabilities:
+\begin{enumerate}
+  \item What is the probability $P_{i}$ of each letter?
+    \if\withsol1{
+        \begin{answer}
+          $P_{i} = \frac{1}{26}$
+        \end{answer}
+      }\fi
+    \item What is the entropy of the alphabet?
+      \if\withsol1{
+          \begin{answer}
+            \begin{align*}
+              S&=-\sum\limits_{i=1}^{N}\left[p\left(x_{i}\right)\cdot\log_{2}p\left(x_{i}\right)\right]\\
+              &=\sum\limits_{i=1}^{N}\left[p\left(x_{i}\right)\cdot\log_{2}p\left(\frac{1}{x_{i}}\right)\right]\\
+              &=\sum\limits_{i=1}^{26}\left[\frac{1}{26}\cdot\log_{2}26\right]\\
+              &=\frac{1}{26}\sum\limits_{i=1}^{26}\log_{2}26\\
+              &=\cancel{\frac{1}{26}\cdot26}\cdot\log_{2}26\\
+              &=\log_{2}26\\
+              &\approx4.7
+            \end{align*}
+          \end{answer}
+        }\fi
+  \item If we encode the alphabet in 8 bits code, what is the redundancy?
+    \if\withsol1{
+\begin{answer}
+      $R=H_{0}-H=8-4.7=3.3$
+          \end{answer}
+}\fi
+  \item If the redundancy of the alphabet in ASCII is so big, why is 8-bit coding used for it?
+    \if\withsol1{
+\begin{answer}
+  In ASCII the alphabet appears twice: once as uppercase letters (A-Z) and once as lowercase letters (a-z). In addition, ASCII encodes all the digits (0-9), several signs (i.e. ~/!\#@) and control characters (i.e. start of text, cancel, acknowledgment, etc.). All in all, 256 characters are encoded, meaning $H=8$ and a redundancy $R=0$.
+          \end{answer}
+}\fi
+\end{enumerate}
+
+%% --------- %%
+%% PROBLEM 6 %%
+%% --------- %%
+    
+\subsection{SQL Databases}
+An online forum for discussions about science and medicine has many users, each with his/hers own unique id, username, password, date of joining the forum, date of last message posted and preferred graphical theme.
+The data is stored in a relational database.
+    \begin{enumerate}
+      \item Write SQL code to generate the table 'users' which implements the structure above (keyed by user IDs).
+        \if\withsol1{
+\begin{answer}
+            \lstinputlisting[language=SQL, firstline=1, lastline=9]{sql/users_table.sql}
+              \end{answer}
+}\fi
+      
+      \item Write a command to list the data for the first 100 users (i.e. $0\leq\text{ID}<100$).
+        \if\withsol1{
+\begin{answer}
+            \lstinputlisting[language=SQL, firstline=11, lastline=12]{sql/users_table.sql}
+              \end{answer}
+}\fi
+      
+      \item The 1,337th user to join was \textit{DMendel}, password 'theMEndel'. He joined on January 30th 2003 and prefers the theme 'Tapirs'. Write a code to add him to the table.
+        \if\withsol1{
+\begin{answer}
+            \lstinputlisting[language=SQL, firstline=14, lastline=20]{sql/users_table.sql}
+            \textbf{NOTE}: \color{black}It is really unadvised to store passwords in their 'plain text' format, since in case the database is leaked, user's accounts can be used directly. Instead, sensitive data like passwords is stored as hashed (encrypted) strings, using advanced hashing functions (like HSA256). Modern applications also use a method called 'Salting' to increase the security even further\footnote{See \url{https://www.youtube.com/watch?v=8ZtInClXe1Q} for more information.}.
+              \end{answer}
+}\fi
+      
+      \item \textit{DMendel} wrote a new message. What command should be used to update this information? (assume NOW is a variable storing the current time)
+        \if\withsol1{
+\begin{answer}
+            \lstinputlisting[language=SQL, firstline=22, lastline=24]{sql/users_table.sql}
+              \end{answer}
+}\fi
+      
+      \item User \textit{AnWakefi} decided that he did not like the forum and thus un-registered from it. How would you delete his account?
+        \if\withsol1{
+\begin{answer}
+            \lstinputlisting[language=SQL, firstline=26, lastline=27]{sql/users_table.sql}
+              \end{answer}
+}\fi
+      
+      \item User \textit{mariecur} wishes to see the date of her last post + which theme she is using. How would you implement this query?
+        \if\withsol1{
+\begin{answer}
+            \lstinputlisting[language=SQL, firstline=29, lastline=30]{sql/users_table.sql}
+              \end{answer}
+}\fi
+    \end{enumerate}

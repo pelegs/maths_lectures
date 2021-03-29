@@ -1,0 +1,41 @@
+=>PYTHONTEX#py#default#default#0#code####ex7.tex#7#
+from scripts import twos
+twos(23, 8)
+print('\\\\')
+twos(42, 8)
+print('\\\\')
+=>PYTHONTEX#py#default#default#1#code####ex7.tex#20#
+from scripts import twos
+twos(13, 8)
+print('\\\\')
+=>PYTHONTEX#py#default#default#2#code####ex7.tex#89#
+from scripts import show_fp
+show_fp(-5.5, scale=0.93)
+=>PYTHONTEX#py#default#default#3#code####ex7.tex#113#
+from scripts import show_fp
+show_fp(17.75, scale=0.93)
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-ex7_solution
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

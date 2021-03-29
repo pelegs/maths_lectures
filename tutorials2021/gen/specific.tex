@@ -1,0 +1,292 @@
+\documentclass[a4paper]{report}
+\setlength{\parindent}{0pt}
+
+\usepackage[explicit]{titlesec}
+\usepackage[dotinlabels]{titletoc}
+\usepackage[margin=2.0cm]{geometry}
+\usepackage[bottom]{footmisc}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{commath}
+\usepackage{mathtools}
+\usepackage{bm}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\usepackage[load={prefix}]{siunitx}
+\usepackage{cancel}
+\usepackage{xstring}
+\usepackage{mathtools}
+\usepackage{tabu}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{afterpage}
+\newcommand\blankpage{%
+  \null
+  \thispagestyle{empty}%
+  \addtocounter{page}{-1}%
+\newpage}
+
+\usepackage[table]{xcolor}
+\definecolor{col1}{HTML}{FF7878}
+\definecolor{col2}{HTML}{51B5F8}
+\definecolor{col3}{HTML}{68E1AA}
+\definecolor{col4}{HTML}{B869EA}
+\definecolor{col5}{HTML}{FF5500}
+\definecolor{col6}{HTML}{FF7878}
+\definecolor{col7}{HTML}{FF7500}
+\definecolor{col8}{HTML}{FF4F93}
+\newcommand{\rcolor}[2]{
+  \color{#1}{#2}\color{black}
+}
+\colorlet{colx}{col2!50}
+\colorlet{coly}{col3!50}
+\usepackage[most]{tcolorbox}
+\usepackage{forloop}
+\usepackage{listings}
+\lstloadlanguages{SQL}
+\lstset{ 
+  language=SQL, % choose the language of the code
+  basicstyle=\fontfamily{pcr}\selectfont\footnotesize\color{black},
+  keywordstyle=\color{red}\bfseries, % style for keywords
+  emph={DATETIME},
+  emphstyle=\color{red}\bfseries,
+  numbers=left, % where to put the line-numbers
+  numberstyle=\color{blue}\tiny, % the size of the fonts that are used for the line-numbers
+  numbersep=5pt,
+  backgroundcolor=\color{white},
+  showspaces=false, % show spaces adding particular underscores
+  showstringspaces=false, % underline spaces within strings
+  showtabs=false, % show tabs within strings adding particular underscores
+  frame=single, % adds a frame around the code
+  tabsize=2, % sets default tabsize to 2 spaces
+}
+\usepackage{minted}
+\setminted[java]{
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1,
+	bgcolor=lightgray!10!white,
+	linenos,
+	xleftmargin=4mm,
+	breaklines,
+	firstnumber=1,
+}
+
+\usepackage{pythontex}
+
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{every axis/.append style={
+  font=\tiny,
+  axis x line=middle,
+  axis y line=middle,
+  axis line style={<->, thick, black},
+  xlabel={$x$},
+  ylabel={$y$},
+  every axis x label/.style={at={(current axis.right of origin)}, xshift=10pt, anchor=east},
+  every axis y label/.style={at={(current axis.above origin)}, yshift=10pt, anchor=north},
+  every extra x tick/.style={xticklabel style={above}},
+  every extra y tick/.style={yticklabel style={right}}
+}}
+\newcommand{\LS}[1]{
+	\mintinline{java}{#1}
+}
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark, calc, positioning, decorations.pathreplacing, shapes, backgrounds, arrows, automata, fit, turtle}
+\tikzset{
+  double arrow/.style args={#1 colored by #2 and #3}{
+  -stealth,line width=#1,#2, % first arrow
+  postaction={draw,-stealth,#3,line width=(#1)/3,
+  shorten <=(#1)/3,shorten >=2*(#1)/3}, % second arrow
+	},
+	vector/.style={->, >=stealth, very thick, cap=round},
+	relation/.style={->, >=stealth, thick}
+}
+
+\newcommand{\tikznode}[3][]{%based on https://tex.stackexchange.com/a/402466/121799
+\ifmmode%
+\tikz[remember picture,baseline=(#2.base),inner sep=0pt] \node[#1] (#2) {$#3$};%
+\else
+\tikz[remember picture,baseline=(#2.base),inner sep=0pt] \node[#1] (#2) {#3};%
+\fi}
+\tikzset{
+	My Node Style/.style={midway, right, xshift=3.0ex, align=left, font=\small, draw=none, thin, text=black},
+  highlight/.style={rectangle, rounded corners, draw, fill opacity=0.5, inner sep=0pt},
+	function/.style={ultra thick, samples=100, smooth}
+}
+
+\pgfkeys{/pgfplots/Axis Style/.style={
+		axis on top=true,
+		grid=major,
+    axis x line=center,
+    axis y line=middle,
+    samples=100,
+    xmin=-7.0, xmax=7.0,
+    ymin=-1.5, ymax=1.5,
+		label style={font=\large},
+		x label style={at={(axis description cs:1,0.5)},anchor=west},
+		y label style={at={(axis description cs:0.5,1)},anchor=south},
+		tick label style={font=\small},
+    axis line style={<->, stealth-stealth},
+}}
+
+\newcommand{\Highlight}[2][submatrix]{%
+  \tikz[overlay,remember picture]{
+  \node[highlight, fill=#2, fit=(left.north west) (right.south east)] (#1) {};}
+}
+
+% Functions
+\newcommand\func[3]{#1:#2\rightarrow#3}
+
+% Norm of a vector
+\newcommand\vnorm[2][black]{
+  \left\| \color{#1} \vec{#2} \color{black} \right\|
+}
+
+\newcount\colveccount
+\newcommand*\colvec[1]{
+  \global\colveccount#1
+  \begin{pmatrix}
+  \colvecnext
+  }
+  \def\colvecnext#1{
+  #1
+  \global\advance\colveccount-1
+  \ifnum\colveccount>0
+  \\
+  \expandafter\colvecnext
+  \else
+  \end{pmatrix}
+  \fi
+}
+
+\newcommand\limit[2]{
+	\lim\limits_{#1\rightarrow#2}
+}
+
+\newcommand\VerticalBrace[4][]{%
+  % #1 = draw options
+  % #2 = top mark
+  % #3 = bottom mark
+  % #4 = label
+  \begin{tikzpicture}[overlay,remember picture]
+  \draw[decorate,decoration={brace, amplitude=1.5ex}, #1] 
+  ([yshift=1ex]#2.north east)  -- ([yshift=-1ex]#3.south east)
+  node[My Node Style] {#4};
+  \end{tikzpicture}
+}
+
+\definecolor{light-gray}{gray}{0.95}
+
+\newcommand{\dd}[2][]{
+  \frac{\text{d}^{#1}}{\text{d}#2^{#1}}
+}
+
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+
+\newcommand\rotMat[1]{%
+  \begin{bmatrix}
+  \cos\left( #1 \right) & -\sin\left( #1 \right) \\
+  \sin\left( #1 \right) &  \cos\left( #1 \right) \\
+  \end{bmatrix}
+}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\newcommand{\xhl}[1][x]{
+  \rcolor{col1}{#1}
+}
+\newcommand{\yhl}[1][y]{
+  \rcolor{col2}{#1}
+}
+\newcommand{\zhl}[1][z]{
+  \rcolor{col3}{#1}
+}
+
+\newcommand{\eb}[1]{
+	\hat{e}_{i}
+}
+
+\newcommand\digits{} % just for safety
+\def\digits[#1](#2:#3:#4:#5)% [draw options](size:base:number)
+{
+  \pgfmathsetmacro{\n}{#5}
+  \draw[#1] (0,0) rectangle (#2*\n,#2);
+  \foreach \b in {1,...,\n}{
+  \draw[#1,-] (#2*\b,0) to (#2*\b,#2);
+  \pgfmathtruncatemacro{\A}{\n-\b}
+  \node at (#2*\b-#2/2,-0.25) {$#3^{\A}$};
+  \node at (#2*\b-#2/2,0.35) {$\StrChar{#4}{\b}$};
+  }
+}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\renewcommand\CancelColor{\color{red!70}}
+
+\newsavebox{\pycodebox}
+
+\newcommand\issolution[1]{%
+  \ifdefined\withsol
+  #1
+  \else
+  \fi
+}
+
+\newcommand{\drawvec}[5]{%
+  \coordinate (vec) at (#1,#2);
+  \draw[-, dashed, gray] (#1,#2) to (0,#2);
+  \draw[-, dashed, gray] (#1,#2) to (#1,0);
+  \draw[->, #3, very thick] (0,0) to (vec);
+  \node[#3, #4 = 0.01cm of vec] {\Large #5};
+}
+
+\newcommand\Rs[1]{\mathbb{R}^{#1}}
+
+\newcommand{\highlight}[2][red]{\mathchoice%
+  {\colorbox{#1}{$\displaystyle#2$}}%
+  {\colorbox{#1}{$\textstyle#2$}}%
+  {\colorbox{#1}{$\scriptstyle#2$}}%
+{\colorbox{#1}{$\scriptscriptstyle#2$}}
+}%
+
+\newcommand{\solutionhead}{
+  \if\withsol0{
+  }\fi
+  \if\withsol1{
+  (Solution)
+  }\fi
+}
+
+\newenvironment{answer}
+  {
+  \begin{tcolorbox}[breakable, enhanced]
+  \textbf{Answer:}\\
+  }
+  {
+  \end{tcolorbox}
+  }
+
+\pagestyle{fancy}
+\lhead{Computer Science and Mathematics (B.MES.108), SoSe21}
+
+\title{Computer Science and Mathematics (B.MES.108)\\Tutorial, Summer Semester 2021\\}
+\author{Peleg Bar Sapir}
+ 
+\def\exnum{\ex}
+\setcounter{secnumdepth}{2}
+\renewcommand{\thesection}{Exercise \ex:}
+\renewcommand{\thesubsection}{Problem \arabic{subsection}:}
+\titleformat{\section}[display]{\normalfont\bfseries\Large}{Exercise \ex: #1\solutionhead}{-20pt}{}
+
+\begin{document}
+\rhead{Exercise \ex\solutionhead}
+\include{source/ex\ex}
+\newpage
+\end{document}

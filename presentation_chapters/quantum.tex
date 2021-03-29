@@ -28,3 +28,69 @@
 		\end{axis}
 	\end{tikzpicture}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Classical Mechanics}
+	The position and velocity of a particle are time-dependent, i.e. they are functions of the time $t$:
+	\begin{align*}
+		\vec{r}(t) &= \colvec{3}{x(t)}{y(t)}{z(t)},\\
+		\vec{v}(t) &= \colvec{3}{v_{x}(t)}{v_{y}(t)}{v_{z}(t)}.
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Classical Mechanics}
+	Each component of $\vec{v}$ is the time derivative of the respective component of $\vec{r}$:
+	\begin{align*}
+		v_{x}(t) &= \od{x(t)}{t},\\
+		v_{y}(t) &= \od{y(t)}{t},\\
+		v_{z}(t) &= \od{z(t)}{t}.
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Classical Mechanics}
+	For example, if we plot $x(t)$ over $t$ (i.e. the $x$-position of a particle over time), the derivative at some time $t_{0}$ is the $x$-component of the velocity of the partile at that time:
+
+	\centering
+	\begin{tikzpicture}[node distance=1mm]
+		\begin{axis}[
+				Axis Style,
+				xlabel={$t$},
+				ylabel={$x(t)$},
+				width=7.5cm, height=7.5cm,
+				axis line style={->, -stealth, thick},
+				xmin=-2, xmax=2,
+				ymin=-2, ymax=2,
+				ticks=none,
+			]
+			\addplot[funcdraw, col1, ultra thick] {traj(x)};
+
+			\pgfmathsetmacro{\xa}{-0.5}
+			\node[circle, inner sep=1pt, minimum size=0.1pt, fill=black] (xval) at (axis cs:\xa,0) {};
+			\node[below=of xval] {$t_{0}$};
+			\node[circle, inner sep=1pt, minimum size=0.1pt, fill=black] (yval) at (axis cs:\xa,{traj(\xa)}) {};
+			\node[above=of yval] {$x(t_{0})$};
+			\path[draw=black, dashed] (xval) to (yval);
+			
+			\pgfmathsetmacro{\dx}{0.5}
+			\pgfmathsetmacro{\dy}{dtraj(\xa)*\dx}
+			\path[draw=col2, dashed] (axis cs:\xa,{traj(\xa)}) to (axis cs:{\xa+\dx},{traj(\xa)+\dy});
+		\end{axis}
+	\end{tikzpicture}
+	MORE STUFF
+\end{frame}
+
+\begin{frame}
+	\frametitle{Quantum Mechanics}
+	\emph{Quantum mechanics}, on the other hand, handles physical systems differently: a particle has no specific place nor velocity, but instead it has a function $\func{\Psi}{\Rs{3}}{\mathbb{C}}$ which completely encodes all the information about the particle at any given time.
+
+	This kind of function is called a \emph{wave function}.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Quantum Mechanics}
+	The wave function of a particle by itself has no physical meaning.
+
+	However, the product $\Psi\Psi^{*}=|\Psi|^{2}$ (i.e. the product of the function with its complex-conjugate) \textbf{does} have a physical interpretation: at any given point $\vec{r}$, the value $|\Psi(\vec{r})|^{2}$ is the \emph{probability density} to find the 
+\end{frame}

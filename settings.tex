@@ -19,11 +19,11 @@
 \usepackage{subcaption}
 \usepackage{svg}
 \definecolor{col0}{HTML}{FFFFFF}
-\definecolor{col1}{HTML}{FF7878}
-\definecolor{col2}{HTML}{51B5F8}
-\definecolor{col3}{HTML}{68E1AA}
-\definecolor{col4}{HTML}{B869EA}
-\definecolor{col5}{HTML}{FF5500}
+\definecolor{col1}{HTML}{BD4242}
+\definecolor{col2}{HTML}{4268BD}
+\definecolor{col3}{HTML}{52B256}
+\definecolor{col4}{HTML}{7F52B2}
+\definecolor{col5}{HTML}{D93F0B}
 \definecolor{col6}{HTML}{FF7878}
 \definecolor{col7}{HTML}{FF7500}
 \definecolor{col8}{HTML}{FF4F93}
@@ -188,7 +188,7 @@
 \newcommand{\TikZ}{\textup{Ti\textit{k}Z}}
 \usepackage[customcolors]{hf-tikz}
 \usetikzlibrary{positioning, calc, math, norm, shapes, fit, backgrounds, arrows, automata, decorations.pathreplacing, decorations.text, trees, matrix}
-\newcommand\tikzmark[1]{\tikz[overlay,remember picture] \node (#1) {};}
+\newcommand\tikzmark[1]{\tikz[overlay, remember picture] \node (#1) {};}
 \tikzset{
   double arrow/.style args={#1 colored by #2 and #3}{
   -stealth,line width=#1,#2, % first arrow
@@ -199,6 +199,8 @@
 	declare function={func(\x) = gauss(\x, \mu, \sig);},
 	declare function={gaussderiv(\x,\y,\z) = -(\x-\y)*gauss(\x,\y,\z)/\z^2;},
 	declare function={funcderiv(\x) = gaussderiv(\x, \mu, \sig);},
+	declare function={traj(\x) = gauss(\x,0,1)*(\x^3-\x^2-\x)+0.5;},
+	declare function={dtraj(\x) = gaussderiv(\x,0,1)*(\x^3-\x^2-\x) + gauss(\x,0,1)*(3*\x^2-2*\x-1);},
 }
 
 \newcommand{\tikznode}[3][]{%based on https://tex.stackexchange.com/a/402466/121799

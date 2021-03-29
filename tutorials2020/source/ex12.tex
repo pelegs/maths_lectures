@@ -1,0 +1,602 @@
+\rhead{Exam Preparation}
+\section{Exam Preparation}
+\subsection{Set Theory}
+The following two sets are given:
+\begin{equation*}
+	A = \left\{ x,y,z \right\},\ B = \left\{ \alpha, \beta, \gamma \right\}.
+\end{equation*}
+\begin{enumerate}
+	\item Write all the elements of the Cartesian Product $A\times B$.
+	\if\withsol1{
+		\begin{answer}
+			The elements of $A\times B$ are pairs of elements $\left( a,b \right)$ such that $a\in A$ and $b\in B$. All these elements are:
+			\begin{align*}
+				&\left( x,\alpha \right),\ \left( x, \beta \right),\ \left( x,\gamma \right),\\
+				&\left( y,\alpha \right),\ \left( y, \beta \right),\ \left( y,\gamma \right),\\
+				&\left( z,\alpha \right),\ \left( z, \beta \right),\ \left( z,\gamma \right).\\
+			\end{align*}
+		\end{answer}
+	}\fi
+
+\item Draw two figures: one representing an \textbf{injective} function $\func{f}{A}{B}$, and one representing a \textbf{non-injective} function $\func{g}{A}{B}$. Can $g$ be surjective?
+
+	\if\withsol1{
+		\begin{answer}
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+					% Injective function
+          \fill[col1!20, draw=col1, thick] (0,0) circle [x radius=0.6, y radius=2]; 
+          \node (x) at (0,1.2) {$x$};
+          \node (y) at (0,0.0) {$y$};
+          \node (z) at (0,-1.2) {$z$};
+					\node[above=7.5mm of x] {\color{col1}$A$};
+
+          \fill[col2!20, draw=col2, thick] (2,0) circle [x radius=0.6, y radius=1.75]; 
+					\node (alpha) at (2,1.2) {$\alpha$};
+          \node (beta)  at (2,0.0) {$\beta$};
+          \node (gamma) at (2,-1.2) {$\gamma$};
+					\node[above=7.5mm of alpha] {\color{col2}$B$};
+
+          \draw[relation] (x) -- (alpha);
+          \draw[relation] (y) -- (beta);
+          \draw[relation] (z) -- (gamma);
+
+					\node at (1,3.5) {\underline{$f$, injective}};
+
+				% Non injective function
+          \fill[col1!20, draw=col1, thick] (6,0) circle [x radius=0.6, y radius=2]; 
+          \node (x2) at (6,1.2) {$x$};
+          \node (y2) at (6,0.0) {$y$};
+          \node (z2) at (6,-1.2) {$z$};
+					\node[above=7.5mm of x2] {\color{col1}$A$};
+
+          \fill[col2!20, draw=col2, thick] (8,0) circle [x radius=0.6, y radius=1.75]; 
+					\node (alpha2) at (8,1.2) {$\alpha$};
+          \node (beta2)  at (8,0.0) {$\beta$};
+          \node (gamma2) at (8,-1.2) {$\gamma$};
+					\node[above=7.5mm of alpha2] {\color{col2}$B$};
+
+          \draw[relation] (x2) -- (alpha2);
+          \draw[relation] (y2) -- (alpha2);
+          \draw[relation] (z2) -- (gamma2);
+
+					\node at (7,3.5) {\underline{$g$, non-injective}};
+        \end{tikzpicture}
+      \end{figure}
+			
+			As can be seen, since the function $\func{g}{A}{B}$ is non-injective, there are at least two elements $a_{1},a_{2}\in A$ that are being connected to the same element $b\in B$, which means that at least one element $b_{1}\in B$ is not connected to by an element in $A$, and thus the function can't be surjective.
+		\end{answer}
+	}\fi
+\end{enumerate}
+
+\subsection{Linear Algebra I}
+The following three vectors in $\Rs{3}$ are given:
+\begin{equation*}
+	\vec{a}=\colvec{3}{1}{-2}{2} ,\ \vec{b}=\colvec{3}{6}{4}{1} ,\ \vec{c}=\colvec{3}{-16}{0}{-10}
+\end{equation*}
+\begin{enumerate}
+  \item Calculate the vector $2\vec{a}+\vec{b}$.
+  \if\withsol1{
+    \begin{answer}
+      Multiplying a vector by a scalar is done element-wise. Thus:
+      \begin{equation*}
+				2\vec{a} = \colvec{3}{1\cdot2}{-2\cdot2}{2\cdot2} = \colvec{3}{2}{-4}{4}.
+      \end{equation*}
+      Similarly, adding to vectors is done element-wise. Thus:
+      \begin{equation*}
+				2\vec{a} + \vec{b} = \colvec{3}{2+6}{-4+4}{4+1} = \colvec{3}{8}{0}{5}.
+      \end{equation*}
+    \end{answer}
+  }\fi
+
+  \item Calculate the inner product $\vec{a}\cdot\vec{b}$.
+  \if\withsol1{
+    \begin{answer}
+      The inner product of two vectors is equal to the sum of the element-wise product. Thus:
+      \begin{align*}
+        \vec{a}\cdot\vec{b} &= 1\cdot6 + (-2)\cdot4 + 2\cdot1\\
+        &= 6 - 8 + 2\\
+        &= 0
+      \end{align*}
+    \end{answer}
+  }\fi
+
+  \item What is the angle between $\vec{a}$ and $\vec{b}$?
+  \if\withsol1{
+    \begin{answer}
+			The angle $\theta$ between any two vectors can be derived from their inner product: $\cos(\theta) = \frac{\vec{a}\cdot\vec{b}}{\norm{\vec{a}} \norm{\vec{b}}}$.
+
+			In this case, $\vec{a}\cdot\vec{b}=0$. Since $\cos(\ang{90})=0$, the angle between the two vectors is $\ang{90}$ (i.e. they are orthogonal).
+    \end{answer}
+  }\fi
+
+  \item Are the three vectors $\vec{a},\vec{b},\vec{c}\ $ linearly independent? Prove your answer.
+  \if\withsol1{
+    \begin{answer}
+			Notice that
+			\begin{equation*}
+				2\vec{a}+\vec{b} = \colvec{3}{8}{0}{5} = -\frac{1}{2}\colvec{3}{-16}{0}{-10} = -\frac{1}{2}\vec{c}.
+			\end{equation*}
+			Thus the vector $\vec{c}$ can be expressed as a linear combination of $\vec{a}$ and $\vec{b}$ (namely $\vec{c}=-4\vec{a}-2\vec{b}$), and therefore the set is not linearly independent.
+
+			However, sometimes the answer is not that obvious, in which case we can gather the vectors in a matrix, e.g.
+			\begin{equation*}
+				M =
+				\begin{pmatrix}
+					1 & 6 & -16\\
+					-2 & 4 & 0\\
+					2 & 1 & -10
+				\end{pmatrix},
+			\end{equation*}
+			and calculate the determinant of the matrix. If the determinant is $0$, then the vectors are not linearly independent, while if it is not zero, they are linearly independent.
+
+			In this case:
+			\begin{align*}
+				|M| &= 1\cdot \begin{vmatrix} 4 & 0\\ 1 & -10 \end{vmatrix} -6 \begin{vmatrix} -2 & 0\\ 2 & -10 \end{vmatrix} -16 \begin{vmatrix} -2 & 4\\ 2 & 1 \end{vmatrix}\\
+				&= 1\cdot(-40) - 6\cdot20 - 16\cdot(-10)\\
+				&= -40 -120 + 160\\
+				&= 0,
+			\end{align*}
+			i.e. the vectors are not linearly independent.
+    \end{answer}
+  }\fi
+
+  \item Give a geometrical description of the shpae of the set of points in space described by $\left\{ \vec{x}\in\Rs{3}\mid \vec{c}\cdot\vec{x}=0 \right\}$.\\
+    (Note: $\vec{c}\cdot\vec{x}$ dontes the inner (scalar) product of $\vec{c}$ and $\vec{x}$)
+  \if\withsol1{
+    \begin{answer}
+      An inner product between two vectors equaling $0$ means that the vectors are orthogonal. Therefore, we are looking for all vectors $\vec{x}$ that are orthogonal to $\vec{c}$. These vectors together form a plane that is itself orthogonal to $\vec{c}$.
+    \end{answer}
+  }\fi
+	
+	\item Normalize the vector $\vec{a}$.
+	\if\withsol1{
+		\begin{answer}
+			To normalize a vector, we divide it by its norm, i.e.
+			\begin{equation*}
+				\hat{v} = \frac{\vec{v}}{\norm{\vec{v}}}.
+			\end{equation*}
+
+			In this case:
+			\begin{align*}
+				\norm{\vec{a}} &= \sqrt{a_{x}^{2} + a_{y}^{2} + a_{z}^{2}}\\
+				&= \sqrt{1^{2} + (-2)^{2} + 2^{2}}\\
+				&= \sqrt{1 + 4 + 4}\\
+				&= \sqrt{9}\\
+				&= 3,
+			\end{align*}
+			and the resulting normalized vector is
+			\begin{equation*}
+				\hat{a} = \frac{\vec{a}}{\norm{\vec{a}}} = \frac{\vec{a}}{3} = \colvec{3}{\frac{1}{3}}{-\frac{2}{3}}{\frac{2}{3}}.
+			\end{equation*}
+		\end{answer}
+	}\fi
+\end{enumerate}
+
+\subsection{Linear Algebra II}
+The matrix $M$ represents a transformation that affects $\hat{x}$ and $\hat{y}$ as follows:
+\begin{equation*}
+	M\hat{x} = \colvec{2}{-1}{8},\quad M\hat{y} = \colvec{2}{8}{11}.
+\end{equation*}
+
+\begin{enumerate}
+	\item Calculate the eigenvalues and eigenvectors of $M$.
+	\if\withsol1{
+		\begin{answer}
+			First, let us present $M$ explicitely: remember that the $i$-th row of a matrix is the vector to which $\eb{i}$ is mapped by the matrix. Thus, for $M$ in our case, using the maps of $\hat{x}$ and $\hat{y}$ we simply get
+			\begin{equation*}
+				M =
+				\begin{pmatrix}
+					-1 & 8 \\
+					8 & 11
+				\end{pmatrix}.
+			\end{equation*}
+
+		Let's now find the eigenvectors and eigenvalues of $M$:
+		\begin{align*}
+			0 &=
+			\begin{vmatrix}
+				-1-\lambda & 8 \\
+				8 & 11-\lambda
+			\end{vmatrix}\\
+			&= \left( -1-\lambda \right)\left( 11-\lambda \right) - 64\\
+			&= -11+\lambda-11\lambda+\lambda^{2}-64\\
+			&= \lambda^{2}-10\lambda-75.
+		\end{align*}
+
+		The solution for the above equation is
+		\begin{equation*}
+			\lambda_{1,2} = \frac{10\pm\sqrt{100+4\cdot75}}{2} = -5,15.
+		\end{equation*}
+
+		We will start by finding the eigenvector corresponding to $\lambda_{1}=-5$:
+			\begin{equation*}
+				\begin{pmatrix}
+					-1 & 8\\
+					8 & 11
+				\end{pmatrix}
+				\colvec{2}{x}{y} = \colvec{2}{-5x}{-5y} \Rightarrow
+				\left\{
+					\begin{array}{ccccc}
+						-x & + & 8y  &= & -5x\\
+						8x & + & 11y &= & -5y
+					\end{array}
+				\right.,
+		\end{equation*}
+				for which the solution is $\frac{x}{y} = -2$, and a representative vector is e.g.
+				\begin{equation*}
+					\vec{u}_{1} = \colvec{2}{2}{-1}.
+				\end{equation*}
+
+				For $\lambda_{2}=15$ we get
+				\begin{equation*}
+					\begin{pmatrix}
+						-1 & 8\\
+						8 & 11
+					\end{pmatrix}
+					\colvec{2}{x}{y} = \colvec{2}{15x}{15y} \Rightarrow
+					\left\{
+						\begin{array}{ccccc}
+							-x & + & 8y  &= & 15x\\
+							8x & + & 11y &= & 15y
+						\end{array}
+					\right.,
+				\end{equation*}
+
+				for which the solution is $\frac{x}{y} = \frac{1}{2}$, and a representative vector is e.g.
+				\begin{equation*}
+					\vec{u}_{2} = \colvec{2}{1}{2}.
+				\end{equation*}
+	\end{answer}
+	}\fi
+
+	\item Does the transformation represented by $M$ flips the orientation of $\Rs{2}$?.
+	\if\withsol1{
+		\begin{answer}
+			The determinant of $M$ is $|M|=\left( -1 \right)\cdot11-8\cdot8 = -11-64 = -75$. This means that the transformation scales space by 75 \textbf{and} flips its orientation.
+		\end{answer}
+	}\fi
+\end{enumerate}
+
+
+\subsection{Computer Science (Programming)}
+The following Java method \LS{f} gets an integer array \LS{x} and a single integer \LS{a} as its arguments:
+\inputminted{java}{java/exam.java}
+What does the function return?
+  \if\withsol1{
+    \begin{answer}
+      The first two lines of the function (except its header) do the following: set new integer variable \LS{i} to \LS{0}, and setting a boolean variable \LS{b} to \LS{true}:
+			\inputminted[firstline=3, lastline=4]{java}{java/exam.java}
+
+      Then, a new loop is run, so long as two conditions are met:
+      \begin{enumerate}
+        \item \LS{b} is \LS{true} (simply written as \LS{while b}), and
+        \item \LS{i} is smaller than the length of the array \LS{x}.
+      \end{enumerate}
+      If any of these two conditions is not met, the loop stops.\\
+      While the loop runs, the function checks whether the \LS{i}-th element in the array (counting the first element as \LS{0}) equals the integer \LS{a} which is an argument passed to the function by the user (see the function's header). This can result in two ways:
+      \begin{enumerate}
+        \item The \LS{i}-th element indeed equals \LS{a}, in which case \LS{b} is set to \LS{false} (which will cause the loop to finish), or
+        \item The \LS{i}-th element does not equal \LS{a}, which will result in simply increasing the value of \LS{i} by one.\\
+      \end{enumerate}
+          When the while loop is finished, for whatever reason (either for some \LS{i}, the \LS{i}-th element of the array \LS{x} equals to \LS{a}, or the value of \LS{i} reached the size of the array \LS{x}), the function checks the value of \LS{b}. Once again, there are two options:
+          \begin{enumerate}
+            \item If \LS{b} is true (which means that no element of the array \LS{x} is equal to \LS{a}), there's a problem: the function went over all the elements of the array \LS{x}, and found no element that is equal to \LS{a}. In this case the function prints \LS{Error!} to screen, and returns \LS{-1}.
+            \item If \LS{b} is \LS{true} it means that the function found an element of the array \LS{x} that is equal to \LS{a}. It then returns the value of \LS{i}. Since \LS{i} counts the elements of the array \LS{x} until it reaches an element that is equal to \LS{a} (or iterates over the entire array without finding anything), the value of \LS{i} is the position in the array \LS{x} of the element that is equal to \LS{a}.
+          \end{enumerate}
+
+          \textbf{To summarize}: the function checks whether there is an element in the array \LS{x} which equals to the integer \LS{a} (given to it as an argument). If there is such element (or more than one), it returns the index of its first occurrence in the array \LS{x}. If there isn't, it returns \LS{-1} and writes \LS{Error!} to the screen.
+    \end{answer}
+  }\fi
+
+
+\subsection{Computer Science (Representation of Numbers)}
+\begin{enumerate}
+  \item What is the binary representation of the decimal number 63?
+  \if\withsol1{
+    \begin{answer}
+      We repeatedly divide $63$ by $2$ until reaching $1$, noting the remainder. Then, we take the resulting remainders from bottom up, and that is the answer:\\~\\
+        \begin{pycode}
+from scripts import convert, vspace
+convert(63,2)
+            \end{pycode}
+            ~\\~\\
+            There is however a quick answer: since $64$ is a power of $2$ ($64=2^{6}$), the binary representation of $64$ is $1$, followed by some number of 0's (in this case 6 zeros). Thus, $63$ would be simply represented by six 1's (think for example of any power of $10$, say $10000$, minus $1$: it's the same behavior, except in the binary case the highest digit is 1 instead of 9).
+    \end{answer}
+  }\fi
+
+  \item What is the decimal representation of the hexadecimal number 2A5?
+  \if\withsol1{
+    \begin{answer}
+      In hexadecimal numbers, each digit stands for a multiplication of $16$ to the power of $0,1,2,\dots$, counting from the right:\\
+
+      \centering
+      \begin{tikzpicture}
+        \digits[thick](0.75:16:2A5:3)
+        \node[] at (3.5,0.35) {};
+      \end{tikzpicture}~\\
+      \flushleft
+
+      Thus, the number 2A5 in hexadecimal form is equal to:
+      \begin{align*}
+        2\times16^{2} + A\times16^{1} + 5\times16^{2} &= 2\times256 + 10\times16 + 5\times1\\
+        &= 512 + 160 + 5\\
+        &= 677
+      \end{align*}
+      (Remember that in base-16, $A=10$)
+    \end{answer}
+  }\fi
+
+  \item Give the 8-bit two's complement representation of the decimal number -84.
+  \if\withsol1{
+    \begin{answer}
+      \begin{pycode}
+from scripts import twos
+twos(84, 8)
+      \end{pycode} 
+    \end{answer}
+  }\fi
+  \item What is the exact value of the fraction which is represented in the ternary base (base-3) by $0.222222222\dots$ (i.e. with infinitely many $2s$ after the period)?
+  \if\withsol1{
+    \begin{answer}
+    Setting $x=0.2222\dots$, we get $3x=2.2222\dots$ (since in base-3 multiplying by 3 is like moving the decimal point one place to the left, same as multiplying by 10 in base-10). But $2.2222\dots$ is like adding $2$ to $0.2222\dots$, and thus we get $3x=2+x$, or simply $x=1$.~\\
+    Notice how this is equivalent to the number $0.9999\dots$ in base-10.
+    \end{answer}
+  }\fi
+
+\end{enumerate}
+
+
+\subsection{Computer Science (Rule-Based Simulation)}
+\begin{enumerate}
+  \item Given the following L-system: A $\rightarrow$ (RF)FA,\\
+        which string is produced after 3 steps of application of this rule to the start word 'A'?\\
+        Draw the graphical structure in the place which is obtained from this string by the following turtle interpretation:
+      \begin{itemize}
+        \item R: Rotate 45 degrees clockwise.
+        \item F: Move forward 1 unit.
+        \item A: Do nothing.
+        \item (: Add position and angle to stack.
+        \item ): Pop position and angle from stack.
+      \end{itemize}
+  \if\withsol1{
+    \begin{answer}
+      The rule simply state that that in each step the letter A is replaced with the string '(RF)FA'.\\
+      Since in the original string there is just one character, and that is 'A' - after the first step we get (RF)FA.\\
+      The second step replaces the single A at the end of the string '(RF)FA' with '(RF)FA', and thus after the second step we get '(RF)F(RF)FA'.\\
+      Essentially, each step simply concatenates '(RF)FA' to the end of the string (excluding the 'A'). After the third step this will yield '(RF)F(RF)F(RF)FA'.\\
+
+      The string will evolve as following:
+        \begin{pycode}
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RF)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = [Lsys('A', rules, i) for i in range(4)]
+print('\\begin{enumerate}[label={\\arabic*.},start=0]')
+for L in Ls:
+    print('\\item', L)
+print('\\end{enumerate}')
+        \end{pycode}
+
+      Using the given drawing rules, the total string '(RF)F(RF)F(RF)FA' yields the following drawing:~\\~\\
+
+      \centering
+      \begin{tikzpicture}[scale=0.75]
+        \begin{pycode}
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RF)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = Lsys('A', rules, 3)
+turtle_draw2(lst=Ls)
+        \end{pycode}
+      \end{tikzpicture}
+    \end{answer}
+  }\fi
+
+  \item A modified L-system is given: A $\rightarrow$ [RFA]FA.\\
+        Draw the corresponding graphical structure after 3 steps.
+  \if\withsol1{
+    \begin{answer}
+      Now there are two 'A's to replace at each step, and each replacement generates two new 'A's. Thus, the system will grow as follows:
+        \begin{pycode}
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RFA)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = [Lsys('A', rules, i) for i in range(4)]
+print('\\begin{enumerate}[label={\\arabic*.},start=0]')
+for L in Ls:
+    print('\\item', L)
+print('\\end{enumerate}')
+        \end{pycode}
+
+      And the drawing after three steps would be:~\\~\\
+
+      \centering
+      \begin{tikzpicture}[scale=0.75]
+        \begin{pycode}
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RFA)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = Lsys('A', rules, 3)
+turtle_draw2(lst=Ls)
+        \end{pycode}
+      \end{tikzpicture}
+    \end{answer}
+  }\fi
+
+  \item How does the number of single lines (obtained from an "F" symbol) grow (quantitatively) with the number of steps for L1? For L2?
+  \if\withsol1{
+    \begin{answer}
+      In the case of L1, each step $N$ yields two 'F's. Thus, the change is linear: $\text{Number of lines}=2N$.\\ 
+      In the case of L2, we get the following number of 'F's in each successive step: $0, 2, 6, 14$. We can notice that these numbers are each a distance of $2$ away from $2^{N+1}$ (i.e. $2, 4, 8, 16$). The growth is exponential, and given by $\text{Number of lines}=2^{N+1}-2$.
+    \end{answer}
+  }\fi
+\end{enumerate}
+
+
+
+\subsection{Calculus (Sequences)}
+\begin{enumerate}
+	\item The following sequence is given:
+	\begin{equation*}
+		a_{n} = \frac{4-n}{2n+3}.
+	\end{equation*}
+
+	Is the sequence increasing, decreasing or neither for $n\geq10$? Is it converging on a finite value, and if so - what is this value?
+	\if\withsol1{
+		\begin{answer}
+			We can check the ratio sequence:
+			\begin{align*}
+				\frac{a_{n+1}}{a_{n}} &= \frac{\frac{4-(n+1)}{2(n+1)+3}}{\frac{4-n}{2n+3}}\\
+				&= \frac{\frac{4-n-1)}{2n+2+3}}{\frac{4-n}{2n+3}}\\
+				&= \frac{\frac{3-n}{2n+5}}{\frac{4-n}{2n+3}}\\
+				&= \frac{\left( 3-n \right)\left( 2n+3 \right)}{\left( 2n+5 \right)\left( 4-n \right)}\\
+				&= \frac{6n+9-2n^{2}-3n}{8n-2n^{2}+20-5n}\\
+				&= \frac{-2n^{2}+3n+9}{-2n^{2}-5n+20}.
+			\end{align*}
+
+			For $n\geq10$, the fraction $\frac{a_{n+1}}{a_{n}}<1$, and thus the sequence is decreasing.
+
+			For $n\rightarrow\infty$, we can ignore $4$ in the numerator and $3$ in the denomenator, and see that the sequence approaches $\frac{-n}{2n} = -\frac{1}{2}$, which is its limit.
+		\end{answer}
+	}\fi
+
+	\item Suppose that the following sequence converges:
+		\begin{equation*} 
+			a_{n+1} = a_{n}^{2} + \frac{1}{4},\quad a_{1}=\frac{1}{4}.
+		\end{equation*}
+			What is its limit as $n\longrightarrow\infty$?
+		\if\withsol1{
+			\begin{answer}
+				Since $a_{n}$ converges, both $a_{n+1}$ and $a_{n}$ will converge to the same limit $L$ as $n\rightarrow\infty$. Thus, we get
+				\begin{equation*}
+					L= L^{2} + \frac{1}{4},
+				\end{equation*}
+				which when substituted into the quadratic formula yields
+				\begin{equation*}
+					L = \frac{1\pm\sqrt{1-4\cdot\frac{1}{4}}}{2} = \frac{1}{2}.
+				\end{equation*}
+			\end{answer}
+		}\fi
+\end{enumerate}
+
+
+\subsection{Calculus (Univariate Functions, Limits)}
+Evaluate the following limit:
+\begin{equation*}
+	\lim\limits_{x\rightarrow-\infty}xe^{x}.
+\end{equation*}
+\if\withsol1{
+	\begin{answer}
+		We can see that
+		\begin{equation*}
+			\lim\limits_{x\rightarrow-\infty}x = -\infty,\quad \lim\limits_{x\rightarrow-\infty}e^{x} = 0,
+		\end{equation*}
+		i.e. we have a situation of $-\infty\cdot0$. To solve this, we will use L'H\^{o}pital rule. First we will re-write the expression:
+		\begin{equation*}
+			xe^{x} = \frac{x}{e^{-x}}.
+		\end{equation*}
+
+		Now we can derive the top and bottom parts separately:
+		\begin{equation*}
+			x'=1,\quad \left(e^{-x}\right)'=-e^{-x}.
+		\end{equation*}
+
+		This yields
+		\begin{align*}
+			\lim\limits_{x\rightarrow-\infty}xe^{x} &= \lim\limits_{x\rightarrow-\infty}\frac{x}{e^{-x}}\\
+			\tikznode{eq}{} &= \lim\limits_{x\rightarrow-\infty} \frac{1}{-e^{-x}}\\
+			&= 0.
+		\end{align*}
+		
+		\begin{tikzpicture}[overlay, remember picture]
+			\node[below left=of eq, xshift=-1cm, col4] (eqtxt) {L'H\^{o}pital rule};
+			\draw[->, >=stealth, col4] (eqtxt.east) to [out=0, in=180] ($(eq.west) + (0,1mm)$);
+		\end{tikzpicture}
+	\end{answer}
+}\fi
+
+\subsection{Calculus (Univariate Functions, Differentiation)}
+Given the following function: $f\left( x \right)=\frac{1}{3}x^{3}-4x^{2}+7x-5$,\\
+\begin{enumerate}
+  \item Find all $x$ values where the function $f$ has local extrema and classify them as minima or maxima.
+  \if\withsol1{
+    \begin{answer}
+      Local extrema are points where the derivative of a function equals $0$. Thus, we solve for $f'\left( x \right)=0$:
+      \begin{align*}
+        f'\left( x \right) &= \frac{3}{3}x^{2}-2\cdot4x+7\\
+        &= x^{2}-8x+7\\
+        &\Downarrow\\
+        0 &= x^{2}-8x+7\\
+        &\Downarrow\\
+        x_{1,2} &= \frac{8\pm\sqrt{64-28}}{2}\\
+        &= \frac{8\pm\sqrt{36}}{2}\\
+        &= \frac{8\pm6}{2}\\
+        &= 4\pm3\\
+        &= 1, 7
+      \end{align*}
+      In order to classify the extrema, we need to use the second derivative of $f\left( x \right)$: $f''\left( x \right) = 2x-8$.
+      Substituting point $x=1,\ x=7$ in $f''\left( x \right)$ yields:
+      \begin{enumerate}
+        \item $f''\left( x=1 \right)=2-8=-6<0$, and thus at $x=1$ there is a local maximum.
+        \item $f''\left( x=7 \right)=14-8=6>0$, and thus at $x=7$ there is a local minimum.
+      \end{enumerate}
+    \end{answer}
+  }\fi
+
+  \item Find where the function is increasing/decreasing, and all $x$ values of inflection points.
+  \if\withsol1{
+    \begin{answer}
+      There are two extrema (at $x=1$ and $x=7$), and thus we need to check three domains:
+      \begin{enumerate}
+        \item $x<1$
+        \item $1<x<7$
+        \item $x>7$
+      \end{enumerate}
+      Since at $x=1$ the function is at a maximum, we expect that for $x<1$ the function will increase. Let's verify it by substituting some $x<1$ into $f'\left( x \right)$, say $x=0$: $f'\left( x=0 \right) = \cancel{0^{2}}-\cancel{8\cdot0} + 7 = 7$. Indeed $7$ is positive, and thus for $x<1$ the function increases.\\
+
+      Similarly, we expect the function to decrease for $1<x<7$. Checking by substituting $x=2$ into $f'\left( x \right)$: $f'\left( x=2 \right)=2^{2}-8\cdot2+7=4-16+7=-5$. Indeed, this shows that the function is decreasing for $1<x<7$.\\
+
+      Last but not least, for $x>7$ we expect the function to increase again (owing to the minimum at $x=7$). By substituting $x=10$ we can see that $f'\left( x=10 \right)=10^{2}-8\cdot10+7=100-80+7=27$, i.e. - the function indeed increases for this domain.\\
+
+      Summarizing:
+      \begin{enumerate}
+        \item $x<1$: $f\left( x \right)$ increases.
+        \item $1<x<7$: $f\left( x \right)$ decreases.
+        \item $x>7$: $f\left( x \right)$ increases.
+      \end{enumerate}
+
+      A plot of the function in the relevant domain, showing the extrema:
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[]
+								\begin{axis}[
+										Axis Style,
+										xmin=-3, xmax=11,
+										ymin=-50, ymax=10,
+										domain=-3:11,
+										x label style={at={(axis description cs:1.05,0.875)}, anchor=north},
+										y label style={at={(axis description cs:0.21,1.025)}, anchor=south},
+									]
+            \pgfplotsset{grid style={dashed,gray!30}}
+            \addplot[function, col1] plot (\x, { 0.334*\x^3-4*\x^2+7*\x-5 } );
+          \end{axis}
+        \end{tikzpicture} 
+      \end{figure}
+    \end{answer}
+  }\fi
+\end{enumerate}
+

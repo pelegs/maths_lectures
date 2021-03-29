@@ -1,0 +1,378 @@
+\section{Exercise \exnum: Integrals\solutionhead}
+
+\stepcounter{probnum}
+\subsection*{Part \arabic{probnum}: Indefinite Integrals}
+\begin{enumerate}
+  \item Find the indefinite integrals ($\int f\left( x \right)\dif x$) of the following functions:
+   \if\withsol1{
+
+   \begin{answer}
+     For this question, it is worth understanding that if $\dd{x}F\left( x \right) = f\left( x \right)$, then $\int f(x)\dif x = F\left( x \right) + C$. This means that derivation and integration are inverse operations. Thus, if you wish to verify a result for $F\left( x \right) = \int f\left( x \right)\dif x$, you can simply derive $F\left( x \right)$ and see that it yields back $f\left(x  \right)$. If it doesn't, you did something wrong. \\
+
+     Where does the constant $C$ come from? Since the derivative of $F\left( x \right)$ tells us what is the slope of the tangent to the function $F\left( x \right)$, moving the function up or down does not change the derivative. Thus, all functions of the family $F\left( x \right)+C$ will be derived back to $f\left( x \right)$ (see Figure \ref{fig:derive_c}).
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[]
+        \begin{axis}[grid=major, xmin=-5, xmax=5, ymin=-5, ymax=5,
+          xtick = {-5,-4,...,5}, ytick = {-5,-4,...,5},
+          scale=1.0]
+          \addplot[blue, thick, samples=100, smooth]
+          plot (\x, { \x^3-2.5*\x^2+\x } );
+          \addplot[green!85!black, thick, samples=100, smooth]
+          plot (\x, { \x^3-2.5*\x^2+\x+4 } );
+          \addplot[red, thick, samples=100, smooth]
+          plot (\x, { \x^3-2.5*\x^2+\x-3 } );
+          \addplot[purple, dashed, thick, domain={-1:1}]
+          plot (\x, { \x } );
+          \addplot[purple, dashed, thick, domain={-1:1}]
+          plot (\x, { \x+4 } );
+          \addplot[purple, dashed, thick, domain={-1:1}]
+          plot (\x, { \x-3 } );
+        \end{axis}
+      \end{tikzpicture} 
+      \caption{Graphing some arbitrary function $f\left( x \right)+C$ for $C=\highlight[blue!50]{0},\highlight[green!50]{4},\highlight[red!50]{-3}$. Notice how the derivative at $x=0$ (dashed purple line) is not affected by the value of $C$.}
+      \label{fig:derive_c}
+    \end{figure}
+
+   \end{answer}
+   }\fi
+    \begin{enumerate}
+      \item $7$
+       \if\withsol1{
+
+       \begin{answer}
+         $7$ is a constant, and thus $\int7\dif x = 7x + C$.
+       \end{answer}
+       }\fi
+     \item $x,\ x^{2},\ x^{n}$
+       \if\withsol1{
+
+       \begin{answer}
+         We know that deriving $x^{2}$ yields $2x$. By multiplying $x^{2}$ by $\frac{1}{2}$ we can compensate for the $2$ in front of $x$ and get $\int x\dif x=\frac{1}{2}x^{2}+C$ (tip: derive $\frac{1}{2}x^{2}+C$ to see that it does indeed yield $x$).\\
+
+         The same concept works with $x^{2}$: we know its integral should be of the form $ax^{3}$. Deriving $ax^{3}$ yields $3ax^{2}$, and we wish to have $3a=1$. Thus, $a=\frac{1}{3}$, and $\int x^{2}\dif x = \frac{1}{3}x^{3} + C$.\\
+
+         Generalizing for any $x^{n}$ yields $\int x^{n}\dif x = \frac{1}{n+1}x^{n+1}+C$.
+       \end{answer}
+       }\fi
+
+      \item $P_{n}\left( x \right)$ (a real polynomial of order $n$).
+       \if\withsol1{
+
+       \begin{answer}
+         Since $P_{n}\left( x \right) = \sum\limits_{k=0}^{n}a_{k}x^{k}$ (see previous tutorials), we can simply integrate the different terms one by one, which would yield
+         $$ \int P_{n}\left( x \right) = \sum\limits_{k=0}^{n}\frac{1}{k+1}a_{k}x^{k+1} + C$$
+         (as an exercise, derive $\sum\limits_{k=0}^{n}\frac{1}{k+1}a_{k}x^{k+1} + C$ to verify that you indeed get back $P_{n}\left( x \right)$!)
+       \end{answer}
+       }\fi
+
+      \item $\frac{1}{x},\ \frac{1}{x^{2}}$
+       \if\withsol1{
+
+       \begin{answer}
+         Since $\dd{x}\log\left( x \right) = \frac{1}{x}$, we expect that $\int\frac{1}{x}\dif x=\log\left( x \right)$. But this is incorrect since for non-positive values of $x$, $\log\left( x \right)$ is undefined. However, $\int\log\left( \left| x \right| \right)\dif x$ does correspond well to $\frac{1}{x}$, and thus
+         $$ \int\frac{1}{x}\dif x = \log\left( \left| x \right| \right) + C $$
+
+         For $\frac{1}{x^{2}}$ the result is much simpler, as we can write $\frac{1}{x^{2}}=x^{-2}$ and immediately see that the result should be of the form $Ax^{-1}$. Deriving $Ax^{-1}$ yields $-1Ax^{-2}$ which means $A=-1$, and thus
+         $$\int\frac{1}{x^{2}}\dif x=-\frac{1}{x}+C$$
+       \end{answer}
+       }\fi
+
+      \item $\sin\left( x \right),\ \cos\left( x \right)$
+       \if\withsol1{
+
+       \begin{answer}
+           from the relations $\dd{x}\sin\left( x \right) = \cos\left( x \right)$ and $\dd{x}\cos\left( x \right) = -\sin\left( x \right)$ we get directly:
+         \begin{align*}
+           \int\sin\left( x \right)\dif x &= -\cos\left( x \right) + C \\
+           \int\cos\left( x \right)\dif x &= \sin\left( x \right) + C \\
+         \end{align*}
+       \end{answer}
+       }\fi
+
+    \item $e^{x},\ e^{-x}$
+     \if\withsol1{
+
+     \begin{answer}
+       Since $\dd{x}e^{x} = e^{x}$, $\int e^{x}\dif x = e^{x} + C$. \\
+       For $e^{-x}$ we will have to account for the minus sign, and thus $\int e^{-x}\dif x = -e^{-x} + C$.
+       \end{answer}
+       }\fi
+
+      \item $2x^{3} - 4\sin\left( x \right),\ -2x^{2}+5x-e^{-x}$
+       \if\withsol1{
+
+       \begin{answer}
+         As for derivatives, addition can be separated when calculating integrals. Thus
+         \begin{align*}
+           \int \left( 2x^{3} - 4\sin\left( x \right) \right)\dif x &= \int2x^{3}\dif x - \int4\sin\left( x \right)\dif x \\
+           &= 2\int x^{3}\dif x -4\int\sin\left( x \right)\dif x \\
+           &= \frac{2}{4}x^{4} + 4\cos\left( x \right) + c \\
+           &= \frac{x^{4}}{2} + \cos\left( x \right) + c \\
+         \end{align*}
+
+         The same principle applies for $\int\left( -2x^{2}+5x-e^{-x} \right)\dif x$:
+         \begin{align*}
+            \int\left( -2x^{2}+5x-e^{-x} \right)\dif x &= -2\int x^{2}\dif x + 5\int x\dif x -\int e^{-x}\dif x \\
+            &= -\frac{2}{3}x^{3} + \frac{5}{2}x^{2} + e^{-x} + C \\
+         \end{align*}
+
+       \end{answer}
+       }\fi
+    \end{enumerate}
+
+  \item Find the indefinite integrals of the following functions using intergration by parts:
+   \if\withsol1{
+
+   \begin{answer}
+     Let us first be reminded of the general method of intergration by parts.\\
+     If $f\left( x \right)$ is a product of two functions $u,v$, we can easily write its derivative:
+     \begin{align*}
+       \dd{x}f &= \frac{d\left(u\cdot v\right)}{\dif x} = \frac{\dif u}{\dif x}v + u\frac{\dif v}{\dif x} \\
+     \end{align*}
+     Rearrangement yields
+     \begin{align*}
+       u\frac{\dif v}{\dif x} = \frac{d\left(u\cdot v\right)}{\dif x} - \frac{\dif u}{\dif x}v \\
+     \end{align*}
+     Integrating both sides:
+     \begin{align*}
+       \int u\frac{\dif v}{\dif x}\dif x = \int\frac{d\left(u\cdot v\right)}{\dif x}\dif x - \int\frac{\dif u}{\dif x}v\dif x \\
+     \end{align*}
+     The term $\int\frac{d\left(u\cdot v\right)}{\dif x}\dif x$ simply equals to $u\cdot v$ (since it is just an integration of a derivative), and thus
+     \begin {equation}
+     \label{eq:int_by_parts}
+       \int u\frac{\dif v}{\dif x}\dif x = u\cdot v - \int\frac{\dif u}{\dif x}v\dif x \\
+     \end{equation}
+     ~\\
+     Now, if we have an integral of the form $\int \left( u\cdot w \right)\dif x$, where $u,w$ are both functions of $x$ - if we can find the indefinite integral of $w$ we can call that integral $v$ (i.e. $v=\int w\dif x$) and thus $w=\frac{\dif u}{\dif x}$ - meaning we can solve the integral using Equation (\ref{eq:int_by_parts}).\\
+     
+     For an easier to digest equation, the following form is presented:
+     $$ \int fg' = fg -\int f'g $$
+   \end{answer}
+   }\fi
+    \begin{enumerate}
+      \item $x\sin\left( x \right)$
+       \if\withsol1{
+
+       \begin{answer}
+         Writing $u=x$ and $\frac{\dif v}{\dif x}=\sin\left( x \right)$ we obtain
+         \begin{equation}
+         \label{eq:dudx}
+           \frac{\dif u}{\dif x}=1
+         \end{equation}
+         Moreover, we can integrate $\frac{\dif v}{\dif x}$:
+         \begin{equation}
+         \label{eq:int_vdx}
+           v = \int\frac{\dif v}{\dif x}\dif x = \int\sin\left( x \right)\dif x = -\cos\left( x \right)
+         \end{equation}
+         and then use the formula in Equation (\ref{eq:int_by_parts}):
+         \begin{align*}
+           \int x\sin\left( x \right) \dif x &= -x\cos\left( x \right) + \int\cos\left( x \right)\cdot1 \\
+           &= -x\cos\left( x \right) + \sin\left( x \right) + C
+         \end{align*}
+
+       \end{answer}
+       }\fi
+
+      \item $e^{x}\sin\left( x \right)$
+       \if\withsol1{
+
+       \begin{answer}
+         Choosing $u=\sin\left( x \right)$ and $\frac{\dif v}{\dif x}=e^{x}$ yields $\frac{\dif u}{\dif x}=\cos\left( x \right)$ and $v=e^{x}$. Thus, according to Equation \ref{eq:int_by_parts}
+         $$ \int e^{x}\sin\left( x \right)\dif x = e^{x}\sin\left( x \right)-\int e^{x}\cos\left( x \right)\dif x $$
+         We now must solve $\int e^{x}\cos\left( x \right)\dif x$, and for that we will assign $u=\cos\left( x \right) \Rightarrow \frac{\dif u}{\dif x}=-\sin\left( x \right)$ and $v=e^{x} \Rightarrow \frac{\dif v}{\dif x}=e^{x}$. Using Equation \ref{eq:int_by_parts} again we get
+         \begin{align*}
+           \int e^{x}\cos\left( x \right)\dif x &= e^{x}\cos\left( x \right) - \int -e^{x}\sin\left( x \right)\dif x \\
+           &= e^{x}\cos\left( x \right) + \int e^{x}\sin\left( x \right)\dif x
+         \end{align*}
+         Substituting back to the original integral yields
+         $$ \int e^{x}\sin\left( x \right)\dif x = e^{x}\sin\left( x \right)- e^{x}\cos\left( x \right) - \int e^{x}\sin\left( x \right) $$
+         Rearranging gives
+         \begin{align*}
+           2\int e^{x}\sin\left( x \right)\dif x &= e^{x}\sin\left( x \right)- e^{x}\cos\left( x \right) \\
+           \Rightarrow \int e^{x}\sin\left( x \right)\dif x &= \frac{e^{x}\sin\left( x \right) - e^{x}\cos\left( x \right)}{2} + C\\
+           &= \frac{e^{x}}{2}\left[ \sin\left( x \right)-\cos\left( x \right) \right] + C
+         \end{align*}
+       \end{answer}
+       }\fi
+    \end{enumerate}
+  
+  \item Find the indefinite integrals of the following functions using intergration by substitution:
+   \if\withsol1{
+
+   \begin{answer}
+     Again, let us start by an overview of the concept:\\
+     when dealing with an integral of the form
+     $$\int f\left( \highlight[blue!20]{g\left( x \right)} \right)\highlight[green!20]{g'\left( x \right)\dif x}$$
+     we can write $\highlight[blue!20]{u=g}$ and thus $\frac{\dif u}{\dif x}=g'\left( x \right)$, or $\highlight[green!20]{\dif u=g'\left( x \right)\dif x}$. This results in 
+     $$\int f\left( \highlight[blue!20]{g\left( x \right)} \right)\highlight[green!20]{g'\left( x \right)\dif x}=\int f\left( \highlight[blue!20]{u} \right)\highlight[green!20]{\dif u}$$
+     which should be easier to solve. 
+   \end{answer}
+   }\fi
+    \begin{enumerate}
+      \item $2x\cos\left( x^2 \right)$
+       \if\withsol1{
+
+       \begin{answer}
+         Noticing that $\dd{x}x^{2}=2x$ we can write $u=x^{2}$ and thus $\dif u=2x\dif x$, yielding
+         $$ \int \cos\left( u \right)\dif u $$
+         which we know is equal to $\sin\left( u \right) + C $. Thus
+         $$ \int 2x\cos\left( x^2 \right)\dif x = \sin(x^{2}) + C $$
+       \end{answer}
+       }\fi
+
+      \item $\frac{x}{x^{2}+1}$
+       \if\withsol1{
+
+       \begin{answer}
+         $\dd{x}\left(x^{2}+1\right)=2x$, and so if we write
+         $$ \int\frac{x}{x^{2}+1}\dif x = \frac{1}{2}\int\frac{2x}{x^{2}+1}\dif x $$
+         we can set $u=x^{2}+1$, and thus: $\dif u=2x\dif x$. This yields:
+         $$ \frac{1}{2}\int\frac{2x}{x^{2}+1}\dif x = \frac{1}{2}\int\frac{1}{u}\dif u $$
+         We know that $\int\frac{1}{x}\dif x=\log\left( \left| x \right| \right) + C$, and so
+         $$ \frac{1}{2}\int\frac{1}{u}\dif u = \frac{1}{2}\log\left( \left| u \right| \right) + C $$
+         which by our substitution is equal to
+         $$ \frac{1}{2}\log\left( \left| x^{2}+1 \right| \right) + C $$
+       \end{answer}
+       }\fi
+    \end{enumerate}
+\end{enumerate}
+
+\stepcounter{probnum}
+\subsection*{Part \arabic{probnum}: Definite Integrals, Areas}
+\if\withsol1{
+
+\begin{answer}
+  The Fundamental Theorem of Calculus states that if $\int f\left( x \right)\dif x = F\left( x \right)+C$, then
+  \begin{equation}
+    S = \int_{a}^{b} f\left( x \right)\dif x = F\left( b \right) - F\left( a \right)
+  \end{equation}
+  is the generalized area between the function $f$ and the $x$-axis.\\
+  The term 'generalized area' is meant to emphasize the fact that this area can be negative (e.g. when the value of $f$ is negative).\\
+  The constant $C$ is dropped since it is cancelled by the subtraction of $F\left( a \right)$ from $F\left( b \right)$.
+\end{answer}
+}\fi
+\begin{enumerate}
+  \item Show by integration that for a right triangle with legs $a$ and $b$, its area is $S=\frac{1}{2}ab$.
+   \if\withsol1{
+
+   \begin{answer}
+     If we draw the triangle on a grid (Figure \ref{fig:triangle}) we can see that the hypotenuse can be represented by the function $f\left( x \right)=\frac{b}{a}x$. To recover the area of the triangle, we can integrate $f\left( x \right)$ between $0$ and $a$, yielding
+     \begin{align*}
+       S &= \int_{0}^{a} \frac{b}{a}x\dif x = \frac{b}{a}\int_{0}^{a}x\dif x = \frac{b}{a} \cdot \left.\frac{1}{2}x^{2}\right|_{0}^{a} = \frac{1}{2}\frac{b}{\cancel{a}} \left( a^{\cancel{2}} - \cancel{0^{2}} \right) = \frac{1}{2}ab \\
+     \end{align*}
+     as expected.
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=1.0]
+        \pgfmathsetmacro{\a}{4}
+        \pgfmathsetmacro{\b}{3}
+        \pgfmathsetmacro{\ang}{atan(\b/\a)}
+        \filldraw[green!20] (0,0) -- (\a,\b) -- (\a,0) -- cycle;
+        \draw[gray!50] (-1,-1) grid (5,5);
+        \draw[<->, thick] (-1,0) to (5,0);
+        \draw[<->, thick] (0,-1) to (0,5);
+        \draw[-, blue, thick] (0,0) to (\a,\b);
+        \node[blue, rotate=\ang] at (\a/2,\b/2+0.5) {$f\left( x \right)=\frac{b}{a}x$};
+        \draw[-, blue, dashed, thick] (-1,-1*\b/\a) to (0,0);
+        \draw[-, blue, dashed, thick] (\a,\b) to (5,5*\b/\a);
+        \node[] at (\a+0.75,\b) {$\left( a,b \right)$};
+        \draw[dashed] (\a,\b) to (\a,0);
+        \draw[dashed] (\a,\b) to (0,\b);
+        \draw[thick] (\a,-0.25) to (\a,0.25);
+        \node[] at (\a, -0.5) {$a$};
+        \draw[thick] (-0.25,\b) to (0.25,\b);
+        \node[] at (-0.5,\b) {$b$};
+      \end{tikzpicture} 
+      \caption{Graphing a right triangle on a grid, using the function $f\left( x \right)=\frac{b}{a}x$.}
+      \label{fig:triangle}
+    \end{figure}
+   \end{answer}
+   }\fi
+
+  \item Find the area under the curve of the following functions in the stated intervals:
+    \begin{enumerate}
+      \item $x^{2}+3,\ x\in\left[ -3,3 \right]$
+       \if\withsol1{
+
+       \begin{answer}
+         We wish to find the following quantity: $S=\int\limits_{-3}^{3}\left( x^{2}+3 \right)\dif x$:
+         \begin{align*}
+           \int_{-3}^{3}\left( x^{2}+3 \right)\dif x &= \left.\frac{1}{3}x^{3}+3x\right|_{-3}^{3} \\
+           &= \frac{1}{3}3^{3} + 3\cdot3 - \left( \frac{1}{3}\left( -3 \right)^{3}+\left( -3 \right)\cdot3 \right) \\
+           &= 9 + 9 - \left( 9 + 9 \right) \\
+           &= 36 \\
+         \end{align*}
+       \end{answer}
+       }\fi
+
+      \item $x^{3}-2x^{2}+x-4,\ x\in\left[ 3, 7\right]$
+       \if\withsol1{
+
+       \begin{answer}
+         \begin{align*}
+           \int_{3}^{7} \left( x^{3}-2x^{2}+x-4 \right)\dif x &= \left. \frac{1}{4}x^{4}-\frac{2}{3}x^{3}+\frac{1}{2}x^{2}-4x \right|_{3}^{7} \\
+           &= \frac{1}{4}7^{4} - \frac{2}{3}7^{3} + \frac{1}{2}7^{2} - 4\cdot7 - \left(  \frac{1}{4}3^{4} - \frac{2}{3}3^{3} + \frac{1}{2}3^{2} - 4\cdot3\right) \\
+           &= 600.25 - 228\frac{1}{3} + 24.5 - 28 - 20.25 + 18 - 4.5 + 12 \\
+           &= 373\frac{2}{3} \\
+         \end{align*}
+       \end{answer}
+       }\fi
+
+      \item $\frac{\left( x^{2}+e^{x^{2}} \right)\sin\left( x \right)}{e^{x^{4}+2x^{2}+5}},\ x\in\left[ -\pi, \pi \right]$
+       \if\withsol1{
+
+       \begin{answer}
+         Notice how all the expressions except $\sin\left( x \right)$ are even functions, while $\sin\left( x \right)$ is an odd function. This means that the entire function is odd.\\
+         For any odd function $f\left( x \right)$ the following is true:
+         $$ \int_{-a}^{a}f\left( x \right)\dif x = 0 $$
+         since the area on the negative side of the integration interval cancels the area on the positive side of the interval.\\
+
+         Thus, 
+         $$\int\limits_{-\pi}^{\pi} \frac{\left( x^{2}+e^{x^{2}} \right)\sin\left( x \right)}{e^{x^{4}+2x^{2}+5}} \dif x = 0 $$
+
+         \underline{Note}: an even function is a function where $f_{\text{even}}\left( -x \right)=f_{\text{even}}\left( x \right)$ (i.e. it is symmetric around the $y$-axis), while an odd function has the property $f_{\text{odd}}\left( -x \right)=-f_{\text{odd}}\left( x \right)$ (i.e. it is anti-symmetric around the $y$-axis). \\
+         For example, the following functions are even: $C,\ x^{2},\ x^{4},\ \frac{1}{x^{2}},\ \cos\left( x \right)$, and the following are odd: $x,\ x^{3},\ x^{5},\ \frac{1}{x},\ \sin\left( x \right)$.
+       \end{answer}
+       }\fi
+    \end{enumerate}
+
+  \item Find the area between the functions $f\left( x \right)=-x^{2}$ and $g\left( x \right)=x^{3}-2x$ in the interval $x\in\left[ 0,1 \right]$.
+   \if\withsol1{
+
+   \begin{answer}
+     Let us first draw the functions so we can visualize the area we are after:
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[]
+        \begin{axis}[grid=major, xmin=-1, xmax=2, ymin=-2, ymax=1,
+          xtick = {-1,0,...,2}, ytick = {-2,-1,...,1},
+          scale=1.0]
+          \addplot[name path=A, red, thick, samples=100, smooth, domain={0:1}]
+          plot (\x, { -\x^2 } );
+          \addplot[name path=B, blue, thick, samples=100, smooth, domain={0:1}]
+          plot (\x, { \x^3-2*\x } );
+          \addplot[green!25] fill between[of=A and B];
+          \addplot[red, thick, samples=100, smooth]
+          plot (\x, { -\x^2 } );
+          \addplot[blue, thick, samples=100, smooth]
+          plot (\x, { \x^3-2*\x } );
+        \end{axis}
+      \end{tikzpicture} 
+    \end{figure}
+    We are interested in the area highlighted in green. \\
+
+    We can subtract the areas from each other, i.e. $G\left( x \right) -F \left( x \right)$ for the relevant integral, but since integration is 'blind' to addition, we can simply write both parts in the same integral, i.e.:
+    $$ S = \int_{0}^{1} \left( x^{3}-2x + x^{2} \right)\dif x $$
+    which yields
+    \begin{align*}
+      S &= \int_{0}^{1} \left( x^{3}-2x + x^{2} \right)\dif x = \left. \frac{1}{4}x^{4}-\frac{2}{3}x^{3} + \frac{1}{3}x^{3} \right|_{0}^{1} \\
+      &= \frac{1}{4} + \frac{1}{3} + \frac{1}{3} = \frac{1}{4} + \frac{2}{3} = \frac{3}{12} + \frac{8}{12} \\
+      &= \frac{11}{12} \\
+    \end{align*}
+    
+    Notice that if we took the area between $g$ and $f$ (instead of between $f$ and $g$), the sign of the result would be the opposite of what we found, i.e. $S=-\frac{11}{12}$. The sign of the area is determined by which function is above the other for the respective interval. This is an example of the concept of 'generalized area' described above.
+   \end{answer}
+   }\fi
+
+\end{enumerate}

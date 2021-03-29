@@ -1,0 +1,235 @@
+\lstset{ 
+    language=Java, % choose the language of the code
+    basicstyle=\fontfamily{pcr}\selectfont\footnotesize\color{black},
+    keywordstyle=\color{red}\bfseries, % style for keywords
+    emph={DATETIME},
+    emphstyle=\color{red}\bfseries,
+    numbers=left, % where to put the line-numbers
+    numberstyle=\color{blue}\tiny, % the size of the fonts that are used for the line-numbers
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false, % show spaces adding particular underscores
+    showstringspaces=false, % underline spaces within strings
+    showtabs=false, % show tabs within strings adding particular underscores
+    frame=single, % adds a frame around the code
+    tabsize=2, % sets default tabsize to 2 spaces
+}
+
+\newcommand{\lsys}[5]{
+  \begin{tabular}[H]{ll}
+    \textbf{variables}:& #1 \\
+    \textbf{constants}:& #2 \\
+    \textbf{axiom}:& #3 \\
+    \textbf{rules}:& #4 \\
+    \textbf{$N$}:& #5
+  \end{tabular}
+}
+
+\section{Introduction to Programming}
+
+\subsection{Java}
+\begin{enumerate}
+  \item The following function is defined:
+    \lstinputlisting[firstline=1, lastline=10]{java/code.java}
+        \begin{enumerate}
+          \item What will be the returned value of \LS{foo} for the array \LS{arr=[2,-3,3,4,-7]}?
+           \if\withsol1{
+
+           \begin{answer}
+             The function will return $4$.
+           \end{answer}
+           }\fi
+          \item What operation does the function perform?
+           \if\withsol1{
+
+           \begin{answer}
+             The function returns the maximum value in the array; it iterates over the array, element by element, using \LS{i} as an index and starting at the second element (\LS{i=1}):
+             \lstinputlisting[firstline=4, lastline=4, firstnumber=4]{java/code.java}
+             If the element in the \LS{i}-th position is bigger than the previous stored maximum \LS{m} (which is set to the first element before the loop starts: see line 3), than it sets \LS{m} to equal this element:
+             \lstinputlisting[firstline=6, lastline=7, firstnumber=6]{java/code.java}
+             After the loop finishes it simply returns the value of \LS{m}:
+             \lstinputlisting[firstline=9, lastline=9, firstnumber=9]{java/code.java}
+
+             In the case of the above given array, the following values will be calculated (remember that \LS{m} is set to \LS{2} before the loop starts, and so there is no need to start the iteration at \LS{i=0}):
+             \begin{center}
+               \begin{tabular}{ c|c|c|c|c }
+                 \LS{i} & \LS{i < arr[i]}? & \LS{arr[i]} & \LS{i>m}? & \LS{m} \\
+                 \hline
+                    -   &  -  & - & - & $2$ \\
+                    $1$ & yes & $-3$ & no  & $2$ \\
+                    $2$ & yes & $3$  & yes & $3$ \\
+                    $3$ & yes & $4$  & yes & $4$ \\
+                    $4$ & yes & $-7$ & no  & $4$ \\
+                    $5$ & no & - & - & \\
+                 \hline
+               \end{tabular}
+             \end{center}
+
+           \end{answer}
+           }\fi
+         \item How will the answer change if, instead of
+           \lstinline!if (arr[i] > m)!,
+           the code would be
+           \lstinline!if (arr[i] < m)!?
+          \if\withsol1{
+
+          \begin{answer}
+            The function will return the minimum value in the array.
+          \end{answer}
+          }\fi
+       \end{enumerate}
+
+  \item The following function is defined:
+        \lstinputlisting[firstline=13, lastline=26]{java/code.java}
+        \underline{Note}: the operator \LS{||} means 'OR', the operator \LS{&&} means 'AND'. The operator \LS{\%} is the modulo operator (i.e. it returns the remainder of the division. For example: \LS{3\%2=1}, \LS{4\%2=0}).
+        \begin{enumerate}
+          \item What are the returned values of \LS{bar} for the following numbers: $-3, 1, 2, 3, 4, 5, 9, 11, 16$?
+           \if\withsol1{
+
+           \begin{answer}
+             \begin{center}
+               \begin{tabular}{ c|c }
+                 \LS{n} & \LS{bar(n)}\\
+                 \hline
+                 $-3$ & false \\
+                 $1$  & false \\
+                 $2$  & true  \\
+                 $3$  & true  \\
+                 $4$  & false \\
+                 $5$  & true  \\
+                 $9$  & false \\
+                 $11$ & true  \\
+                 $16$ & false \\
+                 \hline
+               \end{tabular}
+             \end{center}
+             
+           \end{answer}
+           }\fi
+          \item Which operation does the function perform?
+           \if\withsol1{
+
+           \begin{answer}
+             The function checks whether the input integer \LS{n} is a prime number. If it is, it returns \LS{true}, and if it isn't it returns \LS{false}.\\
+             The lines
+             \lstinputlisting[firstline=15, lastline=16]{java/code.java}
+             check whether \LS{n} is either smaller than \LS{2}, or an even number that is not \LS{2}. If these conditions are met, the function immediately returns \LS{false}. If \LS{n} is an odd number bigger than \LS{2} (or \LS{2} itself) the function continues to the main loop, where it checks whether \LS{n} is divisible without remainder for any odd number smaller than itself (why are the odd numbers sufficient?):
+             \lstinputlisting[firstline=19, lastline=24, firstnumber=7]{java/code.java}
+             If this is true for any number (i.e. \LS{9} is divisible by \LS{3} without remainder) it immediately returns \LS{false}. Only if \LS{n} is not divisible by any number smaller than it will the function return \LS{true}.
+           \end{answer}
+           }\fi
+        \end{enumerate}
+
+  \item The following function is defined:
+        \lstinputlisting[firstline=28, lastline=36]{java/code.java}
+        \begin{enumerate}
+          \item What are the returned values of \LS{baz} for the following numbers: $1, 2, 3, 4, 5$?\\
+            \underline{Note}: \LS{i++} means \LS{i=i+1} (i.e. it increases \LS{i} by one).
+           \if\withsol1{
+
+           \begin{answer}
+             \begin{center}
+               \begin{tabular}{ c|l }
+                 \LS{n} & \LS{baz(n)} \\
+                 \hline
+                 \LS{1} & \LS{1}  \\
+                 \LS{2} & \LS{2}  \\
+                 \LS{3} & \LS{6}  \\
+                 \LS{4} & \LS{24} \\
+                 \LS{5} & \LS{120}\\
+                 \hline
+               \end{tabular}
+             \end{center}
+             
+           \end{answer}
+           }\fi
+          \item Which operation does the function perform?
+           \if\withsol1{
+
+           \begin{answer}
+             The function returns the factorial of \LS{n}. \\
+             It does so by multiplying all integers form \LS{1} to \LS{n} (including both):
+             \lstinputlisting[firstline=31, lastline=34, firstnumber=4]{java/code.java}
+           \end{answer}
+           }\fi
+        \end{enumerate}
+\end{enumerate}
+
+\if\withsol0{
+  \newpage
+}\fi
+\subsection{L-Systems}
+\begin{enumerate}
+  \item For the following L-systems, write the first $N$ strings ($N$ is given for each system):\\
+  \begin{enumerate}
+    \item ~\\
+      \lsys{A B}{None}{A}{A$\rightarrow$AB, B$\rightarrow$A}{4}\\
+      \if\withsol1{
+        \begin{answer}
+              \begin{pycode}
+from scripts import Lsys, print_Lsys
+rules = {'A': 'AB',
+         'B': 'A'}
+Ls = [(Lsys('A', rules, i)) for i in range(5)]
+print_Lsys(Ls)
+              \end{pycode}
+        \end{answer}
+    }\fi
+
+    \item ~\\
+      \lsys{A B C}{None}{A}{A$\rightarrow$C, B$\rightarrow$A, C$\rightarrow$AB}{10}\\
+      \if\withsol1{
+        \begin{answer}
+              \begin{pycode}
+from scripts import Lsys, print_Lsys
+rules = {'A': 'C',
+         'B': 'A',
+         'C': 'AB'}
+Ls = [(Lsys('A', rules, i)) for i in range(10)]
+print_Lsys(Ls)
+              \end{pycode}
+        \end{answer}
+    }\fi
+
+    \item \label{lastsys}~\\
+      \lsys{B, A}{(,)}{B}{A$\rightarrow$AA, B$\rightarrow$A(B)B}{3}\\
+      \if\withsol1{
+        \begin{answer}
+              \begin{pycode}
+from scripts import Lsys, print_Lsys
+rules = {'A': 'AA',
+         'B': 'A(B)B',
+         '(': '(',
+         ')': ')'}
+Ls = [(Lsys('B', rules, i)) for i in range(4)]
+print_Lsys(Ls)
+              \end{pycode}
+        \end{answer}
+    }\fi
+  \end{enumerate}
+
+  \item For system \ref{lastsys} ($N=0,1,2,3,4$), draw  using the following rules:\\
+    \begin{tabular}{ll}
+      'A': & draw a line segment.\\
+      'B': & draw a line segment ending in a leaf.\\
+      '(': & push position and angle, turn left 45 degrees.\\
+      ')': & pop position and angle, turn right 45 degrees.\\
+    \end{tabular}
+      \if\withsol1{
+        \begin{answer}
+          \begin{tikzpicture}[scale=0.2]
+              \begin{pycode}
+from scripts import Lsys, turtle_draw
+rules = {'A': 'AA',
+         'B': 'A(B)B',
+         '(': '(',
+         ')': ')'}
+Ls = [(Lsys('B', rules, i)) for i in range(1,6)]
+for i, L in enumerate(Ls):
+  turtle_draw(start=[i*13,5], lst=L)
+  print('\\node at ({}*13,0) {{$n={}$}};'.format(i, i+1))
+              \end{pycode}
+          \end{tikzpicture}
+        \end{answer}
+    }\fi
+\end{enumerate}

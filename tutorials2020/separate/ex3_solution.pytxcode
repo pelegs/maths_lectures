@@ -1,0 +1,71 @@
+=>PYTHONTEX#py#default#default#0#code####ex3.tex#147#
+from scripts import *
+A=np.array([[1, 3, 7],[0, -4, 1],[2, 2, 5]])
+B=np.array([[1, 0, 1],[2, 0, 2], [3, 7, 0]])
+print(r'\begin{tabular}{l c c c c r}')
+print(r'& $A$ & $B$ &&&\\')
+for i in range(3):
+		for j in range(3):
+				colordot(A, B, a=i, b=j, col1='col1', col2='col2')
+		print(r'\\')
+print(r'\end{tabular}')
+=>PYTHONTEX#py#default#default#1#c####ex3.tex#161#
+draw_matrix(np.dot(A, B))
+=>PYTHONTEX#py#default#default#2#c####ex3.tex#165#
+draw_matrix(np.dot(B, A))
+=>PYTHONTEX#py#default#default#3#c####ex3.tex#171#
+draw_matrix(A)
+=>PYTHONTEX#py#default#default#4#code####ex3.tex#198#
+print(r'\begin{align*}')
+print(r'A^{\mathbf{T}}&=')
+draw_matrix(np.transpose(A))
+print(r',\\B^{\mathbf{T}}&=')
+draw_matrix(np.transpose(B))
+print(r',\\C^{\mathbf{T}}&=')
+draw_matrix(np.identity(3).astype(int))
+print(r'.\end{align*}')
+=>PYTHONTEX#py#default#default#5#code####ex3.tex#228#
+A=np.array([[1,2],[-5,8]])
+B=np.array([[2,0],[0,1]])
+mdot(A, B)
+=>PYTHONTEX#py#default#default#6#code####ex3.tex#251#
+A=np.array([[1,2,6],[-5,8,6]])
+B=np.array([[0,1,-2],[1,0,1],[3,7,2]])
+mdot(A, B)
+=>PYTHONTEX#py#default#default#7#code####ex3.tex#323#
+A = np.array([[2,2],[7,1],[0,5]])
+B = np.array([[2,0],[1,-1],[8,1]])
+mdot(A, np.transpose(B))
+=>PYTHONTEX#py#default#default#8#code####ex3.tex#344#
+a = np.array([7, 0, 4])
+b = np.array([-3, 1, 8])
+vdot(0, 0, a, b, alone=True)
+=>PYTHONTEX#py#default#default#9#code####ex3.tex#367#
+a = np.array([[1, 0, 0],[0, 3, 0],[0, 0, -1]])
+b = np.array([[1],[5],[5]])
+mdot(a, b)
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-ex3_solution
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

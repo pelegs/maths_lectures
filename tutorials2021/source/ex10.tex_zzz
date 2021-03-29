@@ -1,0 +1,446 @@
+\section{Exercise \exnum: Derivatives\solutionhead}
+
+
+\begin{enumerate}
+  \item Draw the following functions on a grid: $x^{2},\ -x^{2},\ x^{2}+3,\ x^{2}-5,\ x^{2}-2x,\ x^{2}-3x+5$.
+   \if\withsol1{
+
+   \begin{answer}
+     It is important to understand how parabolas of the form $ax^{2}+bx+c$ behave. The sign of $a$ determines whether the parabola is upward-concaving or downward-concaving (See $-x^{2}$ in Figure \ref{fig:parabolas2}), and its width (the bigger $a$ is, the narrower will the parabola be). Changing only $c$ simply 'moves' the parabola up and down (See Figure \ref{fig:parabolas1}). $b$ affects the shape of the parabola in a more complicated way: for a parabola of the form $x^{2}+bx$, we get that it's minimum is at $x=-\frac{b}{2}$ with value $y=\frac{b^{2}}{4}-\frac{b^{2}}{2}=-\frac{b^{2}}{4}$, meaning that changing $b$ simultaneously moves the minimum linearly in the $x$-axis and on a parabolic path in the $y$-axis.\\
+     Notice that in essence - up to scaling, rotating, translating and flipping around the axes - there is actually only one parabola\footnotemark, that is being shifted around the $xy$-plane according to its parameters.
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[]
+        \begin{axis}[grid=major, xmin=-4, xmax=4, ymin=-5, ymax=10,
+          xtick = {-4,-3,...,4}, ytick = {-5,-4,...,10},
+          scale=1.0]
+          \addplot[red, thick, samples=100, smooth]
+          plot (\x, { \x^2 } );
+          \addplot[green!80!black, thick, samples=100, smooth]
+          plot (\x, { \x^2+3 } );
+          \addplot[blue, thick, samples=100, smooth]
+          plot (\x, { \x^2-5 } );
+        \end{axis}
+      \end{tikzpicture} 
+      \caption{Graphing $\color{red}x^{2},\ \color{green!80!black}x^{2}+3$ and $\color{blue}x^{2}-5$ for $x\in\left[ -4,4 \right]$.}
+      \label{fig:parabolas1}
+    \end{figure}
+    
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[]
+        \begin{axis}[grid=major, xmin=-4, xmax=4, ymin=-10, ymax=10,
+          xtick = {-4,-3,...,4}, ytick = {-10,-9,...,10},
+          scale=1.0]
+          \addplot[red, thick, samples=100, smooth]
+          plot (\x, { -\x^2 } );
+          \addplot[green!80!black, thick, samples=100, smooth]
+          plot (\x, { \x^2-2*\x } );
+          \addplot[blue, thick, samples=100, smooth]
+          plot (\x, { \x^2-3*\x+5 } );
+        \end{axis}
+      \end{tikzpicture} 
+      \caption{Graphing $\color{red}-x^{2},\ \color{green!80!black}x^{2}-2x$ and $\color{blue}x^{2}-3x+5$ for $x\in\left[ -4,4 \right]$.}
+      \label{fig:parabolas2}
+    \end{figure}
+   \end{answer}
+   \footnotetext{See the following YouTube video: \url{https://www.youtube.com/watch?v=hoh4TmPzu1w}.}
+   }\fi
+    
+  \item Calculate the following derivatives:
+    \begin{enumerate}[label=\roman*.]
+      \item $\dd{x}\left(5x^{4}-3x^{2}+5\right)$
+       \if\withsol1{
+
+       \begin{answer}
+         \begin{align}
+           \dd{x}\left(5x^{4}-3x^{2}+5\right) &= \dd{x}5x^{4} - \dd{x}3x^{2} + \cancel{\dd{x}5}\\
+           &= 5\dd{x}x^4 - 3\dd{x}x^2 \\
+           &= 5\times4x^{3} - 3\times2x \\
+           &= 20x^{3} - 6x
+         \end{align}
+       \end{answer}
+       }\fi
+
+      \item $\dd{x}\left(\frac{x^{3}-6x+5}{x-7}\right)$
+        \if\withsol1{
+
+        \begin{answer}
+          For functions of the type $\frac{f}{g}$ we get $\dd{x}\frac{f}{g}=\frac{\dd{x}f\cdot g-f\cdot\dd{x}g}{g^{2}}$, and thus if we define $f\left(x\right)=x^{3}-6x+5,\ g\left(x\right)=x-7$ we get
+          \begin{align*}
+            \dd{x}\left(\frac{x^{3}-6x+5}{x-7}\right) &= \frac{\dd{x}\left( x^{3}-6x+5 \right)\left( x-7 \right) - \left( x^{3}-6x+5 \right)\dd{x}\left( x-7 \right)}{\left( x-7 \right)^{2}} \\
+            &= \frac{\left( 3x^{2}-6 \right)\left( x-7 \right) - \left( x^{3}-6x+5 \right)\left( 1 \right)}{\left( x-7 \right)^{2}} \\
+            &= \frac{3x^{3}-\cancel{6x}-21x^{2}+42 - \left( x^{3}-\cancel{6x}+5 \right)}{x^2-14x+49} \\
+            &= \frac{2x^{3}-21x^{2}+37}{x^2-14x+49} \\
+          \end{align*}
+        \end{answer}
+        }\fi
+
+      \item $\dd{x}P_{n}\left( x \right)$, where $P_{n}\left( x \right)$ is a real polynomial of order $n$.
+       \if\withsol1{
+
+       \begin{answer}
+         Remembering that $P_{n}\left( x \right)=\sum\limits_{k=0}^{n}a_{k}x^{k}$ - we see that we can derive the terms of the polynomial separately:
+         \begin{align*}
+           \dd{x}P_{n}\left( x \right) &= \dd{x}\sum\limits_{k=0}^{n}a_{k}x^{k} \\
+           &= \sum\limits_{k=0}^{n}\dd{x}a_{k}x^{k} \\
+           &= \sum\limits_{k=0}^{n}a_{k}\dd{x}x^{k} \\
+           &= \sum\limits_{k=0}^{n}k\cdot a_{k}\cdot x^{k-1} \\
+         \end{align*}
+       \end{answer}
+       }\fi
+
+         \item $\dd[n]{x}P_{n}\left( x \right)$
+       \if\withsol1{
+
+       \begin{answer}
+         Let's derive only the last term of the polynomial:
+         \begin{equation*}
+           \dd{x}a_{n}x^{n} = na_{n}x^{n-1}
+         \end{equation*}
+         deriving the second time yields
+         \begin{equation*}
+           \dd{x}na_{n}x^{n-1} = \left( n-1 \right)na_{n}x^{n-2}
+         \end{equation*}
+         and then the third time...
+         \begin{equation*}
+           \dd{x}\left( n-1 \right)na_{n}x^{n-2} = \left( n-2 \right)\left( n-1 \right)na_{n}x^{n-3}
+         \end{equation*}
+         ...and so on.
+         The $n$-th derivative will thus yield
+         \begin{equation*}
+           \dd[n]{x}a_{n}x^{n} =\left( \cancelto{=1}{n-n+1} \right)\times\left( \cancelto{=2}{n-n+2} \right)\dots\times\left( n-2 \right)\left( n-1 \right)na_{n}x^{\cancel{n-n}}
+         \end{equation*}
+         Since $n-n=0$ and $n-n+1=1$, the last term would be equal to
+         \begin{equation*}
+           \dd[n]{x}a_{n}x^{n}=\highlight[green!20]{1\times2\times\dots\times\left( n-2 \right)\left( n-1 \right)n}a_{n}\cancel{x^{0}}
+         \end{equation*}
+         the expression highlighted in green is simply $n!$, and thus the last term is equal to $n!\cdot a_{n}$. \\
+         Since the rest of the terms have a power of $x$ which is less than $n$ they will all be lost during the derivation steps. Think for example about $a_{3}x^{3}$: after the first derivation it will become $3a_{3}x^{2}$, then $6a_{3}x$, then $6a_{3}$ and then simply $0$. \\
+         Thus, the complete derivative is just the last term, i.e.
+         \begin{equation*}
+           \dd[n]{x}P_{n}\left( x \right) = n!\cdot a_{n}
+         \end{equation*}
+       \end{answer}
+       }\fi
+      \item $\dd{x}\sqrt{x},\ \dd{x}\frac{1}{2\sqrt{x}}$
+       \if\withsol1{
+
+       \begin{answer}
+         Since $\sqrt{x}=x^{\frac{1}{2}}$, we can simply use the power rule, and thus
+         \begin{align*}
+           \dd{x}\sqrt{x} &= \dd{x}x^{\frac{1}{2}} \\
+           &= \frac{1}{2}x^{\frac{1}{2}-1} \\
+           &= \frac{1}{2}x^{-\frac{1}{2}} \\
+           &= \frac{1}{2x^{\frac{1}{2}}} \\
+           &= \frac{1}{2\sqrt{x}}
+         \end{align*}
+         Notice that a similar process can be applied for any expression of $x$ (i.e. $f\left( x \right)$) yielding $\dd{x}\sqrt{f\left( x \right)} = \frac{\dd{x}f\left( x \right)}{2\sqrt{f\left( x \right)}}$. \\
+         For $\dd{x}\frac{1}{2\sqrt{x}}$ we can use a similar process:
+         \begin{align*}
+           \dd{x}\frac{1}{2\sqrt{x}} &= \dd{x}\frac{1}{2}x^{-\frac{1}{2}} \\
+           &= \frac{1}{2}\cdot\left( -\frac{1}{2} \right)x^{-\frac{3}{2}} \\
+           &= -\frac{1}{4x^{\frac{3}{2}}} \\
+           &= -\frac{1}{4\sqrt{x}^{3}} \\
+         \end{align*}
+       \end{answer}
+       }\fi
+      \item $\dd{x}e^{3x^{3}-2x},\ \dd{x}e^{-2\sqrt{x}}$
+       \if\withsol1{
+
+       \begin{answer}
+         Generally, $\dd{x}e^{f\left( x \right)} = \left[ \dd{x}f\left( x \right) \right]\cdot e^{f\left( x \right)}$ (and specifically: $\dd{x}e^{x}=e^{x}$). \\
+         Thus
+         \begin{align*}
+           \dd{x}e^{3x^{3}-2x} &= \dd{x}\left( 3x^{3}-2x \right)\cdot e^{3x^{3}-2x} \\
+           &= \left(9x^{2}-2\right)\cdot e^{3x^{3}-2x} \\
+         \end{align*}
+         Similarly,
+         \begin{align*}
+           \dd{x}e^{-2\sqrt{x}} &= -\cancel{2}\frac{1}{\cancel{2}\sqrt{x}}e^{-2\sqrt{x}} \\
+           &= -\frac{1}{\sqrt{x}}e^{-2\sqrt{x}} \\
+         \end{align*}
+       \end{answer}
+       }\fi
+
+     \item $\dd[7]{x}e^{-x}$
+       \if\withsol1{
+
+       \begin{answer}
+         Deriving $e^{-x}$ yields $-e^{-x}$, which when derived yields back $e^{-x}$. Thus after 7 derivation we will get $-e^{-x}$.
+       \end{answer}
+       }\fi
+      \item $\dd{x}\left( 3x-\sin\left( x \right) \right),\ \dd{x}\sin\left(x^{2}\right)$
+       \if\withsol1{
+
+       \begin{answer}
+         Since $\dd{x}\sin\left( x \right)=\cos\left( x \right)$, we get simply $\dd{x}\left( 3x-\sin\left( x \right) \right)=3-\cos\left( x \right)$. \\
+         Similarly, $\dd{x}\sin\left( x^{2} \right) = \cos\left( x^{2} \right)\cdot\dd{x}x^{2} = 2x\cos\left( x^{2} \right)$.
+       \end{answer}
+       }\fi
+     \item $\dd[8]{x}\cos\left( x \right)$
+       \if\withsol1{
+
+       \begin{answer}
+         Since $\dd{x}\sin\left( x \right)=\cos\left( x \right)$ and $\dd{x}\cos\left( x \right)=-\sin\left( x \right)$, we can see that successive derivation of $\cos\left( x \right)$ will yield the follwing (the arrows here represent the derivative):
+         \begin{align*}
+           \cos\left( x \right) \rightarrow \sin\left( x \right) \rightarrow -\cos\left( x \right) \rightarrow -\sin\left( x \right) \rightarrow \cos\left( x \right)
+         \end{align*}
+         We can see that after $4$ derivatives, $\cos\left( x \right)$ becomes again $\cos\left( x \right)$, and so after $8$ derivates the same will happen. Thus
+         \begin{equation*}
+           \frac{d^{8}}{dx^{8}}\cos\left( x \right) = \cos\left( x \right)
+         \end{equation*}
+       \end{answer}
+       }\fi
+    \end{enumerate}
+
+  \item Using Taylor expansions\if\withsol1{\footnote{Take it as a fact, at this point you should not be familiar with this concept.}}\fi, we know that the following is true:
+    \begin{align*} 
+      \sin\left( x \right) &= x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\dots=\sum\limits_{k=0}^{\infty}\frac{\left( -1 \right)^{k}}{\left( 2k+1 \right)!}x^{2k+1} \\
+      \cos\left( x \right) &= 1-\frac{x^{2}}{2!}+\frac{x^{4}}{4!}-\dots=\sum\limits_{k=0}^{\infty}\frac{\left( -1 \right)^{k}}{\left( 2k \right)!}x^{2k}
+    \end{align*}
+    (these are the \textit{MacLaurin series} of $\sin\left( x \right)$ and $\cos\left( x \right)$) \\
+    Using these expansions, show that $\dd{x}\sin\left( x \right)=\cos\left( x \right)$ and that $\dd{x}\cos\left( x \right)=-\sin\left( x \right)$.
+   \if\withsol1{
+
+   \begin{answer}
+     Let us look at the first few terms of the MacLaurin series of $\sin\left(x\right)$, and try to derive them:
+     \begin{align*}
+       \dd{x}\sin\left(x\right) &= \dd{x}\left(x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\frac{x^{7}}{7!}+\dots\right) \\
+       &= \dd{x}x-\dd{x}\frac{x^{3}}{3!}+\dd{x}\frac{x^{5}}{5!}-\dd{x}\frac{x^{7}}{7!}+\dots \\
+       &= \dd{x}x-\frac{1}{3!}\dd{x}x^{3}+\frac{1}{5!}\dd{x}x^{5}-\frac{1}{7!}\dd{x}x^{7}+\dots \\
+       &= 1-\frac{1}{3!}3x^{2}+\frac{1}{5!}5x^{4}-\frac{1}{7!}7x^{6}+\dots \\
+     \end{align*}
+     We can see that the coefficients of $x^{n}$ are terms of the form $\frac{n}{n!}$ (i.e. $\frac{3}{3!},\ \frac{5}{5!},\ \frac{7}{7!},\ $ etc.).\\
+     Let's calculate what does $\frac{n}{n!}$ equal to:
+     \begin{align*}
+       \frac{n}{n!}	&= \frac{n}{1\times2\times\dots\times\left(n-1\right)\times n}\\
+       &=\frac{1}{1\times2\times\dots\times\left(n-1\right)} \\
+       &=\frac{1}{\left(n-1\right)!}\\
+     \end{align*}
+     This means that $\frac{3}{3!}=\frac{1}{2!},\ \frac{5}{5!}=\frac{1}{4!},\ $ etc. Thus, we get:
+     \begin{align*}
+       \dd{x}\sin\left(x\right) &= 1-\frac{1}{3!}3x^{2}+\frac{1}{5!}5x^{4}-\frac{1}{7!}7x^{6}+\dots \\
+       &= 1-\frac{1}{2!}x^{2}+\frac{1}{4!}x^{4}-\frac{1}{6!}x^{6}+\dots \\
+     \end{align*} 
+     which looks like the MacLaurin series for $\cos\left(x\right)$.\\
+     Let us now write this in a more general way, noticing that we can derive each term of the summation seperately as we did just now:
+     \begin{align*}
+       \dd{x}\sin\left(x\right) &= \dd{x}\sum_{k=0}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k+1\right)!}x^{2k+1} \\
+       &=\sum_{k=0}^{\infty}\dd{x}\left[\frac{\left(-1\right)^{k}}{\left(2k+1\right)!}x^{2k+1}\right] \\
+       &=\sum_{k=0}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k+1\right)!}\cdot\dd{x}x^{2k+1} \\
+       &=\sum_{k=0}^{\infty}\left(-1\right)^{k}\frac{2k+1}{\left(2k+1\right)!}\cdot x^{2k} \\
+       &=\sum_{k=0}^{\infty}\left(-1\right)^{k}\frac{1}{\left(2k\right)!}\cdot x^{2k} \\
+     \end{align*}
+       which is exactly the MacLaurin series for $\cos\left(x\right)$.\\
+       ~\\
+       Now on to deriving $\cos\left(x\right)$: the same logic as before yields
+       \begin{align*}
+         \dd{x}\cos\left(x\right) &= \sum_{k=0}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k-1\right)!}x^{2k-1} \\
+       \end{align*}
+       This looks almost exactly like the MacLaurin series of $\sin\left(x\right)$, but with $2k-1$ instead of $2k+1$. \\
+       We can divide this sum into two parts: the first term (i.e. when $k=0$) and all the rest. This yields
+       \begin{align*}
+         \sum_{k=0}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k-1\right)!}x^{2k-1} &= \frac{\left(-1\right)^{0}}{\left(0-1\right)!}x^{-1}+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k-1\right)!}x^{2k-1} \\
+	     &= \frac{1}{\left(-1\right)!}x^{-1}+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k-1\right)!}x^{2k-1} \\
+       \end{align*}
+       If we accept that $\left(-1\right)!=\infty$ (more on that later), we get that $\frac{1}{\left(-1\right)!}x^{-1}=0$, and thus
+       \begin{align*}
+         \dd{x}\cos\left(x\right) &= \sum_{k=0}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k-1\right)!}x^{2k-1} \\
+	     &=\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k-1\right)!}x^{2k-1} \\
+       \end{align*}
+       This last expression looks as follows:
+       \begin{align*}
+         \sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{\left(2k-1\right)!}x^{2k-1} &= \frac{\left(-1\right)^{1}}{1!}x^{1}+\frac{\left(-1\right)^{2}}{3!}x^{3}+\frac{\left(-1\right)^{3}}{5!}x^{5}+\dots \\
+         &= -x+\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\dots \\
+         &= -\left(x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}+\dots\right) \\
+         &= -\sin\left( x \right) \\
+       \end{align*}
+       which means $\dd{x}\cos\left( x \right)=-\sin\left( x \right)$. \\
+       ~\\
+       \begin{tcolorbox}
+         \textbf{In what sense does $\left( -1 \right)! = \infty$?}\\
+         Obiously, the classic definition of the factorial does not apply here. We therefore use the Gamma function, which is an extension of the factorial to the complex plane, in a way such that for natural numbers $n\in\mathbb{N}$, $\Gamma\left( n \right)=\left( n-1 \right)!$, i.e. $\Gamma\left( 0 \right)=\left( -1 \right)!,\ \Gamma\left( 1 \right)=0!,\ \Gamma\left( 2 \right)=1!$, etc.\\
+         Specifically, the definition is $$\Gamma\left( z \right)=\int\limits_{0}^{\infty}x^{z-1}e^{-x}dx$$ (this really is just extra information, you should not in any way understand it in the framework of this course) \\
+         This definition yields $\lim\limits_{x\rightarrow0^{+}}\Gamma\left( 0 \right)=\infty$, which is what we used here.
+       \end{tcolorbox}
+   \end{answer}
+   }\fi
+
+ \item Analyze the following functions (i.e. find points where the function intersects the axes, find all extrema and their type - including inflection points, and where the function is increasing or decreasing):
+   \begin{enumerate}
+     \item $f\left( x \right)=x^{3}-x^{2}-x+1$
+     \item $f\left( x \right)=e^{-\frac{1}{2}x^{2}}$
+   \end{enumerate}
+  \if\withsol1{
+  \begin{answer}
+    \begin{enumerate}
+      \item 
+        We start by finding the points where the function intercepts the axes. For the $y$-axis this will be when $x=0$:
+        $$y = f\left( 0 \right) = \cancel{0^{3}}-\cancel{0^{2}}-\cancel{0}+1 = 1$$
+        For the $x$-axis this will be when $y=f\left( x \right)=0$. Thus we need to solve the equation $x^{3}-x^{2}-x+1=0$. The following is true:
+        $$x^{3}-x^{2}-x+1 = \left( x^{2}-1 \right)\left( x-1 \right)$$
+        and so $x^{3}-x^{2}-x+1=0$ will be true when either $x^{2}-1=0$ or $x-1=0$, which means $x=\pm1$.\\
+        Next, we will find the extremum points of the function. Local minima and maxima have the property that in these points $\dd{x}f\left( x \right)=0$\footnotemark{}. Thus, we will derive the function by $x$ and find at which values of $x$ our function has a local minimum/maximum:
+        \begin{align*}
+          \dd{x}f\left( x \right)=0 &\Rightarrow \dd{x}\left[ x^{3}-x^{2}-x+1 \right]=0 \\
+          &\Rightarrow 3x^{2}-2x-1=0 \\
+          &\Rightarrow x_{1,2} = \frac{2\pm\sqrt{4+3\cdot4\cdot1}}{6}=\frac{2\pm\sqrt{16}}{6}=\frac{2\pm4}{6}=\frac{1\pm2}{3}\\
+          &\Rightarrow x_{1,2} \approx -\frac{1}{3}, 1 \\
+        \end{align*}
+        The corresponding $y$ values of these two points are $y=\frac{32}{27}$ and $y=0$. \\
+        Let's summarize what we have so far:
+        \begin{itemize}
+          \item Point where the function crosses the $x$-axis: $\left( 0, 1\right)$.
+          \item Points where the function crosses the $y$-axis: $\left( -1,0 \right),\ \left( 1,0 \right)$.
+          \item Minima and maxima: $\left( -\frac{1}{3}, \frac{32}{27} \right)$ and $\left( 1, 0 \right)$.
+        \end{itemize}
+        We should now categorize both points $\left( -\frac{1}{3}, \frac{32}{27} \right)$ and $\left( 1, 0 \right)$ into minimum and maximum points. We do this by either checking the function's behaviour in a small neighborhood around them, or by looking at the second derivative at that point: a positive value of the second derivative would mean a minimum, while a negative value would mean a maximum\footnotemark{}. \par
+
+        The second derivative of our function is $\dd[2]{x}f\left( x \right)=6x-2$. Substituting $x=-\frac{1}{3}$ yields $\dd[2]{x}f\left( -\frac{1}{3} \right)=-4$, and thus $\left( -\frac{1}{3}, \frac{32}{27} \right)$ is a maximum point. Substituting $x=1$ into $\dd[2]{x}f\left( x \right)$ yields $4$ and thus $\left( 1, 0 \right)$ is a minimum point. \par
+
+       Let's draw all the information we have so far:
+        \begin{figure}[H]
+          \centering
+          \begin{tikzpicture}[]
+            \begin{axis}[grid=major, xmin=-2, xmax=2, ymin=-2, ymax=2,
+              xtick = {-2,-1,...,2}, ytick = {-2,-1,...,2},
+              scale=1.0]
+              \addplot[blue, very thick, samples=100, smooth, domain=-0.05:-0.6]
+              plot (\x, { \x^3-\x^2-\x+1 });
+              \addplot[blue, very thick, samples=100, smooth, domain=0.75:1.25]
+              plot (\x, { \x^3-\x^2-\x+1 });
+              \addplot[red, mark=*, only marks] coordinates {(-1,0) (-0.3334,1.185) (0,1) (1,0)};
+            \end{axis}
+          \end{tikzpicture} 
+        \end{figure}
+        The only thing remaining is to determine what are the limits of the function at $\pm\infty$. Since $x^{3}$ is the term with the highest power of $x$, $\lim\limits_{x\rightarrow-\infty}f\left( x \right)=-\infty$ and $\lim\limits_{x\rightarrow\infty}f\left( x \right)=\infty$. Thus, the complete function looks as follows:
+        \begin{figure}[H]
+          \centering
+          \begin{tikzpicture}[]
+            \begin{axis}[grid=major, xmin=-2, xmax=2, ymin=-2, ymax=2,
+              xtick = {-2,-1,...,2}, ytick = {-2,-1,...,2},
+              scale=1.0]
+              \addplot[blue, thick, samples=100, smooth]
+              plot (\x, { \x^3-\x^2-\x+1 });
+              \addplot[red, mark=*, only marks] coordinates {(0,4) (-2,0) (1,0) (2,0)};
+              \addplot[black, very thick, samples=100, smooth, domain=-0.05:-0.6]
+              plot (\x, { \x^3-\x^2-\x+1 });
+              \addplot[black, very thick, samples=100, smooth, domain=0.75:1.25]
+              plot (\x, { \x^3-\x^2-\x+1 });
+            \end{axis}
+          \end{tikzpicture} 
+        \end{figure}
+      \item
+      Starting with points of intersection with the axes, we substitute $x=0$ into the function and get $f\left( 0 \right)=e^{0}=1$. Solving $f\left( x \right)=0$ should yield the points of intersection of the function with the $x$-axis:
+      \begin{align*}
+        f\left( x \right)=0 &\Rightarrow e^{-\frac{1}{2}x^{2}}=0 \\
+        &\Rightarrow \log\left( e^{-\frac{1}{2}x^{2}} \right) = \log\left( 0 \right) \\
+      \end{align*}
+      Since $\log\left( 0 \right)$ is undefined, we must look at the limits: $\lim\limits_{x\rightarrow\pm\infty}e^{-\frac{1}{2}x^{2}}=0$. \par
+
+      For the extremum points, we will derive the function.
+      \begin{align*}
+        \dd{x}f\left( x \right) &= -\frac{1}{\cancel{2}}\cdot\cancel{2}x\cdot e^{-\frac{1}{2}x^{2}} \\
+        &= -xe^{-\frac{1}{2}x^{2}} \\
+      \end{align*}
+      Solving $\dd{x}f\left( x \right)=0$ thus yields either $x=0$ or $x=\pm\infty$.\\
+      Now let us check the type (minimum or maximum) of these points by deriving $f\left( x \right)$ again:
+      \begin{align*}
+        \dd[2]{x}f\left( x \right) &= -\dd{x}xe^{-\frac{1}{2}x^{2}} \\
+        &= -\dd{x}x\cdot e^{-\frac{1}{2}x^{2}} - x\dd{x}e^{-\frac{1}{2}x^{2}} \\
+        &= -1\cdot e^{-\frac{1}{2}x^{2}} + x\cdot xe^{-\frac{1}{2}x^{2}} \\
+        &=  e^{-\frac{1}{2}x^{2}}\left( -1+x^{2} \right) \\
+        &= \left( x^{2}-1 \right)e^{-\frac{1}{2}x^{2}} \\
+      \end{align*}
+      Subtituting $x=0$ to $\dd[2]{x}f\left( x \right)$ yields $\left( 0^{2}-1 \right)e^{-\frac{1}{2}0^{2}}=-1<0$. Thus, the point $\left( 0,1 \right)$ is a local maximum. \par
+
+      Using all this data, we can plot our function:
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[]
+          \pgfmathsetmacro{\exp}{2.71828}
+          \begin{axis}[grid=major, xmin=-3, xmax=3, ymin=-1, ymax=2,
+            xtick = {-3,-2,...,3}, ytick = {-1,0,...,2},
+            scale=1.0]
+            \addplot[blue, thick, samples=100, smooth]
+            plot (\x, { \exp^(-0.5*\x^2) });
+          \end{axis}
+        \end{tikzpicture} 
+      \end{figure}
+      This is, of course, the normal distribution function (a.k.a. the 'bell curve', or the Gaussian distribution).
+    \end{enumerate}
+  \end{answer}
+  \addtocounter{footnote}{-2} %3=n
+  \stepcounter{footnote}\footnotetext{If you understand why this is true, you have at least a good basic grasp of differential calculus! This is one of the most important concepts of the field.}
+  \stepcounter{footnote}\footnotetext{...and if you understand why this is true, you have more than a good basic grasp of the topic! If you don't and are curious, don't hesitate to contact me at \href{mailto:pelegs@gmail.com}{pelegs@gmail.com} or watch this YouTube series: \url{https://youtu.be/WUvTyaaNkzM}.}
+  }\fi
+
+  \item \textbf{Extra Question} (if time permits)
+    \begin{enumerate}[label=\roman*.]
+      \item Using matrix multiplication, show that if a line has slope $m$, a perpendicular line would have a slope $-\frac{1}{m}$.
+       \if\withsol1{
+
+       \begin{answer}
+         A line with slope $m$ can be represented by a vector $\vec{v}=\left( x,y \right)$ such that $\frac{y}{x}=m$. \\
+         From previous tutorials we know that the $90^{\circ}$ (clockwise) rotation matrix is
+         \begin{equation*}
+           R_{90^{\circ}} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}
+         \end{equation*}
+         Thus $R_{90^{\circ}}\cdot \vec{v} = \left( -y, x \right)$, and the corresponding slope would be $m'=\frac{x}{-y}=-\frac{x}{y}=-\frac{1}{m}$.
+       \end{answer}
+       }\fi
+     \item Find the slope of the function $f\left( x \right)=\sqrt{1-x^{2}}$ at $x=\frac{1}{\sqrt{2}}$ without using derivates.
+       \if\withsol1{
+
+       \begin{answer}
+         Rewriting $y=\sqrt{1-x^{2}}$ and then squaring both sides yields $y^{2}=1-x^{2}$, or $x^{2}+y^{2}=1$.\\
+         This is of course a circle of radius $r=1$ centered at the origin. At $x=\frac{1}{2}$ $y=\frac{1}{2}$ as well, and this corresponds to an isosceles right triangle, with hypotenuse equal to $1$ (since it is the circle's radius). Since the radius to the point $\left( \frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)$ is of slope $1$, and the tangent line to the circle at any point must be at $90^{\circ}$ to the radius, it follows that the tangent at that point has slope $-1$. This is exactly the derivative of the function at $\left(\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\right)$.\\
+
+         \begin{center}      
+           \begin{tikzpicture}[scale=3]
+             \draw[thick, blue!50] (1,0) arc (0:180:1);
+             \coordinate (A) at (2,0);
+             \coordinate (B) at (0,2);
+             \draw[<->, thick] (-2,0) to (A);
+             \draw[<->, thick] (0,-0.5) to (B);
+             \node[right = 0.1cm of A] {$x$};
+             \node[above = 0.1cm of B] {$y$};
+             \coordinate (C) at (0.70711, 0.70711);
+             \draw[->, red!50, very thick] (0,0) to (C);
+             \node[above right = 0.1cm of C] {\small$\left( \frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}} \right)$};
+             \coordinate (plusone) at (1,0);
+             \coordinate (minusone) at (-1,0);
+             \draw[-] (1,-0.05) to (plusone);
+             \draw[-] (-1,-0.05) to (minusone);
+             \node[below = 0.1cm of plusone]  {\small$\left( 1,0 \right)$};
+             \node[below = 0.1cm of minusone] {\small$\left( -1,0 \right)$};
+             \draw[dashed, very thick, purple!50] (0,1.4142) to (1.4142,0);
+             \node[red, rotate=45, anchor=center, red!50] at (0.25, 0.4) {$m=1$};
+             \node[purple, rotate=-45, anchor=center, purple!50] at (0.3, 1.2) {$m=-1$};
+             \coordinate (D) at (0.70711,0);
+             \draw[dashed, thick, black!50] (C) to (D);
+             \draw[black!75] (0.70711, 0.1) -- (0.60711,0.1) -- (0.60711,0);
+             \draw [black!50, decorate,decoration={brace, amplitude=2pt, mirror}, xshift=0.5pt,yshift=0pt]
+             (0.70711,0) -- (0.70711,0.70711) node [black, midway, xshift=0.4cm]{\footnotesize\color{black!50}$\frac{1}{\sqrt{2}}$};
+             \draw [black!50, decorate,decoration={brace, amplitude=2pt, mirror}, xshift=0pt,yshift=-1pt]
+             (0,0) -- (0.70711,0) node [black, midway, yshift=-0.4cm]{\footnotesize\color{black!50}$\frac{1}{\sqrt{2}}$};
+             \filldraw[black] (0.70711, 0.70711) circle (0.01);
+           \end{tikzpicture}
+         \end{center}
+       \end{answer}
+       }\fi
+
+      \item Find the derivative of $f\left( x \right)$ at $x=\frac{1}{\sqrt{2}}$ with derivation and compare the result to the one obtained in the previous section.
+       \if\withsol1{
+
+       \begin{answer}
+         $\dd{x} f\left( x \right)=-\frac{x}{\sqrt{1-x^{2}}}$, and thus
+         \begin{align*}
+           \dd{x}f\left( \frac{1}{\sqrt{2}} \right)&=-\frac{\frac{1}{\sqrt{2}}}{\sqrt{1-\left(\frac{1}{\sqrt{2}}\right)^{2}}}\\&=-\frac{\frac{1}{\sqrt{2}}}{\sqrt{1-\frac{1}{2}}}\\&=-\frac{\frac{1}{\sqrt{2}}}{\sqrt{\frac{1}{2}}}\\&=-\frac{\cancel{\frac{1}{\sqrt{2}}}}{\cancel{\frac{1}{\sqrt{2}}}}\\&=-1 
+         \end{align*}
+         as expected.
+       \end{answer}
+       }\fi
+    \end{enumerate}
+\end{enumerate}

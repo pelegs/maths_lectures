@@ -1,0 +1,73 @@
+=>PYTHONTEX#py#default#default#0#code####ex12.tex#300#
+from scripts import convert, vspace
+convert(63,2)
+=>PYTHONTEX#py#default#default#1#code####ex12.tex#334#
+from scripts import twos
+twos(84, 8)
+=>PYTHONTEX#py#default#default#2#code####ex12.tex#371#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RF)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = [Lsys('A', rules, i) for i in range(4)]
+print('\\begin{enumerate}[label={\\arabic*.},start=0]')
+for L in Ls:
+    print('\\item', L)
+print('\\end{enumerate}')
+=>PYTHONTEX#py#default#default#3#code####ex12.tex#389#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RF)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = Lsys('A', rules, 3)
+turtle_draw2(lst=Ls)
+=>PYTHONTEX#py#default#default#4#code####ex12.tex#408#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RFA)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = [Lsys('A', rules, i) for i in range(4)]
+print('\\begin{enumerate}[label={\\arabic*.},start=0]')
+for L in Ls:
+    print('\\item', L)
+print('\\end{enumerate}')
+=>PYTHONTEX#py#default#default#5#code####ex12.tex#426#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RFA)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = Lsys('A', rules, 3)
+turtle_draw2(lst=Ls)
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-ex12_solution
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

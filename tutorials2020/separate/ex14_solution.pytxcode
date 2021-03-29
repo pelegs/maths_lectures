@@ -1,0 +1,88 @@
+=>PYTHONTEX#py#default#default#0#code####ex14.tex#238#
+from scripts import *
+A=np.array([[2, 1, 3],[1, 1, 2],[4, 2, 7]])
+B=np.array([[2, 0], [0, 1], [-1, 0]])
+print(r'\begin{tabular}{l c c c c r}')
+print(r'& $\bm{A}$ & $\bm{B}$ &&&\\')
+for i in range(A.shape[0]):
+  for j in range(B.shape[1]):
+    colordot(A, B,
+             a=i, b=j,
+             col1='red', col2='blue')
+    print(r'\\')
+print(r'\end{tabular}')
+=>PYTHONTEX#py#default#default#1#c####ex14.tex#253#
+draw_matrix(np.dot(A,B))
+=>PYTHONTEX#py#default#default#2#code####ex14.tex#327#
+from scripts import convert, vspace
+convert(63,2)
+=>PYTHONTEX#py#default#default#3#code####ex14.tex#361#
+from scripts import twos
+twos(84, 8)
+=>PYTHONTEX#py#default#default#4#code####ex14.tex#398#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RF)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = [Lsys('A', rules, i) for i in range(4)]
+print('\\begin{enumerate}[label={\\arabic*.},start=0]')
+for L in Ls:
+    print('\\item', L)
+print('\\end{enumerate}')
+=>PYTHONTEX#py#default#default#5#code####ex14.tex#416#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RF)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = Lsys('A', rules, 3)
+turtle_draw2(lst=Ls)
+=>PYTHONTEX#py#default#default#6#code####ex14.tex#435#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RFA)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = [Lsys('A', rules, i) for i in range(4)]
+print('\\begin{enumerate}[label={\\arabic*.},start=0]')
+for L in Ls:
+    print('\\item', L)
+print('\\end{enumerate}')
+=>PYTHONTEX#py#default#default#7#code####ex14.tex#453#
+from scripts import Lsys, turtle_draw2
+rules = {'A': '(RFA)FA',
+         'R': 'R',
+         'F': 'F',
+         '(': '(',
+         ')': ')'}
+Ls = Lsys('A', rules, 3)
+turtle_draw2(lst=Ls)
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-ex14_solution
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

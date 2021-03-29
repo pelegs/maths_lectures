@@ -1,0 +1,56 @@
+=>PYTHONTEX#py#default#default#0#code####ex8.tex#169#
+from scripts import Lsys, print_Lsys
+rules = {'A': 'AB',
+         'B': 'A'}
+Ls = [(Lsys('A', rules, i)) for i in range(5)]
+print_Lsys(Ls)
+=>PYTHONTEX#py#default#default#1#code####ex8.tex#183#
+from scripts import Lsys, print_Lsys
+rules = {'A': 'C',
+         'B': 'A',
+         'C': 'AB'}
+Ls = [(Lsys('A', rules, i)) for i in range(10)]
+print_Lsys(Ls)
+=>PYTHONTEX#py#default#default#2#code####ex8.tex#198#
+from scripts import Lsys, print_Lsys
+rules = {'A': 'AA',
+         'B': 'A(B)B',
+         '(': '(',
+         ')': ')'}
+Ls = [(Lsys('B', rules, i)) for i in range(4)]
+print_Lsys(Ls)
+=>PYTHONTEX#py#default#default#3#code####ex8.tex#221#
+from scripts import Lsys, turtle_draw
+rules = {'A': 'AA',
+         'B': 'A(B)B',
+         '(': '(',
+         ')': ')'}
+Ls = [(Lsys('B', rules, i)) for i in range(1,6)]
+for i, L in enumerate(Ls):
+  turtle_draw(start=[i*13,5], lst=L)
+  print('\\node at ({}*13,0) {{$n={}$}};'.format(i, i+1))
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-ex8_solution
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|
